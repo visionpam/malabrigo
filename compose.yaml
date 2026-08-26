@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: malabrigo-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: malabrigo
+      POSTGRES_USER: malabrigo
+      POSTGRES_PASSWORD: malabrigo
+    ports:
+      - "5432:5432"
+    volumes:
+      - malabrigo_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U malabrigo -d malabrigo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  malabrigo_postgres_data:

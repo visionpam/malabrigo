@@ -1,0 +1,175 @@
+"use server";
+
+import { randomUUID } from "node:crypto";
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+
+import { db } from "@/lib/db";
+
+const databaseId = z.string().trim().regex(
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+  "Selecciona una opción válida",
+);
+
+const saleSchema = z.discriminatedUnion("mode", [
+  z.object({
+    memberId: databaseId,
+    programId: databaseId,
+    mode: z.literal("CASH"),
+    financingPlanId: z.literal(""),
+  }),
+  z.object({
+    memberId: databaseId,
+    programId: databaseId,
+    mode: z.literal("CREDIT"),
+    financingPlanId: databaseId,
+  }),
+]);
+
+type SaleFields = "memberId" | "programId" | "mode" | "financingPlanId";
+
+export type CreateSaleState = {
+  success: boolean;
+  message: string;
+  code?: string;
+  errors?: Partial<Record<SaleFields, string[]>>;
+};
+
+function installmentDate(monthOffset: number) {
+  const today = new Date();
+  const year = today.getUTCFullYear();
+  const month = today.getUTCMonth() + monthOffset;
+  const lastDay = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  return new Date(Date.UTC(year, month, Math.min(today.getUTCDate(), lastDay)));
+}
+
+export async function createSaleAction(_previousState: CreateSaleState, formData: FormData): Promise<CreateSaleState> {
+  // Authentication and role authorization will be enforced here when the login module is enabled.
+  const parsed = saleSchema.safeParse({
+    memberId: formData.get("memberId"),
+    programId: formData.get("programId"),
+    mode: formData.get("mode"),
+    financingPlanId: formData.get("financingPlanId") ?? "",
+  });
+
+  if (!parsed.success) {
+    return { success: false, message: "Revisa los campos marcados.", errors: parsed.error.flatten().fieldErrors };
+  }
+
+  const input = parsed.data;
+  const [member, program] = await Promise.all([
+    db.member.findUnique({ where: { id: input.memberId }, select: { id: true } }),
+    db.program.findFirst({ where: { id: input.programId, active: true }, include: { financingPlans: { where: { active: true } } } }),
+  ]);
+
+  if (!member) return { success: false, message: "El socio seleccionado ya no está disponible." };
+  if (!program) return { success: false, message: "El programa seleccionado ya no está disponible." };
+
+  const financingPlan = input.mode === "CREDIT"
+    ? program.financingPlans.find((plan) => plan.id === input.financingPlanId)
+    : null;
+
+  if (input.mode === "CREDIT" && !financingPlan) {
+    return { success: false, message: "El plan no pertenece al programa seleccionado o ya no está vigente." };
+  }
+
+  const code = `VTA-${new Date().toISOString().slice(2, 10).replaceAll("-", "")}-${randomUUID().slice(0, 8).toUpperCase()}`;
+
+  try {
+    await db.$transaction(async (transaction) => {
+      const sale = await transaction.sale.create({
+        data: {
+          code,
+          memberId: member.id,
+          programId: program.id,
+          financingPlanId: financingPlan?.id ?? null,
+          mode: input.mode,
+          status: "DRAFT",
+          currency: "USD",
+          totalPrice: program.cashPrice,
+          separationAmount: program.separation,
+          downPaymentAmount: financingPlan?.downPayment ?? 0,
+        },
+        select: { id: true },
+      });
+
+      if (financingPlan) {
+        await transaction.installment.createMany({
+          data: Array.from({ length: financingPlan.termMonths }, (_, index) => ({
+            saleId: sale.id,
+            number: index + 1,
+            amount: financingPlan.monthlyPayment,
+            dueDate: installmentDate(index + 1),
+          })),
+        });
+      }
+
+      await transaction.auditLog.create({
+        data: {
+          action: "SALE_CREATED",
+          entityType: "Sale",
+          entityId: sale.id,
+          after: {
+            code,
+            memberId: member.id,
+            programId: program.id,
+            financingPlanId: financingPlan?.id ?? null,
+            mode: input.mode,
+            status: "DRAFT",
+            totalPrice: program.cashPrice.toString(),
+          },
+        },
+      });
+    });
+  } catch {
+    return { success: false, message: "No fue posible registrar la venta. Inténtalo nuevamente." };
+  }
+
+  revalidatePath("/ventas");
+  return { success: true, message: "Venta registrada correctamente.", code };
+}
+
+export type SaleOperationState = { success: boolean; message: string };
+
+export async function confirmSeparationAction(saleId: string, _previousState: SaleOperationState, formData: FormData): Promise<SaleOperationState> {
+  // Authentication and role authorization will be enforced here when the login module is enabled.
+  const parsed = z.object({ reference: z.string().trim().min(3, "Ingresa la referencia").max(60, "Máximo 60 caracteres") }).safeParse({ reference: formData.get("reference") });
+  if (!parsed.success) return { success: false, message: parsed.error.issues[0]?.message ?? "Referencia inválida." };
+  const sale = await db.sale.findUnique({ where: { id: saleId }, include: { payments: { where: { status: "CONFIRMED" } } } });
+  if (!sale) return { success: false, message: "La venta ya no existe." };
+  if (!['DRAFT', 'RESERVED'].includes(sale.status)) return { success: false, message: "La venta ya no admite confirmar la separación." };
+  const paid = sale.payments.reduce((sum, payment) => sum + Number(payment.amount), 0);
+  const remaining = Number(sale.separationAmount) - paid;
+  if (remaining <= 0) return { success: false, message: "La separación ya está cubierta." };
+
+  try {
+    await db.$transaction(async (transaction) => {
+      const payment = await transaction.payment.create({ data: { saleId, reference: parsed.data.reference.toUpperCase(), amount: remaining, concept: "SEPARATION", currency: sale.currency, paidAt: new Date(), status: "CONFIRMED" } });
+      await transaction.sale.update({ where: { id: saleId }, data: { status: "RESERVED" } });
+      await transaction.auditLog.create({ data: { action: "SEPARATION_CONFIRMED", entityType: "Sale", entityId: saleId, before: { status: sale.status, confirmedAmount: paid }, after: { status: "RESERVED", paymentId: payment.id, reference: payment.reference, amount: remaining } } });
+    });
+  } catch {
+    return { success: false, message: "No fue posible confirmar la separación. Verifica que la referencia no esté repetida." };
+  }
+  revalidatePath("/ventas"); revalidatePath("/pagos");
+  return { success: true, message: "Separación confirmada. La venta quedó separada." };
+}
+
+export async function activateSaleAction(saleId: string, _previousState: SaleOperationState, formData: FormData): Promise<SaleOperationState> {
+  // Authentication and role authorization will be enforced here when the login module is enabled.
+  if (formData.get("contractConfirmed") !== "on") return { success: false, message: "Debes confirmar que el contrato fue firmado." };
+  const sale = await db.sale.findUnique({ where: { id: saleId }, include: { payments: { where: { status: "CONFIRMED" } }, member: true } });
+  if (!sale) return { success: false, message: "La venta ya no existe." };
+  if (sale.status !== "RESERVED") return { success: false, message: "Primero debes confirmar la separación." };
+  const confirmed = sale.payments.reduce((sum, payment) => sum + Number(payment.amount), 0);
+  if (confirmed < Number(sale.separationAmount)) return { success: false, message: "La separación todavía no está cubierta." };
+  const activatedAt = new Date();
+  await db.$transaction(async (transaction) => {
+    await transaction.sale.update({ where: { id: saleId }, data: { status: "ACTIVE", signedAt: activatedAt } });
+    if (sale.member.status === "PROSPECT") await transaction.member.update({ where: { id: sale.memberId }, data: { status: "ACTIVE", joinedAt: sale.member.joinedAt ?? activatedAt } });
+    await transaction.auditLog.create({ data: { action: "SALE_ACTIVATED", entityType: "Sale", entityId: saleId, before: { status: sale.status }, after: { status: "ACTIVE", contractConfirmed: true, signedAt: activatedAt.toISOString() } } });
+    if (sale.member.status === "PROSPECT") await transaction.auditLog.create({ data: { action: "MEMBER_ACTIVATED", entityType: "Member", entityId: sale.memberId, before: { status: sale.member.status }, after: { status: "ACTIVE", sourceSaleId: saleId } } });
+  });
+  revalidatePath("/ventas"); revalidatePath("/socios"); revalidatePath("/");
+  return { success: true, message: "Venta y socio activados correctamente." };
+}
