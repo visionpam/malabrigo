@@ -26,6 +26,7 @@ export type AggregateMember = {
 
 export type MemberMinAggregateOutputType = {
   id: string | null
+  memberCode: string | null
   userId: string | null
   documentType: string | null
   documentNumber: string | null
@@ -34,6 +35,9 @@ export type MemberMinAggregateOutputType = {
   countryCode: string | null
   phone: string | null
   email: string | null
+  residence: string | null
+  occupation: string | null
+  maritalStatus: $Enums.MaritalStatus | null
   status: $Enums.MemberStatus | null
   joinedAt: Date | null
   createdAt: Date | null
@@ -42,6 +46,7 @@ export type MemberMinAggregateOutputType = {
 
 export type MemberMaxAggregateOutputType = {
   id: string | null
+  memberCode: string | null
   userId: string | null
   documentType: string | null
   documentNumber: string | null
@@ -50,6 +55,9 @@ export type MemberMaxAggregateOutputType = {
   countryCode: string | null
   phone: string | null
   email: string | null
+  residence: string | null
+  occupation: string | null
+  maritalStatus: $Enums.MaritalStatus | null
   status: $Enums.MemberStatus | null
   joinedAt: Date | null
   createdAt: Date | null
@@ -58,6 +66,7 @@ export type MemberMaxAggregateOutputType = {
 
 export type MemberCountAggregateOutputType = {
   id: number
+  memberCode: number
   userId: number
   documentType: number
   documentNumber: number
@@ -66,6 +75,9 @@ export type MemberCountAggregateOutputType = {
   countryCode: number
   phone: number
   email: number
+  residence: number
+  occupation: number
+  maritalStatus: number
   status: number
   joinedAt: number
   createdAt: number
@@ -76,6 +88,7 @@ export type MemberCountAggregateOutputType = {
 
 export type MemberMinAggregateInputType = {
   id?: true
+  memberCode?: true
   userId?: true
   documentType?: true
   documentNumber?: true
@@ -84,6 +97,9 @@ export type MemberMinAggregateInputType = {
   countryCode?: true
   phone?: true
   email?: true
+  residence?: true
+  occupation?: true
+  maritalStatus?: true
   status?: true
   joinedAt?: true
   createdAt?: true
@@ -92,6 +108,7 @@ export type MemberMinAggregateInputType = {
 
 export type MemberMaxAggregateInputType = {
   id?: true
+  memberCode?: true
   userId?: true
   documentType?: true
   documentNumber?: true
@@ -100,6 +117,9 @@ export type MemberMaxAggregateInputType = {
   countryCode?: true
   phone?: true
   email?: true
+  residence?: true
+  occupation?: true
+  maritalStatus?: true
   status?: true
   joinedAt?: true
   createdAt?: true
@@ -108,6 +128,7 @@ export type MemberMaxAggregateInputType = {
 
 export type MemberCountAggregateInputType = {
   id?: true
+  memberCode?: true
   userId?: true
   documentType?: true
   documentNumber?: true
@@ -116,6 +137,9 @@ export type MemberCountAggregateInputType = {
   countryCode?: true
   phone?: true
   email?: true
+  residence?: true
+  occupation?: true
+  maritalStatus?: true
   status?: true
   joinedAt?: true
   createdAt?: true
@@ -197,6 +221,7 @@ export type MemberGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type MemberGroupByOutputType = {
   id: string
+  memberCode: string
   userId: string | null
   documentType: string
   documentNumber: string
@@ -205,6 +230,9 @@ export type MemberGroupByOutputType = {
   countryCode: string
   phone: string | null
   email: string
+  residence: string | null
+  occupation: string | null
+  maritalStatus: $Enums.MaritalStatus | null
   status: $Enums.MemberStatus
   joinedAt: Date | null
   createdAt: Date
@@ -234,6 +262,7 @@ export type MemberWhereInput = {
   OR?: Prisma.MemberWhereInput[]
   NOT?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[]
   id?: Prisma.UuidFilter<"Member"> | string
+  memberCode?: Prisma.StringFilter<"Member"> | string
   userId?: Prisma.UuidNullableFilter<"Member"> | string | null
   documentType?: Prisma.StringFilter<"Member"> | string
   documentNumber?: Prisma.StringFilter<"Member"> | string
@@ -242,6 +271,9 @@ export type MemberWhereInput = {
   countryCode?: Prisma.StringFilter<"Member"> | string
   phone?: Prisma.StringNullableFilter<"Member"> | string | null
   email?: Prisma.StringFilter<"Member"> | string
+  residence?: Prisma.StringNullableFilter<"Member"> | string | null
+  occupation?: Prisma.StringNullableFilter<"Member"> | string | null
+  maritalStatus?: Prisma.EnumMaritalStatusNullableFilter<"Member"> | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus
   joinedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
@@ -252,10 +284,15 @@ export type MemberWhereInput = {
   sponsorshipAsChild?: Prisma.XOR<Prisma.SponsorshipNullableScalarRelationFilter, Prisma.SponsorshipWhereInput> | null
   sponsorships?: Prisma.SponsorshipListRelationFilter
   legalAcceptances?: Prisma.LegalAcceptanceListRelationFilter
+  investorProfile?: Prisma.XOR<Prisma.InvestorProfileNullableScalarRelationFilter, Prisma.InvestorProfileWhereInput> | null
+  ambassadorProfile?: Prisma.XOR<Prisma.AmbassadorProfileNullableScalarRelationFilter, Prisma.AmbassadorProfileWhereInput> | null
+  beneficiaries?: Prisma.BeneficiaryListRelationFilter
+  documents?: Prisma.DocumentRecordListRelationFilter
 }
 
 export type MemberOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  memberCode?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   documentType?: Prisma.SortOrder
   documentNumber?: Prisma.SortOrder
@@ -264,6 +301,9 @@ export type MemberOrderByWithRelationInput = {
   countryCode?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
+  residence?: Prisma.SortOrderInput | Prisma.SortOrder
+  occupation?: Prisma.SortOrderInput | Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -274,10 +314,15 @@ export type MemberOrderByWithRelationInput = {
   sponsorshipAsChild?: Prisma.SponsorshipOrderByWithRelationInput
   sponsorships?: Prisma.SponsorshipOrderByRelationAggregateInput
   legalAcceptances?: Prisma.LegalAcceptanceOrderByRelationAggregateInput
+  investorProfile?: Prisma.InvestorProfileOrderByWithRelationInput
+  ambassadorProfile?: Prisma.AmbassadorProfileOrderByWithRelationInput
+  beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
+  documents?: Prisma.DocumentRecordOrderByRelationAggregateInput
 }
 
 export type MemberWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  memberCode?: string
   userId?: string
   documentType_documentNumber?: Prisma.MemberDocumentTypeDocumentNumberCompoundUniqueInput
   AND?: Prisma.MemberWhereInput | Prisma.MemberWhereInput[]
@@ -290,6 +335,9 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   countryCode?: Prisma.StringFilter<"Member"> | string
   phone?: Prisma.StringNullableFilter<"Member"> | string | null
   email?: Prisma.StringFilter<"Member"> | string
+  residence?: Prisma.StringNullableFilter<"Member"> | string | null
+  occupation?: Prisma.StringNullableFilter<"Member"> | string | null
+  maritalStatus?: Prisma.EnumMaritalStatusNullableFilter<"Member"> | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFilter<"Member"> | $Enums.MemberStatus
   joinedAt?: Prisma.DateTimeNullableFilter<"Member"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Member"> | Date | string
@@ -300,10 +348,15 @@ export type MemberWhereUniqueInput = Prisma.AtLeast<{
   sponsorshipAsChild?: Prisma.XOR<Prisma.SponsorshipNullableScalarRelationFilter, Prisma.SponsorshipWhereInput> | null
   sponsorships?: Prisma.SponsorshipListRelationFilter
   legalAcceptances?: Prisma.LegalAcceptanceListRelationFilter
-}, "id" | "userId" | "documentType_documentNumber">
+  investorProfile?: Prisma.XOR<Prisma.InvestorProfileNullableScalarRelationFilter, Prisma.InvestorProfileWhereInput> | null
+  ambassadorProfile?: Prisma.XOR<Prisma.AmbassadorProfileNullableScalarRelationFilter, Prisma.AmbassadorProfileWhereInput> | null
+  beneficiaries?: Prisma.BeneficiaryListRelationFilter
+  documents?: Prisma.DocumentRecordListRelationFilter
+}, "id" | "memberCode" | "userId" | "documentType_documentNumber">
 
 export type MemberOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  memberCode?: Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
   documentType?: Prisma.SortOrder
   documentNumber?: Prisma.SortOrder
@@ -312,6 +365,9 @@ export type MemberOrderByWithAggregationInput = {
   countryCode?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
+  residence?: Prisma.SortOrderInput | Prisma.SortOrder
+  occupation?: Prisma.SortOrderInput | Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -326,6 +382,7 @@ export type MemberScalarWhereWithAggregatesInput = {
   OR?: Prisma.MemberScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MemberScalarWhereWithAggregatesInput | Prisma.MemberScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Member"> | string
+  memberCode?: Prisma.StringWithAggregatesFilter<"Member"> | string
   userId?: Prisma.UuidNullableWithAggregatesFilter<"Member"> | string | null
   documentType?: Prisma.StringWithAggregatesFilter<"Member"> | string
   documentNumber?: Prisma.StringWithAggregatesFilter<"Member"> | string
@@ -334,6 +391,9 @@ export type MemberScalarWhereWithAggregatesInput = {
   countryCode?: Prisma.StringWithAggregatesFilter<"Member"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"Member"> | string
+  residence?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  occupation?: Prisma.StringNullableWithAggregatesFilter<"Member"> | string | null
+  maritalStatus?: Prisma.EnumMaritalStatusNullableWithAggregatesFilter<"Member"> | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusWithAggregatesFilter<"Member"> | $Enums.MemberStatus
   joinedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Member"> | Date | string
@@ -342,6 +402,7 @@ export type MemberScalarWhereWithAggregatesInput = {
 
 export type MemberCreateInput = {
   id?: string
+  memberCode: string
   documentType: string
   documentNumber: string
   firstName: string
@@ -349,6 +410,9 @@ export type MemberCreateInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -359,10 +423,15 @@ export type MemberCreateInput = {
   sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateInput = {
   id?: string
+  memberCode: string
   userId?: string | null
   documentType: string
   documentNumber: string
@@ -371,6 +440,9 @@ export type MemberUncheckedCreateInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -380,10 +452,15 @@ export type MemberUncheckedCreateInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -391,6 +468,9 @@ export type MemberUpdateInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -401,10 +481,15 @@ export type MemberUpdateInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -413,6 +498,9 @@ export type MemberUncheckedUpdateInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -422,10 +510,15 @@ export type MemberUncheckedUpdateInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateManyInput = {
   id?: string
+  memberCode: string
   userId?: string | null
   documentType: string
   documentNumber: string
@@ -434,6 +527,9 @@ export type MemberCreateManyInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -442,6 +538,7 @@ export type MemberCreateManyInput = {
 
 export type MemberUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -449,6 +546,9 @@ export type MemberUpdateManyMutationInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -457,6 +557,7 @@ export type MemberUpdateManyMutationInput = {
 
 export type MemberUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -465,6 +566,9 @@ export type MemberUncheckedUpdateManyInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -483,6 +587,7 @@ export type MemberDocumentTypeDocumentNumberCompoundUniqueInput = {
 
 export type MemberCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  memberCode?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   documentType?: Prisma.SortOrder
   documentNumber?: Prisma.SortOrder
@@ -491,6 +596,9 @@ export type MemberCountOrderByAggregateInput = {
   countryCode?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  residence?: Prisma.SortOrder
+  occupation?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
   status?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -499,6 +607,7 @@ export type MemberCountOrderByAggregateInput = {
 
 export type MemberMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  memberCode?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   documentType?: Prisma.SortOrder
   documentNumber?: Prisma.SortOrder
@@ -507,6 +616,9 @@ export type MemberMaxOrderByAggregateInput = {
   countryCode?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  residence?: Prisma.SortOrder
+  occupation?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
   status?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -515,6 +627,7 @@ export type MemberMaxOrderByAggregateInput = {
 
 export type MemberMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  memberCode?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   documentType?: Prisma.SortOrder
   documentNumber?: Prisma.SortOrder
@@ -523,6 +636,9 @@ export type MemberMinOrderByAggregateInput = {
   countryCode?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   email?: Prisma.SortOrder
+  residence?: Prisma.SortOrder
+  occupation?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
   status?: Prisma.SortOrder
   joinedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -566,8 +682,54 @@ export type MemberUncheckedUpdateOneWithoutUserNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutUserInput, Prisma.MemberUpdateWithoutUserInput>, Prisma.MemberUncheckedUpdateWithoutUserInput>
 }
 
+export type NullableEnumMaritalStatusFieldUpdateOperationsInput = {
+  set?: $Enums.MaritalStatus | null
+}
+
 export type EnumMemberStatusFieldUpdateOperationsInput = {
   set?: $Enums.MemberStatus
+}
+
+export type MemberCreateNestedOneWithoutInvestorProfileInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutInvestorProfileInput, Prisma.MemberUncheckedCreateWithoutInvestorProfileInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutInvestorProfileInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutInvestorProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutInvestorProfileInput, Prisma.MemberUncheckedCreateWithoutInvestorProfileInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutInvestorProfileInput
+  upsert?: Prisma.MemberUpsertWithoutInvestorProfileInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutInvestorProfileInput, Prisma.MemberUpdateWithoutInvestorProfileInput>, Prisma.MemberUncheckedUpdateWithoutInvestorProfileInput>
+}
+
+export type MemberCreateNestedOneWithoutAmbassadorProfileInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutAmbassadorProfileInput, Prisma.MemberUncheckedCreateWithoutAmbassadorProfileInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutAmbassadorProfileInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutAmbassadorProfileNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutAmbassadorProfileInput, Prisma.MemberUncheckedCreateWithoutAmbassadorProfileInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutAmbassadorProfileInput
+  upsert?: Prisma.MemberUpsertWithoutAmbassadorProfileInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutAmbassadorProfileInput, Prisma.MemberUpdateWithoutAmbassadorProfileInput>, Prisma.MemberUncheckedUpdateWithoutAmbassadorProfileInput>
+}
+
+export type MemberCreateNestedOneWithoutBeneficiariesInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutBeneficiariesInput, Prisma.MemberUncheckedCreateWithoutBeneficiariesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutBeneficiariesInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneRequiredWithoutBeneficiariesNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutBeneficiariesInput, Prisma.MemberUncheckedCreateWithoutBeneficiariesInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutBeneficiariesInput
+  upsert?: Prisma.MemberUpsertWithoutBeneficiariesInput
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutBeneficiariesInput, Prisma.MemberUpdateWithoutBeneficiariesInput>, Prisma.MemberUncheckedUpdateWithoutBeneficiariesInput>
 }
 
 export type MemberCreateNestedOneWithoutSalesInput = {
@@ -626,6 +788,22 @@ export type MemberUpdateOneRequiredWithoutSponsorshipsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutSponsorshipsInput, Prisma.MemberUpdateWithoutSponsorshipsInput>, Prisma.MemberUncheckedUpdateWithoutSponsorshipsInput>
 }
 
+export type MemberCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutDocumentsInput, Prisma.MemberUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.MemberWhereUniqueInput
+}
+
+export type MemberUpdateOneWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.MemberCreateWithoutDocumentsInput, Prisma.MemberUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.MemberCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.MemberUpsertWithoutDocumentsInput
+  disconnect?: Prisma.MemberWhereInput | boolean
+  delete?: Prisma.MemberWhereInput | boolean
+  connect?: Prisma.MemberWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MemberUpdateToOneWithWhereWithoutDocumentsInput, Prisma.MemberUpdateWithoutDocumentsInput>, Prisma.MemberUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type MemberCreateNestedOneWithoutLegalAcceptancesInput = {
   create?: Prisma.XOR<Prisma.MemberCreateWithoutLegalAcceptancesInput, Prisma.MemberUncheckedCreateWithoutLegalAcceptancesInput>
   connectOrCreate?: Prisma.MemberCreateOrConnectWithoutLegalAcceptancesInput
@@ -642,6 +820,7 @@ export type MemberUpdateOneRequiredWithoutLegalAcceptancesNestedInput = {
 
 export type MemberCreateWithoutUserInput = {
   id?: string
+  memberCode: string
   documentType: string
   documentNumber: string
   firstName: string
@@ -649,6 +828,9 @@ export type MemberCreateWithoutUserInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -658,10 +840,15 @@ export type MemberCreateWithoutUserInput = {
   sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutUserInput = {
   id?: string
+  memberCode: string
   documentType: string
   documentNumber: string
   firstName: string
@@ -669,6 +856,9 @@ export type MemberUncheckedCreateWithoutUserInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -678,6 +868,10 @@ export type MemberUncheckedCreateWithoutUserInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutUserInput = {
@@ -698,6 +892,7 @@ export type MemberUpdateToOneWithWhereWithoutUserInput = {
 
 export type MemberUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -705,6 +900,9 @@ export type MemberUpdateWithoutUserInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -714,10 +912,15 @@ export type MemberUpdateWithoutUserInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -725,6 +928,9 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -734,10 +940,15 @@ export type MemberUncheckedUpdateWithoutUserInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
 }
 
-export type MemberCreateWithoutSalesInput = {
+export type MemberCreateWithoutInvestorProfileInput = {
   id?: string
+  memberCode: string
   documentType: string
   documentNumber: string
   firstName: string
@@ -745,6 +956,393 @@ export type MemberCreateWithoutSalesInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
+  status?: $Enums.MemberStatus
+  joinedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutMemberInput
+  sales?: Prisma.SaleCreateNestedManyWithoutMemberInput
+  referralCode?: Prisma.ReferralCodeCreateNestedOneWithoutMemberInput
+  sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
+  sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutInvestorProfileInput = {
+  id?: string
+  memberCode: string
+  userId?: string | null
+  documentType: string
+  documentNumber: string
+  firstName: string
+  lastName: string
+  countryCode?: string
+  phone?: string | null
+  email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
+  status?: $Enums.MemberStatus
+  joinedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutMemberInput
+  referralCode?: Prisma.ReferralCodeUncheckedCreateNestedOneWithoutMemberInput
+  sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
+  sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutInvestorProfileInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutInvestorProfileInput, Prisma.MemberUncheckedCreateWithoutInvestorProfileInput>
+}
+
+export type MemberUpsertWithoutInvestorProfileInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutInvestorProfileInput, Prisma.MemberUncheckedUpdateWithoutInvestorProfileInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutInvestorProfileInput, Prisma.MemberUncheckedCreateWithoutInvestorProfileInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutInvestorProfileInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutInvestorProfileInput, Prisma.MemberUncheckedUpdateWithoutInvestorProfileInput>
+}
+
+export type MemberUpdateWithoutInvestorProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
+  documentType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutMemberNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutMemberNestedInput
+  referralCode?: Prisma.ReferralCodeUpdateOneWithoutMemberNestedInput
+  sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
+  sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutInvestorProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documentType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutMemberNestedInput
+  referralCode?: Prisma.ReferralCodeUncheckedUpdateOneWithoutMemberNestedInput
+  sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
+  sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutAmbassadorProfileInput = {
+  id?: string
+  memberCode: string
+  documentType: string
+  documentNumber: string
+  firstName: string
+  lastName: string
+  countryCode?: string
+  phone?: string | null
+  email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
+  status?: $Enums.MemberStatus
+  joinedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutMemberInput
+  sales?: Prisma.SaleCreateNestedManyWithoutMemberInput
+  referralCode?: Prisma.ReferralCodeCreateNestedOneWithoutMemberInput
+  sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
+  sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutAmbassadorProfileInput = {
+  id?: string
+  memberCode: string
+  userId?: string | null
+  documentType: string
+  documentNumber: string
+  firstName: string
+  lastName: string
+  countryCode?: string
+  phone?: string | null
+  email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
+  status?: $Enums.MemberStatus
+  joinedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutMemberInput
+  referralCode?: Prisma.ReferralCodeUncheckedCreateNestedOneWithoutMemberInput
+  sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
+  sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutAmbassadorProfileInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutAmbassadorProfileInput, Prisma.MemberUncheckedCreateWithoutAmbassadorProfileInput>
+}
+
+export type MemberUpsertWithoutAmbassadorProfileInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutAmbassadorProfileInput, Prisma.MemberUncheckedUpdateWithoutAmbassadorProfileInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutAmbassadorProfileInput, Prisma.MemberUncheckedCreateWithoutAmbassadorProfileInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutAmbassadorProfileInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutAmbassadorProfileInput, Prisma.MemberUncheckedUpdateWithoutAmbassadorProfileInput>
+}
+
+export type MemberUpdateWithoutAmbassadorProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
+  documentType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutMemberNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutMemberNestedInput
+  referralCode?: Prisma.ReferralCodeUpdateOneWithoutMemberNestedInput
+  sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
+  sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutAmbassadorProfileInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documentType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutMemberNestedInput
+  referralCode?: Prisma.ReferralCodeUncheckedUpdateOneWithoutMemberNestedInput
+  sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
+  sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutBeneficiariesInput = {
+  id?: string
+  memberCode: string
+  documentType: string
+  documentNumber: string
+  firstName: string
+  lastName: string
+  countryCode?: string
+  phone?: string | null
+  email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
+  status?: $Enums.MemberStatus
+  joinedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutMemberInput
+  sales?: Prisma.SaleCreateNestedManyWithoutMemberInput
+  referralCode?: Prisma.ReferralCodeCreateNestedOneWithoutMemberInput
+  sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
+  sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutBeneficiariesInput = {
+  id?: string
+  memberCode: string
+  userId?: string | null
+  documentType: string
+  documentNumber: string
+  firstName: string
+  lastName: string
+  countryCode?: string
+  phone?: string | null
+  email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
+  status?: $Enums.MemberStatus
+  joinedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutMemberInput
+  referralCode?: Prisma.ReferralCodeUncheckedCreateNestedOneWithoutMemberInput
+  sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
+  sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
+}
+
+export type MemberCreateOrConnectWithoutBeneficiariesInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutBeneficiariesInput, Prisma.MemberUncheckedCreateWithoutBeneficiariesInput>
+}
+
+export type MemberUpsertWithoutBeneficiariesInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutBeneficiariesInput, Prisma.MemberUncheckedUpdateWithoutBeneficiariesInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutBeneficiariesInput, Prisma.MemberUncheckedCreateWithoutBeneficiariesInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutBeneficiariesInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutBeneficiariesInput, Prisma.MemberUncheckedUpdateWithoutBeneficiariesInput>
+}
+
+export type MemberUpdateWithoutBeneficiariesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
+  documentType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutMemberNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutMemberNestedInput
+  referralCode?: Prisma.ReferralCodeUpdateOneWithoutMemberNestedInput
+  sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
+  sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutBeneficiariesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documentType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutMemberNestedInput
+  referralCode?: Prisma.ReferralCodeUncheckedUpdateOneWithoutMemberNestedInput
+  sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
+  sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
+}
+
+export type MemberCreateWithoutSalesInput = {
+  id?: string
+  memberCode: string
+  documentType: string
+  documentNumber: string
+  firstName: string
+  lastName: string
+  countryCode?: string
+  phone?: string | null
+  email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -754,10 +1352,15 @@ export type MemberCreateWithoutSalesInput = {
   sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSalesInput = {
   id?: string
+  memberCode: string
   userId?: string | null
   documentType: string
   documentNumber: string
@@ -766,6 +1369,9 @@ export type MemberUncheckedCreateWithoutSalesInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -774,6 +1380,10 @@ export type MemberUncheckedCreateWithoutSalesInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSalesInput = {
@@ -794,6 +1404,7 @@ export type MemberUpdateToOneWithWhereWithoutSalesInput = {
 
 export type MemberUpdateWithoutSalesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -801,6 +1412,9 @@ export type MemberUpdateWithoutSalesInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -810,10 +1424,15 @@ export type MemberUpdateWithoutSalesInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSalesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -822,6 +1441,9 @@ export type MemberUncheckedUpdateWithoutSalesInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -830,10 +1452,15 @@ export type MemberUncheckedUpdateWithoutSalesInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutReferralCodeInput = {
   id?: string
+  memberCode: string
   documentType: string
   documentNumber: string
   firstName: string
@@ -841,6 +1468,9 @@ export type MemberCreateWithoutReferralCodeInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -850,10 +1480,15 @@ export type MemberCreateWithoutReferralCodeInput = {
   sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutReferralCodeInput = {
   id?: string
+  memberCode: string
   userId?: string | null
   documentType: string
   documentNumber: string
@@ -862,6 +1497,9 @@ export type MemberUncheckedCreateWithoutReferralCodeInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -870,6 +1508,10 @@ export type MemberUncheckedCreateWithoutReferralCodeInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutReferralCodeInput = {
@@ -890,6 +1532,7 @@ export type MemberUpdateToOneWithWhereWithoutReferralCodeInput = {
 
 export type MemberUpdateWithoutReferralCodeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -897,6 +1540,9 @@ export type MemberUpdateWithoutReferralCodeInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -906,10 +1552,15 @@ export type MemberUpdateWithoutReferralCodeInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutReferralCodeInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -918,6 +1569,9 @@ export type MemberUncheckedUpdateWithoutReferralCodeInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -926,10 +1580,15 @@ export type MemberUncheckedUpdateWithoutReferralCodeInput = {
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberCreateWithoutSponsorshipAsChildInput = {
   id?: string
+  memberCode: string
   documentType: string
   documentNumber: string
   firstName: string
@@ -937,6 +1596,9 @@ export type MemberCreateWithoutSponsorshipAsChildInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -946,10 +1608,15 @@ export type MemberCreateWithoutSponsorshipAsChildInput = {
   referralCode?: Prisma.ReferralCodeCreateNestedOneWithoutMemberInput
   sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSponsorshipAsChildInput = {
   id?: string
+  memberCode: string
   userId?: string | null
   documentType: string
   documentNumber: string
@@ -958,6 +1625,9 @@ export type MemberUncheckedCreateWithoutSponsorshipAsChildInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -966,6 +1636,10 @@ export type MemberUncheckedCreateWithoutSponsorshipAsChildInput = {
   referralCode?: Prisma.ReferralCodeUncheckedCreateNestedOneWithoutMemberInput
   sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSponsorshipAsChildInput = {
@@ -975,6 +1649,7 @@ export type MemberCreateOrConnectWithoutSponsorshipAsChildInput = {
 
 export type MemberCreateWithoutSponsorshipsInput = {
   id?: string
+  memberCode: string
   documentType: string
   documentNumber: string
   firstName: string
@@ -982,6 +1657,9 @@ export type MemberCreateWithoutSponsorshipsInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -991,10 +1669,15 @@ export type MemberCreateWithoutSponsorshipsInput = {
   referralCode?: Prisma.ReferralCodeCreateNestedOneWithoutMemberInput
   sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
   legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
 }
 
 export type MemberUncheckedCreateWithoutSponsorshipsInput = {
   id?: string
+  memberCode: string
   userId?: string | null
   documentType: string
   documentNumber: string
@@ -1003,6 +1686,9 @@ export type MemberUncheckedCreateWithoutSponsorshipsInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -1011,6 +1697,10 @@ export type MemberUncheckedCreateWithoutSponsorshipsInput = {
   referralCode?: Prisma.ReferralCodeUncheckedCreateNestedOneWithoutMemberInput
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutSponsorshipsInput = {
@@ -1031,6 +1721,7 @@ export type MemberUpdateToOneWithWhereWithoutSponsorshipAsChildInput = {
 
 export type MemberUpdateWithoutSponsorshipAsChildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1038,6 +1729,9 @@ export type MemberUpdateWithoutSponsorshipAsChildInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1047,10 +1741,15 @@ export type MemberUpdateWithoutSponsorshipAsChildInput = {
   referralCode?: Prisma.ReferralCodeUpdateOneWithoutMemberNestedInput
   sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSponsorshipAsChildInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1059,6 +1758,9 @@ export type MemberUncheckedUpdateWithoutSponsorshipAsChildInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1067,6 +1769,10 @@ export type MemberUncheckedUpdateWithoutSponsorshipAsChildInput = {
   referralCode?: Prisma.ReferralCodeUncheckedUpdateOneWithoutMemberNestedInput
   sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUpsertWithoutSponsorshipsInput = {
@@ -1082,6 +1788,7 @@ export type MemberUpdateToOneWithWhereWithoutSponsorshipsInput = {
 
 export type MemberUpdateWithoutSponsorshipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1089,6 +1796,9 @@ export type MemberUpdateWithoutSponsorshipsInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1098,10 +1808,15 @@ export type MemberUpdateWithoutSponsorshipsInput = {
   referralCode?: Prisma.ReferralCodeUpdateOneWithoutMemberNestedInput
   sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutSponsorshipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1110,6 +1825,9 @@ export type MemberUncheckedUpdateWithoutSponsorshipsInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1118,10 +1836,15 @@ export type MemberUncheckedUpdateWithoutSponsorshipsInput = {
   referralCode?: Prisma.ReferralCodeUncheckedUpdateOneWithoutMemberNestedInput
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
   legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
 }
 
-export type MemberCreateWithoutLegalAcceptancesInput = {
+export type MemberCreateWithoutDocumentsInput = {
   id?: string
+  memberCode: string
   documentType: string
   documentNumber: string
   firstName: string
@@ -1129,6 +1852,9 @@ export type MemberCreateWithoutLegalAcceptancesInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -1138,10 +1864,15 @@ export type MemberCreateWithoutLegalAcceptancesInput = {
   referralCode?: Prisma.ReferralCodeCreateNestedOneWithoutMemberInput
   sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
+  legalAcceptances?: Prisma.LegalAcceptanceCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
 }
 
-export type MemberUncheckedCreateWithoutLegalAcceptancesInput = {
+export type MemberUncheckedCreateWithoutDocumentsInput = {
   id?: string
+  memberCode: string
   userId?: string | null
   documentType: string
   documentNumber: string
@@ -1150,6 +1881,9 @@ export type MemberUncheckedCreateWithoutLegalAcceptancesInput = {
   countryCode?: string
   phone?: string | null
   email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
   status?: $Enums.MemberStatus
   joinedAt?: Date | string | null
   createdAt?: Date | string
@@ -1158,6 +1892,138 @@ export type MemberUncheckedCreateWithoutLegalAcceptancesInput = {
   referralCode?: Prisma.ReferralCodeUncheckedCreateNestedOneWithoutMemberInput
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
   sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedCreateNestedManyWithoutMemberInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+}
+
+export type MemberCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.MemberWhereUniqueInput
+  create: Prisma.XOR<Prisma.MemberCreateWithoutDocumentsInput, Prisma.MemberUncheckedCreateWithoutDocumentsInput>
+}
+
+export type MemberUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.MemberUpdateWithoutDocumentsInput, Prisma.MemberUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.MemberCreateWithoutDocumentsInput, Prisma.MemberUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.MemberWhereInput
+}
+
+export type MemberUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.MemberWhereInput
+  data: Prisma.XOR<Prisma.MemberUpdateWithoutDocumentsInput, Prisma.MemberUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type MemberUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
+  documentType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneWithoutMemberNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutMemberNestedInput
+  referralCode?: Prisma.ReferralCodeUpdateOneWithoutMemberNestedInput
+  sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
+  sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+}
+
+export type MemberUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documentType?: Prisma.StringFieldUpdateOperationsInput | string
+  documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  firstName?: Prisma.StringFieldUpdateOperationsInput | string
+  lastName?: Prisma.StringFieldUpdateOperationsInput | string
+  countryCode?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
+  status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+  joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutMemberNestedInput
+  referralCode?: Prisma.ReferralCodeUncheckedUpdateOneWithoutMemberNestedInput
+  sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
+  sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
+  legalAcceptances?: Prisma.LegalAcceptanceUncheckedUpdateManyWithoutMemberNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+}
+
+export type MemberCreateWithoutLegalAcceptancesInput = {
+  id?: string
+  memberCode: string
+  documentType: string
+  documentNumber: string
+  firstName: string
+  lastName: string
+  countryCode?: string
+  phone?: string | null
+  email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
+  status?: $Enums.MemberStatus
+  joinedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user?: Prisma.UserCreateNestedOneWithoutMemberInput
+  sales?: Prisma.SaleCreateNestedManyWithoutMemberInput
+  referralCode?: Prisma.ReferralCodeCreateNestedOneWithoutMemberInput
+  sponsorshipAsChild?: Prisma.SponsorshipCreateNestedOneWithoutChildInput
+  sponsorships?: Prisma.SponsorshipCreateNestedManyWithoutSponsorInput
+  investorProfile?: Prisma.InvestorProfileCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutMemberInput
+}
+
+export type MemberUncheckedCreateWithoutLegalAcceptancesInput = {
+  id?: string
+  memberCode: string
+  userId?: string | null
+  documentType: string
+  documentNumber: string
+  firstName: string
+  lastName: string
+  countryCode?: string
+  phone?: string | null
+  email: string
+  residence?: string | null
+  occupation?: string | null
+  maritalStatus?: $Enums.MaritalStatus | null
+  status?: $Enums.MemberStatus
+  joinedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutMemberInput
+  referralCode?: Prisma.ReferralCodeUncheckedCreateNestedOneWithoutMemberInput
+  sponsorshipAsChild?: Prisma.SponsorshipUncheckedCreateNestedOneWithoutChildInput
+  sponsorships?: Prisma.SponsorshipUncheckedCreateNestedManyWithoutSponsorInput
+  investorProfile?: Prisma.InvestorProfileUncheckedCreateNestedOneWithoutMemberInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedCreateNestedOneWithoutMemberInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutHolderInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutMemberInput
 }
 
 export type MemberCreateOrConnectWithoutLegalAcceptancesInput = {
@@ -1178,6 +2044,7 @@ export type MemberUpdateToOneWithWhereWithoutLegalAcceptancesInput = {
 
 export type MemberUpdateWithoutLegalAcceptancesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1185,6 +2052,9 @@ export type MemberUpdateWithoutLegalAcceptancesInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1194,10 +2064,15 @@ export type MemberUpdateWithoutLegalAcceptancesInput = {
   referralCode?: Prisma.ReferralCodeUpdateOneWithoutMemberNestedInput
   sponsorshipAsChild?: Prisma.SponsorshipUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUpdateManyWithoutSponsorNestedInput
+  investorProfile?: Prisma.InvestorProfileUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutMemberNestedInput
 }
 
 export type MemberUncheckedUpdateWithoutLegalAcceptancesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberCode?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documentType?: Prisma.StringFieldUpdateOperationsInput | string
   documentNumber?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1206,6 +2081,9 @@ export type MemberUncheckedUpdateWithoutLegalAcceptancesInput = {
   countryCode?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
+  residence?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maritalStatus?: Prisma.NullableEnumMaritalStatusFieldUpdateOperationsInput | $Enums.MaritalStatus | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   joinedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1214,6 +2092,10 @@ export type MemberUncheckedUpdateWithoutLegalAcceptancesInput = {
   referralCode?: Prisma.ReferralCodeUncheckedUpdateOneWithoutMemberNestedInput
   sponsorshipAsChild?: Prisma.SponsorshipUncheckedUpdateOneWithoutChildNestedInput
   sponsorships?: Prisma.SponsorshipUncheckedUpdateManyWithoutSponsorNestedInput
+  investorProfile?: Prisma.InvestorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  ambassadorProfile?: Prisma.AmbassadorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutMemberNestedInput
 }
 
 
@@ -1225,12 +2107,16 @@ export type MemberCountOutputType = {
   sales: number
   sponsorships: number
   legalAcceptances: number
+  beneficiaries: number
+  documents: number
 }
 
 export type MemberCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sales?: boolean | MemberCountOutputTypeCountSalesArgs
   sponsorships?: boolean | MemberCountOutputTypeCountSponsorshipsArgs
   legalAcceptances?: boolean | MemberCountOutputTypeCountLegalAcceptancesArgs
+  beneficiaries?: boolean | MemberCountOutputTypeCountBeneficiariesArgs
+  documents?: boolean | MemberCountOutputTypeCountDocumentsArgs
 }
 
 /**
@@ -1264,9 +2150,24 @@ export type MemberCountOutputTypeCountLegalAcceptancesArgs<ExtArgs extends runti
   where?: Prisma.LegalAcceptanceWhereInput
 }
 
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BeneficiaryWhereInput
+}
+
+/**
+ * MemberCountOutputType without action
+ */
+export type MemberCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentRecordWhereInput
+}
+
 
 export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  memberCode?: boolean
   userId?: boolean
   documentType?: boolean
   documentNumber?: boolean
@@ -1275,6 +2176,9 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   countryCode?: boolean
   phone?: boolean
   email?: boolean
+  residence?: boolean
+  occupation?: boolean
+  maritalStatus?: boolean
   status?: boolean
   joinedAt?: boolean
   createdAt?: boolean
@@ -1285,11 +2189,16 @@ export type MemberSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   sponsorshipAsChild?: boolean | Prisma.Member$sponsorshipAsChildArgs<ExtArgs>
   sponsorships?: boolean | Prisma.Member$sponsorshipsArgs<ExtArgs>
   legalAcceptances?: boolean | Prisma.Member$legalAcceptancesArgs<ExtArgs>
+  investorProfile?: boolean | Prisma.Member$investorProfileArgs<ExtArgs>
+  ambassadorProfile?: boolean | Prisma.Member$ambassadorProfileArgs<ExtArgs>
+  beneficiaries?: boolean | Prisma.Member$beneficiariesArgs<ExtArgs>
+  documents?: boolean | Prisma.Member$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["member"]>
 
 export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  memberCode?: boolean
   userId?: boolean
   documentType?: boolean
   documentNumber?: boolean
@@ -1298,6 +2207,9 @@ export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   countryCode?: boolean
   phone?: boolean
   email?: boolean
+  residence?: boolean
+  occupation?: boolean
+  maritalStatus?: boolean
   status?: boolean
   joinedAt?: boolean
   createdAt?: boolean
@@ -1307,6 +2219,7 @@ export type MemberSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
 
 export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  memberCode?: boolean
   userId?: boolean
   documentType?: boolean
   documentNumber?: boolean
@@ -1315,6 +2228,9 @@ export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   countryCode?: boolean
   phone?: boolean
   email?: boolean
+  residence?: boolean
+  occupation?: boolean
+  maritalStatus?: boolean
   status?: boolean
   joinedAt?: boolean
   createdAt?: boolean
@@ -1324,6 +2240,7 @@ export type MemberSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
 
 export type MemberSelectScalar = {
   id?: boolean
+  memberCode?: boolean
   userId?: boolean
   documentType?: boolean
   documentNumber?: boolean
@@ -1332,13 +2249,16 @@ export type MemberSelectScalar = {
   countryCode?: boolean
   phone?: boolean
   email?: boolean
+  residence?: boolean
+  occupation?: boolean
+  maritalStatus?: boolean
   status?: boolean
   joinedAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "documentType" | "documentNumber" | "firstName" | "lastName" | "countryCode" | "phone" | "email" | "status" | "joinedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
+export type MemberOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberCode" | "userId" | "documentType" | "documentNumber" | "firstName" | "lastName" | "countryCode" | "phone" | "email" | "residence" | "occupation" | "maritalStatus" | "status" | "joinedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["member"]>
 export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Member$userArgs<ExtArgs>
   sales?: boolean | Prisma.Member$salesArgs<ExtArgs>
@@ -1346,6 +2266,10 @@ export type MemberInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   sponsorshipAsChild?: boolean | Prisma.Member$sponsorshipAsChildArgs<ExtArgs>
   sponsorships?: boolean | Prisma.Member$sponsorshipsArgs<ExtArgs>
   legalAcceptances?: boolean | Prisma.Member$legalAcceptancesArgs<ExtArgs>
+  investorProfile?: boolean | Prisma.Member$investorProfileArgs<ExtArgs>
+  ambassadorProfile?: boolean | Prisma.Member$ambassadorProfileArgs<ExtArgs>
+  beneficiaries?: boolean | Prisma.Member$beneficiariesArgs<ExtArgs>
+  documents?: boolean | Prisma.Member$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.MemberCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MemberIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1364,9 +2288,14 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     sponsorshipAsChild: Prisma.$SponsorshipPayload<ExtArgs> | null
     sponsorships: Prisma.$SponsorshipPayload<ExtArgs>[]
     legalAcceptances: Prisma.$LegalAcceptancePayload<ExtArgs>[]
+    investorProfile: Prisma.$InvestorProfilePayload<ExtArgs> | null
+    ambassadorProfile: Prisma.$AmbassadorProfilePayload<ExtArgs> | null
+    beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
+    documents: Prisma.$DocumentRecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    memberCode: string
     userId: string | null
     documentType: string
     documentNumber: string
@@ -1375,6 +2304,9 @@ export type $MemberPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     countryCode: string
     phone: string | null
     email: string
+    residence: string | null
+    occupation: string | null
+    maritalStatus: $Enums.MaritalStatus | null
     status: $Enums.MemberStatus
     joinedAt: Date | null
     createdAt: Date
@@ -1779,6 +2711,10 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
   sponsorshipAsChild<T extends Prisma.Member$sponsorshipAsChildArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$sponsorshipAsChildArgs<ExtArgs>>): Prisma.Prisma__SponsorshipClient<runtime.Types.Result.GetResult<Prisma.$SponsorshipPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   sponsorships<T extends Prisma.Member$sponsorshipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$sponsorshipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SponsorshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   legalAcceptances<T extends Prisma.Member$legalAcceptancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$legalAcceptancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LegalAcceptancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  investorProfile<T extends Prisma.Member$investorProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$investorProfileArgs<ExtArgs>>): Prisma.Prisma__InvestorProfileClient<runtime.Types.Result.GetResult<Prisma.$InvestorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ambassadorProfile<T extends Prisma.Member$ambassadorProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$ambassadorProfileArgs<ExtArgs>>): Prisma.Prisma__AmbassadorProfileClient<runtime.Types.Result.GetResult<Prisma.$AmbassadorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  beneficiaries<T extends Prisma.Member$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Member$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Member$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1809,6 +2745,7 @@ export interface Prisma__MemberClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface MemberFieldRefs {
   readonly id: Prisma.FieldRef<"Member", 'String'>
+  readonly memberCode: Prisma.FieldRef<"Member", 'String'>
   readonly userId: Prisma.FieldRef<"Member", 'String'>
   readonly documentType: Prisma.FieldRef<"Member", 'String'>
   readonly documentNumber: Prisma.FieldRef<"Member", 'String'>
@@ -1817,6 +2754,9 @@ export interface MemberFieldRefs {
   readonly countryCode: Prisma.FieldRef<"Member", 'String'>
   readonly phone: Prisma.FieldRef<"Member", 'String'>
   readonly email: Prisma.FieldRef<"Member", 'String'>
+  readonly residence: Prisma.FieldRef<"Member", 'String'>
+  readonly occupation: Prisma.FieldRef<"Member", 'String'>
+  readonly maritalStatus: Prisma.FieldRef<"Member", 'MaritalStatus'>
   readonly status: Prisma.FieldRef<"Member", 'MemberStatus'>
   readonly joinedAt: Prisma.FieldRef<"Member", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Member", 'DateTime'>
@@ -2348,6 +3288,92 @@ export type Member$legalAcceptancesArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.LegalAcceptanceScalarFieldEnum | Prisma.LegalAcceptanceScalarFieldEnum[]
+}
+
+/**
+ * Member.investorProfile
+ */
+export type Member$investorProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InvestorProfile
+   */
+  select?: Prisma.InvestorProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InvestorProfile
+   */
+  omit?: Prisma.InvestorProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InvestorProfileInclude<ExtArgs> | null
+  where?: Prisma.InvestorProfileWhereInput
+}
+
+/**
+ * Member.ambassadorProfile
+ */
+export type Member$ambassadorProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AmbassadorProfile
+   */
+  select?: Prisma.AmbassadorProfileSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AmbassadorProfile
+   */
+  omit?: Prisma.AmbassadorProfileOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AmbassadorProfileInclude<ExtArgs> | null
+  where?: Prisma.AmbassadorProfileWhereInput
+}
+
+/**
+ * Member.beneficiaries
+ */
+export type Member$beneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Beneficiary
+   */
+  select?: Prisma.BeneficiarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Beneficiary
+   */
+  omit?: Prisma.BeneficiaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeneficiaryInclude<ExtArgs> | null
+  where?: Prisma.BeneficiaryWhereInput
+  orderBy?: Prisma.BeneficiaryOrderByWithRelationInput | Prisma.BeneficiaryOrderByWithRelationInput[]
+  cursor?: Prisma.BeneficiaryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BeneficiaryScalarFieldEnum | Prisma.BeneficiaryScalarFieldEnum[]
+}
+
+/**
+ * Member.documents
+ */
+export type Member$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentRecord
+   */
+  select?: Prisma.DocumentRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentRecord
+   */
+  omit?: Prisma.DocumentRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentRecordInclude<ExtArgs> | null
+  where?: Prisma.DocumentRecordWhereInput
+  orderBy?: Prisma.DocumentRecordOrderByWithRelationInput | Prisma.DocumentRecordOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentRecordScalarFieldEnum | Prisma.DocumentRecordScalarFieldEnum[]
 }
 
 /**

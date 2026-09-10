@@ -32,6 +32,7 @@ export type ProgramAvgAggregateOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number | null
+  marriedBeneficiaryCap: number | null
 }
 
 export type ProgramSumAggregateOutputType = {
@@ -40,6 +41,7 @@ export type ProgramSumAggregateOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number | null
+  marriedBeneficiaryCap: number | null
 }
 
 export type ProgramMinAggregateOutputType = {
@@ -51,6 +53,10 @@ export type ProgramMinAggregateOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number | null
+  marriedBeneficiaryCap: number | null
+  membershipName: string | null
+  shareholderCategory: string | null
+  observations: string | null
   active: boolean | null
   createdAt: Date | null
 }
@@ -64,6 +70,10 @@ export type ProgramMaxAggregateOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number | null
+  marriedBeneficiaryCap: number | null
+  membershipName: string | null
+  shareholderCategory: string | null
+  observations: string | null
   active: boolean | null
   createdAt: Date | null
 }
@@ -77,6 +87,10 @@ export type ProgramCountAggregateOutputType = {
   cashShares: number
   cashStayDays: number
   beneficiaryCap: number
+  marriedBeneficiaryCap: number
+  membershipName: number
+  shareholderCategory: number
+  observations: number
   active: number
   createdAt: number
   _all: number
@@ -89,6 +103,7 @@ export type ProgramAvgAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  marriedBeneficiaryCap?: true
 }
 
 export type ProgramSumAggregateInputType = {
@@ -97,6 +112,7 @@ export type ProgramSumAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  marriedBeneficiaryCap?: true
 }
 
 export type ProgramMinAggregateInputType = {
@@ -108,6 +124,10 @@ export type ProgramMinAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  marriedBeneficiaryCap?: true
+  membershipName?: true
+  shareholderCategory?: true
+  observations?: true
   active?: true
   createdAt?: true
 }
@@ -121,6 +141,10 @@ export type ProgramMaxAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  marriedBeneficiaryCap?: true
+  membershipName?: true
+  shareholderCategory?: true
+  observations?: true
   active?: true
   createdAt?: true
 }
@@ -134,6 +158,10 @@ export type ProgramCountAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  marriedBeneficiaryCap?: true
+  membershipName?: true
+  shareholderCategory?: true
+  observations?: true
   active?: true
   createdAt?: true
   _all?: true
@@ -234,6 +262,10 @@ export type ProgramGroupByOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number
+  marriedBeneficiaryCap: number
+  membershipName: string | null
+  shareholderCategory: string | null
+  observations: string | null
   active: boolean
   createdAt: Date
   _count: ProgramCountAggregateOutputType | null
@@ -270,10 +302,15 @@ export type ProgramWhereInput = {
   cashShares?: Prisma.IntNullableFilter<"Program"> | number | null
   cashStayDays?: Prisma.IntNullableFilter<"Program"> | number | null
   beneficiaryCap?: Prisma.IntFilter<"Program"> | number
+  marriedBeneficiaryCap?: Prisma.IntFilter<"Program"> | number
+  membershipName?: Prisma.StringNullableFilter<"Program"> | string | null
+  shareholderCategory?: Prisma.StringNullableFilter<"Program"> | string | null
+  observations?: Prisma.StringNullableFilter<"Program"> | string | null
   active?: Prisma.BoolFilter<"Program"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Program"> | Date | string
   financingPlans?: Prisma.FinancingPlanListRelationFilter
   sales?: Prisma.SaleListRelationFilter
+  commissionRules?: Prisma.CommissionRuleListRelationFilter
 }
 
 export type ProgramOrderByWithRelationInput = {
@@ -285,10 +322,15 @@ export type ProgramOrderByWithRelationInput = {
   cashShares?: Prisma.SortOrderInput | Prisma.SortOrder
   cashStayDays?: Prisma.SortOrderInput | Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  marriedBeneficiaryCap?: Prisma.SortOrder
+  membershipName?: Prisma.SortOrderInput | Prisma.SortOrder
+  shareholderCategory?: Prisma.SortOrderInput | Prisma.SortOrder
+  observations?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   financingPlans?: Prisma.FinancingPlanOrderByRelationAggregateInput
   sales?: Prisma.SaleOrderByRelationAggregateInput
+  commissionRules?: Prisma.CommissionRuleOrderByRelationAggregateInput
 }
 
 export type ProgramWhereUniqueInput = Prisma.AtLeast<{
@@ -303,10 +345,15 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   cashShares?: Prisma.IntNullableFilter<"Program"> | number | null
   cashStayDays?: Prisma.IntNullableFilter<"Program"> | number | null
   beneficiaryCap?: Prisma.IntFilter<"Program"> | number
+  marriedBeneficiaryCap?: Prisma.IntFilter<"Program"> | number
+  membershipName?: Prisma.StringNullableFilter<"Program"> | string | null
+  shareholderCategory?: Prisma.StringNullableFilter<"Program"> | string | null
+  observations?: Prisma.StringNullableFilter<"Program"> | string | null
   active?: Prisma.BoolFilter<"Program"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Program"> | Date | string
   financingPlans?: Prisma.FinancingPlanListRelationFilter
   sales?: Prisma.SaleListRelationFilter
+  commissionRules?: Prisma.CommissionRuleListRelationFilter
 }, "id" | "kind">
 
 export type ProgramOrderByWithAggregationInput = {
@@ -318,6 +365,10 @@ export type ProgramOrderByWithAggregationInput = {
   cashShares?: Prisma.SortOrderInput | Prisma.SortOrder
   cashStayDays?: Prisma.SortOrderInput | Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  marriedBeneficiaryCap?: Prisma.SortOrder
+  membershipName?: Prisma.SortOrderInput | Prisma.SortOrder
+  shareholderCategory?: Prisma.SortOrderInput | Prisma.SortOrder
+  observations?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.ProgramCountOrderByAggregateInput
@@ -339,6 +390,10 @@ export type ProgramScalarWhereWithAggregatesInput = {
   cashShares?: Prisma.IntNullableWithAggregatesFilter<"Program"> | number | null
   cashStayDays?: Prisma.IntNullableWithAggregatesFilter<"Program"> | number | null
   beneficiaryCap?: Prisma.IntWithAggregatesFilter<"Program"> | number
+  marriedBeneficiaryCap?: Prisma.IntWithAggregatesFilter<"Program"> | number
+  membershipName?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
+  shareholderCategory?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
+  observations?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
   active?: Prisma.BoolWithAggregatesFilter<"Program"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Program"> | Date | string
 }
@@ -352,10 +407,15 @@ export type ProgramCreateInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
   active?: boolean
   createdAt?: Date | string
   financingPlans?: Prisma.FinancingPlanCreateNestedManyWithoutProgramInput
   sales?: Prisma.SaleCreateNestedManyWithoutProgramInput
+  commissionRules?: Prisma.CommissionRuleCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateInput = {
@@ -367,10 +427,15 @@ export type ProgramUncheckedCreateInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
   active?: boolean
   createdAt?: Date | string
   financingPlans?: Prisma.FinancingPlanUncheckedCreateNestedManyWithoutProgramInput
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutProgramInput
+  commissionRules?: Prisma.CommissionRuleUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUpdateInput = {
@@ -382,10 +447,15 @@ export type ProgramUpdateInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financingPlans?: Prisma.FinancingPlanUpdateManyWithoutProgramNestedInput
   sales?: Prisma.SaleUpdateManyWithoutProgramNestedInput
+  commissionRules?: Prisma.CommissionRuleUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateInput = {
@@ -397,10 +467,15 @@ export type ProgramUncheckedUpdateInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financingPlans?: Prisma.FinancingPlanUncheckedUpdateManyWithoutProgramNestedInput
   sales?: Prisma.SaleUncheckedUpdateManyWithoutProgramNestedInput
+  commissionRules?: Prisma.CommissionRuleUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramCreateManyInput = {
@@ -412,6 +487,10 @@ export type ProgramCreateManyInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
   active?: boolean
   createdAt?: Date | string
 }
@@ -425,6 +504,10 @@ export type ProgramUpdateManyMutationInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -438,6 +521,10 @@ export type ProgramUncheckedUpdateManyInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -451,6 +538,10 @@ export type ProgramCountOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  marriedBeneficiaryCap?: Prisma.SortOrder
+  membershipName?: Prisma.SortOrder
+  shareholderCategory?: Prisma.SortOrder
+  observations?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -461,6 +552,7 @@ export type ProgramAvgOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  marriedBeneficiaryCap?: Prisma.SortOrder
 }
 
 export type ProgramMaxOrderByAggregateInput = {
@@ -472,6 +564,10 @@ export type ProgramMaxOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  marriedBeneficiaryCap?: Prisma.SortOrder
+  membershipName?: Prisma.SortOrder
+  shareholderCategory?: Prisma.SortOrder
+  observations?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -485,6 +581,10 @@ export type ProgramMinOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  marriedBeneficiaryCap?: Prisma.SortOrder
+  membershipName?: Prisma.SortOrder
+  shareholderCategory?: Prisma.SortOrder
+  observations?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
@@ -495,11 +595,17 @@ export type ProgramSumOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  marriedBeneficiaryCap?: Prisma.SortOrder
 }
 
 export type ProgramScalarRelationFilter = {
   is?: Prisma.ProgramWhereInput
   isNot?: Prisma.ProgramWhereInput
+}
+
+export type ProgramNullableScalarRelationFilter = {
+  is?: Prisma.ProgramWhereInput | null
+  isNot?: Prisma.ProgramWhereInput | null
 }
 
 export type EnumProgramKindFieldUpdateOperationsInput = {
@@ -530,10 +636,6 @@ export type IntFieldUpdateOperationsInput = {
   divide?: number
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type ProgramCreateNestedOneWithoutFinancingPlansInput = {
   create?: Prisma.XOR<Prisma.ProgramCreateWithoutFinancingPlansInput, Prisma.ProgramUncheckedCreateWithoutFinancingPlansInput>
   connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutFinancingPlansInput
@@ -562,6 +664,22 @@ export type ProgramUpdateOneRequiredWithoutSalesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutSalesInput, Prisma.ProgramUpdateWithoutSalesInput>, Prisma.ProgramUncheckedUpdateWithoutSalesInput>
 }
 
+export type ProgramCreateNestedOneWithoutCommissionRulesInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutCommissionRulesInput, Prisma.ProgramUncheckedCreateWithoutCommissionRulesInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutCommissionRulesInput
+  connect?: Prisma.ProgramWhereUniqueInput
+}
+
+export type ProgramUpdateOneWithoutCommissionRulesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProgramCreateWithoutCommissionRulesInput, Prisma.ProgramUncheckedCreateWithoutCommissionRulesInput>
+  connectOrCreate?: Prisma.ProgramCreateOrConnectWithoutCommissionRulesInput
+  upsert?: Prisma.ProgramUpsertWithoutCommissionRulesInput
+  disconnect?: Prisma.ProgramWhereInput | boolean
+  delete?: Prisma.ProgramWhereInput | boolean
+  connect?: Prisma.ProgramWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProgramUpdateToOneWithWhereWithoutCommissionRulesInput, Prisma.ProgramUpdateWithoutCommissionRulesInput>, Prisma.ProgramUncheckedUpdateWithoutCommissionRulesInput>
+}
+
 export type ProgramCreateWithoutFinancingPlansInput = {
   id?: string
   kind: $Enums.ProgramKind
@@ -571,9 +689,14 @@ export type ProgramCreateWithoutFinancingPlansInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
   active?: boolean
   createdAt?: Date | string
   sales?: Prisma.SaleCreateNestedManyWithoutProgramInput
+  commissionRules?: Prisma.CommissionRuleCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutFinancingPlansInput = {
@@ -585,9 +708,14 @@ export type ProgramUncheckedCreateWithoutFinancingPlansInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
   active?: boolean
   createdAt?: Date | string
   sales?: Prisma.SaleUncheckedCreateNestedManyWithoutProgramInput
+  commissionRules?: Prisma.CommissionRuleUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutFinancingPlansInput = {
@@ -615,9 +743,14 @@ export type ProgramUpdateWithoutFinancingPlansInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sales?: Prisma.SaleUpdateManyWithoutProgramNestedInput
+  commissionRules?: Prisma.CommissionRuleUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutFinancingPlansInput = {
@@ -629,9 +762,14 @@ export type ProgramUncheckedUpdateWithoutFinancingPlansInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sales?: Prisma.SaleUncheckedUpdateManyWithoutProgramNestedInput
+  commissionRules?: Prisma.CommissionRuleUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramCreateWithoutSalesInput = {
@@ -643,9 +781,14 @@ export type ProgramCreateWithoutSalesInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
   active?: boolean
   createdAt?: Date | string
   financingPlans?: Prisma.FinancingPlanCreateNestedManyWithoutProgramInput
+  commissionRules?: Prisma.CommissionRuleCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramUncheckedCreateWithoutSalesInput = {
@@ -657,9 +800,14 @@ export type ProgramUncheckedCreateWithoutSalesInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
   active?: boolean
   createdAt?: Date | string
   financingPlans?: Prisma.FinancingPlanUncheckedCreateNestedManyWithoutProgramInput
+  commissionRules?: Prisma.CommissionRuleUncheckedCreateNestedManyWithoutProgramInput
 }
 
 export type ProgramCreateOrConnectWithoutSalesInput = {
@@ -687,9 +835,14 @@ export type ProgramUpdateWithoutSalesInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financingPlans?: Prisma.FinancingPlanUpdateManyWithoutProgramNestedInput
+  commissionRules?: Prisma.CommissionRuleUpdateManyWithoutProgramNestedInput
 }
 
 export type ProgramUncheckedUpdateWithoutSalesInput = {
@@ -701,9 +854,106 @@ export type ProgramUncheckedUpdateWithoutSalesInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   financingPlans?: Prisma.FinancingPlanUncheckedUpdateManyWithoutProgramNestedInput
+  commissionRules?: Prisma.CommissionRuleUncheckedUpdateManyWithoutProgramNestedInput
+}
+
+export type ProgramCreateWithoutCommissionRulesInput = {
+  id?: string
+  kind: $Enums.ProgramKind
+  name: string
+  cashPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  separation: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cashShares?: number | null
+  cashStayDays?: number | null
+  beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  financingPlans?: Prisma.FinancingPlanCreateNestedManyWithoutProgramInput
+  sales?: Prisma.SaleCreateNestedManyWithoutProgramInput
+}
+
+export type ProgramUncheckedCreateWithoutCommissionRulesInput = {
+  id?: string
+  kind: $Enums.ProgramKind
+  name: string
+  cashPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  separation: runtime.Decimal | runtime.DecimalJsLike | number | string
+  cashShares?: number | null
+  cashStayDays?: number | null
+  beneficiaryCap: number
+  marriedBeneficiaryCap?: number
+  membershipName?: string | null
+  shareholderCategory?: string | null
+  observations?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  financingPlans?: Prisma.FinancingPlanUncheckedCreateNestedManyWithoutProgramInput
+  sales?: Prisma.SaleUncheckedCreateNestedManyWithoutProgramInput
+}
+
+export type ProgramCreateOrConnectWithoutCommissionRulesInput = {
+  where: Prisma.ProgramWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutCommissionRulesInput, Prisma.ProgramUncheckedCreateWithoutCommissionRulesInput>
+}
+
+export type ProgramUpsertWithoutCommissionRulesInput = {
+  update: Prisma.XOR<Prisma.ProgramUpdateWithoutCommissionRulesInput, Prisma.ProgramUncheckedUpdateWithoutCommissionRulesInput>
+  create: Prisma.XOR<Prisma.ProgramCreateWithoutCommissionRulesInput, Prisma.ProgramUncheckedCreateWithoutCommissionRulesInput>
+  where?: Prisma.ProgramWhereInput
+}
+
+export type ProgramUpdateToOneWithWhereWithoutCommissionRulesInput = {
+  where?: Prisma.ProgramWhereInput
+  data: Prisma.XOR<Prisma.ProgramUpdateWithoutCommissionRulesInput, Prisma.ProgramUncheckedUpdateWithoutCommissionRulesInput>
+}
+
+export type ProgramUpdateWithoutCommissionRulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumProgramKindFieldUpdateOperationsInput | $Enums.ProgramKind
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  cashPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  separation?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  financingPlans?: Prisma.FinancingPlanUpdateManyWithoutProgramNestedInput
+  sales?: Prisma.SaleUpdateManyWithoutProgramNestedInput
+}
+
+export type ProgramUncheckedUpdateWithoutCommissionRulesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  kind?: Prisma.EnumProgramKindFieldUpdateOperationsInput | $Enums.ProgramKind
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  cashPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  separation?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  observations?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  financingPlans?: Prisma.FinancingPlanUncheckedUpdateManyWithoutProgramNestedInput
+  sales?: Prisma.SaleUncheckedUpdateManyWithoutProgramNestedInput
 }
 
 
@@ -714,11 +964,13 @@ export type ProgramUncheckedUpdateWithoutSalesInput = {
 export type ProgramCountOutputType = {
   financingPlans: number
   sales: number
+  commissionRules: number
 }
 
 export type ProgramCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   financingPlans?: boolean | ProgramCountOutputTypeCountFinancingPlansArgs
   sales?: boolean | ProgramCountOutputTypeCountSalesArgs
+  commissionRules?: boolean | ProgramCountOutputTypeCountCommissionRulesArgs
 }
 
 /**
@@ -745,6 +997,13 @@ export type ProgramCountOutputTypeCountSalesArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.SaleWhereInput
 }
 
+/**
+ * ProgramCountOutputType without action
+ */
+export type ProgramCountOutputTypeCountCommissionRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CommissionRuleWhereInput
+}
+
 
 export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -755,10 +1014,15 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   cashShares?: boolean
   cashStayDays?: boolean
   beneficiaryCap?: boolean
+  marriedBeneficiaryCap?: boolean
+  membershipName?: boolean
+  shareholderCategory?: boolean
+  observations?: boolean
   active?: boolean
   createdAt?: boolean
   financingPlans?: boolean | Prisma.Program$financingPlansArgs<ExtArgs>
   sales?: boolean | Prisma.Program$salesArgs<ExtArgs>
+  commissionRules?: boolean | Prisma.Program$commissionRulesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["program"]>
 
@@ -771,6 +1035,10 @@ export type ProgramSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   cashShares?: boolean
   cashStayDays?: boolean
   beneficiaryCap?: boolean
+  marriedBeneficiaryCap?: boolean
+  membershipName?: boolean
+  shareholderCategory?: boolean
+  observations?: boolean
   active?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["program"]>
@@ -784,6 +1052,10 @@ export type ProgramSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   cashShares?: boolean
   cashStayDays?: boolean
   beneficiaryCap?: boolean
+  marriedBeneficiaryCap?: boolean
+  membershipName?: boolean
+  shareholderCategory?: boolean
+  observations?: boolean
   active?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["program"]>
@@ -797,14 +1069,19 @@ export type ProgramSelectScalar = {
   cashShares?: boolean
   cashStayDays?: boolean
   beneficiaryCap?: boolean
+  marriedBeneficiaryCap?: boolean
+  membershipName?: boolean
+  shareholderCategory?: boolean
+  observations?: boolean
   active?: boolean
   createdAt?: boolean
 }
 
-export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kind" | "name" | "cashPrice" | "separation" | "cashShares" | "cashStayDays" | "beneficiaryCap" | "active" | "createdAt", ExtArgs["result"]["program"]>
+export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kind" | "name" | "cashPrice" | "separation" | "cashShares" | "cashStayDays" | "beneficiaryCap" | "marriedBeneficiaryCap" | "membershipName" | "shareholderCategory" | "observations" | "active" | "createdAt", ExtArgs["result"]["program"]>
 export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   financingPlans?: boolean | Prisma.Program$financingPlansArgs<ExtArgs>
   sales?: boolean | Prisma.Program$salesArgs<ExtArgs>
+  commissionRules?: boolean | Prisma.Program$commissionRulesArgs<ExtArgs>
   _count?: boolean | Prisma.ProgramCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProgramIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -815,6 +1092,7 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     financingPlans: Prisma.$FinancingPlanPayload<ExtArgs>[]
     sales: Prisma.$SalePayload<ExtArgs>[]
+    commissionRules: Prisma.$CommissionRulePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -825,6 +1103,10 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     cashShares: number | null
     cashStayDays: number | null
     beneficiaryCap: number
+    marriedBeneficiaryCap: number
+    membershipName: string | null
+    shareholderCategory: string | null
+    observations: string | null
     active: boolean
     createdAt: Date
   }, ExtArgs["result"]["program"]>
@@ -1223,6 +1505,7 @@ export interface Prisma__ProgramClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   financingPlans<T extends Prisma.Program$financingPlansArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$financingPlansArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancingPlanPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   sales<T extends Prisma.Program$salesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$salesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  commissionRules<T extends Prisma.Program$commissionRulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Program$commissionRulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommissionRulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1260,6 +1543,10 @@ export interface ProgramFieldRefs {
   readonly cashShares: Prisma.FieldRef<"Program", 'Int'>
   readonly cashStayDays: Prisma.FieldRef<"Program", 'Int'>
   readonly beneficiaryCap: Prisma.FieldRef<"Program", 'Int'>
+  readonly marriedBeneficiaryCap: Prisma.FieldRef<"Program", 'Int'>
+  readonly membershipName: Prisma.FieldRef<"Program", 'String'>
+  readonly shareholderCategory: Prisma.FieldRef<"Program", 'String'>
+  readonly observations: Prisma.FieldRef<"Program", 'String'>
   readonly active: Prisma.FieldRef<"Program", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Program", 'DateTime'>
 }
@@ -1700,6 +1987,30 @@ export type Program$salesArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.SaleScalarFieldEnum | Prisma.SaleScalarFieldEnum[]
+}
+
+/**
+ * Program.commissionRules
+ */
+export type Program$commissionRulesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CommissionRule
+   */
+  select?: Prisma.CommissionRuleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CommissionRule
+   */
+  omit?: Prisma.CommissionRuleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CommissionRuleInclude<ExtArgs> | null
+  where?: Prisma.CommissionRuleWhereInput
+  orderBy?: Prisma.CommissionRuleOrderByWithRelationInput | Prisma.CommissionRuleOrderByWithRelationInput[]
+  cursor?: Prisma.CommissionRuleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CommissionRuleScalarFieldEnum | Prisma.CommissionRuleScalarFieldEnum[]
 }
 
 /**

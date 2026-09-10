@@ -37,6 +37,9 @@ export async function reconcileSaleReservation(transaction: Prisma.TransactionCl
   if (!covered && sale.status === "ACTIVE") {
     await transaction.sale.update({ where: { id: saleId }, data: { status: "RESERVED", signedAt: null } });
     const otherActive = await transaction.sale.count({ where: { memberId: sale.memberId, status: "ACTIVE", id: { not: saleId } } });
-    if (otherActive === 0) await transaction.member.update({ where: { id: sale.memberId }, data: { status: "PROSPECT", joinedAt: null } });
+    if (otherActive === 0) {
+      await transaction.member.update({ where: { id: sale.memberId }, data: { status: "PROSPECT", joinedAt: null } });
+      await transaction.investorProfile.updateMany({ where: { memberId: sale.memberId }, data: { status: "PROSPECT", activatedAt: null } });
+    }
   }
 }

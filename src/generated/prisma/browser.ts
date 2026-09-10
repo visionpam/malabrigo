@@ -33,10 +33,35 @@ export type Role = Prisma.RoleModel
  */
 export type UserRole = Prisma.UserRoleModel
 /**
+ * Model Permission
+ * 
+ */
+export type Permission = Prisma.PermissionModel
+/**
+ * Model UserPermission
+ * 
+ */
+export type UserPermission = Prisma.UserPermissionModel
+/**
  * Model Member
  * 
  */
 export type Member = Prisma.MemberModel
+/**
+ * Model InvestorProfile
+ * 
+ */
+export type InvestorProfile = Prisma.InvestorProfileModel
+/**
+ * Model AmbassadorProfile
+ * 
+ */
+export type AmbassadorProfile = Prisma.AmbassadorProfileModel
+/**
+ * Model Beneficiary
+ * 
+ */
+export type Beneficiary = Prisma.BeneficiaryModel
 /**
  * Model Program
  * 
@@ -108,6 +133,11 @@ export type ProjectUpdate = Prisma.ProjectUpdateModel
  */
 export type ProjectMedia = Prisma.ProjectMediaModel
 /**
+ * Model DocumentRecord
+ * 
+ */
+export type DocumentRecord = Prisma.DocumentRecordModel
+/**
  * Model AuditLog
  * 
  */
@@ -127,3 +157,48 @@ export type Contract = Prisma.ContractModel
  * 
  */
 export type LegalAcceptance = Prisma.LegalAcceptanceModel
+/**
+ * Model AccountInvitation
+ * 
+ */
+export type AccountInvitation = Prisma.AccountInvitationModel
+/**
+ * Model PasswordResetToken
+ * 
+ */
+export type PasswordResetToken = Prisma.PasswordResetTokenModel
+/**
+ * Model UserSession
+ * 
+ */
+export type UserSession = Prisma.UserSessionModel
+/**
+ * Model CommissionRule
+ * 
+ */
+export type CommissionRule = Prisma.CommissionRuleModel
+/**
+ * Model CommissionEntry
+ * 
+ */
+export type CommissionEntry = Prisma.CommissionEntryModel
+/**
+ * Model RankDefinition
+ * 
+ */
+export type RankDefinition = Prisma.RankDefinitionModel
+/**
+ * Model AmbassadorRankHistory
+ * 
+ */
+export type AmbassadorRankHistory = Prisma.AmbassadorRankHistoryModel
+/**
+ * Model RankBonusPayment
+ * 
+ */
+export type RankBonusPayment = Prisma.RankBonusPaymentModel
+/**
+ * Model RankAward
+ * 
+ */
+export type RankAward = Prisma.RankAwardModel

@@ -54,7 +54,12 @@ export const ModelName = {
   User: 'User',
   Role: 'Role',
   UserRole: 'UserRole',
+  Permission: 'Permission',
+  UserPermission: 'UserPermission',
   Member: 'Member',
+  InvestorProfile: 'InvestorProfile',
+  AmbassadorProfile: 'AmbassadorProfile',
+  Beneficiary: 'Beneficiary',
   Program: 'Program',
   FinancingPlan: 'FinancingPlan',
   Sale: 'Sale',
@@ -69,10 +74,20 @@ export const ModelName = {
   ProjectStage: 'ProjectStage',
   ProjectUpdate: 'ProjectUpdate',
   ProjectMedia: 'ProjectMedia',
+  DocumentRecord: 'DocumentRecord',
   AuditLog: 'AuditLog',
   ContractTemplate: 'ContractTemplate',
   Contract: 'Contract',
-  LegalAcceptance: 'LegalAcceptance'
+  LegalAcceptance: 'LegalAcceptance',
+  AccountInvitation: 'AccountInvitation',
+  PasswordResetToken: 'PasswordResetToken',
+  UserSession: 'UserSession',
+  CommissionRule: 'CommissionRule',
+  CommissionEntry: 'CommissionEntry',
+  RankDefinition: 'RankDefinition',
+  AmbassadorRankHistory: 'AmbassadorRankHistory',
+  RankBonusPayment: 'RankBonusPayment',
+  RankAward: 'RankAward'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -124,8 +139,28 @@ export const UserRoleScalarFieldEnum = {
 export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
 
 
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+export const UserPermissionScalarFieldEnum = {
+  userId: 'userId',
+  permissionId: 'permissionId',
+  assignedAt: 'assignedAt'
+} as const
+
+export type UserPermissionScalarFieldEnum = (typeof UserPermissionScalarFieldEnum)[keyof typeof UserPermissionScalarFieldEnum]
+
+
 export const MemberScalarFieldEnum = {
   id: 'id',
+  memberCode: 'memberCode',
   userId: 'userId',
   documentType: 'documentType',
   documentNumber: 'documentNumber',
@@ -134,6 +169,9 @@ export const MemberScalarFieldEnum = {
   countryCode: 'countryCode',
   phone: 'phone',
   email: 'email',
+  residence: 'residence',
+  occupation: 'occupation',
+  maritalStatus: 'maritalStatus',
   status: 'status',
   joinedAt: 'joinedAt',
   createdAt: 'createdAt',
@@ -141,6 +179,44 @@ export const MemberScalarFieldEnum = {
 } as const
 
 export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+
+export const InvestorProfileScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  sponsorId: 'sponsorId',
+  status: 'status',
+  activatedAt: 'activatedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type InvestorProfileScalarFieldEnum = (typeof InvestorProfileScalarFieldEnum)[keyof typeof InvestorProfileScalarFieldEnum]
+
+
+export const AmbassadorProfileScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  referralCode: 'referralCode',
+  sponsorId: 'sponsorId',
+  status: 'status',
+  currentRank: 'currentRank',
+  affiliatedAt: 'affiliatedAt'
+} as const
+
+export type AmbassadorProfileScalarFieldEnum = (typeof AmbassadorProfileScalarFieldEnum)[keyof typeof AmbassadorProfileScalarFieldEnum]
+
+
+export const BeneficiaryScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  fullName: 'fullName',
+  document: 'document',
+  relationship: 'relationship',
+  isSpouse: 'isSpouse',
+  createdAt: 'createdAt'
+} as const
+
+export type BeneficiaryScalarFieldEnum = (typeof BeneficiaryScalarFieldEnum)[keyof typeof BeneficiaryScalarFieldEnum]
 
 
 export const ProgramScalarFieldEnum = {
@@ -152,6 +228,10 @@ export const ProgramScalarFieldEnum = {
   cashShares: 'cashShares',
   cashStayDays: 'cashStayDays',
   beneficiaryCap: 'beneficiaryCap',
+  marriedBeneficiaryCap: 'marriedBeneficiaryCap',
+  membershipName: 'membershipName',
+  shareholderCategory: 'shareholderCategory',
+  observations: 'observations',
   active: 'active',
   createdAt: 'createdAt'
 } as const
@@ -211,6 +291,7 @@ export const PaymentSubmissionScalarFieldEnum = {
   id: 'id',
   saleId: 'saleId',
   amount: 'amount',
+  concept: 'concept',
   currency: 'currency',
   voucherUrl: 'voucherUrl',
   submittedAt: 'submittedAt',
@@ -327,6 +408,24 @@ export const ProjectMediaScalarFieldEnum = {
 export type ProjectMediaScalarFieldEnum = (typeof ProjectMediaScalarFieldEnum)[keyof typeof ProjectMediaScalarFieldEnum]
 
 
+export const DocumentRecordScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  saleId: 'saleId',
+  uploadedById: 'uploadedById',
+  category: 'category',
+  visibility: 'visibility',
+  status: 'status',
+  title: 'title',
+  url: 'url',
+  rejectionReason: 'rejectionReason',
+  createdAt: 'createdAt',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type DocumentRecordScalarFieldEnum = (typeof DocumentRecordScalarFieldEnum)[keyof typeof DocumentRecordScalarFieldEnum]
+
+
 export const AuditLogScalarFieldEnum = {
   id: 'id',
   actorUserId: 'actorUserId',
@@ -386,6 +485,126 @@ export const LegalAcceptanceScalarFieldEnum = {
 export type LegalAcceptanceScalarFieldEnum = (typeof LegalAcceptanceScalarFieldEnum)[keyof typeof LegalAcceptanceScalarFieldEnum]
 
 
+export const AccountInvitationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  consumedAt: 'consumedAt',
+  sentAt: 'sentAt'
+} as const
+
+export type AccountInvitationScalarFieldEnum = (typeof AccountInvitationScalarFieldEnum)[keyof typeof AccountInvitationScalarFieldEnum]
+
+
+export const PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  consumedAt: 'consumedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+export const UserSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type UserSessionScalarFieldEnum = (typeof UserSessionScalarFieldEnum)[keyof typeof UserSessionScalarFieldEnum]
+
+
+export const CommissionRuleScalarFieldEnum = {
+  id: 'id',
+  programId: 'programId',
+  mode: 'mode',
+  generation: 'generation',
+  fixedAmount: 'fixedAmount',
+  percentage: 'percentage',
+  points: 'points',
+  version: 'version',
+  active: 'active'
+} as const
+
+export type CommissionRuleScalarFieldEnum = (typeof CommissionRuleScalarFieldEnum)[keyof typeof CommissionRuleScalarFieldEnum]
+
+
+export const CommissionEntryScalarFieldEnum = {
+  id: 'id',
+  ambassadorId: 'ambassadorId',
+  sourceSaleId: 'sourceSaleId',
+  sourcePaymentId: 'sourcePaymentId',
+  generation: 'generation',
+  amount: 'amount',
+  points: 'points',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type CommissionEntryScalarFieldEnum = (typeof CommissionEntryScalarFieldEnum)[keyof typeof CommissionEntryScalarFieldEnum]
+
+
+export const RankDefinitionScalarFieldEnum = {
+  code: 'code',
+  name: 'name',
+  sortOrder: 'sortOrder',
+  memberCount: 'memberCount',
+  directCount: 'directCount',
+  directPoints: 'directPoints',
+  totalPoints: 'totalPoints',
+  deadlineMonths: 'deadlineMonths',
+  monthlyBonus: 'monthlyBonus',
+  rewardName: 'rewardName',
+  rewardDescription: 'rewardDescription'
+} as const
+
+export type RankDefinitionScalarFieldEnum = (typeof RankDefinitionScalarFieldEnum)[keyof typeof RankDefinitionScalarFieldEnum]
+
+
+export const AmbassadorRankHistoryScalarFieldEnum = {
+  id: 'id',
+  ambassadorId: 'ambassadorId',
+  rankCode: 'rankCode',
+  achievedAt: 'achievedAt',
+  snapshot: 'snapshot'
+} as const
+
+export type AmbassadorRankHistoryScalarFieldEnum = (typeof AmbassadorRankHistoryScalarFieldEnum)[keyof typeof AmbassadorRankHistoryScalarFieldEnum]
+
+
+export const RankBonusPaymentScalarFieldEnum = {
+  id: 'id',
+  ambassadorId: 'ambassadorId',
+  rankCode: 'rankCode',
+  period: 'period',
+  amount: 'amount',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type RankBonusPaymentScalarFieldEnum = (typeof RankBonusPaymentScalarFieldEnum)[keyof typeof RankBonusPaymentScalarFieldEnum]
+
+
+export const RankAwardScalarFieldEnum = {
+  id: 'id',
+  ambassadorId: 'ambassadorId',
+  rankCode: 'rankCode',
+  status: 'status',
+  earnedAt: 'earnedAt',
+  deliveredAt: 'deliveredAt',
+  notes: 'notes'
+} as const
+
+export type RankAwardScalarFieldEnum = (typeof RankAwardScalarFieldEnum)[keyof typeof RankAwardScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -400,6 +619,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

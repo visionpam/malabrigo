@@ -38,6 +38,7 @@ export type PaymentSubmissionMinAggregateOutputType = {
   id: string | null
   saleId: string | null
   amount: runtime.Decimal | null
+  concept: $Enums.PaymentConcept | null
   currency: string | null
   voucherUrl: string | null
   submittedAt: Date | null
@@ -50,6 +51,7 @@ export type PaymentSubmissionMaxAggregateOutputType = {
   id: string | null
   saleId: string | null
   amount: runtime.Decimal | null
+  concept: $Enums.PaymentConcept | null
   currency: string | null
   voucherUrl: string | null
   submittedAt: Date | null
@@ -62,6 +64,7 @@ export type PaymentSubmissionCountAggregateOutputType = {
   id: number
   saleId: number
   amount: number
+  concept: number
   currency: number
   voucherUrl: number
   submittedAt: number
@@ -84,6 +87,7 @@ export type PaymentSubmissionMinAggregateInputType = {
   id?: true
   saleId?: true
   amount?: true
+  concept?: true
   currency?: true
   voucherUrl?: true
   submittedAt?: true
@@ -96,6 +100,7 @@ export type PaymentSubmissionMaxAggregateInputType = {
   id?: true
   saleId?: true
   amount?: true
+  concept?: true
   currency?: true
   voucherUrl?: true
   submittedAt?: true
@@ -108,6 +113,7 @@ export type PaymentSubmissionCountAggregateInputType = {
   id?: true
   saleId?: true
   amount?: true
+  concept?: true
   currency?: true
   voucherUrl?: true
   submittedAt?: true
@@ -207,6 +213,7 @@ export type PaymentSubmissionGroupByOutputType = {
   id: string
   saleId: string
   amount: runtime.Decimal
+  concept: $Enums.PaymentConcept
   currency: string
   voucherUrl: string
   submittedAt: Date
@@ -242,6 +249,7 @@ export type PaymentSubmissionWhereInput = {
   id?: Prisma.UuidFilter<"PaymentSubmission"> | string
   saleId?: Prisma.UuidFilter<"PaymentSubmission"> | string
   amount?: Prisma.DecimalFilter<"PaymentSubmission"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFilter<"PaymentSubmission"> | $Enums.PaymentConcept
   currency?: Prisma.StringFilter<"PaymentSubmission"> | string
   voucherUrl?: Prisma.StringFilter<"PaymentSubmission"> | string
   submittedAt?: Prisma.DateTimeFilter<"PaymentSubmission"> | Date | string
@@ -256,6 +264,7 @@ export type PaymentSubmissionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   saleId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
@@ -273,6 +282,7 @@ export type PaymentSubmissionWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.PaymentSubmissionWhereInput | Prisma.PaymentSubmissionWhereInput[]
   saleId?: Prisma.UuidFilter<"PaymentSubmission"> | string
   amount?: Prisma.DecimalFilter<"PaymentSubmission"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFilter<"PaymentSubmission"> | $Enums.PaymentConcept
   currency?: Prisma.StringFilter<"PaymentSubmission"> | string
   voucherUrl?: Prisma.StringFilter<"PaymentSubmission"> | string
   submittedAt?: Prisma.DateTimeFilter<"PaymentSubmission"> | Date | string
@@ -287,6 +297,7 @@ export type PaymentSubmissionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   saleId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
@@ -307,6 +318,7 @@ export type PaymentSubmissionScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"PaymentSubmission"> | string
   saleId?: Prisma.UuidWithAggregatesFilter<"PaymentSubmission"> | string
   amount?: Prisma.DecimalWithAggregatesFilter<"PaymentSubmission"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptWithAggregatesFilter<"PaymentSubmission"> | $Enums.PaymentConcept
   currency?: Prisma.StringWithAggregatesFilter<"PaymentSubmission"> | string
   voucherUrl?: Prisma.StringWithAggregatesFilter<"PaymentSubmission"> | string
   submittedAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentSubmission"> | Date | string
@@ -318,6 +330,7 @@ export type PaymentSubmissionScalarWhereWithAggregatesInput = {
 export type PaymentSubmissionCreateInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
   submittedAt?: Date | string
@@ -332,6 +345,7 @@ export type PaymentSubmissionUncheckedCreateInput = {
   id?: string
   saleId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
   submittedAt?: Date | string
@@ -344,6 +358,7 @@ export type PaymentSubmissionUncheckedCreateInput = {
 export type PaymentSubmissionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -358,6 +373,7 @@ export type PaymentSubmissionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   saleId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -371,6 +387,7 @@ export type PaymentSubmissionCreateManyInput = {
   id?: string
   saleId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
   submittedAt?: Date | string
@@ -382,6 +399,7 @@ export type PaymentSubmissionCreateManyInput = {
 export type PaymentSubmissionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -394,6 +412,7 @@ export type PaymentSubmissionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   saleId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -416,6 +435,7 @@ export type PaymentSubmissionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   saleId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
@@ -432,6 +452,7 @@ export type PaymentSubmissionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   saleId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
@@ -444,6 +465,7 @@ export type PaymentSubmissionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   saleId?: Prisma.SortOrder
   amount?: Prisma.SortOrder
+  concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
@@ -503,6 +525,10 @@ export type PaymentSubmissionUncheckedUpdateManyWithoutSaleNestedInput = {
   deleteMany?: Prisma.PaymentSubmissionScalarWhereInput | Prisma.PaymentSubmissionScalarWhereInput[]
 }
 
+export type EnumPaymentConceptFieldUpdateOperationsInput = {
+  set?: $Enums.PaymentConcept
+}
+
 export type EnumSubmissionStatusFieldUpdateOperationsInput = {
   set?: $Enums.SubmissionStatus
 }
@@ -526,6 +552,7 @@ export type PaymentSubmissionUpdateOneWithoutPaymentNestedInput = {
 export type PaymentSubmissionCreateWithoutSaleInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
   submittedAt?: Date | string
@@ -538,6 +565,7 @@ export type PaymentSubmissionCreateWithoutSaleInput = {
 export type PaymentSubmissionUncheckedCreateWithoutSaleInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
   submittedAt?: Date | string
@@ -580,6 +608,7 @@ export type PaymentSubmissionScalarWhereInput = {
   id?: Prisma.UuidFilter<"PaymentSubmission"> | string
   saleId?: Prisma.UuidFilter<"PaymentSubmission"> | string
   amount?: Prisma.DecimalFilter<"PaymentSubmission"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFilter<"PaymentSubmission"> | $Enums.PaymentConcept
   currency?: Prisma.StringFilter<"PaymentSubmission"> | string
   voucherUrl?: Prisma.StringFilter<"PaymentSubmission"> | string
   submittedAt?: Prisma.DateTimeFilter<"PaymentSubmission"> | Date | string
@@ -591,6 +620,7 @@ export type PaymentSubmissionScalarWhereInput = {
 export type PaymentSubmissionCreateWithoutPaymentInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
   submittedAt?: Date | string
@@ -604,6 +634,7 @@ export type PaymentSubmissionUncheckedCreateWithoutPaymentInput = {
   id?: string
   saleId: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
   submittedAt?: Date | string
@@ -631,6 +662,7 @@ export type PaymentSubmissionUpdateToOneWithWhereWithoutPaymentInput = {
 export type PaymentSubmissionUpdateWithoutPaymentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -644,6 +676,7 @@ export type PaymentSubmissionUncheckedUpdateWithoutPaymentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   saleId?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -655,6 +688,7 @@ export type PaymentSubmissionUncheckedUpdateWithoutPaymentInput = {
 export type PaymentSubmissionCreateManySaleInput = {
   id?: string
   amount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
   submittedAt?: Date | string
@@ -666,6 +700,7 @@ export type PaymentSubmissionCreateManySaleInput = {
 export type PaymentSubmissionUpdateWithoutSaleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -678,6 +713,7 @@ export type PaymentSubmissionUpdateWithoutSaleInput = {
 export type PaymentSubmissionUncheckedUpdateWithoutSaleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -690,6 +726,7 @@ export type PaymentSubmissionUncheckedUpdateWithoutSaleInput = {
 export type PaymentSubmissionUncheckedUpdateManyWithoutSaleInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -704,6 +741,7 @@ export type PaymentSubmissionSelect<ExtArgs extends runtime.Types.Extensions.Int
   id?: boolean
   saleId?: boolean
   amount?: boolean
+  concept?: boolean
   currency?: boolean
   voucherUrl?: boolean
   submittedAt?: boolean
@@ -718,6 +756,7 @@ export type PaymentSubmissionSelectCreateManyAndReturn<ExtArgs extends runtime.T
   id?: boolean
   saleId?: boolean
   amount?: boolean
+  concept?: boolean
   currency?: boolean
   voucherUrl?: boolean
   submittedAt?: boolean
@@ -731,6 +770,7 @@ export type PaymentSubmissionSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   id?: boolean
   saleId?: boolean
   amount?: boolean
+  concept?: boolean
   currency?: boolean
   voucherUrl?: boolean
   submittedAt?: boolean
@@ -744,6 +784,7 @@ export type PaymentSubmissionSelectScalar = {
   id?: boolean
   saleId?: boolean
   amount?: boolean
+  concept?: boolean
   currency?: boolean
   voucherUrl?: boolean
   submittedAt?: boolean
@@ -752,7 +793,7 @@ export type PaymentSubmissionSelectScalar = {
   rejectionReason?: boolean
 }
 
-export type PaymentSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleId" | "amount" | "currency" | "voucherUrl" | "submittedAt" | "reviewedAt" | "status" | "rejectionReason", ExtArgs["result"]["paymentSubmission"]>
+export type PaymentSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleId" | "amount" | "concept" | "currency" | "voucherUrl" | "submittedAt" | "reviewedAt" | "status" | "rejectionReason", ExtArgs["result"]["paymentSubmission"]>
 export type PaymentSubmissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
   payment?: boolean | Prisma.PaymentSubmission$paymentArgs<ExtArgs>
@@ -774,6 +815,7 @@ export type $PaymentSubmissionPayload<ExtArgs extends runtime.Types.Extensions.I
     id: string
     saleId: string
     amount: runtime.Decimal
+    concept: $Enums.PaymentConcept
     currency: string
     voucherUrl: string
     submittedAt: Date
@@ -1208,6 +1250,7 @@ export interface PaymentSubmissionFieldRefs {
   readonly id: Prisma.FieldRef<"PaymentSubmission", 'String'>
   readonly saleId: Prisma.FieldRef<"PaymentSubmission", 'String'>
   readonly amount: Prisma.FieldRef<"PaymentSubmission", 'Decimal'>
+  readonly concept: Prisma.FieldRef<"PaymentSubmission", 'PaymentConcept'>
   readonly currency: Prisma.FieldRef<"PaymentSubmission", 'String'>
   readonly voucherUrl: Prisma.FieldRef<"PaymentSubmission", 'String'>
   readonly submittedAt: Prisma.FieldRef<"PaymentSubmission", 'DateTime'>

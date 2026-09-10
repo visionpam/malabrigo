@@ -3,12 +3,12 @@
 import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Ban, LoaderCircle, Pencil, ReceiptText, Save, Upload, X } from "lucide-react";
+import { paymentConceptOptions } from "@/lib/payment-concepts";
 import { createPaymentAction, type PaymentActionState, updatePaymentAction, voidPaymentAction } from "./actions";
 
 type SaleOption = { id: string; code: string; member: string; program: string; mode: "CASH" | "CREDIT"; status: string };
 type PaymentData = { id: string; saleId: string; reference: string; amount: number; concept: "SEPARATION" | "DOWN_PAYMENT" | "INSTALLMENT" | "OTHER"; paidAt: string; status: "CONFIRMED" | "VOIDED"; history: { id: string; action: string; createdAt: string }[] };
 const initialState: PaymentActionState = { success: false, message: "" };
-const conceptLabels = { SEPARATION: "Separación", DOWN_PAYMENT: "Cuota inicial", INSTALLMENT: "Cuota del cronograma", OTHER: "Otro pago" } as const;
 const actionLabels: Record<string, string> = { PAYMENT_CREATED: "Pago registrado", PAYMENT_UPDATED: "Pago editado", PAYMENT_VOIDED: "Pago anulado" };
 const today = new Date().toISOString().slice(0, 10);
 
@@ -22,7 +22,7 @@ function PaymentForm({ sales, payment, onDone }: { sales: SaleOption[]; payment?
   return <form action={formAction} className="member-form">
     <div className="form-grid">
       <label className="form-wide"><span>Venta *</span><select name="saleId" defaultValue={payment?.saleId ?? sales[0]?.id} required disabled={Boolean(payment)}>{sales.map((sale) => <option key={sale.id} value={sale.id}>{sale.code} · {sale.member} · {sale.program}</option>)}</select>{payment && <input type="hidden" name="saleId" value={payment.saleId} />}<FieldError messages={state.errors?.saleId} /></label>
-      <label><span>Concepto *</span><select name="concept" defaultValue={payment?.concept ?? "INSTALLMENT"} required>{Object.entries(conceptLabels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select><FieldError messages={state.errors?.concept} /></label>
+      <label><span>Concepto *</span><select name="concept" defaultValue={payment?.concept ?? "INSTALLMENT"} required>{paymentConceptOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}</select><FieldError messages={state.errors?.concept} /></label>
       <label><span>Monto USD *</span><input name="amount" type="number" min="0.01" step="0.01" defaultValue={payment?.amount} placeholder="0.00" required /><FieldError messages={state.errors?.amount} /></label>
       <label><span>Referencia *</span><input name="reference" defaultValue={payment?.reference} maxLength={60} placeholder="Operación bancaria o recibo" required /><FieldError messages={state.errors?.reference} /></label>
       <label><span>Fecha de pago *</span><input name="paidAt" type="date" defaultValue={payment?.paidAt ?? today} required /><FieldError messages={state.errors?.paidAt} /></label>

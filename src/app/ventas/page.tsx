@@ -5,13 +5,15 @@ import { db } from "@/lib/db";
 import { formatDate, formatMoney, saleStatusLabel, statusTone } from "@/lib/format";
 import { SaleCreateDialog } from "./sale-create-dialog";
 import { SaleManageDialog } from "./sale-manage-dialog";
+import { requirePermission } from "@/lib/access-control";
 
 export default async function SalesPage() {
+  await requirePermission("SALES");
   await connection();
   const [sales, total, active, volume, members, programs] = await Promise.all([
     db.sale.findMany({ take: 50, orderBy: { createdAt: "desc" }, include: { member: true, program: true, financingPlan: true, payments: { where: { status: "CONFIRMED" } }, installments: { orderBy: { number: "asc" } } } }),
     db.sale.count(), db.sale.count({ where: { status: "ACTIVE" } }), db.sale.aggregate({ _sum: { totalPrice: true } }),
-    db.member.findMany({ where: { status: { notIn: ["SUSPENDED", "WITHDRAWN"] } }, orderBy: [{ firstName: "asc" }, { lastName: "asc" }], select: { id: true, firstName: true, lastName: true, documentType: true, documentNumber: true } }),
+    db.member.findMany({ where: { status: { notIn: ["SUSPENDED", "WITHDRAWN"] }, investorProfile: { isNot: null } }, orderBy: [{ firstName: "asc" }, { lastName: "asc" }], select: { id: true, firstName: true, lastName: true, documentType: true, documentNumber: true } }),
     db.program.findMany({ where: { active: true }, orderBy: { cashPrice: "asc" }, include: { financingPlans: { where: { active: true }, orderBy: { termMonths: "asc" } } } }),
   ]);
   const history = sales.length ? await db.auditLog.findMany({ where: { entityType: "Sale", entityId: { in: sales.map((sale) => sale.id) } }, orderBy: { createdAt: "desc" }, take: 500 }) : [];

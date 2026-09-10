@@ -305,6 +305,7 @@ export type SaleWhereInput = {
   shareAllocation?: Prisma.XOR<Prisma.ShareAllocationNullableScalarRelationFilter, Prisma.ShareAllocationWhereInput> | null
   stayAllocation?: Prisma.XOR<Prisma.StayAllocationNullableScalarRelationFilter, Prisma.StayAllocationWhereInput> | null
   contracts?: Prisma.ContractListRelationFilter
+  documents?: Prisma.DocumentRecordListRelationFilter
 }
 
 export type SaleOrderByWithRelationInput = {
@@ -331,6 +332,7 @@ export type SaleOrderByWithRelationInput = {
   shareAllocation?: Prisma.ShareAllocationOrderByWithRelationInput
   stayAllocation?: Prisma.StayAllocationOrderByWithRelationInput
   contracts?: Prisma.ContractOrderByRelationAggregateInput
+  documents?: Prisma.DocumentRecordOrderByRelationAggregateInput
 }
 
 export type SaleWhereUniqueInput = Prisma.AtLeast<{
@@ -360,6 +362,7 @@ export type SaleWhereUniqueInput = Prisma.AtLeast<{
   shareAllocation?: Prisma.XOR<Prisma.ShareAllocationNullableScalarRelationFilter, Prisma.ShareAllocationWhereInput> | null
   stayAllocation?: Prisma.XOR<Prisma.StayAllocationNullableScalarRelationFilter, Prisma.StayAllocationWhereInput> | null
   contracts?: Prisma.ContractListRelationFilter
+  documents?: Prisma.DocumentRecordListRelationFilter
 }, "id" | "code">
 
 export type SaleOrderByWithAggregationInput = {
@@ -425,6 +428,7 @@ export type SaleCreateInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateInput = {
@@ -448,6 +452,7 @@ export type SaleUncheckedCreateInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUpdateInput = {
@@ -471,6 +476,7 @@ export type SaleUpdateInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateInput = {
@@ -494,6 +500,7 @@ export type SaleUncheckedUpdateInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateManyInput = {
@@ -620,6 +627,11 @@ export type SaleSumOrderByAggregateInput = {
 export type SaleScalarRelationFilter = {
   is?: Prisma.SaleWhereInput
   isNot?: Prisma.SaleWhereInput
+}
+
+export type SaleNullableScalarRelationFilter = {
+  is?: Prisma.SaleWhereInput | null
+  isNot?: Prisma.SaleWhereInput | null
 }
 
 export type SaleCreateNestedManyWithoutMemberInput = {
@@ -826,6 +838,22 @@ export type SaleUpdateOneRequiredWithoutStayAllocationNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SaleUpdateToOneWithWhereWithoutStayAllocationInput, Prisma.SaleUpdateWithoutStayAllocationInput>, Prisma.SaleUncheckedUpdateWithoutStayAllocationInput>
 }
 
+export type SaleCreateNestedOneWithoutDocumentsInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutDocumentsInput, Prisma.SaleUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutDocumentsInput
+  connect?: Prisma.SaleWhereUniqueInput
+}
+
+export type SaleUpdateOneWithoutDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutDocumentsInput, Prisma.SaleUncheckedCreateWithoutDocumentsInput>
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutDocumentsInput
+  upsert?: Prisma.SaleUpsertWithoutDocumentsInput
+  disconnect?: Prisma.SaleWhereInput | boolean
+  delete?: Prisma.SaleWhereInput | boolean
+  connect?: Prisma.SaleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SaleUpdateToOneWithWhereWithoutDocumentsInput, Prisma.SaleUpdateWithoutDocumentsInput>, Prisma.SaleUncheckedUpdateWithoutDocumentsInput>
+}
+
 export type SaleCreateNestedOneWithoutContractsInput = {
   create?: Prisma.XOR<Prisma.SaleCreateWithoutContractsInput, Prisma.SaleUncheckedCreateWithoutContractsInput>
   connectOrCreate?: Prisma.SaleCreateOrConnectWithoutContractsInput
@@ -860,6 +888,7 @@ export type SaleCreateWithoutMemberInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutMemberInput = {
@@ -882,6 +911,7 @@ export type SaleUncheckedCreateWithoutMemberInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutMemberInput = {
@@ -950,6 +980,7 @@ export type SaleCreateWithoutProgramInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutProgramInput = {
@@ -972,6 +1003,7 @@ export type SaleUncheckedCreateWithoutProgramInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutProgramInput = {
@@ -1020,6 +1052,7 @@ export type SaleCreateWithoutFinancingPlanInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutFinancingPlanInput = {
@@ -1042,6 +1075,7 @@ export type SaleUncheckedCreateWithoutFinancingPlanInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutFinancingPlanInput = {
@@ -1090,6 +1124,7 @@ export type SaleCreateWithoutInstallmentsInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutInstallmentsInput = {
@@ -1112,6 +1147,7 @@ export type SaleUncheckedCreateWithoutInstallmentsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutInstallmentsInput = {
@@ -1150,6 +1186,7 @@ export type SaleUpdateWithoutInstallmentsInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutInstallmentsInput = {
@@ -1172,6 +1209,7 @@ export type SaleUncheckedUpdateWithoutInstallmentsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutPaymentSubmissionsInput = {
@@ -1194,6 +1232,7 @@ export type SaleCreateWithoutPaymentSubmissionsInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutPaymentSubmissionsInput = {
@@ -1216,6 +1255,7 @@ export type SaleUncheckedCreateWithoutPaymentSubmissionsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutPaymentSubmissionsInput = {
@@ -1254,6 +1294,7 @@ export type SaleUpdateWithoutPaymentSubmissionsInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutPaymentSubmissionsInput = {
@@ -1276,6 +1317,7 @@ export type SaleUncheckedUpdateWithoutPaymentSubmissionsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutPaymentsInput = {
@@ -1298,6 +1340,7 @@ export type SaleCreateWithoutPaymentsInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutPaymentsInput = {
@@ -1320,6 +1363,7 @@ export type SaleUncheckedCreateWithoutPaymentsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutPaymentsInput = {
@@ -1358,6 +1402,7 @@ export type SaleUpdateWithoutPaymentsInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutPaymentsInput = {
@@ -1380,6 +1425,7 @@ export type SaleUncheckedUpdateWithoutPaymentsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutShareAllocationInput = {
@@ -1402,6 +1448,7 @@ export type SaleCreateWithoutShareAllocationInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutShareAllocationInput = {
@@ -1424,6 +1471,7 @@ export type SaleUncheckedCreateWithoutShareAllocationInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutShareAllocationInput = {
@@ -1462,6 +1510,7 @@ export type SaleUpdateWithoutShareAllocationInput = {
   payments?: Prisma.PaymentUpdateManyWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutShareAllocationInput = {
@@ -1484,6 +1533,7 @@ export type SaleUncheckedUpdateWithoutShareAllocationInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutStayAllocationInput = {
@@ -1506,6 +1556,7 @@ export type SaleCreateWithoutStayAllocationInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutSaleInput
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutStayAllocationInput = {
@@ -1528,6 +1579,7 @@ export type SaleUncheckedCreateWithoutStayAllocationInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutSaleInput
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutStayAllocationInput = {
@@ -1566,6 +1618,7 @@ export type SaleUpdateWithoutStayAllocationInput = {
   payments?: Prisma.PaymentUpdateManyWithoutSaleNestedInput
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutStayAllocationInput = {
@@ -1587,6 +1640,115 @@ export type SaleUncheckedUpdateWithoutStayAllocationInput = {
   paymentSubmissions?: Prisma.PaymentSubmissionUncheckedUpdateManyWithoutSaleNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutSaleNestedInput
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+}
+
+export type SaleCreateWithoutDocumentsInput = {
+  id?: string
+  code: string
+  mode: $Enums.SaleMode
+  status?: $Enums.SaleStatus
+  currency?: string
+  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutSalesInput
+  program: Prisma.ProgramCreateNestedOneWithoutSalesInput
+  financingPlan?: Prisma.FinancingPlanCreateNestedOneWithoutSalesInput
+  installments?: Prisma.InstallmentCreateNestedManyWithoutSaleInput
+  paymentSubmissions?: Prisma.PaymentSubmissionCreateNestedManyWithoutSaleInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutSaleInput
+  shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
+  stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+}
+
+export type SaleUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  code: string
+  memberId: string
+  programId: string
+  financingPlanId?: string | null
+  mode: $Enums.SaleMode
+  status?: $Enums.SaleStatus
+  currency?: string
+  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  installments?: Prisma.InstallmentUncheckedCreateNestedManyWithoutSaleInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUncheckedCreateNestedManyWithoutSaleInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutSaleInput
+  shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
+  stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+}
+
+export type SaleCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.SaleWhereUniqueInput
+  create: Prisma.XOR<Prisma.SaleCreateWithoutDocumentsInput, Prisma.SaleUncheckedCreateWithoutDocumentsInput>
+}
+
+export type SaleUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.SaleUpdateWithoutDocumentsInput, Prisma.SaleUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.SaleCreateWithoutDocumentsInput, Prisma.SaleUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.SaleWhereInput
+}
+
+export type SaleUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.SaleWhereInput
+  data: Prisma.XOR<Prisma.SaleUpdateWithoutDocumentsInput, Prisma.SaleUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type SaleUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
+  status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutSalesNestedInput
+  program?: Prisma.ProgramUpdateOneRequiredWithoutSalesNestedInput
+  financingPlan?: Prisma.FinancingPlanUpdateOneWithoutSalesNestedInput
+  installments?: Prisma.InstallmentUpdateManyWithoutSaleNestedInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUpdateManyWithoutSaleNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutSaleNestedInput
+  shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
+  stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+}
+
+export type SaleUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
+  status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  installments?: Prisma.InstallmentUncheckedUpdateManyWithoutSaleNestedInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUncheckedUpdateManyWithoutSaleNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutSaleNestedInput
+  shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
+  stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
 }
 
@@ -1610,6 +1772,7 @@ export type SaleCreateWithoutContractsInput = {
   payments?: Prisma.PaymentCreateNestedManyWithoutSaleInput
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutContractsInput = {
@@ -1632,6 +1795,7 @@ export type SaleUncheckedCreateWithoutContractsInput = {
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutSaleInput
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutContractsInput = {
@@ -1670,6 +1834,7 @@ export type SaleUpdateWithoutContractsInput = {
   payments?: Prisma.PaymentUpdateManyWithoutSaleNestedInput
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutContractsInput = {
@@ -1692,6 +1857,7 @@ export type SaleUncheckedUpdateWithoutContractsInput = {
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutSaleNestedInput
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateManyMemberInput = {
@@ -1730,6 +1896,7 @@ export type SaleUpdateWithoutMemberInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutMemberInput = {
@@ -1752,6 +1919,7 @@ export type SaleUncheckedUpdateWithoutMemberInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutMemberInput = {
@@ -1806,6 +1974,7 @@ export type SaleUpdateWithoutProgramInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutProgramInput = {
@@ -1828,6 +1997,7 @@ export type SaleUncheckedUpdateWithoutProgramInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutProgramInput = {
@@ -1882,6 +2052,7 @@ export type SaleUpdateWithoutFinancingPlanInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutFinancingPlanInput = {
@@ -1904,6 +2075,7 @@ export type SaleUncheckedUpdateWithoutFinancingPlanInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutFinancingPlanInput = {
@@ -1932,6 +2104,7 @@ export type SaleCountOutputType = {
   paymentSubmissions: number
   payments: number
   contracts: number
+  documents: number
 }
 
 export type SaleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1939,6 +2112,7 @@ export type SaleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   paymentSubmissions?: boolean | SaleCountOutputTypeCountPaymentSubmissionsArgs
   payments?: boolean | SaleCountOutputTypeCountPaymentsArgs
   contracts?: boolean | SaleCountOutputTypeCountContractsArgs
+  documents?: boolean | SaleCountOutputTypeCountDocumentsArgs
 }
 
 /**
@@ -1979,6 +2153,13 @@ export type SaleCountOutputTypeCountContractsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.ContractWhereInput
 }
 
+/**
+ * SaleCountOutputType without action
+ */
+export type SaleCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentRecordWhereInput
+}
+
 
 export type SaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2004,6 +2185,7 @@ export type SaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   shareAllocation?: boolean | Prisma.Sale$shareAllocationArgs<ExtArgs>
   stayAllocation?: boolean | Prisma.Sale$stayAllocationArgs<ExtArgs>
   contracts?: boolean | Prisma.Sale$contractsArgs<ExtArgs>
+  documents?: boolean | Prisma.Sale$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.SaleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sale"]>
 
@@ -2075,6 +2257,7 @@ export type SaleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   shareAllocation?: boolean | Prisma.Sale$shareAllocationArgs<ExtArgs>
   stayAllocation?: boolean | Prisma.Sale$stayAllocationArgs<ExtArgs>
   contracts?: boolean | Prisma.Sale$contractsArgs<ExtArgs>
+  documents?: boolean | Prisma.Sale$documentsArgs<ExtArgs>
   _count?: boolean | Prisma.SaleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SaleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2100,6 +2283,7 @@ export type $SalePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     shareAllocation: Prisma.$ShareAllocationPayload<ExtArgs> | null
     stayAllocation: Prisma.$StayAllocationPayload<ExtArgs> | null
     contracts: Prisma.$ContractPayload<ExtArgs>[]
+    documents: Prisma.$DocumentRecordPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2519,6 +2703,7 @@ export interface Prisma__SaleClient<T, Null = never, ExtArgs extends runtime.Typ
   shareAllocation<T extends Prisma.Sale$shareAllocationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$shareAllocationArgs<ExtArgs>>): Prisma.Prisma__ShareAllocationClient<runtime.Types.Result.GetResult<Prisma.$ShareAllocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   stayAllocation<T extends Prisma.Sale$stayAllocationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$stayAllocationArgs<ExtArgs>>): Prisma.Prisma__StayAllocationClient<runtime.Types.Result.GetResult<Prisma.$StayAllocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   contracts<T extends Prisma.Sale$contractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documents<T extends Prisma.Sale$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3113,6 +3298,30 @@ export type Sale$contractsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ContractScalarFieldEnum | Prisma.ContractScalarFieldEnum[]
+}
+
+/**
+ * Sale.documents
+ */
+export type Sale$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentRecord
+   */
+  select?: Prisma.DocumentRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentRecord
+   */
+  omit?: Prisma.DocumentRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentRecordInclude<ExtArgs> | null
+  where?: Prisma.DocumentRecordWhereInput
+  orderBy?: Prisma.DocumentRecordOrderByWithRelationInput | Prisma.DocumentRecordOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentRecordScalarFieldEnum | Prisma.DocumentRecordScalarFieldEnum[]
 }
 
 /**

@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { db } from "@/lib/db";
+import { reconcileDirectCommission } from "@/lib/commission-ledger";
+import { requirePermission } from "@/lib/access-control";
 
 const databaseId = z.string().trim().regex(
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
@@ -44,7 +46,7 @@ function installmentDate(monthOffset: number) {
 }
 
 export async function createSaleAction(_previousState: CreateSaleState, formData: FormData): Promise<CreateSaleState> {
-  // Authentication and role authorization will be enforced here when the login module is enabled.
+  await requirePermission("SALES");
   const parsed = saleSchema.safeParse({
     memberId: formData.get("memberId"),
     programId: formData.get("programId"),
@@ -58,11 +60,12 @@ export async function createSaleAction(_previousState: CreateSaleState, formData
 
   const input = parsed.data;
   const [member, program] = await Promise.all([
-    db.member.findUnique({ where: { id: input.memberId }, select: { id: true } }),
+    db.member.findUnique({ where: { id: input.memberId }, select: { id: true, investorProfile: { select: { id: true } } } }),
     db.program.findFirst({ where: { id: input.programId, active: true }, include: { financingPlans: { where: { active: true } } } }),
   ]);
 
   if (!member) return { success: false, message: "El socio seleccionado ya no está disponible." };
+  if (!member.investorProfile) return { success: false, message: "La persona seleccionada no tiene perfil de inversionista." };
   if (!program) return { success: false, message: "El programa seleccionado ya no está disponible." };
 
   const financingPlan = input.mode === "CREDIT"
@@ -132,7 +135,7 @@ export async function createSaleAction(_previousState: CreateSaleState, formData
 export type SaleOperationState = { success: boolean; message: string };
 
 export async function confirmSeparationAction(saleId: string, _previousState: SaleOperationState, formData: FormData): Promise<SaleOperationState> {
-  // Authentication and role authorization will be enforced here when the login module is enabled.
+  await requirePermission("SALES");
   const parsed = z.object({ reference: z.string().trim().min(3, "Ingresa la referencia").max(60, "Máximo 60 caracteres") }).safeParse({ reference: formData.get("reference") });
   if (!parsed.success) return { success: false, message: parsed.error.issues[0]?.message ?? "Referencia inválida." };
   const sale = await db.sale.findUnique({ where: { id: saleId }, include: { payments: { where: { status: "CONFIRMED" } } } });
@@ -156,10 +159,11 @@ export async function confirmSeparationAction(saleId: string, _previousState: Sa
 }
 
 export async function activateSaleAction(saleId: string, _previousState: SaleOperationState, formData: FormData): Promise<SaleOperationState> {
-  // Authentication and role authorization will be enforced here when the login module is enabled.
+  await requirePermission("SALES");
   if (formData.get("contractConfirmed") !== "on") return { success: false, message: "Debes confirmar que el contrato fue firmado." };
-  const sale = await db.sale.findUnique({ where: { id: saleId }, include: { payments: { where: { status: "CONFIRMED" } }, member: true } });
+  const sale = await db.sale.findUnique({ where: { id: saleId }, include: { payments: { where: { status: "CONFIRMED" } }, member: { include: { investorProfile: true } } } });
   if (!sale) return { success: false, message: "La venta ya no existe." };
+  if (!sale.member.investorProfile) return { success: false, message: "Esta persona no tiene perfil de inversionista." };
   if (sale.status !== "RESERVED") return { success: false, message: "Primero debes confirmar la separación." };
   const confirmed = sale.payments.reduce((sum, payment) => sum + Number(payment.amount), 0);
   if (confirmed < Number(sale.separationAmount)) return { success: false, message: "La separación todavía no está cubierta." };
@@ -167,6 +171,8 @@ export async function activateSaleAction(saleId: string, _previousState: SaleOpe
   await db.$transaction(async (transaction) => {
     await transaction.sale.update({ where: { id: saleId }, data: { status: "ACTIVE", signedAt: activatedAt } });
     if (sale.member.status === "PROSPECT") await transaction.member.update({ where: { id: sale.memberId }, data: { status: "ACTIVE", joinedAt: sale.member.joinedAt ?? activatedAt } });
+    await transaction.investorProfile.update({ where: { memberId: sale.memberId }, data: { status: "ACTIVE", activatedAt: sale.member.investorProfile?.activatedAt ?? activatedAt } });
+    await reconcileDirectCommission(transaction, saleId);
     await transaction.auditLog.create({ data: { action: "SALE_ACTIVATED", entityType: "Sale", entityId: saleId, before: { status: sale.status }, after: { status: "ACTIVE", contractConfirmed: true, signedAt: activatedAt.toISOString() } } });
     if (sale.member.status === "PROSPECT") await transaction.auditLog.create({ data: { action: "MEMBER_ACTIVATED", entityType: "Member", entityId: sale.memberId, before: { status: sale.member.status }, after: { status: "ACTIVE", sourceSaleId: saleId } } });
   });

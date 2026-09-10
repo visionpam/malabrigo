@@ -1,0 +1,37 @@
+import { Award, Coins, Network, TrendingUp, Trophy, UsersRound } from "lucide-react";
+import { EmptyState, MetricCard, PageHeader, StatusPill } from "@/components/module-ui";
+import { requireUser, roleCodes } from "@/lib/access-control";
+import { db } from "@/lib/db";
+import { formatDate, formatMoney, statusTone } from "@/lib/format";
+import { getAmbassadorNetwork } from "@/lib/network";
+import { MemberCreateDialog } from "../socios/member-create-dialog";
+import { redirect } from "next/navigation";
+
+const commissionLabels = { PENDING: "Pendiente", APPROVED: "Aprobada", PAID: "Pagada", REVERSED: "Reversada" } as const;
+
+export default async function MyNetworkPage() {
+  const user = await requireUser();
+  if (!roleCodes(user).includes("AMBASSADOR") || !user.member?.ambassadorProfile) redirect("/mi-portal");
+  const ambassadorId = user.member.ambassadorProfile.id;
+  const [profile, levels, ranks] = await Promise.all([
+    db.ambassadorProfile.findUniqueOrThrow({ where: { id: ambassadorId }, include: { member: true, commissions: { orderBy: { createdAt: "desc" }, take: 100 }, rankBonuses: { orderBy: { period: "desc" } }, awards: { orderBy: { earnedAt: "desc" }, include: { rank: true } }, rankHistory: { orderBy: { achievedAt: "desc" }, include: { rank: true } } } }),
+    getAmbassadorNetwork(ambassadorId),
+    db.rankDefinition.findMany({ orderBy: { sortOrder: "asc" } }),
+  ]);
+  const people = levels.flatMap((level) => level.people); const direct = levels[0]?.people ?? [];
+  const networkVolume = people.reduce((sum, item) => sum + item.volume, 0);
+  const directPoints = profile.commissions.filter((item) => item.generation === 1 && item.status !== "REVERSED").reduce((sum, item) => sum + item.points, 0);
+  const pending = profile.commissions.filter((item) => item.status === "PENDING").reduce((sum, item) => sum + Number(item.amount), 0);
+  const currentIndex = ranks.findIndex((rank) => rank.code === profile.currentRank); const nextRank = ranks[currentIndex + 1] ?? (currentIndex < 0 ? ranks[0] : null);
+  return <><PageHeader eyebrow="Portal del embajador" title="Mi red" description={`Código ${profile.referralCode}. Se muestran exclusivamente tus ocho generaciones.`} action={<MemberCreateDialog ambassadors={[]} networkMode />} />
+    <section className="module-metrics"><MetricCard label="Socios directos" value={String(direct.length)} detail={`${people.length} en toda la red`} icon={UsersRound} /><MetricCard label="Volumen de red" value={formatMoney(networkVolume)} detail="Ventas no anuladas" icon={TrendingUp} /><MetricCard label="Comisiones pendientes" value={formatMoney(pending)} detail="Pendientes de aprobación" icon={Coins} /><MetricCard label="Rango actual" value={ranks.find((rank) => rank.code === profile.currentRank)?.name ?? "Sin rango"} detail="Carrera del embajador" icon={Trophy} /></section>
+
+    {nextRank && <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Próximo rango: {nextRank.name}</h2><p>Progreso calculado con tu red activa y comisiones directas generadas.</p></div></div><div className="panel-body"><div className="rank-progress-grid"><div><span>Socios</span><strong>{people.length} / {nextRank.memberCount}</strong><progress max={nextRank.memberCount} value={Math.min(people.length, nextRank.memberCount)} /></div><div><span>Directos</span><strong>{direct.length} / {nextRank.directCount}</strong><progress max={nextRank.directCount} value={Math.min(direct.length, nextRank.directCount)} /></div><div><span>Puntos directos</span><strong>{directPoints} / {nextRank.directPoints}</strong><progress max={nextRank.directPoints} value={Math.min(directPoints, nextRank.directPoints)} /></div><div><span>Volumen de red</span><strong>{formatMoney(networkVolume)} / {formatMoney(nextRank.totalPoints)}</strong><progress max={Number(nextRank.totalPoints)} value={Math.min(networkVolume, Number(nextRank.totalPoints))} /></div></div></div></section>}
+
+    <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Red por generaciones</h2><p>Personas directas e indirectas hasta el octavo nivel.</p></div></div>{people.length === 0 ? <EmptyState icon={UsersRound} title="Tu red todavía está vacía" description="Registra tu primer socio con el botón superior." /> : <div className="network-levels">{levels.filter((level) => level.people.length).map((level) => <section key={level.level}><div className="section-title"><h3>Generación {level.level}</h3><span>{level.people.length} personas</span></div><div className="table-wrap module-table"><table><thead><tr><th>Código</th><th>Socio</th><th>Perfil</th><th>Estado</th><th>Ventas</th><th>Volumen</th><th>Registro</th></tr></thead><tbody>{level.people.map((entry) => <tr key={entry.memberId}><td className="money">{entry.memberCode}</td><td>{entry.name}<small className="cell-secondary">{entry.document}</small></td><td>{entry.profile}</td><td><StatusPill tone={entry.status === "ACTIVE" ? "success" : "warning"}>{entry.status === "ACTIVE" ? "Activo" : "Prospecto"}</StatusPill></td><td>{entry.sales}</td><td className="money">{formatMoney(entry.volume)}</td><td>{formatDate(entry.createdAt)}</td></tr>)}</tbody></table></div></section>)}</div>}</section>
+
+    <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Mis comisiones</h2><p>Ingresos directos e indirectos de tu red.</p></div></div>{profile.commissions.length ? <div className="table-wrap module-table"><table><thead><tr><th>Nivel</th><th>Monto</th><th>Puntos</th><th>Estado</th><th>Fecha</th></tr></thead><tbody>{profile.commissions.map((item) => <tr key={item.id}><td>{item.generation === 1 ? "Directa" : `Generación ${item.generation}`}</td><td className="money">{formatMoney(item.amount)}</td><td>{item.points}</td><td><StatusPill tone={statusTone(item.status)}>{commissionLabels[item.status]}</StatusPill></td><td>{formatDate(item.createdAt)}</td></tr>)}</tbody></table></div> : <EmptyState icon={Network} title="Aún no hay comisiones" description="Se mostrarán cuando las ventas patrocinadas cumplan el pago requerido." />}</section>
+
+    <section className="portal-summary-grid"><article className="module-panel"><div className="module-toolbar"><div><h2>Bonos mensuales</h2><p>Pagos por rango</p></div></div>{profile.rankBonuses.length ? <div className="record-list padded-list">{profile.rankBonuses.map((item) => <div key={item.id}><div><strong>{formatMoney(item.amount)}</strong><span>{formatDate(item.period)}</span></div><StatusPill tone={statusTone(item.status)}>{commissionLabels[item.status]}</StatusPill></div>)}</div> : <EmptyState icon={Coins} title="Sin bonos" description="Los bonos se generan al alcanzar un rango." />}</article><article className="module-panel"><div className="module-toolbar"><div><h2>Premios obtenidos</h2><p>Reconocimientos de carrera</p></div></div>{profile.awards.length ? <div className="record-list padded-list">{profile.awards.map((item) => <div key={item.id}><div><strong>{item.rank.rewardName ?? item.rank.name}</strong><span>{item.deliveredAt ? `Entregado ${formatDate(item.deliveredAt)}` : `Obtenido ${formatDate(item.earnedAt)}`}</span></div><Award size={18} /></div>)}</div> : <EmptyState icon={Award} title="Sin premios" description="Tus reconocimientos aparecerán con cada ascenso." />}</article></section>
+  </>;
+}

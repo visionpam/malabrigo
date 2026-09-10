@@ -12,7 +12,9 @@
 export const UserStatus = {
   INVITED: 'INVITED',
   ACTIVE: 'ACTIVE',
-  SUSPENDED: 'SUSPENDED'
+  SUSPENDED: 'SUSPENDED',
+  LOCKED: 'LOCKED',
+  DISABLED: 'DISABLED'
 } as const
 
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
@@ -30,6 +32,7 @@ export type MemberStatus = (typeof MemberStatus)[keyof typeof MemberStatus]
 
 
 export const ProgramKind = {
+  FOUNDATION: 'FOUNDATION',
   PLUS: 'PLUS',
   PREMIUM: 'PREMIUM',
   FAMILIAR: 'FAMILIAR',
@@ -37,6 +40,38 @@ export const ProgramKind = {
 } as const
 
 export type ProgramKind = (typeof ProgramKind)[keyof typeof ProgramKind]
+
+
+export const MaritalStatus = {
+  SINGLE: 'SINGLE',
+  MARRIED: 'MARRIED',
+  COHABITING: 'COHABITING',
+  DIVORCED: 'DIVORCED',
+  WIDOWED: 'WIDOWED',
+  OTHER: 'OTHER'
+} as const
+
+export type MaritalStatus = (typeof MaritalStatus)[keyof typeof MaritalStatus]
+
+
+export const AmbassadorStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  WITHDRAWN: 'WITHDRAWN'
+} as const
+
+export type AmbassadorStatus = (typeof AmbassadorStatus)[keyof typeof AmbassadorStatus]
+
+
+export const CommissionStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  PAID: 'PAID',
+  REVERSED: 'REVERSED'
+} as const
+
+export type CommissionStatus = (typeof CommissionStatus)[keyof typeof CommissionStatus]
 
 
 export const SaleMode = {
@@ -113,3 +148,41 @@ export const ContractStatus = {
 } as const
 
 export type ContractStatus = (typeof ContractStatus)[keyof typeof ContractStatus]
+
+
+export const DocumentCategory = {
+  IDENTITY: 'IDENTITY',
+  SEPARATION_FORM: 'SEPARATION_FORM',
+  SEPARATION_PROOF: 'SEPARATION_PROOF',
+  SALE_PROOF: 'SALE_PROOF',
+  SIGNED_CONTRACT: 'SIGNED_CONTRACT',
+  ANNEX: 'ANNEX',
+  RENDER: 'RENDER',
+  PROJECT: 'PROJECT',
+  TIMELINE: 'TIMELINE',
+  CONSTRUCTION_PROGRESS: 'CONSTRUCTION_PROGRESS',
+  CABINS: 'CABINS',
+  PLANS: 'PLANS',
+  CONTRACT_MODEL: 'CONTRACT_MODEL',
+  OTHER: 'OTHER'
+} as const
+
+export type DocumentCategory = (typeof DocumentCategory)[keyof typeof DocumentCategory]
+
+
+export const DocumentVisibility = {
+  PRIVATE_MEMBER: 'PRIVATE_MEMBER',
+  ALL_MEMBERS: 'ALL_MEMBERS',
+  ADMIN_ONLY: 'ADMIN_ONLY'
+} as const
+
+export type DocumentVisibility = (typeof DocumentVisibility)[keyof typeof DocumentVisibility]
+
+
+export const DocumentStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type DocumentStatus = (typeof DocumentStatus)[keyof typeof DocumentStatus]
