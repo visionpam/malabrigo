@@ -669,6 +669,40 @@ tbody tr:hover { background: rgba(214,163,66,.045); }
   .network-levels { padding: 14px; }
 }
 
+/* Respeta las zonas seguras cuando la PWA se ejecuta a pantalla completa. */
+@supports (padding: env(safe-area-inset-top)) {
+  .sidebar {
+    padding-top: calc(20px + env(safe-area-inset-top));
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .topbar {
+    height: calc(80px + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+    padding-right: max(clamp(20px, 2.5vw, 38px), env(safe-area-inset-right));
+  }
+
+  .content {
+    padding-right: max(clamp(24px, 3vw, 42px), env(safe-area-inset-right));
+    padding-bottom: calc(clamp(24px, 3vw, 42px) + env(safe-area-inset-bottom));
+  }
+
+  @media (max-width: 760px) {
+    .sidebar { padding-top: calc(16px + env(safe-area-inset-top)); }
+    .topbar {
+      height: calc(68px + env(safe-area-inset-top));
+      padding-right: max(14px, env(safe-area-inset-right));
+      padding-left: max(14px, env(safe-area-inset-left));
+    }
+    .content {
+      padding-right: max(16px, env(safe-area-inset-right));
+      padding-bottom: calc(36px + env(safe-area-inset-bottom));
+      padding-left: max(16px, env(safe-area-inset-left));
+    }
+    .profile-menu { top: calc(64px + env(safe-area-inset-top)); }
+  }
+}
+
 @media (max-width: 1120px) {
   .sidebar { width: 244px; }
   .workspace { width: calc(100% - 244px); margin-left: 244px; }
