@@ -18,7 +18,7 @@ export default async function MyPaymentsPage() {
   const [sales, payments, submissions] = await Promise.all([
     db.sale.findMany({ where: { memberId, status: { not: "CANCELLED" } }, orderBy: { createdAt: "desc" }, include: { program: true } }),
     db.payment.findMany({ where: { sale: { memberId } }, orderBy: { paidAt: "desc" }, include: { sale: { include: { program: true } } } }),
-    db.paymentSubmission.findMany({ where: { sale: { memberId } }, orderBy: { submittedAt: "desc" }, include: { sale: { include: { program: true } } } }),
+    db.paymentSubmission.findMany({ where: { sale: { memberId } }, orderBy: { submittedAt: "desc" }, select: { id: true, concept: true, amount: true, submittedAt: true, status: true, voucherUrl: true, sale: { include: { program: true } } } }),
   ]);
   const confirmed = payments.filter((payment) => payment.status === "CONFIRMED");
   return <><PageHeader eyebrow="Portal del socio" title="Mis pagos" description="Consulta tus pagos y envía comprobantes para aprobación." />

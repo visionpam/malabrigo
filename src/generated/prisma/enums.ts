@@ -42,18 +42,6 @@ export const ProgramKind = {
 export type ProgramKind = (typeof ProgramKind)[keyof typeof ProgramKind]
 
 
-export const MaritalStatus = {
-  SINGLE: 'SINGLE',
-  MARRIED: 'MARRIED',
-  COHABITING: 'COHABITING',
-  DIVORCED: 'DIVORCED',
-  WIDOWED: 'WIDOWED',
-  OTHER: 'OTHER'
-} as const
-
-export type MaritalStatus = (typeof MaritalStatus)[keyof typeof MaritalStatus]
-
-
 export const AmbassadorStatus = {
   PENDING: 'PENDING',
   ACTIVE: 'ACTIVE',
@@ -182,7 +170,8 @@ export type DocumentVisibility = (typeof DocumentVisibility)[keyof typeof Docume
 export const DocumentStatus = {
   PENDING: 'PENDING',
   APPROVED: 'APPROVED',
-  REJECTED: 'REJECTED'
+  REJECTED: 'REJECTED',
+  VOIDED: 'VOIDED'
 } as const
 
 export type DocumentStatus = (typeof DocumentStatus)[keyof typeof DocumentStatus]

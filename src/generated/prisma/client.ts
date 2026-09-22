@@ -47,6 +47,41 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
+ * Model Country
+ * 
+ */
+export type Country = Prisma.CountryModel
+/**
+ * Model AddressRegion
+ * 
+ */
+export type AddressRegion = Prisma.AddressRegionModel
+/**
+ * Model AddressProvince
+ * 
+ */
+export type AddressProvince = Prisma.AddressProvinceModel
+/**
+ * Model AddressDistrict
+ * 
+ */
+export type AddressDistrict = Prisma.AddressDistrictModel
+/**
+ * Model DocumentTypeOption
+ * 
+ */
+export type DocumentTypeOption = Prisma.DocumentTypeOptionModel
+/**
+ * Model OccupationOption
+ * 
+ */
+export type OccupationOption = Prisma.OccupationOptionModel
+/**
+ * Model MaritalStatusOption
+ * 
+ */
+export type MaritalStatusOption = Prisma.MaritalStatusOptionModel
+/**
  * Model Role
  * 
  */
@@ -141,6 +176,11 @@ export type ReferralCode = Prisma.ReferralCodeModel
  * 
  */
 export type Sponsorship = Prisma.SponsorshipModel
+/**
+ * Model ConstructionProject
+ * 
+ */
+export type ConstructionProject = Prisma.ConstructionProjectModel
 /**
  * Model ProjectStage
  * 

@@ -31,15 +31,6 @@ enum ProgramKind {
   VIP
 }
 
-enum MaritalStatus {
-  SINGLE
-  MARRIED
-  COHABITING
-  DIVORCED
-  WIDOWED
-  OTHER
-}
-
 enum AmbassadorStatus {
   PENDING
   ACTIVE
@@ -133,6 +124,7 @@ enum DocumentStatus {
   PENDING
   APPROVED
   REJECTED
+  VOIDED
 }
 
 model User {
@@ -154,6 +146,85 @@ model User {
   uploadedDocuments DocumentRecord[]     @relation("DocumentUploader")
 
   @@map("users")
+}
+
+model Country {
+  code      String   @id @db.Char(2)
+  name      String   @db.VarChar(120)
+  active    Boolean  @default(true)
+  sortOrder Int      @default(0) @map("sort_order")
+  members   Member[]
+  regions   AddressRegion[]
+
+  @@index([active, sortOrder])
+  @@map("countries")
+}
+
+model AddressRegion {
+  code        String             @id @db.VarChar(20)
+  countryCode String             @map("country_code") @db.Char(2)
+  name        String             @db.VarChar(120)
+  active      Boolean            @default(true)
+  sortOrder   Int                @default(0) @map("sort_order")
+  country     Country            @relation(fields: [countryCode], references: [code], onDelete: Restrict, onUpdate: Cascade)
+  provinces   AddressProvince[]
+  members     Member[]           @relation("MemberRegion")
+
+  @@index([countryCode, active, sortOrder])
+  @@map("address_regions")
+}
+
+model AddressProvince {
+  code       String           @id @db.VarChar(24)
+  regionCode String           @map("region_code") @db.VarChar(20)
+  name       String           @db.VarChar(120)
+  active     Boolean          @default(true)
+  sortOrder  Int              @default(0) @map("sort_order")
+  region     AddressRegion    @relation(fields: [regionCode], references: [code], onDelete: Cascade, onUpdate: Cascade)
+  districts  AddressDistrict[]
+  members    Member[]         @relation("MemberProvince")
+
+  @@index([regionCode, active, sortOrder])
+  @@map("address_provinces")
+}
+
+model AddressDistrict {
+  code         String          @id @db.VarChar(24)
+  provinceCode String          @map("province_code") @db.VarChar(24)
+  name         String          @db.VarChar(120)
+  active       Boolean         @default(true)
+  sortOrder    Int             @default(0) @map("sort_order")
+  province     AddressProvince @relation(fields: [provinceCode], references: [code], onDelete: Cascade, onUpdate: Cascade)
+  members      Member[]        @relation("MemberDistrict")
+
+  @@index([provinceCode, active, sortOrder])
+  @@map("address_districts")
+}
+
+model DocumentTypeOption {
+  code      String   @id @db.VarChar(20)
+  name      String   @db.VarChar(100)
+  active    Boolean  @default(true)
+  sortOrder Int      @default(0) @map("sort_order")
+  members   Member[]
+  @@map("document_type_options")
+}
+
+model OccupationOption {
+  code      String   @id @db.VarChar(80)
+  name      String   @db.VarChar(140)
+  active    Boolean  @default(true)
+  sortOrder Int      @default(0) @map("sort_order")
+  @@map("occupation_options")
+}
+
+model MaritalStatusOption {
+  code      String   @id @db.VarChar(30)
+  name      String   @db.VarChar(100)
+  active    Boolean  @default(true)
+  sortOrder Int      @default(0) @map("sort_order")
+  members   Member[]
+  @@map("marital_status_options")
 }
 
 model Role {
@@ -207,11 +278,14 @@ model Member {
   firstName          String             @map("first_name") @db.VarChar(100)
   lastName           String             @map("last_name") @db.VarChar(100)
   countryCode        String             @default("PE") @map("country_code") @db.Char(2)
+  regionCode         String?            @map("region_code") @db.VarChar(20)
+  provinceCode       String?            @map("province_code") @db.VarChar(24)
+  districtCode       String?            @map("district_code") @db.VarChar(24)
   phone              String?            @db.VarChar(30)
   email              String             @db.VarChar(255)
   residence          String?            @db.VarChar(180)
   occupation         String?            @db.VarChar(140)
-  maritalStatus      MaritalStatus?     @map("marital_status")
+  maritalStatus      String?            @map("marital_status") @db.VarChar(30)
   status             MemberStatus       @default(PROSPECT)
   joinedAt           DateTime?          @map("joined_at") @db.Timestamptz(6)
   createdAt          DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
@@ -226,6 +300,12 @@ model Member {
   ambassadorProfile  AmbassadorProfile?
   beneficiaries      Beneficiary[]      @relation("InvestmentHolder")
   documents          DocumentRecord[]
+  country            Country            @relation(fields: [countryCode], references: [code], onDelete: Restrict, onUpdate: Cascade)
+  region             AddressRegion?     @relation("MemberRegion", fields: [regionCode], references: [code], onDelete: SetNull, onUpdate: Cascade)
+  province           AddressProvince?   @relation("MemberProvince", fields: [provinceCode], references: [code], onDelete: SetNull, onUpdate: Cascade)
+  district           AddressDistrict?  @relation("MemberDistrict", fields: [districtCode], references: [code], onDelete: SetNull, onUpdate: Cascade)
+  documentTypeOption DocumentTypeOption  @relation(fields: [documentType], references: [code], onDelete: Restrict, onUpdate: Cascade)
+  maritalStatusOption MaritalStatusOption? @relation(fields: [maritalStatus], references: [code], onDelete: Restrict, onUpdate: Cascade)
 
   @@unique([documentType, documentNumber])
   @@index([email])
@@ -374,6 +454,8 @@ model PaymentSubmission {
   concept         PaymentConcept   @default(OTHER)
   currency        String           @default("USD") @db.Char(3)
   voucherUrl      String           @map("voucher_url") @db.Text
+  voucherData     Bytes?           @map("voucher_data") @db.ByteA
+  voucherMimeType String?          @map("voucher_mime_type") @db.VarChar(40)
   submittedAt     DateTime         @default(now()) @map("submitted_at") @db.Timestamptz(6)
   reviewedAt      DateTime?        @map("reviewed_at") @db.Timestamptz(6)
   status          SubmissionStatus @default(PENDING)
@@ -460,8 +542,21 @@ model Sponsorship {
   @@map("sponsorships")
 }
 
+model ConstructionProject {
+  id          String         @id @default(uuid()) @db.Uuid
+  code        String         @unique @db.VarChar(40)
+  name        String         @db.VarChar(160)
+  description String?        @db.Text
+  active      Boolean        @default(true)
+  createdAt   DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  stages      ProjectStage[]
+
+  @@map("construction_projects")
+}
+
 model ProjectStage {
   id          String          @id @default(uuid()) @db.Uuid
+  projectId   String          @map("project_id") @db.Uuid
   name        String          @db.VarChar(160)
   description String?         @db.Text
   weight      Decimal         @db.Decimal(5, 2)
@@ -469,7 +564,9 @@ model ProjectStage {
   endsAt      DateTime?       @map("ends_at") @db.Date
   sortOrder   Int             @map("sort_order")
   updates     ProjectUpdate[]
+  project     ConstructionProject @relation(fields: [projectId], references: [id], onDelete: Restrict)
 
+  @@index([projectId, sortOrder])
   @@map("project_stages")
 }
 
@@ -510,7 +607,11 @@ model DocumentRecord {
   status          DocumentStatus     @default(PENDING)
   title           String             @db.VarChar(180)
   url             String             @db.Text
+  fileData        Bytes?             @map("file_data") @db.ByteA
+  fileMimeType    String?            @map("file_mime_type") @db.VarChar(40)
   rejectionReason String?            @map("rejection_reason") @db.VarChar(500)
+  voidReason      String?            @map("void_reason") @db.VarChar(500)
+  voidedAt        DateTime?          @map("voided_at") @db.Timestamptz(6)
   createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
   reviewedAt      DateTime?          @map("reviewed_at") @db.Timestamptz(6)
   member          Member?            @relation(fields: [memberId], references: [id], onDelete: Cascade)
@@ -560,6 +661,7 @@ model Contract {
   templateId  String            @map("template_id") @db.Uuid
   status      ContractStatus    @default(DRAFT)
   documentUrl String?           @map("document_url") @db.Text
+  documentText String?          @map("document_text") @db.Text
   generatedAt DateTime?         @map("generated_at") @db.Timestamptz(6)
   signedAt    DateTime?         @map("signed_at") @db.Timestamptz(6)
   createdAt   DateTime          @default(now()) @map("created_at") @db.Timestamptz(6)
@@ -673,6 +775,7 @@ model RankDefinition {
   totalPoints       Int                     @map("total_points")
   deadlineMonths    Int                     @map("deadline_months")
   monthlyBonus      Decimal                 @map("monthly_bonus") @db.Decimal(18, 2)
+  logoUrl           String?                 @map("logo_url") @db.VarChar(500)
   rewardName        String?                 @map("reward_name") @db.VarChar(140)
   rewardDescription String?                 @map("reward_description") @db.VarChar(400)
   history           AmbassadorRankHistory[]

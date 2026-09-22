@@ -403,10 +403,6 @@ export type BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput = {
   deleteMany?: Prisma.BeneficiaryScalarWhereInput | Prisma.BeneficiaryScalarWhereInput[]
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type BeneficiaryCreateWithoutHolderInput = {
   id?: string
   fullName: string

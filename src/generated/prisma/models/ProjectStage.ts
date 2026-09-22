@@ -38,6 +38,7 @@ export type ProjectStageSumAggregateOutputType = {
 
 export type ProjectStageMinAggregateOutputType = {
   id: string | null
+  projectId: string | null
   name: string | null
   description: string | null
   weight: runtime.Decimal | null
@@ -48,6 +49,7 @@ export type ProjectStageMinAggregateOutputType = {
 
 export type ProjectStageMaxAggregateOutputType = {
   id: string | null
+  projectId: string | null
   name: string | null
   description: string | null
   weight: runtime.Decimal | null
@@ -58,6 +60,7 @@ export type ProjectStageMaxAggregateOutputType = {
 
 export type ProjectStageCountAggregateOutputType = {
   id: number
+  projectId: number
   name: number
   description: number
   weight: number
@@ -80,6 +83,7 @@ export type ProjectStageSumAggregateInputType = {
 
 export type ProjectStageMinAggregateInputType = {
   id?: true
+  projectId?: true
   name?: true
   description?: true
   weight?: true
@@ -90,6 +94,7 @@ export type ProjectStageMinAggregateInputType = {
 
 export type ProjectStageMaxAggregateInputType = {
   id?: true
+  projectId?: true
   name?: true
   description?: true
   weight?: true
@@ -100,6 +105,7 @@ export type ProjectStageMaxAggregateInputType = {
 
 export type ProjectStageCountAggregateInputType = {
   id?: true
+  projectId?: true
   name?: true
   description?: true
   weight?: true
@@ -197,6 +203,7 @@ export type ProjectStageGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 
 export type ProjectStageGroupByOutputType = {
   id: string
+  projectId: string
   name: string
   description: string | null
   weight: runtime.Decimal
@@ -230,6 +237,7 @@ export type ProjectStageWhereInput = {
   OR?: Prisma.ProjectStageWhereInput[]
   NOT?: Prisma.ProjectStageWhereInput | Prisma.ProjectStageWhereInput[]
   id?: Prisma.UuidFilter<"ProjectStage"> | string
+  projectId?: Prisma.UuidFilter<"ProjectStage"> | string
   name?: Prisma.StringFilter<"ProjectStage"> | string
   description?: Prisma.StringNullableFilter<"ProjectStage"> | string | null
   weight?: Prisma.DecimalFilter<"ProjectStage"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -237,10 +245,12 @@ export type ProjectStageWhereInput = {
   endsAt?: Prisma.DateTimeNullableFilter<"ProjectStage"> | Date | string | null
   sortOrder?: Prisma.IntFilter<"ProjectStage"> | number
   updates?: Prisma.ProjectUpdateListRelationFilter
+  project?: Prisma.XOR<Prisma.ConstructionProjectScalarRelationFilter, Prisma.ConstructionProjectWhereInput>
 }
 
 export type ProjectStageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
@@ -248,6 +258,7 @@ export type ProjectStageOrderByWithRelationInput = {
   endsAt?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
   updates?: Prisma.ProjectUpdateOrderByRelationAggregateInput
+  project?: Prisma.ConstructionProjectOrderByWithRelationInput
 }
 
 export type ProjectStageWhereUniqueInput = Prisma.AtLeast<{
@@ -255,6 +266,7 @@ export type ProjectStageWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ProjectStageWhereInput | Prisma.ProjectStageWhereInput[]
   OR?: Prisma.ProjectStageWhereInput[]
   NOT?: Prisma.ProjectStageWhereInput | Prisma.ProjectStageWhereInput[]
+  projectId?: Prisma.UuidFilter<"ProjectStage"> | string
   name?: Prisma.StringFilter<"ProjectStage"> | string
   description?: Prisma.StringNullableFilter<"ProjectStage"> | string | null
   weight?: Prisma.DecimalFilter<"ProjectStage"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -262,10 +274,12 @@ export type ProjectStageWhereUniqueInput = Prisma.AtLeast<{
   endsAt?: Prisma.DateTimeNullableFilter<"ProjectStage"> | Date | string | null
   sortOrder?: Prisma.IntFilter<"ProjectStage"> | number
   updates?: Prisma.ProjectUpdateListRelationFilter
+  project?: Prisma.XOR<Prisma.ConstructionProjectScalarRelationFilter, Prisma.ConstructionProjectWhereInput>
 }, "id">
 
 export type ProjectStageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   weight?: Prisma.SortOrder
@@ -284,6 +298,7 @@ export type ProjectStageScalarWhereWithAggregatesInput = {
   OR?: Prisma.ProjectStageScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ProjectStageScalarWhereWithAggregatesInput | Prisma.ProjectStageScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"ProjectStage"> | string
+  projectId?: Prisma.UuidWithAggregatesFilter<"ProjectStage"> | string
   name?: Prisma.StringWithAggregatesFilter<"ProjectStage"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"ProjectStage"> | string | null
   weight?: Prisma.DecimalWithAggregatesFilter<"ProjectStage"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -301,10 +316,12 @@ export type ProjectStageCreateInput = {
   endsAt?: Date | string | null
   sortOrder: number
   updates?: Prisma.ProjectUpdateCreateNestedManyWithoutStageInput
+  project: Prisma.ConstructionProjectCreateNestedOneWithoutStagesInput
 }
 
 export type ProjectStageUncheckedCreateInput = {
   id?: string
+  projectId: string
   name: string
   description?: string | null
   weight: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -323,10 +340,12 @@ export type ProjectStageUpdateInput = {
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
   updates?: Prisma.ProjectUpdateUpdateManyWithoutStageNestedInput
+  project?: Prisma.ConstructionProjectUpdateOneRequiredWithoutStagesNestedInput
 }
 
 export type ProjectStageUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -338,6 +357,7 @@ export type ProjectStageUncheckedUpdateInput = {
 
 export type ProjectStageCreateManyInput = {
   id?: string
+  projectId: string
   name: string
   description?: string | null
   weight: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -358,6 +378,7 @@ export type ProjectStageUpdateManyMutationInput = {
 
 export type ProjectStageUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   weight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -366,8 +387,19 @@ export type ProjectStageUncheckedUpdateManyInput = {
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
+export type ProjectStageListRelationFilter = {
+  every?: Prisma.ProjectStageWhereInput
+  some?: Prisma.ProjectStageWhereInput
+  none?: Prisma.ProjectStageWhereInput
+}
+
+export type ProjectStageOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type ProjectStageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   weight?: Prisma.SortOrder
@@ -383,6 +415,7 @@ export type ProjectStageAvgOrderByAggregateInput = {
 
 export type ProjectStageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   weight?: Prisma.SortOrder
@@ -393,6 +426,7 @@ export type ProjectStageMaxOrderByAggregateInput = {
 
 export type ProjectStageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   description?: Prisma.SortOrder
   weight?: Prisma.SortOrder
@@ -411,6 +445,48 @@ export type ProjectStageScalarRelationFilter = {
   isNot?: Prisma.ProjectStageWhereInput
 }
 
+export type ProjectStageCreateNestedManyWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.ProjectStageCreateWithoutProjectInput, Prisma.ProjectStageUncheckedCreateWithoutProjectInput> | Prisma.ProjectStageCreateWithoutProjectInput[] | Prisma.ProjectStageUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.ProjectStageCreateOrConnectWithoutProjectInput | Prisma.ProjectStageCreateOrConnectWithoutProjectInput[]
+  createMany?: Prisma.ProjectStageCreateManyProjectInputEnvelope
+  connect?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+}
+
+export type ProjectStageUncheckedCreateNestedManyWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.ProjectStageCreateWithoutProjectInput, Prisma.ProjectStageUncheckedCreateWithoutProjectInput> | Prisma.ProjectStageCreateWithoutProjectInput[] | Prisma.ProjectStageUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.ProjectStageCreateOrConnectWithoutProjectInput | Prisma.ProjectStageCreateOrConnectWithoutProjectInput[]
+  createMany?: Prisma.ProjectStageCreateManyProjectInputEnvelope
+  connect?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+}
+
+export type ProjectStageUpdateManyWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectStageCreateWithoutProjectInput, Prisma.ProjectStageUncheckedCreateWithoutProjectInput> | Prisma.ProjectStageCreateWithoutProjectInput[] | Prisma.ProjectStageUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.ProjectStageCreateOrConnectWithoutProjectInput | Prisma.ProjectStageCreateOrConnectWithoutProjectInput[]
+  upsert?: Prisma.ProjectStageUpsertWithWhereUniqueWithoutProjectInput | Prisma.ProjectStageUpsertWithWhereUniqueWithoutProjectInput[]
+  createMany?: Prisma.ProjectStageCreateManyProjectInputEnvelope
+  set?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+  disconnect?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+  delete?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+  connect?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+  update?: Prisma.ProjectStageUpdateWithWhereUniqueWithoutProjectInput | Prisma.ProjectStageUpdateWithWhereUniqueWithoutProjectInput[]
+  updateMany?: Prisma.ProjectStageUpdateManyWithWhereWithoutProjectInput | Prisma.ProjectStageUpdateManyWithWhereWithoutProjectInput[]
+  deleteMany?: Prisma.ProjectStageScalarWhereInput | Prisma.ProjectStageScalarWhereInput[]
+}
+
+export type ProjectStageUncheckedUpdateManyWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectStageCreateWithoutProjectInput, Prisma.ProjectStageUncheckedCreateWithoutProjectInput> | Prisma.ProjectStageCreateWithoutProjectInput[] | Prisma.ProjectStageUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.ProjectStageCreateOrConnectWithoutProjectInput | Prisma.ProjectStageCreateOrConnectWithoutProjectInput[]
+  upsert?: Prisma.ProjectStageUpsertWithWhereUniqueWithoutProjectInput | Prisma.ProjectStageUpsertWithWhereUniqueWithoutProjectInput[]
+  createMany?: Prisma.ProjectStageCreateManyProjectInputEnvelope
+  set?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+  disconnect?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+  delete?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+  connect?: Prisma.ProjectStageWhereUniqueInput | Prisma.ProjectStageWhereUniqueInput[]
+  update?: Prisma.ProjectStageUpdateWithWhereUniqueWithoutProjectInput | Prisma.ProjectStageUpdateWithWhereUniqueWithoutProjectInput[]
+  updateMany?: Prisma.ProjectStageUpdateManyWithWhereWithoutProjectInput | Prisma.ProjectStageUpdateManyWithWhereWithoutProjectInput[]
+  deleteMany?: Prisma.ProjectStageScalarWhereInput | Prisma.ProjectStageScalarWhereInput[]
+}
+
 export type ProjectStageCreateNestedOneWithoutUpdatesInput = {
   create?: Prisma.XOR<Prisma.ProjectStageCreateWithoutUpdatesInput, Prisma.ProjectStageUncheckedCreateWithoutUpdatesInput>
   connectOrCreate?: Prisma.ProjectStageCreateOrConnectWithoutUpdatesInput
@@ -425,6 +501,68 @@ export type ProjectStageUpdateOneRequiredWithoutUpdatesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectStageUpdateToOneWithWhereWithoutUpdatesInput, Prisma.ProjectStageUpdateWithoutUpdatesInput>, Prisma.ProjectStageUncheckedUpdateWithoutUpdatesInput>
 }
 
+export type ProjectStageCreateWithoutProjectInput = {
+  id?: string
+  name: string
+  description?: string | null
+  weight: runtime.Decimal | runtime.DecimalJsLike | number | string
+  startsAt?: Date | string | null
+  endsAt?: Date | string | null
+  sortOrder: number
+  updates?: Prisma.ProjectUpdateCreateNestedManyWithoutStageInput
+}
+
+export type ProjectStageUncheckedCreateWithoutProjectInput = {
+  id?: string
+  name: string
+  description?: string | null
+  weight: runtime.Decimal | runtime.DecimalJsLike | number | string
+  startsAt?: Date | string | null
+  endsAt?: Date | string | null
+  sortOrder: number
+  updates?: Prisma.ProjectUpdateUncheckedCreateNestedManyWithoutStageInput
+}
+
+export type ProjectStageCreateOrConnectWithoutProjectInput = {
+  where: Prisma.ProjectStageWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectStageCreateWithoutProjectInput, Prisma.ProjectStageUncheckedCreateWithoutProjectInput>
+}
+
+export type ProjectStageCreateManyProjectInputEnvelope = {
+  data: Prisma.ProjectStageCreateManyProjectInput | Prisma.ProjectStageCreateManyProjectInput[]
+  skipDuplicates?: boolean
+}
+
+export type ProjectStageUpsertWithWhereUniqueWithoutProjectInput = {
+  where: Prisma.ProjectStageWhereUniqueInput
+  update: Prisma.XOR<Prisma.ProjectStageUpdateWithoutProjectInput, Prisma.ProjectStageUncheckedUpdateWithoutProjectInput>
+  create: Prisma.XOR<Prisma.ProjectStageCreateWithoutProjectInput, Prisma.ProjectStageUncheckedCreateWithoutProjectInput>
+}
+
+export type ProjectStageUpdateWithWhereUniqueWithoutProjectInput = {
+  where: Prisma.ProjectStageWhereUniqueInput
+  data: Prisma.XOR<Prisma.ProjectStageUpdateWithoutProjectInput, Prisma.ProjectStageUncheckedUpdateWithoutProjectInput>
+}
+
+export type ProjectStageUpdateManyWithWhereWithoutProjectInput = {
+  where: Prisma.ProjectStageScalarWhereInput
+  data: Prisma.XOR<Prisma.ProjectStageUpdateManyMutationInput, Prisma.ProjectStageUncheckedUpdateManyWithoutProjectInput>
+}
+
+export type ProjectStageScalarWhereInput = {
+  AND?: Prisma.ProjectStageScalarWhereInput | Prisma.ProjectStageScalarWhereInput[]
+  OR?: Prisma.ProjectStageScalarWhereInput[]
+  NOT?: Prisma.ProjectStageScalarWhereInput | Prisma.ProjectStageScalarWhereInput[]
+  id?: Prisma.UuidFilter<"ProjectStage"> | string
+  projectId?: Prisma.UuidFilter<"ProjectStage"> | string
+  name?: Prisma.StringFilter<"ProjectStage"> | string
+  description?: Prisma.StringNullableFilter<"ProjectStage"> | string | null
+  weight?: Prisma.DecimalFilter<"ProjectStage"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  startsAt?: Prisma.DateTimeNullableFilter<"ProjectStage"> | Date | string | null
+  endsAt?: Prisma.DateTimeNullableFilter<"ProjectStage"> | Date | string | null
+  sortOrder?: Prisma.IntFilter<"ProjectStage"> | number
+}
+
 export type ProjectStageCreateWithoutUpdatesInput = {
   id?: string
   name: string
@@ -433,10 +571,12 @@ export type ProjectStageCreateWithoutUpdatesInput = {
   startsAt?: Date | string | null
   endsAt?: Date | string | null
   sortOrder: number
+  project: Prisma.ConstructionProjectCreateNestedOneWithoutStagesInput
 }
 
 export type ProjectStageUncheckedCreateWithoutUpdatesInput = {
   id?: string
+  projectId: string
   name: string
   description?: string | null
   weight: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -469,9 +609,53 @@ export type ProjectStageUpdateWithoutUpdatesInput = {
   startsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  project?: Prisma.ConstructionProjectUpdateOneRequiredWithoutStagesNestedInput
 }
 
 export type ProjectStageUncheckedUpdateWithoutUpdatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  startsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type ProjectStageCreateManyProjectInput = {
+  id?: string
+  name: string
+  description?: string | null
+  weight: runtime.Decimal | runtime.DecimalJsLike | number | string
+  startsAt?: Date | string | null
+  endsAt?: Date | string | null
+  sortOrder: number
+}
+
+export type ProjectStageUpdateWithoutProjectInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  startsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  updates?: Prisma.ProjectUpdateUpdateManyWithoutStageNestedInput
+}
+
+export type ProjectStageUncheckedUpdateWithoutProjectInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  weight?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  startsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endsAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  updates?: Prisma.ProjectUpdateUncheckedUpdateManyWithoutStageNestedInput
+}
+
+export type ProjectStageUncheckedUpdateManyWithoutProjectInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -514,6 +698,7 @@ export type ProjectStageCountOutputTypeCountUpdatesArgs<ExtArgs extends runtime.
 
 export type ProjectStageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  projectId?: boolean
   name?: boolean
   description?: boolean
   weight?: boolean
@@ -521,31 +706,37 @@ export type ProjectStageSelect<ExtArgs extends runtime.Types.Extensions.Internal
   endsAt?: boolean
   sortOrder?: boolean
   updates?: boolean | Prisma.ProjectStage$updatesArgs<ExtArgs>
+  project?: boolean | Prisma.ConstructionProjectDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectStageCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectStage"]>
 
 export type ProjectStageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  projectId?: boolean
   name?: boolean
   description?: boolean
   weight?: boolean
   startsAt?: boolean
   endsAt?: boolean
   sortOrder?: boolean
+  project?: boolean | Prisma.ConstructionProjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectStage"]>
 
 export type ProjectStageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  projectId?: boolean
   name?: boolean
   description?: boolean
   weight?: boolean
   startsAt?: boolean
   endsAt?: boolean
   sortOrder?: boolean
+  project?: boolean | Prisma.ConstructionProjectDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["projectStage"]>
 
 export type ProjectStageSelectScalar = {
   id?: boolean
+  projectId?: boolean
   name?: boolean
   description?: boolean
   weight?: boolean
@@ -554,21 +745,28 @@ export type ProjectStageSelectScalar = {
   sortOrder?: boolean
 }
 
-export type ProjectStageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "description" | "weight" | "startsAt" | "endsAt" | "sortOrder", ExtArgs["result"]["projectStage"]>
+export type ProjectStageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "name" | "description" | "weight" | "startsAt" | "endsAt" | "sortOrder", ExtArgs["result"]["projectStage"]>
 export type ProjectStageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   updates?: boolean | Prisma.ProjectStage$updatesArgs<ExtArgs>
+  project?: boolean | Prisma.ConstructionProjectDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectStageCountOutputTypeDefaultArgs<ExtArgs>
 }
-export type ProjectStageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type ProjectStageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ProjectStageIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  project?: boolean | Prisma.ConstructionProjectDefaultArgs<ExtArgs>
+}
+export type ProjectStageIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  project?: boolean | Prisma.ConstructionProjectDefaultArgs<ExtArgs>
+}
 
 export type $ProjectStagePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ProjectStage"
   objects: {
     updates: Prisma.$ProjectUpdatePayload<ExtArgs>[]
+    project: Prisma.$ConstructionProjectPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    projectId: string
     name: string
     description: string | null
     weight: runtime.Decimal
@@ -970,6 +1168,7 @@ readonly fields: ProjectStageFieldRefs;
 export interface Prisma__ProjectStageClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   updates<T extends Prisma.ProjectStage$updatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectStage$updatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectUpdatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  project<T extends Prisma.ConstructionProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConstructionProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ConstructionProjectClient<runtime.Types.Result.GetResult<Prisma.$ConstructionProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1000,6 +1199,7 @@ export interface Prisma__ProjectStageClient<T, Null = never, ExtArgs extends run
  */
 export interface ProjectStageFieldRefs {
   readonly id: Prisma.FieldRef<"ProjectStage", 'String'>
+  readonly projectId: Prisma.FieldRef<"ProjectStage", 'String'>
   readonly name: Prisma.FieldRef<"ProjectStage", 'String'>
   readonly description: Prisma.FieldRef<"ProjectStage", 'String'>
   readonly weight: Prisma.FieldRef<"ProjectStage", 'Decimal'>
@@ -1260,6 +1460,10 @@ export type ProjectStageCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    */
   data: Prisma.ProjectStageCreateManyInput | Prisma.ProjectStageCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectStageIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1330,6 +1534,10 @@ export type ProjectStageUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many ProjectStages to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectStageIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**

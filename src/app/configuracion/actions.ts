@@ -1,5 +1,8 @@
 "use server";
 
+import { randomUUID } from "node:crypto";
+import { mkdir, unlink, writeFile } from "node:fs/promises";
+import path from "node:path";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
@@ -36,6 +39,58 @@ const programSchema = z.object({
 });
 
 export type ProgramState = { success: boolean; message: string };
+export type RankState = { success: boolean; message: string };
+
+const rankSchema = z.object({
+  name: z.string().trim().min(2).max(60),
+  memberCount: z.coerce.number().int().min(1),
+  directCount: z.coerce.number().int().min(0),
+  directPoints: z.coerce.number().int().min(0),
+  totalPoints: z.coerce.number().int().min(0),
+  deadlineMonths: z.coerce.number().int().min(1),
+  monthlyBonus: z.coerce.number().min(0),
+  rewardName: z.string().trim().max(140),
+  rewardDescription: z.string().trim().max(400),
+  logoUrl: z.string().trim().max(500),
+});
+
+export async function updateRankAction(rankCode: string, _previous: RankState, formData: FormData): Promise<RankState> {
+  const actor = await requirePermission("SETTINGS");
+  const parsed = rankSchema.safeParse({ name: formData.get("name"), memberCount: formData.get("memberCount"), directCount: formData.get("directCount"), directPoints: formData.get("directPoints"), totalPoints: formData.get("totalPoints"), deadlineMonths: formData.get("deadlineMonths"), monthlyBonus: formData.get("monthlyBonus"), rewardName: formData.get("rewardName") ?? "", rewardDescription: formData.get("rewardDescription") ?? "", logoUrl: formData.get("logoUrl") ?? "" });
+  if (!parsed.success) return { success: false, message: parsed.error.issues[0]?.message ?? "Revisa los datos del rango." };
+  const current = await db.rankDefinition.findUnique({ where: { code: rankCode } });
+  if (!current) return { success: false, message: "El rango ya no existe." };
+  const data = parsed.data;
+  const logoFile = formData.get("logoFile");
+  let uploadedLogoUrl = data.logoUrl || null;
+  let destination = "";
+  if (logoFile instanceof File && logoFile.size) {
+    const extensions: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+    const extension = extensions[logoFile.type];
+    if (!extension || logoFile.size > 10 * 1024 * 1024) return { success: false, message: "El logo debe ser JPG, PNG o WebP y pesar máximo 10 MB." };
+    const fileName = `${randomUUID()}.${extension}`;
+    const directory = path.join(process.cwd(), "public", "uploads", "rank-logos");
+    destination = path.join(directory, fileName);
+    try {
+      await mkdir(directory, { recursive: true });
+      await writeFile(destination, Buffer.from(await logoFile.arrayBuffer()));
+      uploadedLogoUrl = `/uploads/rank-logos/${fileName}`;
+    } catch {
+      return { success: false, message: "No fue posible guardar la imagen del logo." };
+    }
+  }
+  try {
+    await db.$transaction(async (tx) => {
+      await tx.rankDefinition.update({ where: { code: rankCode }, data: { ...data, rewardName: data.rewardName || null, rewardDescription: data.rewardDescription || null, logoUrl: uploadedLogoUrl } });
+      await tx.auditLog.create({ data: { actorUserId: actor.id, action: "RANK_UPDATED", entityType: "RankDefinition", entityId: rankCode, before: { name: current.name, logoUrl: current.logoUrl }, after: { ...data, logoUrl: uploadedLogoUrl } } });
+    });
+  } catch {
+    if (destination) await unlink(destination).catch(() => undefined);
+    return { success: false, message: "No fue posible actualizar el rango." };
+  }
+  revalidatePath("/configuracion"); revalidatePath("/embajadores"); revalidatePath("/mi-red");
+  return { success: true, message: "Rango actualizado correctamente." };
+}
 
 export async function updateProgramAction(programId: string, _previous: ProgramState, formData: FormData): Promise<ProgramState> {
   const actor = await requirePermission("SETTINGS");

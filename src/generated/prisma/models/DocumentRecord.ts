@@ -34,7 +34,11 @@ export type DocumentRecordMinAggregateOutputType = {
   status: $Enums.DocumentStatus | null
   title: string | null
   url: string | null
+  fileData: runtime.Bytes | null
+  fileMimeType: string | null
   rejectionReason: string | null
+  voidReason: string | null
+  voidedAt: Date | null
   createdAt: Date | null
   reviewedAt: Date | null
 }
@@ -49,7 +53,11 @@ export type DocumentRecordMaxAggregateOutputType = {
   status: $Enums.DocumentStatus | null
   title: string | null
   url: string | null
+  fileData: runtime.Bytes | null
+  fileMimeType: string | null
   rejectionReason: string | null
+  voidReason: string | null
+  voidedAt: Date | null
   createdAt: Date | null
   reviewedAt: Date | null
 }
@@ -64,7 +72,11 @@ export type DocumentRecordCountAggregateOutputType = {
   status: number
   title: number
   url: number
+  fileData: number
+  fileMimeType: number
   rejectionReason: number
+  voidReason: number
+  voidedAt: number
   createdAt: number
   reviewedAt: number
   _all: number
@@ -81,7 +93,11 @@ export type DocumentRecordMinAggregateInputType = {
   status?: true
   title?: true
   url?: true
+  fileData?: true
+  fileMimeType?: true
   rejectionReason?: true
+  voidReason?: true
+  voidedAt?: true
   createdAt?: true
   reviewedAt?: true
 }
@@ -96,7 +112,11 @@ export type DocumentRecordMaxAggregateInputType = {
   status?: true
   title?: true
   url?: true
+  fileData?: true
+  fileMimeType?: true
   rejectionReason?: true
+  voidReason?: true
+  voidedAt?: true
   createdAt?: true
   reviewedAt?: true
 }
@@ -111,7 +131,11 @@ export type DocumentRecordCountAggregateInputType = {
   status?: true
   title?: true
   url?: true
+  fileData?: true
+  fileMimeType?: true
   rejectionReason?: true
+  voidReason?: true
+  voidedAt?: true
   createdAt?: true
   reviewedAt?: true
   _all?: true
@@ -199,7 +223,11 @@ export type DocumentRecordGroupByOutputType = {
   status: $Enums.DocumentStatus
   title: string
   url: string
+  fileData: runtime.Bytes | null
+  fileMimeType: string | null
   rejectionReason: string | null
+  voidReason: string | null
+  voidedAt: Date | null
   createdAt: Date
   reviewedAt: Date | null
   _count: DocumentRecordCountAggregateOutputType | null
@@ -235,7 +263,11 @@ export type DocumentRecordWhereInput = {
   status?: Prisma.EnumDocumentStatusFilter<"DocumentRecord"> | $Enums.DocumentStatus
   title?: Prisma.StringFilter<"DocumentRecord"> | string
   url?: Prisma.StringFilter<"DocumentRecord"> | string
+  fileData?: Prisma.BytesNullableFilter<"DocumentRecord"> | runtime.Bytes | null
+  fileMimeType?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
   rejectionReason?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
+  voidReason?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
+  voidedAt?: Prisma.DateTimeNullableFilter<"DocumentRecord"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"DocumentRecord"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"DocumentRecord"> | Date | string | null
   member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
@@ -253,7 +285,11 @@ export type DocumentRecordOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  fileData?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileMimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  voidReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  voidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   member?: Prisma.MemberOrderByWithRelationInput
@@ -274,7 +310,11 @@ export type DocumentRecordWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumDocumentStatusFilter<"DocumentRecord"> | $Enums.DocumentStatus
   title?: Prisma.StringFilter<"DocumentRecord"> | string
   url?: Prisma.StringFilter<"DocumentRecord"> | string
+  fileData?: Prisma.BytesNullableFilter<"DocumentRecord"> | runtime.Bytes | null
+  fileMimeType?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
   rejectionReason?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
+  voidReason?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
+  voidedAt?: Prisma.DateTimeNullableFilter<"DocumentRecord"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"DocumentRecord"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"DocumentRecord"> | Date | string | null
   member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
@@ -292,7 +332,11 @@ export type DocumentRecordOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  fileData?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileMimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   rejectionReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  voidReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  voidedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.DocumentRecordCountOrderByAggregateInput
@@ -313,7 +357,11 @@ export type DocumentRecordScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumDocumentStatusWithAggregatesFilter<"DocumentRecord"> | $Enums.DocumentStatus
   title?: Prisma.StringWithAggregatesFilter<"DocumentRecord"> | string
   url?: Prisma.StringWithAggregatesFilter<"DocumentRecord"> | string
+  fileData?: Prisma.BytesNullableWithAggregatesFilter<"DocumentRecord"> | runtime.Bytes | null
+  fileMimeType?: Prisma.StringNullableWithAggregatesFilter<"DocumentRecord"> | string | null
   rejectionReason?: Prisma.StringNullableWithAggregatesFilter<"DocumentRecord"> | string | null
+  voidReason?: Prisma.StringNullableWithAggregatesFilter<"DocumentRecord"> | string | null
+  voidedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DocumentRecord"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"DocumentRecord"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DocumentRecord"> | Date | string | null
 }
@@ -325,7 +373,11 @@ export type DocumentRecordCreateInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
   member?: Prisma.MemberCreateNestedOneWithoutDocumentsInput
@@ -343,7 +395,11 @@ export type DocumentRecordUncheckedCreateInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
 }
@@ -355,7 +411,11 @@ export type DocumentRecordUpdateInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   member?: Prisma.MemberUpdateOneWithoutDocumentsNestedInput
@@ -373,7 +433,11 @@ export type DocumentRecordUncheckedUpdateInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -388,7 +452,11 @@ export type DocumentRecordCreateManyInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
 }
@@ -400,7 +468,11 @@ export type DocumentRecordUpdateManyMutationInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -415,7 +487,11 @@ export type DocumentRecordUncheckedUpdateManyInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -440,7 +516,11 @@ export type DocumentRecordCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  fileData?: Prisma.SortOrder
+  fileMimeType?: Prisma.SortOrder
   rejectionReason?: Prisma.SortOrder
+  voidReason?: Prisma.SortOrder
+  voidedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
 }
@@ -455,7 +535,11 @@ export type DocumentRecordMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  fileData?: Prisma.SortOrder
+  fileMimeType?: Prisma.SortOrder
   rejectionReason?: Prisma.SortOrder
+  voidReason?: Prisma.SortOrder
+  voidedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
 }
@@ -470,7 +554,11 @@ export type DocumentRecordMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   title?: Prisma.SortOrder
   url?: Prisma.SortOrder
+  fileData?: Prisma.SortOrder
+  fileMimeType?: Prisma.SortOrder
   rejectionReason?: Prisma.SortOrder
+  voidReason?: Prisma.SortOrder
+  voidedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
 }
@@ -620,7 +708,11 @@ export type DocumentRecordCreateWithoutUploadedByInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
   member?: Prisma.MemberCreateNestedOneWithoutDocumentsInput
@@ -636,7 +728,11 @@ export type DocumentRecordUncheckedCreateWithoutUploadedByInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
 }
@@ -680,7 +776,11 @@ export type DocumentRecordScalarWhereInput = {
   status?: Prisma.EnumDocumentStatusFilter<"DocumentRecord"> | $Enums.DocumentStatus
   title?: Prisma.StringFilter<"DocumentRecord"> | string
   url?: Prisma.StringFilter<"DocumentRecord"> | string
+  fileData?: Prisma.BytesNullableFilter<"DocumentRecord"> | runtime.Bytes | null
+  fileMimeType?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
   rejectionReason?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
+  voidReason?: Prisma.StringNullableFilter<"DocumentRecord"> | string | null
+  voidedAt?: Prisma.DateTimeNullableFilter<"DocumentRecord"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"DocumentRecord"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"DocumentRecord"> | Date | string | null
 }
@@ -692,7 +792,11 @@ export type DocumentRecordCreateWithoutMemberInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
   sale?: Prisma.SaleCreateNestedOneWithoutDocumentsInput
@@ -708,7 +812,11 @@ export type DocumentRecordUncheckedCreateWithoutMemberInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
 }
@@ -746,7 +854,11 @@ export type DocumentRecordCreateWithoutSaleInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
   member?: Prisma.MemberCreateNestedOneWithoutDocumentsInput
@@ -762,7 +874,11 @@ export type DocumentRecordUncheckedCreateWithoutSaleInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
 }
@@ -802,7 +918,11 @@ export type DocumentRecordCreateManyUploadedByInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
 }
@@ -814,7 +934,11 @@ export type DocumentRecordUpdateWithoutUploadedByInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   member?: Prisma.MemberUpdateOneWithoutDocumentsNestedInput
@@ -830,7 +954,11 @@ export type DocumentRecordUncheckedUpdateWithoutUploadedByInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -844,7 +972,11 @@ export type DocumentRecordUncheckedUpdateManyWithoutUploadedByInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -858,7 +990,11 @@ export type DocumentRecordCreateManyMemberInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
 }
@@ -870,7 +1006,11 @@ export type DocumentRecordUpdateWithoutMemberInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   sale?: Prisma.SaleUpdateOneWithoutDocumentsNestedInput
@@ -886,7 +1026,11 @@ export type DocumentRecordUncheckedUpdateWithoutMemberInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -900,7 +1044,11 @@ export type DocumentRecordUncheckedUpdateManyWithoutMemberInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -914,7 +1062,11 @@ export type DocumentRecordCreateManySaleInput = {
   status?: $Enums.DocumentStatus
   title: string
   url: string
+  fileData?: runtime.Bytes | null
+  fileMimeType?: string | null
   rejectionReason?: string | null
+  voidReason?: string | null
+  voidedAt?: Date | string | null
   createdAt?: Date | string
   reviewedAt?: Date | string | null
 }
@@ -926,7 +1078,11 @@ export type DocumentRecordUpdateWithoutSaleInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   member?: Prisma.MemberUpdateOneWithoutDocumentsNestedInput
@@ -942,7 +1098,11 @@ export type DocumentRecordUncheckedUpdateWithoutSaleInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -956,7 +1116,11 @@ export type DocumentRecordUncheckedUpdateManyWithoutSaleInput = {
   status?: Prisma.EnumDocumentStatusFieldUpdateOperationsInput | $Enums.DocumentStatus
   title?: Prisma.StringFieldUpdateOperationsInput | string
   url?: Prisma.StringFieldUpdateOperationsInput | string
+  fileData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  fileMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rejectionReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  voidedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
@@ -973,7 +1137,11 @@ export type DocumentRecordSelect<ExtArgs extends runtime.Types.Extensions.Intern
   status?: boolean
   title?: boolean
   url?: boolean
+  fileData?: boolean
+  fileMimeType?: boolean
   rejectionReason?: boolean
+  voidReason?: boolean
+  voidedAt?: boolean
   createdAt?: boolean
   reviewedAt?: boolean
   member?: boolean | Prisma.DocumentRecord$memberArgs<ExtArgs>
@@ -991,7 +1159,11 @@ export type DocumentRecordSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   status?: boolean
   title?: boolean
   url?: boolean
+  fileData?: boolean
+  fileMimeType?: boolean
   rejectionReason?: boolean
+  voidReason?: boolean
+  voidedAt?: boolean
   createdAt?: boolean
   reviewedAt?: boolean
   member?: boolean | Prisma.DocumentRecord$memberArgs<ExtArgs>
@@ -1009,7 +1181,11 @@ export type DocumentRecordSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   status?: boolean
   title?: boolean
   url?: boolean
+  fileData?: boolean
+  fileMimeType?: boolean
   rejectionReason?: boolean
+  voidReason?: boolean
+  voidedAt?: boolean
   createdAt?: boolean
   reviewedAt?: boolean
   member?: boolean | Prisma.DocumentRecord$memberArgs<ExtArgs>
@@ -1027,12 +1203,16 @@ export type DocumentRecordSelectScalar = {
   status?: boolean
   title?: boolean
   url?: boolean
+  fileData?: boolean
+  fileMimeType?: boolean
   rejectionReason?: boolean
+  voidReason?: boolean
+  voidedAt?: boolean
   createdAt?: boolean
   reviewedAt?: boolean
 }
 
-export type DocumentRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "saleId" | "uploadedById" | "category" | "visibility" | "status" | "title" | "url" | "rejectionReason" | "createdAt" | "reviewedAt", ExtArgs["result"]["documentRecord"]>
+export type DocumentRecordOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "saleId" | "uploadedById" | "category" | "visibility" | "status" | "title" | "url" | "fileData" | "fileMimeType" | "rejectionReason" | "voidReason" | "voidedAt" | "createdAt" | "reviewedAt", ExtArgs["result"]["documentRecord"]>
 export type DocumentRecordInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.DocumentRecord$memberArgs<ExtArgs>
   sale?: boolean | Prisma.DocumentRecord$saleArgs<ExtArgs>
@@ -1066,7 +1246,11 @@ export type $DocumentRecordPayload<ExtArgs extends runtime.Types.Extensions.Inte
     status: $Enums.DocumentStatus
     title: string
     url: string
+    fileData: runtime.Bytes | null
+    fileMimeType: string | null
     rejectionReason: string | null
+    voidReason: string | null
+    voidedAt: Date | null
     createdAt: Date
     reviewedAt: Date | null
   }, ExtArgs["result"]["documentRecord"]>
@@ -1504,7 +1688,11 @@ export interface DocumentRecordFieldRefs {
   readonly status: Prisma.FieldRef<"DocumentRecord", 'DocumentStatus'>
   readonly title: Prisma.FieldRef<"DocumentRecord", 'String'>
   readonly url: Prisma.FieldRef<"DocumentRecord", 'String'>
+  readonly fileData: Prisma.FieldRef<"DocumentRecord", 'Bytes'>
+  readonly fileMimeType: Prisma.FieldRef<"DocumentRecord", 'String'>
   readonly rejectionReason: Prisma.FieldRef<"DocumentRecord", 'String'>
+  readonly voidReason: Prisma.FieldRef<"DocumentRecord", 'String'>
+  readonly voidedAt: Prisma.FieldRef<"DocumentRecord", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"DocumentRecord", 'DateTime'>
   readonly reviewedAt: Prisma.FieldRef<"DocumentRecord", 'DateTime'>
 }

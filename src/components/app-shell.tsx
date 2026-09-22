@@ -22,6 +22,7 @@ const navigation: NavigationItem[] = [
   { label: "Pagos", icon: WalletCards, href: "/pagos", permission: "PAYMENTS" },
   { label: "Contratos", icon: FileCheck2, href: "/contratos", permission: "CONTRACTS" },
   { label: "Documentos", icon: Files, href: "/documentos", permission: "CONTRACTS" },
+  { label: "Proyectos", icon: FolderKanban, href: "/proyectos", permission: "CONSTRUCTION" },
   { label: "Avance de obra", icon: HardHat, href: "/avance-obra", permission: "CONSTRUCTION" },
   { label: "Reportes", icon: FolderKanban, href: "/reportes", permission: "REPORTS" },
 ];

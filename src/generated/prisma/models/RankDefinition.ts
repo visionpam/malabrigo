@@ -56,6 +56,7 @@ export type RankDefinitionMinAggregateOutputType = {
   totalPoints: number | null
   deadlineMonths: number | null
   monthlyBonus: runtime.Decimal | null
+  logoUrl: string | null
   rewardName: string | null
   rewardDescription: string | null
 }
@@ -70,6 +71,7 @@ export type RankDefinitionMaxAggregateOutputType = {
   totalPoints: number | null
   deadlineMonths: number | null
   monthlyBonus: runtime.Decimal | null
+  logoUrl: string | null
   rewardName: string | null
   rewardDescription: string | null
 }
@@ -84,6 +86,7 @@ export type RankDefinitionCountAggregateOutputType = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: number
+  logoUrl: number
   rewardName: number
   rewardDescription: number
   _all: number
@@ -120,6 +123,7 @@ export type RankDefinitionMinAggregateInputType = {
   totalPoints?: true
   deadlineMonths?: true
   monthlyBonus?: true
+  logoUrl?: true
   rewardName?: true
   rewardDescription?: true
 }
@@ -134,6 +138,7 @@ export type RankDefinitionMaxAggregateInputType = {
   totalPoints?: true
   deadlineMonths?: true
   monthlyBonus?: true
+  logoUrl?: true
   rewardName?: true
   rewardDescription?: true
 }
@@ -148,6 +153,7 @@ export type RankDefinitionCountAggregateInputType = {
   totalPoints?: true
   deadlineMonths?: true
   monthlyBonus?: true
+  logoUrl?: true
   rewardName?: true
   rewardDescription?: true
   _all?: true
@@ -249,6 +255,7 @@ export type RankDefinitionGroupByOutputType = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal
+  logoUrl: string | null
   rewardName: string | null
   rewardDescription: string | null
   _count: RankDefinitionCountAggregateOutputType | null
@@ -286,6 +293,7 @@ export type RankDefinitionWhereInput = {
   totalPoints?: Prisma.IntFilter<"RankDefinition"> | number
   deadlineMonths?: Prisma.IntFilter<"RankDefinition"> | number
   monthlyBonus?: Prisma.DecimalFilter<"RankDefinition"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.StringNullableFilter<"RankDefinition"> | string | null
   rewardName?: Prisma.StringNullableFilter<"RankDefinition"> | string | null
   rewardDescription?: Prisma.StringNullableFilter<"RankDefinition"> | string | null
   history?: Prisma.AmbassadorRankHistoryListRelationFilter
@@ -303,6 +311,7 @@ export type RankDefinitionOrderByWithRelationInput = {
   totalPoints?: Prisma.SortOrder
   deadlineMonths?: Prisma.SortOrder
   monthlyBonus?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   rewardName?: Prisma.SortOrderInput | Prisma.SortOrder
   rewardDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   history?: Prisma.AmbassadorRankHistoryOrderByRelationAggregateInput
@@ -323,6 +332,7 @@ export type RankDefinitionWhereUniqueInput = Prisma.AtLeast<{
   totalPoints?: Prisma.IntFilter<"RankDefinition"> | number
   deadlineMonths?: Prisma.IntFilter<"RankDefinition"> | number
   monthlyBonus?: Prisma.DecimalFilter<"RankDefinition"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.StringNullableFilter<"RankDefinition"> | string | null
   rewardName?: Prisma.StringNullableFilter<"RankDefinition"> | string | null
   rewardDescription?: Prisma.StringNullableFilter<"RankDefinition"> | string | null
   history?: Prisma.AmbassadorRankHistoryListRelationFilter
@@ -340,6 +350,7 @@ export type RankDefinitionOrderByWithAggregationInput = {
   totalPoints?: Prisma.SortOrder
   deadlineMonths?: Prisma.SortOrder
   monthlyBonus?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   rewardName?: Prisma.SortOrderInput | Prisma.SortOrder
   rewardDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.RankDefinitionCountOrderByAggregateInput
@@ -362,6 +373,7 @@ export type RankDefinitionScalarWhereWithAggregatesInput = {
   totalPoints?: Prisma.IntWithAggregatesFilter<"RankDefinition"> | number
   deadlineMonths?: Prisma.IntWithAggregatesFilter<"RankDefinition"> | number
   monthlyBonus?: Prisma.DecimalWithAggregatesFilter<"RankDefinition"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.StringNullableWithAggregatesFilter<"RankDefinition"> | string | null
   rewardName?: Prisma.StringNullableWithAggregatesFilter<"RankDefinition"> | string | null
   rewardDescription?: Prisma.StringNullableWithAggregatesFilter<"RankDefinition"> | string | null
 }
@@ -376,6 +388,7 @@ export type RankDefinitionCreateInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
   history?: Prisma.AmbassadorRankHistoryCreateNestedManyWithoutRankInput
@@ -393,6 +406,7 @@ export type RankDefinitionUncheckedCreateInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
   history?: Prisma.AmbassadorRankHistoryUncheckedCreateNestedManyWithoutRankInput
@@ -410,6 +424,7 @@ export type RankDefinitionUpdateInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   history?: Prisma.AmbassadorRankHistoryUpdateManyWithoutRankNestedInput
@@ -427,6 +442,7 @@ export type RankDefinitionUncheckedUpdateInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   history?: Prisma.AmbassadorRankHistoryUncheckedUpdateManyWithoutRankNestedInput
@@ -444,6 +460,7 @@ export type RankDefinitionCreateManyInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
 }
@@ -458,6 +475,7 @@ export type RankDefinitionUpdateManyMutationInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -472,6 +490,7 @@ export type RankDefinitionUncheckedUpdateManyInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
@@ -486,6 +505,7 @@ export type RankDefinitionCountOrderByAggregateInput = {
   totalPoints?: Prisma.SortOrder
   deadlineMonths?: Prisma.SortOrder
   monthlyBonus?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
   rewardName?: Prisma.SortOrder
   rewardDescription?: Prisma.SortOrder
 }
@@ -510,6 +530,7 @@ export type RankDefinitionMaxOrderByAggregateInput = {
   totalPoints?: Prisma.SortOrder
   deadlineMonths?: Prisma.SortOrder
   monthlyBonus?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
   rewardName?: Prisma.SortOrder
   rewardDescription?: Prisma.SortOrder
 }
@@ -524,6 +545,7 @@ export type RankDefinitionMinOrderByAggregateInput = {
   totalPoints?: Prisma.SortOrder
   deadlineMonths?: Prisma.SortOrder
   monthlyBonus?: Prisma.SortOrder
+  logoUrl?: Prisma.SortOrder
   rewardName?: Prisma.SortOrder
   rewardDescription?: Prisma.SortOrder
 }
@@ -595,6 +617,7 @@ export type RankDefinitionCreateWithoutHistoryInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
   bonuses?: Prisma.RankBonusPaymentCreateNestedManyWithoutRankInput
@@ -611,6 +634,7 @@ export type RankDefinitionUncheckedCreateWithoutHistoryInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
   bonuses?: Prisma.RankBonusPaymentUncheckedCreateNestedManyWithoutRankInput
@@ -643,6 +667,7 @@ export type RankDefinitionUpdateWithoutHistoryInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bonuses?: Prisma.RankBonusPaymentUpdateManyWithoutRankNestedInput
@@ -659,6 +684,7 @@ export type RankDefinitionUncheckedUpdateWithoutHistoryInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   bonuses?: Prisma.RankBonusPaymentUncheckedUpdateManyWithoutRankNestedInput
@@ -675,6 +701,7 @@ export type RankDefinitionCreateWithoutBonusesInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
   history?: Prisma.AmbassadorRankHistoryCreateNestedManyWithoutRankInput
@@ -691,6 +718,7 @@ export type RankDefinitionUncheckedCreateWithoutBonusesInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
   history?: Prisma.AmbassadorRankHistoryUncheckedCreateNestedManyWithoutRankInput
@@ -723,6 +751,7 @@ export type RankDefinitionUpdateWithoutBonusesInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   history?: Prisma.AmbassadorRankHistoryUpdateManyWithoutRankNestedInput
@@ -739,6 +768,7 @@ export type RankDefinitionUncheckedUpdateWithoutBonusesInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   history?: Prisma.AmbassadorRankHistoryUncheckedUpdateManyWithoutRankNestedInput
@@ -755,6 +785,7 @@ export type RankDefinitionCreateWithoutAwardsInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
   history?: Prisma.AmbassadorRankHistoryCreateNestedManyWithoutRankInput
@@ -771,6 +802,7 @@ export type RankDefinitionUncheckedCreateWithoutAwardsInput = {
   totalPoints: number
   deadlineMonths: number
   monthlyBonus: runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: string | null
   rewardName?: string | null
   rewardDescription?: string | null
   history?: Prisma.AmbassadorRankHistoryUncheckedCreateNestedManyWithoutRankInput
@@ -803,6 +835,7 @@ export type RankDefinitionUpdateWithoutAwardsInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   history?: Prisma.AmbassadorRankHistoryUpdateManyWithoutRankNestedInput
@@ -819,6 +852,7 @@ export type RankDefinitionUncheckedUpdateWithoutAwardsInput = {
   totalPoints?: Prisma.IntFieldUpdateOperationsInput | number
   deadlineMonths?: Prisma.IntFieldUpdateOperationsInput | number
   monthlyBonus?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  logoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rewardDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   history?: Prisma.AmbassadorRankHistoryUncheckedUpdateManyWithoutRankNestedInput
@@ -884,6 +918,7 @@ export type RankDefinitionSelect<ExtArgs extends runtime.Types.Extensions.Intern
   totalPoints?: boolean
   deadlineMonths?: boolean
   monthlyBonus?: boolean
+  logoUrl?: boolean
   rewardName?: boolean
   rewardDescription?: boolean
   history?: boolean | Prisma.RankDefinition$historyArgs<ExtArgs>
@@ -902,6 +937,7 @@ export type RankDefinitionSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   totalPoints?: boolean
   deadlineMonths?: boolean
   monthlyBonus?: boolean
+  logoUrl?: boolean
   rewardName?: boolean
   rewardDescription?: boolean
 }, ExtArgs["result"]["rankDefinition"]>
@@ -916,6 +952,7 @@ export type RankDefinitionSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   totalPoints?: boolean
   deadlineMonths?: boolean
   monthlyBonus?: boolean
+  logoUrl?: boolean
   rewardName?: boolean
   rewardDescription?: boolean
 }, ExtArgs["result"]["rankDefinition"]>
@@ -930,11 +967,12 @@ export type RankDefinitionSelectScalar = {
   totalPoints?: boolean
   deadlineMonths?: boolean
   monthlyBonus?: boolean
+  logoUrl?: boolean
   rewardName?: boolean
   rewardDescription?: boolean
 }
 
-export type RankDefinitionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "name" | "sortOrder" | "memberCount" | "directCount" | "directPoints" | "totalPoints" | "deadlineMonths" | "monthlyBonus" | "rewardName" | "rewardDescription", ExtArgs["result"]["rankDefinition"]>
+export type RankDefinitionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"code" | "name" | "sortOrder" | "memberCount" | "directCount" | "directPoints" | "totalPoints" | "deadlineMonths" | "monthlyBonus" | "logoUrl" | "rewardName" | "rewardDescription", ExtArgs["result"]["rankDefinition"]>
 export type RankDefinitionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   history?: boolean | Prisma.RankDefinition$historyArgs<ExtArgs>
   bonuses?: boolean | Prisma.RankDefinition$bonusesArgs<ExtArgs>
@@ -961,6 +999,7 @@ export type $RankDefinitionPayload<ExtArgs extends runtime.Types.Extensions.Inte
     totalPoints: number
     deadlineMonths: number
     monthlyBonus: runtime.Decimal
+    logoUrl: string | null
     rewardName: string | null
     rewardDescription: string | null
   }, ExtArgs["result"]["rankDefinition"]>
@@ -1398,6 +1437,7 @@ export interface RankDefinitionFieldRefs {
   readonly totalPoints: Prisma.FieldRef<"RankDefinition", 'Int'>
   readonly deadlineMonths: Prisma.FieldRef<"RankDefinition", 'Int'>
   readonly monthlyBonus: Prisma.FieldRef<"RankDefinition", 'Decimal'>
+  readonly logoUrl: Prisma.FieldRef<"RankDefinition", 'String'>
   readonly rewardName: Prisma.FieldRef<"RankDefinition", 'String'>
   readonly rewardDescription: Prisma.FieldRef<"RankDefinition", 'String'>
 }

@@ -1,8 +1,6 @@
 "use server";
 
 import { randomUUID } from "node:crypto";
-import { mkdir, unlink, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
@@ -26,17 +24,12 @@ export async function submitOwnPaymentAction(_previous: SubmissionState, formDat
   const sale = await db.sale.findFirst({ where: { id: parsed.data.saleId, memberId: user.member.id, status: { not: "CANCELLED" } }, select: { id: true, currency: true } });
   if (!sale) return { success: false, message: "La inversión seleccionada no está disponible." };
 
-  const fileName = `${randomUUID()}.${allowedTypes[voucher.type]}`;
-  const relativeUrl = `/uploads/payment-vouchers/${fileName}`;
-  const directory = path.join(process.cwd(), "public", "uploads", "payment-vouchers");
-  const destination = path.join(directory, fileName);
+  const submissionId = randomUUID();
+  const relativeUrl = `/pagos/comprobantes/${submissionId}`;
   try {
-    await mkdir(directory, { recursive: true });
-    await writeFile(destination, Buffer.from(await voucher.arrayBuffer()));
-    const submission = await db.paymentSubmission.create({ data: { saleId: sale.id, amount: parsed.data.amount, concept: parsed.data.concept, currency: sale.currency, voucherUrl: relativeUrl } });
+    const submission = await db.paymentSubmission.create({ data: { id: submissionId, saleId: sale.id, amount: parsed.data.amount, concept: parsed.data.concept, currency: sale.currency, voucherUrl: relativeUrl, voucherData: new Uint8Array(await voucher.arrayBuffer()), voucherMimeType: voucher.type } });
     await db.auditLog.create({ data: { actorUserId: user.id, action: "PAYMENT_SUBMITTED", entityType: "PaymentSubmission", entityId: submission.id, after: { saleId: sale.id, amount: parsed.data.amount, concept: parsed.data.concept, voucherUrl: relativeUrl, status: "PENDING" } } });
   } catch {
-    await unlink(destination).catch(() => undefined);
     return { success: false, message: "No fue posible enviar el comprobante." };
   }
   revalidatePath("/mi-portal/pagos");

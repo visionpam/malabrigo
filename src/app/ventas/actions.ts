@@ -134,6 +134,49 @@ export async function createSaleAction(_previousState: CreateSaleState, formData
 
 export type SaleOperationState = { success: boolean; message: string };
 
+export async function updateDraftSaleAction(saleId: string, _previousState: SaleOperationState, formData: FormData): Promise<SaleOperationState> {
+  const actor = await requirePermission("SALES");
+  const parsed = saleSchema.safeParse({ memberId: formData.get("memberId"), programId: formData.get("programId"), mode: formData.get("mode"), financingPlanId: formData.get("financingPlanId") ?? "" });
+  if (!parsed.success) return { success: false, message: "Revisa el socio, programa y modalidad seleccionados." };
+  const current = await db.sale.findUnique({ where: { id: saleId }, include: { payments: true, paymentSubmissions: true, documents: true, contracts: true } });
+  if (!current) return { success: false, message: "La venta ya no existe." };
+  if (current.status !== "DRAFT") return { success: false, message: "Solo los borradores se pueden editar desde esta lista." };
+  if (current.payments.length || current.paymentSubmissions.length || current.documents.length || current.contracts.length) return { success: false, message: "El borrador tiene movimientos asociados y no puede modificarse." };
+  const input = parsed.data;
+  const [member, program] = await Promise.all([
+    db.member.findUnique({ where: { id: input.memberId }, select: { id: true, investorProfile: { select: { id: true } } } }),
+    db.program.findFirst({ where: { id: input.programId, active: true }, include: { financingPlans: { where: { active: true } } } }),
+  ]);
+  if (!member?.investorProfile) return { success: false, message: "El socio seleccionado no tiene perfil de inversionista activo." };
+  if (!program) return { success: false, message: "El programa seleccionado ya no está disponible." };
+  const financingPlan = input.mode === "CREDIT" ? program.financingPlans.find((item) => item.id === input.financingPlanId) : null;
+  if (input.mode === "CREDIT" && !financingPlan) return { success: false, message: "El plazo seleccionado no pertenece al programa." };
+  await db.$transaction(async (transaction) => {
+    await transaction.installment.deleteMany({ where: { saleId } });
+    await transaction.sale.update({ where: { id: saleId }, data: { memberId: member.id, programId: program.id, financingPlanId: financingPlan?.id ?? null, mode: input.mode, totalPrice: program.cashPrice, separationAmount: program.separation, downPaymentAmount: financingPlan?.downPayment ?? 0 } });
+    if (financingPlan) await transaction.installment.createMany({ data: Array.from({ length: financingPlan.termMonths }, (_, index) => ({ saleId, number: index + 1, amount: financingPlan.monthlyPayment, dueDate: installmentDate(index + 1) })) });
+    await transaction.auditLog.create({ data: { actorUserId: actor.id, action: "SALE_DRAFT_UPDATED", entityType: "Sale", entityId: saleId, before: { memberId: current.memberId, programId: current.programId, mode: current.mode, financingPlanId: current.financingPlanId }, after: { memberId: member.id, programId: program.id, mode: input.mode, financingPlanId: financingPlan?.id ?? null } } });
+  });
+  revalidatePath("/ventas");
+  return { success: true, message: "Borrador actualizado correctamente." };
+}
+
+export async function deleteDraftSaleAction(saleId: string, _previousState: SaleOperationState): Promise<SaleOperationState> {
+  void _previousState;
+  const actor = await requirePermission("SALES");
+  const sale = await db.sale.findUnique({ where: { id: saleId }, include: { payments: true, paymentSubmissions: true, documents: true, contracts: true, shareAllocation: true, stayAllocation: true } });
+  if (!sale) return { success: false, message: "La venta ya no existe." };
+  if (sale.status !== "DRAFT") return { success: false, message: "Solo los borradores sin activar se pueden eliminar." };
+  if (sale.payments.length || sale.paymentSubmissions.length || sale.documents.length || sale.contracts.length || sale.shareAllocation || sale.stayAllocation) return { success: false, message: "No se puede eliminar: el borrador tiene movimientos o documentos asociados." };
+  await db.$transaction(async (transaction) => {
+    await transaction.auditLog.create({ data: { actorUserId: actor.id, action: "SALE_DRAFT_DELETED", entityType: "Sale", entityId: saleId, before: { code: sale.code, memberId: sale.memberId, programId: sale.programId } } });
+    await transaction.installment.deleteMany({ where: { saleId } });
+    await transaction.sale.delete({ where: { id: saleId } });
+  });
+  revalidatePath("/ventas");
+  return { success: true, message: "Borrador eliminado." };
+}
+
 export async function confirmSeparationAction(saleId: string, _previousState: SaleOperationState, formData: FormData): Promise<SaleOperationState> {
   await requirePermission("SALES");
   const parsed = z.object({ reference: z.string().trim().min(3, "Ingresa la referencia").max(60, "Máximo 60 caracteres") }).safeParse({ reference: formData.get("reference") });

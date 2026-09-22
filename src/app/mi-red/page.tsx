@@ -13,17 +13,24 @@ export default async function MyNetworkPage() {
   const user = await requireUser();
   if (!roleCodes(user).includes("AMBASSADOR") || !user.member?.ambassadorProfile) redirect("/mi-portal");
   const ambassadorId = user.member.ambassadorProfile.id;
-  const [profile, levels, ranks] = await Promise.all([
+  const [profile, levels, ranks, countries, documentTypes, occupations, maritalStatuses, regions, provinces, districts] = await Promise.all([
     db.ambassadorProfile.findUniqueOrThrow({ where: { id: ambassadorId }, include: { member: true, commissions: { orderBy: { createdAt: "desc" }, take: 100 }, rankBonuses: { orderBy: { period: "desc" } }, awards: { orderBy: { earnedAt: "desc" }, include: { rank: true } }, rankHistory: { orderBy: { achievedAt: "desc" }, include: { rank: true } } } }),
     getAmbassadorNetwork(ambassadorId),
     db.rankDefinition.findMany({ orderBy: { sortOrder: "asc" } }),
+    db.country.findMany({ where: { active: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }], select: { code: true, name: true } }),
+    db.documentTypeOption.findMany({ where: { active: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }], select: { code: true, name: true } }),
+    db.occupationOption.findMany({ where: { active: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }], select: { code: true, name: true } }),
+    db.maritalStatusOption.findMany({ where: { active: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }], select: { code: true, name: true } }),
+    db.addressRegion.findMany({ where: { active: true }, select: { code: true, name: true, countryCode: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }] }),
+    db.addressProvince.findMany({ where: { active: true }, select: { code: true, name: true, regionCode: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }] }),
+    db.addressDistrict.findMany({ where: { active: true }, select: { code: true, name: true, provinceCode: true }, orderBy: [{ sortOrder: "asc" }, { name: "asc" }] }),
   ]);
   const people = levels.flatMap((level) => level.people); const direct = levels[0]?.people ?? [];
   const networkVolume = people.reduce((sum, item) => sum + item.volume, 0);
   const directPoints = profile.commissions.filter((item) => item.generation === 1 && item.status !== "REVERSED").reduce((sum, item) => sum + item.points, 0);
   const pending = profile.commissions.filter((item) => item.status === "PENDING").reduce((sum, item) => sum + Number(item.amount), 0);
   const currentIndex = ranks.findIndex((rank) => rank.code === profile.currentRank); const nextRank = ranks[currentIndex + 1] ?? (currentIndex < 0 ? ranks[0] : null);
-  return <><PageHeader eyebrow="Portal del embajador" title="Mi red" description={`Código ${profile.referralCode}. Se muestran exclusivamente tus ocho generaciones.`} action={<MemberCreateDialog ambassadors={[]} networkMode />} />
+  return <><PageHeader eyebrow="Portal del embajador" title="Mi red" description={`Código ${profile.referralCode}. Se muestran exclusivamente tus ocho generaciones.`} action={<MemberCreateDialog countries={countries} documentTypes={documentTypes} occupations={occupations} maritalStatuses={maritalStatuses} regions={regions} provinces={provinces.map((item) => ({ ...item, parentCode: item.regionCode }))} districts={districts.map((item) => ({ ...item, parentCode: item.provinceCode }))} ambassadors={[]} networkMode />} />
     <section className="module-metrics"><MetricCard label="Socios directos" value={String(direct.length)} detail={`${people.length} en toda la red`} icon={UsersRound} /><MetricCard label="Volumen de red" value={formatMoney(networkVolume)} detail="Ventas no anuladas" icon={TrendingUp} /><MetricCard label="Comisiones pendientes" value={formatMoney(pending)} detail="Pendientes de aprobación" icon={Coins} /><MetricCard label="Rango actual" value={ranks.find((rank) => rank.code === profile.currentRank)?.name ?? "Sin rango"} detail="Carrera del embajador" icon={Trophy} /></section>
 
     {nextRank && <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Próximo rango: {nextRank.name}</h2><p>Progreso calculado con tu red activa y comisiones directas generadas.</p></div></div><div className="panel-body"><div className="rank-progress-grid"><div><span>Socios</span><strong>{people.length} / {nextRank.memberCount}</strong><progress max={nextRank.memberCount} value={Math.min(people.length, nextRank.memberCount)} /></div><div><span>Directos</span><strong>{direct.length} / {nextRank.directCount}</strong><progress max={nextRank.directCount} value={Math.min(direct.length, nextRank.directCount)} /></div><div><span>Puntos directos</span><strong>{directPoints} / {nextRank.directPoints}</strong><progress max={nextRank.directPoints} value={Math.min(directPoints, nextRank.directPoints)} /></div><div><span>Volumen de red</span><strong>{formatMoney(networkVolume)} / {formatMoney(nextRank.totalPoints)}</strong><progress max={Number(nextRank.totalPoints)} value={Math.min(networkVolume, Number(nextRank.totalPoints))} /></div></div></div></section>}

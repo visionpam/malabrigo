@@ -41,6 +41,8 @@ export type PaymentSubmissionMinAggregateOutputType = {
   concept: $Enums.PaymentConcept | null
   currency: string | null
   voucherUrl: string | null
+  voucherData: runtime.Bytes | null
+  voucherMimeType: string | null
   submittedAt: Date | null
   reviewedAt: Date | null
   status: $Enums.SubmissionStatus | null
@@ -54,6 +56,8 @@ export type PaymentSubmissionMaxAggregateOutputType = {
   concept: $Enums.PaymentConcept | null
   currency: string | null
   voucherUrl: string | null
+  voucherData: runtime.Bytes | null
+  voucherMimeType: string | null
   submittedAt: Date | null
   reviewedAt: Date | null
   status: $Enums.SubmissionStatus | null
@@ -67,6 +71,8 @@ export type PaymentSubmissionCountAggregateOutputType = {
   concept: number
   currency: number
   voucherUrl: number
+  voucherData: number
+  voucherMimeType: number
   submittedAt: number
   reviewedAt: number
   status: number
@@ -90,6 +96,8 @@ export type PaymentSubmissionMinAggregateInputType = {
   concept?: true
   currency?: true
   voucherUrl?: true
+  voucherData?: true
+  voucherMimeType?: true
   submittedAt?: true
   reviewedAt?: true
   status?: true
@@ -103,6 +111,8 @@ export type PaymentSubmissionMaxAggregateInputType = {
   concept?: true
   currency?: true
   voucherUrl?: true
+  voucherData?: true
+  voucherMimeType?: true
   submittedAt?: true
   reviewedAt?: true
   status?: true
@@ -116,6 +126,8 @@ export type PaymentSubmissionCountAggregateInputType = {
   concept?: true
   currency?: true
   voucherUrl?: true
+  voucherData?: true
+  voucherMimeType?: true
   submittedAt?: true
   reviewedAt?: true
   status?: true
@@ -216,6 +228,8 @@ export type PaymentSubmissionGroupByOutputType = {
   concept: $Enums.PaymentConcept
   currency: string
   voucherUrl: string
+  voucherData: runtime.Bytes | null
+  voucherMimeType: string | null
   submittedAt: Date
   reviewedAt: Date | null
   status: $Enums.SubmissionStatus
@@ -252,6 +266,8 @@ export type PaymentSubmissionWhereInput = {
   concept?: Prisma.EnumPaymentConceptFilter<"PaymentSubmission"> | $Enums.PaymentConcept
   currency?: Prisma.StringFilter<"PaymentSubmission"> | string
   voucherUrl?: Prisma.StringFilter<"PaymentSubmission"> | string
+  voucherData?: Prisma.BytesNullableFilter<"PaymentSubmission"> | runtime.Bytes | null
+  voucherMimeType?: Prisma.StringNullableFilter<"PaymentSubmission"> | string | null
   submittedAt?: Prisma.DateTimeFilter<"PaymentSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"PaymentSubmission"> | Date | string | null
   status?: Prisma.EnumSubmissionStatusFilter<"PaymentSubmission"> | $Enums.SubmissionStatus
@@ -267,6 +283,8 @@ export type PaymentSubmissionOrderByWithRelationInput = {
   concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
+  voucherData?: Prisma.SortOrderInput | Prisma.SortOrder
+  voucherMimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -285,6 +303,8 @@ export type PaymentSubmissionWhereUniqueInput = Prisma.AtLeast<{
   concept?: Prisma.EnumPaymentConceptFilter<"PaymentSubmission"> | $Enums.PaymentConcept
   currency?: Prisma.StringFilter<"PaymentSubmission"> | string
   voucherUrl?: Prisma.StringFilter<"PaymentSubmission"> | string
+  voucherData?: Prisma.BytesNullableFilter<"PaymentSubmission"> | runtime.Bytes | null
+  voucherMimeType?: Prisma.StringNullableFilter<"PaymentSubmission"> | string | null
   submittedAt?: Prisma.DateTimeFilter<"PaymentSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"PaymentSubmission"> | Date | string | null
   status?: Prisma.EnumSubmissionStatusFilter<"PaymentSubmission"> | $Enums.SubmissionStatus
@@ -300,6 +320,8 @@ export type PaymentSubmissionOrderByWithAggregationInput = {
   concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
+  voucherData?: Prisma.SortOrderInput | Prisma.SortOrder
+  voucherMimeType?: Prisma.SortOrderInput | Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -321,6 +343,8 @@ export type PaymentSubmissionScalarWhereWithAggregatesInput = {
   concept?: Prisma.EnumPaymentConceptWithAggregatesFilter<"PaymentSubmission"> | $Enums.PaymentConcept
   currency?: Prisma.StringWithAggregatesFilter<"PaymentSubmission"> | string
   voucherUrl?: Prisma.StringWithAggregatesFilter<"PaymentSubmission"> | string
+  voucherData?: Prisma.BytesNullableWithAggregatesFilter<"PaymentSubmission"> | runtime.Bytes | null
+  voucherMimeType?: Prisma.StringNullableWithAggregatesFilter<"PaymentSubmission"> | string | null
   submittedAt?: Prisma.DateTimeWithAggregatesFilter<"PaymentSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"PaymentSubmission"> | Date | string | null
   status?: Prisma.EnumSubmissionStatusWithAggregatesFilter<"PaymentSubmission"> | $Enums.SubmissionStatus
@@ -333,6 +357,8 @@ export type PaymentSubmissionCreateInput = {
   concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
+  voucherData?: runtime.Bytes | null
+  voucherMimeType?: string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   status?: $Enums.SubmissionStatus
@@ -348,6 +374,8 @@ export type PaymentSubmissionUncheckedCreateInput = {
   concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
+  voucherData?: runtime.Bytes | null
+  voucherMimeType?: string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   status?: $Enums.SubmissionStatus
@@ -361,6 +389,8 @@ export type PaymentSubmissionUpdateInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -376,6 +406,8 @@ export type PaymentSubmissionUncheckedUpdateInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -390,6 +422,8 @@ export type PaymentSubmissionCreateManyInput = {
   concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
+  voucherData?: runtime.Bytes | null
+  voucherMimeType?: string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   status?: $Enums.SubmissionStatus
@@ -402,6 +436,8 @@ export type PaymentSubmissionUpdateManyMutationInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -415,6 +451,8 @@ export type PaymentSubmissionUncheckedUpdateManyInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -438,6 +476,8 @@ export type PaymentSubmissionCountOrderByAggregateInput = {
   concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
+  voucherData?: Prisma.SortOrder
+  voucherMimeType?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -455,6 +495,8 @@ export type PaymentSubmissionMaxOrderByAggregateInput = {
   concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
+  voucherData?: Prisma.SortOrder
+  voucherMimeType?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -468,6 +510,8 @@ export type PaymentSubmissionMinOrderByAggregateInput = {
   concept?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   voucherUrl?: Prisma.SortOrder
+  voucherData?: Prisma.SortOrder
+  voucherMimeType?: Prisma.SortOrder
   submittedAt?: Prisma.SortOrder
   reviewedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
@@ -529,6 +573,10 @@ export type EnumPaymentConceptFieldUpdateOperationsInput = {
   set?: $Enums.PaymentConcept
 }
 
+export type NullableBytesFieldUpdateOperationsInput = {
+  set?: runtime.Bytes | null
+}
+
 export type EnumSubmissionStatusFieldUpdateOperationsInput = {
   set?: $Enums.SubmissionStatus
 }
@@ -555,6 +603,8 @@ export type PaymentSubmissionCreateWithoutSaleInput = {
   concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
+  voucherData?: runtime.Bytes | null
+  voucherMimeType?: string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   status?: $Enums.SubmissionStatus
@@ -568,6 +618,8 @@ export type PaymentSubmissionUncheckedCreateWithoutSaleInput = {
   concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
+  voucherData?: runtime.Bytes | null
+  voucherMimeType?: string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   status?: $Enums.SubmissionStatus
@@ -611,6 +663,8 @@ export type PaymentSubmissionScalarWhereInput = {
   concept?: Prisma.EnumPaymentConceptFilter<"PaymentSubmission"> | $Enums.PaymentConcept
   currency?: Prisma.StringFilter<"PaymentSubmission"> | string
   voucherUrl?: Prisma.StringFilter<"PaymentSubmission"> | string
+  voucherData?: Prisma.BytesNullableFilter<"PaymentSubmission"> | runtime.Bytes | null
+  voucherMimeType?: Prisma.StringNullableFilter<"PaymentSubmission"> | string | null
   submittedAt?: Prisma.DateTimeFilter<"PaymentSubmission"> | Date | string
   reviewedAt?: Prisma.DateTimeNullableFilter<"PaymentSubmission"> | Date | string | null
   status?: Prisma.EnumSubmissionStatusFilter<"PaymentSubmission"> | $Enums.SubmissionStatus
@@ -623,6 +677,8 @@ export type PaymentSubmissionCreateWithoutPaymentInput = {
   concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
+  voucherData?: runtime.Bytes | null
+  voucherMimeType?: string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   status?: $Enums.SubmissionStatus
@@ -637,6 +693,8 @@ export type PaymentSubmissionUncheckedCreateWithoutPaymentInput = {
   concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
+  voucherData?: runtime.Bytes | null
+  voucherMimeType?: string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   status?: $Enums.SubmissionStatus
@@ -665,6 +723,8 @@ export type PaymentSubmissionUpdateWithoutPaymentInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -679,6 +739,8 @@ export type PaymentSubmissionUncheckedUpdateWithoutPaymentInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -691,6 +753,8 @@ export type PaymentSubmissionCreateManySaleInput = {
   concept?: $Enums.PaymentConcept
   currency?: string
   voucherUrl: string
+  voucherData?: runtime.Bytes | null
+  voucherMimeType?: string | null
   submittedAt?: Date | string
   reviewedAt?: Date | string | null
   status?: $Enums.SubmissionStatus
@@ -703,6 +767,8 @@ export type PaymentSubmissionUpdateWithoutSaleInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -716,6 +782,8 @@ export type PaymentSubmissionUncheckedUpdateWithoutSaleInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -729,6 +797,8 @@ export type PaymentSubmissionUncheckedUpdateManyWithoutSaleInput = {
   concept?: Prisma.EnumPaymentConceptFieldUpdateOperationsInput | $Enums.PaymentConcept
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   voucherUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  voucherData?: Prisma.NullableBytesFieldUpdateOperationsInput | runtime.Bytes | null
+  voucherMimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submittedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
@@ -744,6 +814,8 @@ export type PaymentSubmissionSelect<ExtArgs extends runtime.Types.Extensions.Int
   concept?: boolean
   currency?: boolean
   voucherUrl?: boolean
+  voucherData?: boolean
+  voucherMimeType?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
   status?: boolean
@@ -759,6 +831,8 @@ export type PaymentSubmissionSelectCreateManyAndReturn<ExtArgs extends runtime.T
   concept?: boolean
   currency?: boolean
   voucherUrl?: boolean
+  voucherData?: boolean
+  voucherMimeType?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
   status?: boolean
@@ -773,6 +847,8 @@ export type PaymentSubmissionSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   concept?: boolean
   currency?: boolean
   voucherUrl?: boolean
+  voucherData?: boolean
+  voucherMimeType?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
   status?: boolean
@@ -787,13 +863,15 @@ export type PaymentSubmissionSelectScalar = {
   concept?: boolean
   currency?: boolean
   voucherUrl?: boolean
+  voucherData?: boolean
+  voucherMimeType?: boolean
   submittedAt?: boolean
   reviewedAt?: boolean
   status?: boolean
   rejectionReason?: boolean
 }
 
-export type PaymentSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleId" | "amount" | "concept" | "currency" | "voucherUrl" | "submittedAt" | "reviewedAt" | "status" | "rejectionReason", ExtArgs["result"]["paymentSubmission"]>
+export type PaymentSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "saleId" | "amount" | "concept" | "currency" | "voucherUrl" | "voucherData" | "voucherMimeType" | "submittedAt" | "reviewedAt" | "status" | "rejectionReason", ExtArgs["result"]["paymentSubmission"]>
 export type PaymentSubmissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
   payment?: boolean | Prisma.PaymentSubmission$paymentArgs<ExtArgs>
@@ -818,6 +896,8 @@ export type $PaymentSubmissionPayload<ExtArgs extends runtime.Types.Extensions.I
     concept: $Enums.PaymentConcept
     currency: string
     voucherUrl: string
+    voucherData: runtime.Bytes | null
+    voucherMimeType: string | null
     submittedAt: Date
     reviewedAt: Date | null
     status: $Enums.SubmissionStatus
@@ -1253,6 +1333,8 @@ export interface PaymentSubmissionFieldRefs {
   readonly concept: Prisma.FieldRef<"PaymentSubmission", 'PaymentConcept'>
   readonly currency: Prisma.FieldRef<"PaymentSubmission", 'String'>
   readonly voucherUrl: Prisma.FieldRef<"PaymentSubmission", 'String'>
+  readonly voucherData: Prisma.FieldRef<"PaymentSubmission", 'Bytes'>
+  readonly voucherMimeType: Prisma.FieldRef<"PaymentSubmission", 'String'>
   readonly submittedAt: Prisma.FieldRef<"PaymentSubmission", 'DateTime'>
   readonly reviewedAt: Prisma.FieldRef<"PaymentSubmission", 'DateTime'>
   readonly status: Prisma.FieldRef<"PaymentSubmission", 'SubmissionStatus'>

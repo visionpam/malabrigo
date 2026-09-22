@@ -11,22 +11,33 @@ import { createNumericCode } from "@/lib/identity";
 import { hasPermission, requirePermission, requireUser, roleCodes } from "@/lib/access-control";
 
 const memberSchema = z.object({
-  documentType: z.enum(["DNI", "CE", "PASSPORT", "RUC"], { message: "Selecciona un tipo de documento" }),
+  documentType: z.string().trim().min(1, "Selecciona un tipo de documento").max(20),
   documentNumber: z.string().trim().min(6, "Ingresa al menos 6 caracteres").max(20, "Máximo 20 caracteres").regex(/^[A-Za-z0-9-]+$/, "Usa solo letras, números y guiones"),
   firstName: z.string().trim().min(2, "Ingresa los nombres").max(100, "Máximo 100 caracteres"),
   lastName: z.string().trim().min(2, "Ingresa los apellidos").max(100, "Máximo 100 caracteres"),
-  countryCode: z.enum(["PE", "CO", "EC", "CL", "US"], { message: "Selecciona un país" }),
+  countryCode: z.string().trim().length(2, "Selecciona un país").transform((value) => value.toUpperCase()),
+  regionCode: z.string().trim().max(20).optional(),
+  provinceCode: z.string().trim().max(24).optional(),
+  districtCode: z.string().trim().max(24).optional(),
   phone: z.string().trim().max(30, "Máximo 30 caracteres").regex(/^[+0-9() -]*$/, "Número de teléfono inválido"),
   email: z.string().trim().toLowerCase().email("Ingresa un correo válido").max(255, "Máximo 255 caracteres"),
   residence: z.string().trim().max(180, "Máximo 180 caracteres"),
   occupation: z.string().trim().max(140, "Máximo 140 caracteres"),
-  maritalStatus: z.enum(["SINGLE", "MARRIED", "COHABITING", "DIVORCED", "WIDOWED", "OTHER"]).optional(),
+  maritalStatus: z.string().trim().max(30).optional(),
 });
 
 const registrationSchema = memberSchema.extend({
   profileType: z.enum(["INVESTOR", "AMBASSADOR", "BOTH"]),
   sponsorId: z.string().regex(/^[0-9a-f-]{36}$/i).or(z.literal("")),
 });
+
+async function validateAddress(data: z.infer<typeof memberSchema>) {
+  const regions = await db.addressRegion.count({ where: { countryCode: data.countryCode, active: true } });
+  if (!regions) return { ok: !data.regionCode && !data.provinceCode && !data.districtCode };
+  if (!data.regionCode || !data.provinceCode || !data.districtCode) return { ok: false };
+  const district = await db.addressDistrict.findFirst({ where: { code: data.districtCode, provinceCode: data.provinceCode, active: true }, include: { province: { include: { region: true } } } });
+  return { ok: Boolean(district && district.province.regionCode === data.regionCode && district.province.region.countryCode === data.countryCode) };
+}
 
 export type CreateMemberState = {
   success: boolean;
@@ -44,6 +55,7 @@ export async function createMemberAction(_previousState: CreateMemberState, form
     firstName: formData.get("firstName"),
     lastName: formData.get("lastName"),
     countryCode: formData.get("countryCode"),
+    regionCode: formData.get("regionCode") || undefined, provinceCode: formData.get("provinceCode") || undefined, districtCode: formData.get("districtCode") || undefined,
     phone: formData.get("phone") ?? "",
     email: formData.get("email"),
     residence: formData.get("residence") ?? "",
@@ -56,6 +68,16 @@ export async function createMemberAction(_previousState: CreateMemberState, form
   if (!parsed.success) {
     return { success: false, message: "Revisa los campos marcados.", errors: parsed.error.flatten().fieldErrors };
   }
+
+  const country = await db.country.findUnique({ where: { code: parsed.data.countryCode }, select: { code: true } });
+  if (!country) return { success: false, message: "El país seleccionado ya no está disponible.", errors: { countryCode: ["Selecciona un país válido"] } };
+  if (!(await validateAddress(parsed.data)).ok) return { success: false, message: "La región, provincia y distrito no corresponden al país seleccionado." };
+  const [documentType, occupation, maritalStatus] = await Promise.all([
+    db.documentTypeOption.findFirst({ where: { code: parsed.data.documentType, active: true }, select: { code: true } }),
+    parsed.data.occupation ? db.occupationOption.findFirst({ where: { code: parsed.data.occupation, active: true }, select: { code: true } }) : null,
+    parsed.data.maritalStatus ? db.maritalStatusOption.findFirst({ where: { code: parsed.data.maritalStatus, active: true }, select: { code: true } }) : null,
+  ]);
+  if (!documentType || (parsed.data.occupation && !occupation) || (parsed.data.maritalStatus && !maritalStatus)) return { success: false, message: "Uno de los catálogos seleccionados ya no está disponible." };
 
   const actorRoles = roleCodes(actor);
   const canManageAll = hasPermission(actor, "MEMBERS");
@@ -92,7 +114,7 @@ export async function createMemberAction(_previousState: CreateMemberState, form
           documentNumber,
           firstName: data.firstName,
           lastName: data.lastName,
-          countryCode: data.countryCode,
+          countryCode: data.countryCode, regionCode: data.regionCode || null, provinceCode: data.provinceCode || null, districtCode: data.districtCode || null,
           phone: data.phone || null,
           email: data.email,
           residence: data.residence || null,
@@ -151,11 +173,21 @@ export async function updateMemberAction(memberId: string, _previousState: Creat
   const parsed = registrationSchema.safeParse({
     documentType: formData.get("documentType"), documentNumber: formData.get("documentNumber"),
     firstName: formData.get("firstName"), lastName: formData.get("lastName"),
-    countryCode: formData.get("countryCode"), phone: formData.get("phone") ?? "", email: formData.get("email"),
+    countryCode: formData.get("countryCode"), regionCode: formData.get("regionCode") || undefined, provinceCode: formData.get("provinceCode") || undefined, districtCode: formData.get("districtCode") || undefined, phone: formData.get("phone") ?? "", email: formData.get("email"),
     residence: formData.get("residence") ?? "", occupation: formData.get("occupation") ?? "", maritalStatus: formData.get("maritalStatus") || undefined,
     profileType: formData.get("profileType"), sponsorId: formData.get("sponsorId") ?? "",
   });
   if (!parsed.success) return { success: false, message: "Revisa los campos marcados.", errors: parsed.error.flatten().fieldErrors };
+
+  const country = await db.country.findUnique({ where: { code: parsed.data.countryCode }, select: { code: true } });
+  if (!country) return { success: false, message: "El país seleccionado ya no está disponible.", errors: { countryCode: ["Selecciona un país válido"] } };
+  if (!(await validateAddress(parsed.data)).ok) return { success: false, message: "La región, provincia y distrito no corresponden al país seleccionado." };
+  const [documentType, occupation, maritalStatus] = await Promise.all([
+    db.documentTypeOption.findFirst({ where: { code: parsed.data.documentType, active: true }, select: { code: true } }),
+    parsed.data.occupation ? db.occupationOption.findFirst({ where: { code: parsed.data.occupation, active: true }, select: { code: true } }) : null,
+    parsed.data.maritalStatus ? db.maritalStatusOption.findFirst({ where: { code: parsed.data.maritalStatus, active: true }, select: { code: true } }) : null,
+  ]);
+  if (!documentType || (parsed.data.occupation && !occupation) || (parsed.data.maritalStatus && !maritalStatus)) return { success: false, message: "Uno de los catálogos seleccionados ya no está disponible." };
 
   const data = parsed.data;
   const documentNumber = data.documentNumber.toUpperCase();
@@ -171,7 +203,7 @@ export async function updateMemberAction(memberId: string, _previousState: Creat
         const sponsor = await transaction.ambassadorProfile.findFirst({ where: { id: data.sponsorId, status: "ACTIVE" }, select: { id: true } });
         if (!sponsor) throw new Error("INVALID_SPONSOR");
       }
-      await transaction.member.update({ where: { id: memberId }, data: { documentType: data.documentType, documentNumber, firstName: data.firstName, lastName: data.lastName, countryCode: data.countryCode, phone: data.phone || null, email: data.email, residence: data.residence || null, occupation: data.occupation || null, maritalStatus: data.maritalStatus ?? null } });
+      await transaction.member.update({ where: { id: memberId }, data: { documentType: data.documentType, documentNumber, firstName: data.firstName, lastName: data.lastName, countryCode: data.countryCode, regionCode: data.regionCode || null, provinceCode: data.provinceCode || null, districtCode: data.districtCode || null, phone: data.phone || null, email: data.email, residence: data.residence || null, occupation: data.occupation || null, maritalStatus: data.maritalStatus ?? null } });
       if (wantsInvestor && !current.investorProfile) await transaction.investorProfile.create({ data: { memberId, sponsorId: data.sponsorId || null, status: "PROSPECT" } });
       if (wantsAmbassador && !current.ambassadorProfile) await transaction.ambassadorProfile.create({ data: { memberId, referralCode: current.memberCode, sponsorId: data.sponsorId || null, status: "ACTIVE" } });
       if (current.userId) await transaction.user.update({ where: { id: current.userId }, data: { email: data.email, displayName: `${data.firstName} ${data.lastName}` } });
@@ -189,6 +221,45 @@ export async function updateMemberAction(memberId: string, _previousState: Creat
   }
   revalidatePath("/socios"); revalidatePath("/ventas");
   return { success: true, message: "Socio actualizado correctamente." };
+}
+
+export async function disableMemberAction(memberId: string): Promise<CreateMemberState> {
+  const actor = await requirePermission("MEMBERS");
+  if (!/^[0-9a-f-]{36}$/i.test(memberId)) return { success: false, message: "Socio inválido." };
+  const member = await db.member.findUnique({ where: { id: memberId }, select: { id: true, userId: true, status: true } });
+  if (!member) return { success: false, message: "El socio ya no existe." };
+  await db.$transaction(async (transaction) => {
+    await transaction.member.update({ where: { id: memberId }, data: { status: "SUSPENDED" } });
+    if (member.userId) await transaction.user.update({ where: { id: member.userId }, data: { status: "SUSPENDED" } });
+    await transaction.auditLog.create({ data: { actorUserId: actor.id, action: "MEMBER_DISABLED", entityType: "Member", entityId: memberId, before: { status: member.status }, after: { status: "SUSPENDED" } } });
+  });
+  revalidatePath("/socios");
+  return { success: true, message: "Socio inhabilitado correctamente." };
+}
+
+export async function toggleMemberAccessAction(memberId: string, activate: boolean): Promise<CreateMemberState> {
+  const actor = await requirePermission("MEMBERS");
+  const member = await db.member.findUnique({ where: { id: memberId }, select: { id: true, userId: true } });
+  if (!member) return { success: false, message: "El socio ya no existe." };
+  await db.$transaction(async (tx) => {
+    await tx.member.update({ where: { id: memberId }, data: { status: activate ? "ACTIVE" : "SUSPENDED" } });
+    if (member.userId) await tx.user.update({ where: { id: member.userId }, data: { status: activate ? "ACTIVE" : "SUSPENDED" } });
+    await tx.auditLog.create({ data: { actorUserId: actor.id, action: activate ? "MEMBER_REACTIVATED" : "MEMBER_DISABLED", entityType: "Member", entityId: memberId, after: { access: activate ? "ACTIVE" : "SUSPENDED" } } });
+  });
+  revalidatePath("/socios");
+  return { success: true, message: activate ? "Socio reactivado." : "Socio bloqueado." };
+}
+
+export async function deleteMemberIfUnusedAction(memberId: string): Promise<CreateMemberState> {
+  const actor = await requirePermission("MEMBERS");
+  const member = await db.member.findUnique({ where: { id: memberId }, select: { id: true, userId: true, _count: { select: { sales: true, documents: true, beneficiaries: true } } } });
+  if (!member) return { success: false, message: "El socio ya no existe." };
+  if (member._count.sales || member._count.documents || member._count.beneficiaries) return { success: false, message: "No se puede eliminar: tiene movimientos o documentos asociados." };
+  try {
+    await db.$transaction(async (tx) => { if (member.userId) await tx.user.delete({ where: { id: member.userId } }); await tx.member.delete({ where: { id: memberId } }); await tx.auditLog.create({ data: { actorUserId: actor.id, action: "MEMBER_DELETED", entityType: "Member", entityId: memberId } }); });
+  } catch { return { success: false, message: "No se puede eliminar porque existen relaciones asociadas." }; }
+  revalidatePath("/socios");
+  return { success: true, message: "Socio eliminado." };
 }
 
 export async function resendInvitationAction(memberId: string, _previousState: CreateMemberState, _formData: FormData): Promise<CreateMemberState> {
@@ -214,5 +285,5 @@ export async function resendInvitationAction(memberId: string, _previousState: C
   });
   const delivery = await sendAccountInvitation({ email: member.email, name: member.firstName, token });
   await db.auditLog.create({ data: { actorUserId: actor.id, action: delivery.sent ? "INVITATION_RESENT" : "INVITATION_DELIVERY_FAILED", entityType: "Member", entityId: member.id, after: delivery.sent ? { email: member.email } : { reason: delivery.reason } } });
-  return { success: delivery.sent, message: delivery.sent ? "Invitación reenviada correctamente." : "No se pudo enviar. Verifica RESEND_API_KEY y EMAIL_FROM." };
+  return { success: delivery.sent, message: delivery.sent ? "Invitación reenviada correctamente." : "No se pudo enviar el correo. Revisa los registros de la función en Vercel." };
 }

@@ -52,6 +52,13 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
+  Country: 'Country',
+  AddressRegion: 'AddressRegion',
+  AddressProvince: 'AddressProvince',
+  AddressDistrict: 'AddressDistrict',
+  DocumentTypeOption: 'DocumentTypeOption',
+  OccupationOption: 'OccupationOption',
+  MaritalStatusOption: 'MaritalStatusOption',
   Role: 'Role',
   UserRole: 'UserRole',
   Permission: 'Permission',
@@ -71,6 +78,7 @@ export const ModelName = {
   StayAllocation: 'StayAllocation',
   ReferralCode: 'ReferralCode',
   Sponsorship: 'Sponsorship',
+  ConstructionProject: 'ConstructionProject',
   ProjectStage: 'ProjectStage',
   ProjectUpdate: 'ProjectUpdate',
   ProjectMedia: 'ProjectMedia',
@@ -120,6 +128,79 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const CountryScalarFieldEnum = {
+  code: 'code',
+  name: 'name',
+  active: 'active',
+  sortOrder: 'sortOrder'
+} as const
+
+export type CountryScalarFieldEnum = (typeof CountryScalarFieldEnum)[keyof typeof CountryScalarFieldEnum]
+
+
+export const AddressRegionScalarFieldEnum = {
+  code: 'code',
+  countryCode: 'countryCode',
+  name: 'name',
+  active: 'active',
+  sortOrder: 'sortOrder'
+} as const
+
+export type AddressRegionScalarFieldEnum = (typeof AddressRegionScalarFieldEnum)[keyof typeof AddressRegionScalarFieldEnum]
+
+
+export const AddressProvinceScalarFieldEnum = {
+  code: 'code',
+  regionCode: 'regionCode',
+  name: 'name',
+  active: 'active',
+  sortOrder: 'sortOrder'
+} as const
+
+export type AddressProvinceScalarFieldEnum = (typeof AddressProvinceScalarFieldEnum)[keyof typeof AddressProvinceScalarFieldEnum]
+
+
+export const AddressDistrictScalarFieldEnum = {
+  code: 'code',
+  provinceCode: 'provinceCode',
+  name: 'name',
+  active: 'active',
+  sortOrder: 'sortOrder'
+} as const
+
+export type AddressDistrictScalarFieldEnum = (typeof AddressDistrictScalarFieldEnum)[keyof typeof AddressDistrictScalarFieldEnum]
+
+
+export const DocumentTypeOptionScalarFieldEnum = {
+  code: 'code',
+  name: 'name',
+  active: 'active',
+  sortOrder: 'sortOrder'
+} as const
+
+export type DocumentTypeOptionScalarFieldEnum = (typeof DocumentTypeOptionScalarFieldEnum)[keyof typeof DocumentTypeOptionScalarFieldEnum]
+
+
+export const OccupationOptionScalarFieldEnum = {
+  code: 'code',
+  name: 'name',
+  active: 'active',
+  sortOrder: 'sortOrder'
+} as const
+
+export type OccupationOptionScalarFieldEnum = (typeof OccupationOptionScalarFieldEnum)[keyof typeof OccupationOptionScalarFieldEnum]
+
+
+export const MaritalStatusOptionScalarFieldEnum = {
+  code: 'code',
+  name: 'name',
+  active: 'active',
+  sortOrder: 'sortOrder'
+} as const
+
+export type MaritalStatusOptionScalarFieldEnum = (typeof MaritalStatusOptionScalarFieldEnum)[keyof typeof MaritalStatusOptionScalarFieldEnum]
+
+
 export const RoleScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -167,6 +248,9 @@ export const MemberScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   countryCode: 'countryCode',
+  regionCode: 'regionCode',
+  provinceCode: 'provinceCode',
+  districtCode: 'districtCode',
   phone: 'phone',
   email: 'email',
   residence: 'residence',
@@ -294,6 +378,8 @@ export const PaymentSubmissionScalarFieldEnum = {
   concept: 'concept',
   currency: 'currency',
   voucherUrl: 'voucherUrl',
+  voucherData: 'voucherData',
+  voucherMimeType: 'voucherMimeType',
   submittedAt: 'submittedAt',
   reviewedAt: 'reviewedAt',
   status: 'status',
@@ -370,8 +456,21 @@ export const SponsorshipScalarFieldEnum = {
 export type SponsorshipScalarFieldEnum = (typeof SponsorshipScalarFieldEnum)[keyof typeof SponsorshipScalarFieldEnum]
 
 
+export const ConstructionProjectScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  description: 'description',
+  active: 'active',
+  createdAt: 'createdAt'
+} as const
+
+export type ConstructionProjectScalarFieldEnum = (typeof ConstructionProjectScalarFieldEnum)[keyof typeof ConstructionProjectScalarFieldEnum]
+
+
 export const ProjectStageScalarFieldEnum = {
   id: 'id',
+  projectId: 'projectId',
   name: 'name',
   description: 'description',
   weight: 'weight',
@@ -418,7 +517,11 @@ export const DocumentRecordScalarFieldEnum = {
   status: 'status',
   title: 'title',
   url: 'url',
+  fileData: 'fileData',
+  fileMimeType: 'fileMimeType',
   rejectionReason: 'rejectionReason',
+  voidReason: 'voidReason',
+  voidedAt: 'voidedAt',
   createdAt: 'createdAt',
   reviewedAt: 'reviewedAt'
 } as const
@@ -461,6 +564,7 @@ export const ContractScalarFieldEnum = {
   templateId: 'templateId',
   status: 'status',
   documentUrl: 'documentUrl',
+  documentText: 'documentText',
   generatedAt: 'generatedAt',
   signedAt: 'signedAt',
   createdAt: 'createdAt',
@@ -561,6 +665,7 @@ export const RankDefinitionScalarFieldEnum = {
   totalPoints: 'totalPoints',
   deadlineMonths: 'deadlineMonths',
   monthlyBonus: 'monthlyBonus',
+  logoUrl: 'logoUrl',
   rewardName: 'rewardName',
   rewardDescription: 'rewardDescription'
 } as const

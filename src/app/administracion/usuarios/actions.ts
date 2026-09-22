@@ -28,7 +28,7 @@ export async function createAdminUserAction(_state: AdminUserState, formData: Fo
     });
     const delivery = await sendAccountInvitation({ email: user.email, name: user.displayName, token });
     revalidatePath("/administracion/usuarios");
-    return { success: true, message: delivery.sent ? "Administrador creado e invitación enviada." : "Administrador creado. El correo SMTP todavía debe configurarse." };
+    return { success: true, message: delivery.sent ? "Administrador creado e invitación enviada." : "Administrador creado, pero el correo no pudo enviarse. Revisa los registros de la función en Vercel." };
   } catch {
     return { success: false, message: "No fue posible crear el usuario. Verifica que el correo no esté registrado." };
   }
