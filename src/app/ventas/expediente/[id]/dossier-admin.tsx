@@ -1,0 +1,42 @@
+"use client";
+
+import { useActionState, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { BadgeCheck, Eye, FilePlus2, LoaderCircle, Send, XCircle } from "lucide-react";
+import { createDossierDocumentAction, reviewDossierDocumentAction, uploadDossierDocumentAsAdminAction, type DossierActionState } from "../../dossier-actions";
+
+const initial: DossierActionState = { success: false, message: "" };
+const labels: Record<string, string> = { IDENTITY: "Identidad / DNI", SEPARATION_FORM: "Ficha de separación", SEPARATION_PROOF: "Comprobante de separación", SALE_PROOF: "Comprobante de pago", SIGNED_CONTRACT: "Contrato firmado", ANNEX: "Anexo", OTHER: "Otro" };
+const statuses: Record<string, string> = { REQUESTED: "Solicitado", PENDING: "Por aprobar", APPROVED: "Aprobado", REJECTED: "Rechazado", CANCELLED: "Cancelado" };
+type Document = { id: string; subjectKind: string; subjectName: string; category: string; title: string; status: string; rejectionReason: string | null; fileName: string | null; fileMimeType: string | null; uploadedById: string | null; createdAt: string };
+type Sale = { id: string; code: string; status: string; memberName: string; program: string; people: { id: string; fullName: string; isHolder: boolean }[]; documents: Document[]; paymentSupports: { id: string; status: string; amount: number; submittedAt: string }[] };
+
+function ActionForm({ document, kind }: { document: Document; kind: "approve" | "reject" | "upload" }) {
+  const router = useRouter();
+  const actionFn = kind === "upload" ? uploadDossierDocumentAsAdminAction.bind(null, document.id) : reviewDossierDocumentAction.bind(null, document.id, kind === "approve" ? "APPROVED" as const : "REJECTED" as const);
+  const [state, action, pending] = useActionState(actionFn, initial);
+  useEffect(() => { if (state.success) router.refresh(); }, [state.success, router]);
+  return <form action={action} className="dossier-inline-form">
+    {kind === "reject" && <input name="reason" required minLength={3} maxLength={500} placeholder="Motivo visible para el inversionista" aria-label="Motivo del rechazo" />}
+    {kind === "upload" && <input name="file" type="file" accept=".jpg,.jpeg,.png,.pdf" required aria-label={`Archivo para ${document.title}`} />}
+    <button className={`row-action ${kind === "reject" ? "danger-link" : kind === "approve" ? "approve" : "edit-link"}`} type="submit" disabled={pending}>{pending ? <LoaderCircle className="spinner" size={15} /> : kind === "approve" ? <BadgeCheck size={15} /> : kind === "reject" ? <XCircle size={15} /> : <FilePlus2 size={15} />}{kind === "approve" ? "Aprobar" : kind === "reject" ? "Rechazar" : "Cargar desde administración"}</button>
+    {state.message && <small className={state.success ? "success" : "error"}>{state.message}</small>}
+  </form>;
+}
+
+export function DossierAdmin({ sale }: { sale: Sale }) {
+  const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+  const [mode, setMode] = useState<"request" | "upload">("request");
+  const [state, action, pending] = useActionState(createDossierDocumentAction, initial);
+  useEffect(() => { if (state.success) { formRef.current?.reset(); router.refresh(); } }, [state.success, router]);
+  return <><header className="dossier-page-heading"><span className="eyebrow">Expediente de la venta</span><h1>{sale.code}</h1><p>{sale.program} · Titular principal: {sale.memberName}</p></header>
+    <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Agregar documento o solicitarlo</h2><p>Relaciona cada archivo con esta venta o con una persona registrada en ella. El inversionista solo podrá cargar lo solicitado.</p></div></div><div className="panel-body">
+      {sale.status === "CANCELLED" ? <p>La venta está anulada; su expediente se conserva solo para consulta.</p> : <form action={action} ref={formRef} className="dossier-create-form"><input type="hidden" name="saleId" value={sale.id} /><input type="hidden" name="mode" value={mode} />
+        <div className="dossier-mode" role="group" aria-label="Cómo se obtendrá el documento"><button type="button" className={mode === "request" ? "active" : ""} onClick={() => setMode("request")}><Send size={16} /> Solicitar al inversionista</button><button type="button" className={mode === "upload" ? "active" : ""} onClick={() => setMode("upload")}><FilePlus2 size={16} /> Cargar desde administración</button></div>
+        <div className="form-grid"><label><span>Corresponde a *</span><select name="subject" required><option value="primary">Titular principal · {sale.memberName}</option><option value="sale">Venta · {sale.code} (p. ej., voucher)</option>{sale.people.map((person) => <option value={person.id} key={person.id}>{person.isHolder ? "Titular" : "Beneficiario"} · {person.fullName}</option>)}</select></label><label><span>Tipo *</span><select name="category" required>{Object.entries(labels).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></label><label><span>Nombre del documento *</span><input name="title" required minLength={3} maxLength={180} placeholder="Ej. Copia del DNI" /></label>{mode === "upload" && <label><span>Archivo *</span><input type="file" name="file" accept=".jpg,.jpeg,.png,.pdf" required /></label>}</div>
+        <div className="dossier-form-footer"><small>JPG, PNG o PDF · máximo 12 MB. Las cargas administrativas quedan aprobadas; los archivos del inversionista requieren revisión.</small><button className="primary-button" type="submit" disabled={pending}>{pending ? <LoaderCircle className="spinner" size={16} /> : mode === "request" ? <Send size={16} /> : <FilePlus2 size={16} />}{mode === "request" ? "Crear solicitud" : "Guardar documento"}</button></div>{state.message && <p className={`form-message ${state.success ? "success" : "error"}`}>{state.message}</p>}</form>}
+    </div></section>
+    <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Documentos de esta venta</h2><p>{sale.documents.length} registro(s) · Cada documento indica la persona y el estado de revisión.</p></div></div>{sale.documents.length ? <div className="dossier-list">{sale.documents.map((document) => <article className="dossier-item" key={document.id}><div className="dossier-item-main"><div><strong>{document.title}</strong><span className={`dossier-status dossier-status-${document.status.toLowerCase()}`}>{statuses[document.status]}</span></div><p>{document.subjectKind === "SALE" ? "Venta" : document.subjectKind === "PRIMARY_HOLDER" ? "Titular principal" : document.subjectKind === "HOLDER" ? "Titular" : "Beneficiario"}: {document.subjectName} · {labels[document.category] ?? document.category}</p>{document.rejectionReason && <p className="dossier-reason">Motivo del rechazo: {document.rejectionReason}</p>}{document.fileName && <small>Archivo: {document.fileName}</small>}</div><div className="dossier-item-actions">{document.fileName && <a className="row-action row-action-icon" href={`/expediente/archivo/${document.id}`} target="_blank" rel="noreferrer" title="Ver archivo" aria-label={`Ver ${document.title}`}><Eye size={17} /></a>}{document.status === "PENDING" && <><ActionForm document={document} kind="approve" /><ActionForm document={document} kind="reject" /></>}{(document.status === "REQUESTED" || document.status === "REJECTED") && <ActionForm document={document} kind="upload" />}</div></article>)}</div> : <div className="panel-body"><p>Esta venta aún no tiene documentos ni solicitudes.</p></div>}</section>
+    {sale.paymentSupports.length > 0 && <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Comprobantes de pago de la venta</h2><p>Se conservan en Pagos y se muestran aquí sin duplicar el archivo. Su aprobación se gestiona en ese módulo.</p></div></div><div className="dossier-list">{sale.paymentSupports.map((item) => <article className="dossier-item" key={item.id}><div className="dossier-item-main"><strong>Comprobante · USD {item.amount.toLocaleString("en-US")}</strong><p>{new Date(item.submittedAt).toLocaleDateString("es-CO")} · {item.status === "APPROVED" ? "Aprobado" : item.status === "REJECTED" ? "Rechazado" : "Por revisar"}</p></div><a className="row-action row-action-icon" href={`/pagos/comprobantes/${item.id}`} target="_blank" rel="noreferrer" title="Ver comprobante" aria-label="Ver comprobante"><Eye size={17} /></a></article>)}</div></section>}</>;
+}

@@ -133,23 +133,33 @@ export async function voidPaymentAction(paymentId: string, _state: PaymentAction
   refresh(); return { success: true, message: "Pago anulado correctamente. El movimiento se conserva en el historial." };
 }
 
-export async function approveSubmissionAction(submissionId: string, _state: PaymentActionState): Promise<PaymentActionState> {
+export async function approveSubmissionAction(submissionId: string, _state: PaymentActionState, formData: FormData): Promise<PaymentActionState> {
   void _state;
   const actor = await requirePermission("PAYMENTS");
+  const parsed = paymentSchema.pick({ reference: true, paidAt: true }).safeParse({ reference: formData.get("reference"), paidAt: formData.get("paidAt") });
+  if (!parsed.success) return { success: false, message: "Completa el número del comprobante y la fecha de pago.", errors: parsed.error.flatten().fieldErrors };
+  const reference = parsed.data.reference.toUpperCase();
+  const paidAt = new Date(`${parsed.data.paidAt}T12:00:00-05:00`);
   const submission = await db.paymentSubmission.findUnique({ where: { id: submissionId }, include: { payment: true, sale: true } });
   if (!submission) return { success: false, message: "El comprobante ya no existe." };
   if (submission.status !== "PENDING" || submission.payment) return { success: false, message: "El comprobante ya fue revisado." };
+  if (submission.sale.status === "CANCELLED") return { success: false, message: "La venta anulada no admite pagos." };
+  if (await db.payment.findUnique({ where: { reference }, select: { id: true } })) return { success: false, message: "El número de comprobante ya está registrado.", errors: { reference: ["Usa otro número de comprobante."] } };
   try {
     await db.$transaction(async (transaction) => {
-      const reference = `WEB-${Date.now().toString(36).toUpperCase()}-${randomUUID().slice(0, 6).toUpperCase()}`;
-      const payment = await transaction.payment.create({ data: { saleId: submission.saleId, submissionId: submission.id, reference, amount: submission.amount, concept: submission.concept, currency: submission.currency, paidAt: submission.submittedAt, status: "CONFIRMED" } });
-      await transaction.paymentSubmission.update({ where: { id: submission.id }, data: { status: "APPROVED", reviewedAt: new Date(), rejectionReason: null } });
+      const updated = await transaction.paymentSubmission.updateMany({ where: { id: submission.id, status: "PENDING" }, data: { status: "APPROVED", reviewedAt: new Date(), rejectionReason: null } });
+      if (!updated.count) throw new Error("El comprobante ya fue revisado.");
+      const payment = await transaction.payment.create({ data: { saleId: submission.saleId, submissionId: submission.id, reference, amount: submission.amount, concept: submission.concept, currency: submission.currency, paidAt, status: "CONFIRMED" } });
       await reconcileInstallments(transaction, submission.saleId);
       await reconcileSaleReservation(transaction, submission.saleId);
       await reconcileDirectCommission(transaction, submission.saleId);
-      await transaction.auditLog.create({ data: { actorUserId: actor.id, action: "PAYMENT_SUBMISSION_APPROVED", entityType: "PaymentSubmission", entityId: submission.id, after: { paymentId: payment.id, reference, amount: payment.amount.toString(), concept: payment.concept, status: "APPROVED" } } });
+      await transaction.auditLog.create({ data: { actorUserId: actor.id, action: "PAYMENT_SUBMISSION_APPROVED", entityType: "PaymentSubmission", entityId: submission.id, after: { paymentId: payment.id, reference, paidAt: payment.paidAt.toISOString(), amount: payment.amount.toString(), concept: payment.concept, status: "APPROVED" } } });
     });
-  } catch { return { success: false, message: "No fue posible aprobar el comprobante." }; }
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") return { success: false, message: "El número de comprobante ya existe o este soporte ya fue aprobado." };
+    if (error instanceof Error && error.message === "El comprobante ya fue revisado.") return { success: false, message: error.message };
+    return { success: false, message: "No fue posible aprobar el comprobante." };
+  }
   refresh(); return { success: true, message: "Comprobante aprobado y pago aplicado." };
 }
 

@@ -216,6 +216,7 @@ export type BeneficiaryWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   holder?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   sale?: Prisma.XOR<Prisma.SaleScalarRelationFilter, Prisma.SaleWhereInput>
+  dossierDocuments?: Prisma.DossierDocumentListRelationFilter
 }
 
 export type BeneficiaryOrderByWithRelationInput = {
@@ -230,6 +231,7 @@ export type BeneficiaryOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   holder?: Prisma.MemberOrderByWithRelationInput
   sale?: Prisma.SaleOrderByWithRelationInput
+  dossierDocuments?: Prisma.DossierDocumentOrderByRelationAggregateInput
 }
 
 export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
@@ -247,6 +249,7 @@ export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   holder?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
   sale?: Prisma.XOR<Prisma.SaleScalarRelationFilter, Prisma.SaleWhereInput>
+  dossierDocuments?: Prisma.DossierDocumentListRelationFilter
 }, "id">
 
 export type BeneficiaryOrderByWithAggregationInput = {
@@ -289,6 +292,7 @@ export type BeneficiaryCreateInput = {
   createdAt?: Date | string
   holder: Prisma.MemberCreateNestedOneWithoutBeneficiariesInput
   sale: Prisma.SaleCreateNestedOneWithoutBeneficiariesInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutBeneficiaryInput
 }
 
 export type BeneficiaryUncheckedCreateInput = {
@@ -301,6 +305,7 @@ export type BeneficiaryUncheckedCreateInput = {
   isSpouse?: boolean
   isHolder?: boolean
   createdAt?: Date | string
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutBeneficiaryInput
 }
 
 export type BeneficiaryUpdateInput = {
@@ -313,6 +318,7 @@ export type BeneficiaryUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   holder?: Prisma.MemberUpdateOneRequiredWithoutBeneficiariesNestedInput
   sale?: Prisma.SaleUpdateOneRequiredWithoutBeneficiariesNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutBeneficiaryNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateInput = {
@@ -325,6 +331,7 @@ export type BeneficiaryUncheckedUpdateInput = {
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutBeneficiaryNestedInput
 }
 
 export type BeneficiaryCreateManyInput = {
@@ -405,6 +412,11 @@ export type BeneficiaryMinOrderByAggregateInput = {
   isSpouse?: Prisma.SortOrder
   isHolder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+}
+
+export type BeneficiaryNullableScalarRelationFilter = {
+  is?: Prisma.BeneficiaryWhereInput | null
+  isNot?: Prisma.BeneficiaryWhereInput | null
 }
 
 export type BeneficiaryCreateNestedManyWithoutHolderInput = {
@@ -491,6 +503,22 @@ export type BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput = {
   deleteMany?: Prisma.BeneficiaryScalarWhereInput | Prisma.BeneficiaryScalarWhereInput[]
 }
 
+export type BeneficiaryCreateNestedOneWithoutDossierDocumentsInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutDossierDocumentsInput, Prisma.BeneficiaryUncheckedCreateWithoutDossierDocumentsInput>
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutDossierDocumentsInput
+  connect?: Prisma.BeneficiaryWhereUniqueInput
+}
+
+export type BeneficiaryUpdateOneWithoutDossierDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutDossierDocumentsInput, Prisma.BeneficiaryUncheckedCreateWithoutDossierDocumentsInput>
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutDossierDocumentsInput
+  upsert?: Prisma.BeneficiaryUpsertWithoutDossierDocumentsInput
+  disconnect?: Prisma.BeneficiaryWhereInput | boolean
+  delete?: Prisma.BeneficiaryWhereInput | boolean
+  connect?: Prisma.BeneficiaryWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BeneficiaryUpdateToOneWithWhereWithoutDossierDocumentsInput, Prisma.BeneficiaryUpdateWithoutDossierDocumentsInput>, Prisma.BeneficiaryUncheckedUpdateWithoutDossierDocumentsInput>
+}
+
 export type BeneficiaryCreateWithoutHolderInput = {
   id?: string
   fullName: string
@@ -500,6 +528,7 @@ export type BeneficiaryCreateWithoutHolderInput = {
   isHolder?: boolean
   createdAt?: Date | string
   sale: Prisma.SaleCreateNestedOneWithoutBeneficiariesInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutBeneficiaryInput
 }
 
 export type BeneficiaryUncheckedCreateWithoutHolderInput = {
@@ -511,6 +540,7 @@ export type BeneficiaryUncheckedCreateWithoutHolderInput = {
   isSpouse?: boolean
   isHolder?: boolean
   createdAt?: Date | string
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutBeneficiaryInput
 }
 
 export type BeneficiaryCreateOrConnectWithoutHolderInput = {
@@ -563,6 +593,7 @@ export type BeneficiaryCreateWithoutSaleInput = {
   isHolder?: boolean
   createdAt?: Date | string
   holder: Prisma.MemberCreateNestedOneWithoutBeneficiariesInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutBeneficiaryInput
 }
 
 export type BeneficiaryUncheckedCreateWithoutSaleInput = {
@@ -574,6 +605,7 @@ export type BeneficiaryUncheckedCreateWithoutSaleInput = {
   isSpouse?: boolean
   isHolder?: boolean
   createdAt?: Date | string
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutBeneficiaryInput
 }
 
 export type BeneficiaryCreateOrConnectWithoutSaleInput = {
@@ -602,6 +634,70 @@ export type BeneficiaryUpdateManyWithWhereWithoutSaleInput = {
   data: Prisma.XOR<Prisma.BeneficiaryUpdateManyMutationInput, Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleInput>
 }
 
+export type BeneficiaryCreateWithoutDossierDocumentsInput = {
+  id?: string
+  fullName: string
+  document?: string | null
+  relationship: string
+  isSpouse?: boolean
+  isHolder?: boolean
+  createdAt?: Date | string
+  holder: Prisma.MemberCreateNestedOneWithoutBeneficiariesInput
+  sale: Prisma.SaleCreateNestedOneWithoutBeneficiariesInput
+}
+
+export type BeneficiaryUncheckedCreateWithoutDossierDocumentsInput = {
+  id?: string
+  memberId: string
+  saleId: string
+  fullName: string
+  document?: string | null
+  relationship: string
+  isSpouse?: boolean
+  isHolder?: boolean
+  createdAt?: Date | string
+}
+
+export type BeneficiaryCreateOrConnectWithoutDossierDocumentsInput = {
+  where: Prisma.BeneficiaryWhereUniqueInput
+  create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutDossierDocumentsInput, Prisma.BeneficiaryUncheckedCreateWithoutDossierDocumentsInput>
+}
+
+export type BeneficiaryUpsertWithoutDossierDocumentsInput = {
+  update: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutDossierDocumentsInput, Prisma.BeneficiaryUncheckedUpdateWithoutDossierDocumentsInput>
+  create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutDossierDocumentsInput, Prisma.BeneficiaryUncheckedCreateWithoutDossierDocumentsInput>
+  where?: Prisma.BeneficiaryWhereInput
+}
+
+export type BeneficiaryUpdateToOneWithWhereWithoutDossierDocumentsInput = {
+  where?: Prisma.BeneficiaryWhereInput
+  data: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutDossierDocumentsInput, Prisma.BeneficiaryUncheckedUpdateWithoutDossierDocumentsInput>
+}
+
+export type BeneficiaryUpdateWithoutDossierDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationship?: Prisma.StringFieldUpdateOperationsInput | string
+  isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  holder?: Prisma.MemberUpdateOneRequiredWithoutBeneficiariesNestedInput
+  sale?: Prisma.SaleUpdateOneRequiredWithoutBeneficiariesNestedInput
+}
+
+export type BeneficiaryUncheckedUpdateWithoutDossierDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  saleId?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationship?: Prisma.StringFieldUpdateOperationsInput | string
+  isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type BeneficiaryCreateManyHolderInput = {
   id?: string
   saleId: string
@@ -622,6 +718,7 @@ export type BeneficiaryUpdateWithoutHolderInput = {
   isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sale?: Prisma.SaleUpdateOneRequiredWithoutBeneficiariesNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutBeneficiaryNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateWithoutHolderInput = {
@@ -633,6 +730,7 @@ export type BeneficiaryUncheckedUpdateWithoutHolderInput = {
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutBeneficiaryNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateManyWithoutHolderInput = {
@@ -666,6 +764,7 @@ export type BeneficiaryUpdateWithoutSaleInput = {
   isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   holder?: Prisma.MemberUpdateOneRequiredWithoutBeneficiariesNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutBeneficiaryNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateWithoutSaleInput = {
@@ -677,6 +776,7 @@ export type BeneficiaryUncheckedUpdateWithoutSaleInput = {
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutBeneficiaryNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateManyWithoutSaleInput = {
@@ -691,6 +791,35 @@ export type BeneficiaryUncheckedUpdateManyWithoutSaleInput = {
 }
 
 
+/**
+ * Count Type BeneficiaryCountOutputType
+ */
+
+export type BeneficiaryCountOutputType = {
+  dossierDocuments: number
+}
+
+export type BeneficiaryCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  dossierDocuments?: boolean | BeneficiaryCountOutputTypeCountDossierDocumentsArgs
+}
+
+/**
+ * BeneficiaryCountOutputType without action
+ */
+export type BeneficiaryCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BeneficiaryCountOutputType
+   */
+  select?: Prisma.BeneficiaryCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * BeneficiaryCountOutputType without action
+ */
+export type BeneficiaryCountOutputTypeCountDossierDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DossierDocumentWhereInput
+}
+
 
 export type BeneficiarySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -704,6 +833,8 @@ export type BeneficiarySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
+  dossierDocuments?: boolean | Prisma.Beneficiary$dossierDocumentsArgs<ExtArgs>
+  _count?: boolean | Prisma.BeneficiaryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["beneficiary"]>
 
 export type BeneficiarySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -750,6 +881,8 @@ export type BeneficiaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type BeneficiaryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
+  dossierDocuments?: boolean | Prisma.Beneficiary$dossierDocumentsArgs<ExtArgs>
+  _count?: boolean | Prisma.BeneficiaryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BeneficiaryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
@@ -765,6 +898,7 @@ export type $BeneficiaryPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     holder: Prisma.$MemberPayload<ExtArgs>
     sale: Prisma.$SalePayload<ExtArgs>
+    dossierDocuments: Prisma.$DossierDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1172,6 +1306,7 @@ export interface Prisma__BeneficiaryClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   holder<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   sale<T extends Prisma.SaleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SaleDefaultArgs<ExtArgs>>): Prisma.Prisma__SaleClient<runtime.Types.Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  dossierDocuments<T extends Prisma.Beneficiary$dossierDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Beneficiary$dossierDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DossierDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1608,6 +1743,30 @@ export type BeneficiaryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many Beneficiaries to delete.
    */
   limit?: number
+}
+
+/**
+ * Beneficiary.dossierDocuments
+ */
+export type Beneficiary$dossierDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DossierDocument
+   */
+  select?: Prisma.DossierDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DossierDocument
+   */
+  omit?: Prisma.DossierDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DossierDocumentInclude<ExtArgs> | null
+  where?: Prisma.DossierDocumentWhereInput
+  orderBy?: Prisma.DossierDocumentOrderByWithRelationInput | Prisma.DossierDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.DossierDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DossierDocumentScalarFieldEnum | Prisma.DossierDocumentScalarFieldEnum[]
 }
 
 /**

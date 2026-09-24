@@ -83,6 +83,7 @@ export const ModelName = {
   ProjectUpdate: 'ProjectUpdate',
   ProjectMedia: 'ProjectMedia',
   DocumentRecord: 'DocumentRecord',
+  DossierDocument: 'DossierDocument',
   AuditLog: 'AuditLog',
   ContractTemplate: 'ContractTemplate',
   Contract: 'Contract',
@@ -532,6 +533,28 @@ export const DocumentRecordScalarFieldEnum = {
 } as const
 
 export type DocumentRecordScalarFieldEnum = (typeof DocumentRecordScalarFieldEnum)[keyof typeof DocumentRecordScalarFieldEnum]
+
+
+export const DossierDocumentScalarFieldEnum = {
+  id: 'id',
+  saleId: 'saleId',
+  beneficiaryId: 'beneficiaryId',
+  subjectKind: 'subjectKind',
+  subjectName: 'subjectName',
+  category: 'category',
+  title: 'title',
+  status: 'status',
+  fileData: 'fileData',
+  fileMimeType: 'fileMimeType',
+  fileName: 'fileName',
+  uploadedById: 'uploadedById',
+  rejectionReason: 'rejectionReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type DossierDocumentScalarFieldEnum = (typeof DossierDocumentScalarFieldEnum)[keyof typeof DossierDocumentScalarFieldEnum]
 
 
 export const AuditLogScalarFieldEnum = {

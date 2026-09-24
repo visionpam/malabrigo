@@ -13,7 +13,7 @@ export async function GET(_request: Request, context: { params: Promise<{ id: st
   if (!/^[0-9a-f-]{36}$/i.test(id)) return new Response("Comprobante no encontrado", { status: 404 });
   const submission = await db.paymentSubmission.findUnique({ where: { id }, select: { voucherData: true, voucherMimeType: true, voucherUrl: true, sale: { select: { memberId: true } } } });
   if (!submission) return new Response("Comprobante no encontrado", { status: 404 });
-  if (!hasPermission(user, "PAYMENTS") && user.member?.id !== submission.sale.memberId) return new Response("Sin acceso", { status: 403 });
+  if (!hasPermission(user, "PAYMENTS") && !hasPermission(user, "SALES") && user.member?.id !== submission.sale.memberId) return new Response("Sin acceso", { status: 403 });
 
   let data: Uint8Array;
   let mime = submission.voucherMimeType;

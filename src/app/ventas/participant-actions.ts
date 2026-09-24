@@ -66,8 +66,10 @@ export async function removeSaleParticipantAction(saleId: string, personId: stri
   const person = await db.beneficiary.findFirst({ where: { id: personId, saleId }, include: { sale: { select: { status: true } } } });
   if (!person || person.sale.status === "CANCELLED") return;
   await db.$transaction(async (tx) => {
+    await tx.dossierDocument.updateMany({ where: { beneficiaryId: personId, status: { in: ["REQUESTED", "REJECTED", "PENDING"] } }, data: { status: "CANCELLED" } });
     await tx.beneficiary.delete({ where: { id: personId } });
     await tx.auditLog.create({ data: { actorUserId: actor.id, action: person.isHolder ? "SALE_HOLDER_REMOVED" : "SALE_BENEFICIARY_REMOVED", entityType: "Sale", entityId: saleId, before: { personId, fullName: person.fullName, isHolder: person.isHolder } } });
   });
   revalidateParticipants();
+  revalidatePath("/mi-portal/documentos");
 }

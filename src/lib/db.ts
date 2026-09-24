@@ -20,6 +20,8 @@ const globalForPrisma = globalThis as unknown as {
 // secretos de ejecución antes de que exista una petición real.
 const adapter = new PrismaPg({
   connectionString: connectionString ?? "postgresql://build:build@127.0.0.1:5432/build",
+  // Sin límite, una caída de PostgreSQL puede dejar la solicitud cargando indefinidamente.
+  connectionTimeoutMillis: 8000,
 });
 
 export const db =

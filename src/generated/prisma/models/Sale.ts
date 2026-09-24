@@ -315,6 +315,7 @@ export type SaleWhereInput = {
   contracts?: Prisma.ContractListRelationFilter
   documents?: Prisma.DocumentRecordListRelationFilter
   beneficiaries?: Prisma.BeneficiaryListRelationFilter
+  dossierDocuments?: Prisma.DossierDocumentListRelationFilter
 }
 
 export type SaleOrderByWithRelationInput = {
@@ -344,6 +345,7 @@ export type SaleOrderByWithRelationInput = {
   contracts?: Prisma.ContractOrderByRelationAggregateInput
   documents?: Prisma.DocumentRecordOrderByRelationAggregateInput
   beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
+  dossierDocuments?: Prisma.DossierDocumentOrderByRelationAggregateInput
 }
 
 export type SaleWhereUniqueInput = Prisma.AtLeast<{
@@ -376,6 +378,7 @@ export type SaleWhereUniqueInput = Prisma.AtLeast<{
   contracts?: Prisma.ContractListRelationFilter
   documents?: Prisma.DocumentRecordListRelationFilter
   beneficiaries?: Prisma.BeneficiaryListRelationFilter
+  dossierDocuments?: Prisma.DossierDocumentListRelationFilter
 }, "id" | "code">
 
 export type SaleOrderByWithAggregationInput = {
@@ -446,6 +449,7 @@ export type SaleCreateInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateInput = {
@@ -472,6 +476,7 @@ export type SaleUncheckedCreateInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUpdateInput = {
@@ -498,6 +503,7 @@ export type SaleUpdateInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateInput = {
@@ -524,6 +530,7 @@ export type SaleUncheckedUpdateInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateManyInput = {
@@ -901,6 +908,20 @@ export type SaleUpdateOneWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SaleUpdateToOneWithWhereWithoutDocumentsInput, Prisma.SaleUpdateWithoutDocumentsInput>, Prisma.SaleUncheckedUpdateWithoutDocumentsInput>
 }
 
+export type SaleCreateNestedOneWithoutDossierDocumentsInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutDossierDocumentsInput, Prisma.SaleUncheckedCreateWithoutDossierDocumentsInput>
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutDossierDocumentsInput
+  connect?: Prisma.SaleWhereUniqueInput
+}
+
+export type SaleUpdateOneRequiredWithoutDossierDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutDossierDocumentsInput, Prisma.SaleUncheckedCreateWithoutDossierDocumentsInput>
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutDossierDocumentsInput
+  upsert?: Prisma.SaleUpsertWithoutDossierDocumentsInput
+  connect?: Prisma.SaleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SaleUpdateToOneWithWhereWithoutDossierDocumentsInput, Prisma.SaleUpdateWithoutDossierDocumentsInput>, Prisma.SaleUncheckedUpdateWithoutDossierDocumentsInput>
+}
+
 export type SaleCreateNestedOneWithoutContractsInput = {
   create?: Prisma.XOR<Prisma.SaleCreateWithoutContractsInput, Prisma.SaleUncheckedCreateWithoutContractsInput>
   connectOrCreate?: Prisma.SaleCreateOrConnectWithoutContractsInput
@@ -938,6 +959,7 @@ export type SaleCreateWithoutMemberInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutMemberInput = {
@@ -963,6 +985,7 @@ export type SaleUncheckedCreateWithoutMemberInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutMemberInput = {
@@ -1035,6 +1058,7 @@ export type SaleCreateWithoutBeneficiariesInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutBeneficiariesInput = {
@@ -1060,6 +1084,7 @@ export type SaleUncheckedCreateWithoutBeneficiariesInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutBeneficiariesInput = {
@@ -1101,6 +1126,7 @@ export type SaleUpdateWithoutBeneficiariesInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutBeneficiariesInput = {
@@ -1126,6 +1152,7 @@ export type SaleUncheckedUpdateWithoutBeneficiariesInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutProgramInput = {
@@ -1151,6 +1178,7 @@ export type SaleCreateWithoutProgramInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutProgramInput = {
@@ -1176,6 +1204,7 @@ export type SaleUncheckedCreateWithoutProgramInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutProgramInput = {
@@ -1227,6 +1256,7 @@ export type SaleCreateWithoutFinancingPlanInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutFinancingPlanInput = {
@@ -1252,6 +1282,7 @@ export type SaleUncheckedCreateWithoutFinancingPlanInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutFinancingPlanInput = {
@@ -1303,6 +1334,7 @@ export type SaleCreateWithoutInstallmentsInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutInstallmentsInput = {
@@ -1328,6 +1360,7 @@ export type SaleUncheckedCreateWithoutInstallmentsInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutInstallmentsInput = {
@@ -1369,6 +1402,7 @@ export type SaleUpdateWithoutInstallmentsInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutInstallmentsInput = {
@@ -1394,6 +1428,7 @@ export type SaleUncheckedUpdateWithoutInstallmentsInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutPaymentSubmissionsInput = {
@@ -1419,6 +1454,7 @@ export type SaleCreateWithoutPaymentSubmissionsInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutPaymentSubmissionsInput = {
@@ -1444,6 +1480,7 @@ export type SaleUncheckedCreateWithoutPaymentSubmissionsInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutPaymentSubmissionsInput = {
@@ -1485,6 +1522,7 @@ export type SaleUpdateWithoutPaymentSubmissionsInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutPaymentSubmissionsInput = {
@@ -1510,6 +1548,7 @@ export type SaleUncheckedUpdateWithoutPaymentSubmissionsInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutPaymentsInput = {
@@ -1535,6 +1574,7 @@ export type SaleCreateWithoutPaymentsInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutPaymentsInput = {
@@ -1560,6 +1600,7 @@ export type SaleUncheckedCreateWithoutPaymentsInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutPaymentsInput = {
@@ -1601,6 +1642,7 @@ export type SaleUpdateWithoutPaymentsInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutPaymentsInput = {
@@ -1626,6 +1668,7 @@ export type SaleUncheckedUpdateWithoutPaymentsInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutShareAllocationInput = {
@@ -1651,6 +1694,7 @@ export type SaleCreateWithoutShareAllocationInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutShareAllocationInput = {
@@ -1676,6 +1720,7 @@ export type SaleUncheckedCreateWithoutShareAllocationInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutShareAllocationInput = {
@@ -1717,6 +1762,7 @@ export type SaleUpdateWithoutShareAllocationInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutShareAllocationInput = {
@@ -1742,6 +1788,7 @@ export type SaleUncheckedUpdateWithoutShareAllocationInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutStayAllocationInput = {
@@ -1767,6 +1814,7 @@ export type SaleCreateWithoutStayAllocationInput = {
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutStayAllocationInput = {
@@ -1792,6 +1840,7 @@ export type SaleUncheckedCreateWithoutStayAllocationInput = {
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutStayAllocationInput = {
@@ -1833,6 +1882,7 @@ export type SaleUpdateWithoutStayAllocationInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutStayAllocationInput = {
@@ -1858,6 +1908,7 @@ export type SaleUncheckedUpdateWithoutStayAllocationInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutDocumentsInput = {
@@ -1883,6 +1934,7 @@ export type SaleCreateWithoutDocumentsInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutDocumentsInput = {
@@ -1908,6 +1960,7 @@ export type SaleUncheckedCreateWithoutDocumentsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutDocumentsInput = {
@@ -1949,6 +2002,7 @@ export type SaleUpdateWithoutDocumentsInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutDocumentsInput = {
@@ -1973,6 +2027,127 @@ export type SaleUncheckedUpdateWithoutDocumentsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
+}
+
+export type SaleCreateWithoutDossierDocumentsInput = {
+  id?: string
+  code: string
+  mode: $Enums.SaleMode
+  status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
+  currency?: string
+  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutSalesInput
+  program: Prisma.ProgramCreateNestedOneWithoutSalesInput
+  financingPlan?: Prisma.FinancingPlanCreateNestedOneWithoutSalesInput
+  installments?: Prisma.InstallmentCreateNestedManyWithoutSaleInput
+  paymentSubmissions?: Prisma.PaymentSubmissionCreateNestedManyWithoutSaleInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutSaleInput
+  shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
+  stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+}
+
+export type SaleUncheckedCreateWithoutDossierDocumentsInput = {
+  id?: string
+  code: string
+  memberId: string
+  programId: string
+  financingPlanId?: string | null
+  mode: $Enums.SaleMode
+  status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
+  currency?: string
+  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  installments?: Prisma.InstallmentUncheckedCreateNestedManyWithoutSaleInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUncheckedCreateNestedManyWithoutSaleInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutSaleInput
+  shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
+  stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+}
+
+export type SaleCreateOrConnectWithoutDossierDocumentsInput = {
+  where: Prisma.SaleWhereUniqueInput
+  create: Prisma.XOR<Prisma.SaleCreateWithoutDossierDocumentsInput, Prisma.SaleUncheckedCreateWithoutDossierDocumentsInput>
+}
+
+export type SaleUpsertWithoutDossierDocumentsInput = {
+  update: Prisma.XOR<Prisma.SaleUpdateWithoutDossierDocumentsInput, Prisma.SaleUncheckedUpdateWithoutDossierDocumentsInput>
+  create: Prisma.XOR<Prisma.SaleCreateWithoutDossierDocumentsInput, Prisma.SaleUncheckedCreateWithoutDossierDocumentsInput>
+  where?: Prisma.SaleWhereInput
+}
+
+export type SaleUpdateToOneWithWhereWithoutDossierDocumentsInput = {
+  where?: Prisma.SaleWhereInput
+  data: Prisma.XOR<Prisma.SaleUpdateWithoutDossierDocumentsInput, Prisma.SaleUncheckedUpdateWithoutDossierDocumentsInput>
+}
+
+export type SaleUpdateWithoutDossierDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
+  status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutSalesNestedInput
+  program?: Prisma.ProgramUpdateOneRequiredWithoutSalesNestedInput
+  financingPlan?: Prisma.FinancingPlanUpdateOneWithoutSalesNestedInput
+  installments?: Prisma.InstallmentUpdateManyWithoutSaleNestedInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUpdateManyWithoutSaleNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutSaleNestedInput
+  shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
+  stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+}
+
+export type SaleUncheckedUpdateWithoutDossierDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
+  status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  installments?: Prisma.InstallmentUncheckedUpdateManyWithoutSaleNestedInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUncheckedUpdateManyWithoutSaleNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutSaleNestedInput
+  shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
+  stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
@@ -1999,6 +2174,7 @@ export type SaleCreateWithoutContractsInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutContractsInput = {
@@ -2024,6 +2200,7 @@ export type SaleUncheckedCreateWithoutContractsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
   beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutContractsInput = {
@@ -2065,6 +2242,7 @@ export type SaleUpdateWithoutContractsInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutContractsInput = {
@@ -2090,6 +2268,7 @@ export type SaleUncheckedUpdateWithoutContractsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateManyMemberInput = {
@@ -2132,6 +2311,7 @@ export type SaleUpdateWithoutMemberInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutMemberInput = {
@@ -2157,6 +2337,7 @@ export type SaleUncheckedUpdateWithoutMemberInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutMemberInput = {
@@ -2216,6 +2397,7 @@ export type SaleUpdateWithoutProgramInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutProgramInput = {
@@ -2241,6 +2423,7 @@ export type SaleUncheckedUpdateWithoutProgramInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutProgramInput = {
@@ -2300,6 +2483,7 @@ export type SaleUpdateWithoutFinancingPlanInput = {
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutFinancingPlanInput = {
@@ -2325,6 +2509,7 @@ export type SaleUncheckedUpdateWithoutFinancingPlanInput = {
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
   beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
+  dossierDocuments?: Prisma.DossierDocumentUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutFinancingPlanInput = {
@@ -2356,6 +2541,7 @@ export type SaleCountOutputType = {
   contracts: number
   documents: number
   beneficiaries: number
+  dossierDocuments: number
 }
 
 export type SaleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2365,6 +2551,7 @@ export type SaleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   contracts?: boolean | SaleCountOutputTypeCountContractsArgs
   documents?: boolean | SaleCountOutputTypeCountDocumentsArgs
   beneficiaries?: boolean | SaleCountOutputTypeCountBeneficiariesArgs
+  dossierDocuments?: boolean | SaleCountOutputTypeCountDossierDocumentsArgs
 }
 
 /**
@@ -2419,6 +2606,13 @@ export type SaleCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.BeneficiaryWhereInput
 }
 
+/**
+ * SaleCountOutputType without action
+ */
+export type SaleCountOutputTypeCountDossierDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DossierDocumentWhereInput
+}
+
 
 export type SaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2447,6 +2641,7 @@ export type SaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   contracts?: boolean | Prisma.Sale$contractsArgs<ExtArgs>
   documents?: boolean | Prisma.Sale$documentsArgs<ExtArgs>
   beneficiaries?: boolean | Prisma.Sale$beneficiariesArgs<ExtArgs>
+  dossierDocuments?: boolean | Prisma.Sale$dossierDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.SaleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sale"]>
 
@@ -2523,6 +2718,7 @@ export type SaleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   contracts?: boolean | Prisma.Sale$contractsArgs<ExtArgs>
   documents?: boolean | Prisma.Sale$documentsArgs<ExtArgs>
   beneficiaries?: boolean | Prisma.Sale$beneficiariesArgs<ExtArgs>
+  dossierDocuments?: boolean | Prisma.Sale$dossierDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.SaleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SaleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2550,6 +2746,7 @@ export type $SalePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     contracts: Prisma.$ContractPayload<ExtArgs>[]
     documents: Prisma.$DocumentRecordPayload<ExtArgs>[]
     beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
+    dossierDocuments: Prisma.$DossierDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2972,6 +3169,7 @@ export interface Prisma__SaleClient<T, Null = never, ExtArgs extends runtime.Typ
   contracts<T extends Prisma.Sale$contractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Sale$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   beneficiaries<T extends Prisma.Sale$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  dossierDocuments<T extends Prisma.Sale$dossierDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$dossierDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DossierDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3615,6 +3813,30 @@ export type Sale$beneficiariesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.BeneficiaryScalarFieldEnum | Prisma.BeneficiaryScalarFieldEnum[]
+}
+
+/**
+ * Sale.dossierDocuments
+ */
+export type Sale$dossierDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DossierDocument
+   */
+  select?: Prisma.DossierDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DossierDocument
+   */
+  omit?: Prisma.DossierDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DossierDocumentInclude<ExtArgs> | null
+  where?: Prisma.DossierDocumentWhereInput
+  orderBy?: Prisma.DossierDocumentOrderByWithRelationInput | Prisma.DossierDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.DossierDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DossierDocumentScalarFieldEnum | Prisma.DossierDocumentScalarFieldEnum[]
 }
 
 /**

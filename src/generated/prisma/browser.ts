@@ -178,6 +178,11 @@ export type ProjectMedia = Prisma.ProjectMediaModel
  */
 export type DocumentRecord = Prisma.DocumentRecordModel
 /**
+ * Model DossierDocument
+ * 
+ */
+export type DossierDocument = Prisma.DossierDocumentModel
+/**
  * Model AuditLog
  * 
  */

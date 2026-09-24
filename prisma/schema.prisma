@@ -132,6 +132,21 @@ enum DocumentStatus {
   VOIDED
 }
 
+enum DossierSubjectKind {
+  SALE
+  PRIMARY_HOLDER
+  HOLDER
+  BENEFICIARY
+}
+
+enum DossierStatus {
+  REQUESTED
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
 model User {
   id                String               @id @default(uuid()) @db.Uuid
   email             String               @unique @db.VarChar(255)
@@ -364,6 +379,7 @@ model Beneficiary {
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   holder       Member   @relation("InvestmentHolder", fields: [memberId], references: [id], onDelete: Cascade)
   sale         Sale     @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  dossierDocuments DossierDocument[]
 
   @@index([memberId])
   @@index([saleId])
@@ -438,6 +454,7 @@ model Sale {
   contracts          Contract[]
   documents          DocumentRecord[]
   beneficiaries      Beneficiary[]
+  dossierDocuments   DossierDocument[]
 
   @@index([memberId, status])
   @@index([createdAt])
@@ -634,6 +651,31 @@ model DocumentRecord {
   @@index([memberId, category])
   @@index([visibility, status])
   @@map("document_records")
+}
+
+model DossierDocument {
+  id              String             @id @default(uuid()) @db.Uuid
+  saleId          String             @map("sale_id") @db.Uuid
+  beneficiaryId   String?            @map("beneficiary_id") @db.Uuid
+  subjectKind     DossierSubjectKind @map("subject_kind")
+  subjectName     String             @map("subject_name") @db.VarChar(180)
+  category        DocumentCategory
+  title           String             @db.VarChar(180)
+  status          DossierStatus      @default(REQUESTED)
+  fileData        Bytes?             @map("file_data") @db.ByteA
+  fileMimeType    String?            @map("file_mime_type") @db.VarChar(40)
+  fileName        String?            @map("file_name") @db.VarChar(180)
+  uploadedById    String?            @map("uploaded_by_id") @db.Uuid
+  rejectionReason String?            @map("rejection_reason") @db.VarChar(500)
+  createdAt       DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt       DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
+  reviewedAt      DateTime?          @map("reviewed_at") @db.Timestamptz(6)
+  sale            Sale               @relation(fields: [saleId], references: [id], onDelete: Restrict)
+  beneficiary     Beneficiary?       @relation(fields: [beneficiaryId], references: [id], onDelete: SetNull)
+
+  @@index([saleId, status])
+  @@index([beneficiaryId])
+  @@map("dossier_documents")
 }
 
 model AuditLog {

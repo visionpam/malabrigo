@@ -538,6 +538,40 @@ export type EnumDocumentStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumDocumentStatusFilter<$PrismaModel>
 }
 
+export type EnumDossierSubjectKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.DossierSubjectKind | Prisma.EnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  in?: $Enums.DossierSubjectKind[] | Prisma.ListEnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DossierSubjectKind[] | Prisma.ListEnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDossierSubjectKindFilter<$PrismaModel> | $Enums.DossierSubjectKind
+}
+
+export type EnumDossierStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DossierStatus | Prisma.EnumDossierStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DossierStatus[] | Prisma.ListEnumDossierStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DossierStatus[] | Prisma.ListEnumDossierStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDossierStatusFilter<$PrismaModel> | $Enums.DossierStatus
+}
+
+export type EnumDossierSubjectKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DossierSubjectKind | Prisma.EnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  in?: $Enums.DossierSubjectKind[] | Prisma.ListEnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DossierSubjectKind[] | Prisma.ListEnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDossierSubjectKindWithAggregatesFilter<$PrismaModel> | $Enums.DossierSubjectKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDossierSubjectKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDossierSubjectKindFilter<$PrismaModel>
+}
+
+export type EnumDossierStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DossierStatus | Prisma.EnumDossierStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DossierStatus[] | Prisma.ListEnumDossierStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DossierStatus[] | Prisma.ListEnumDossierStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDossierStatusWithAggregatesFilter<$PrismaModel> | $Enums.DossierStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDossierStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDossierStatusFilter<$PrismaModel>
+}
+
 export type BigIntFilter<$PrismaModel = never> = {
   equals?: bigint | number | Prisma.BigIntFieldRefInput<$PrismaModel>
   in?: bigint[] | number[] | Prisma.ListBigIntFieldRefInput<$PrismaModel>
@@ -1276,6 +1310,40 @@ export type NestedEnumDocumentStatusWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumDocumentStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumDocumentStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumDossierSubjectKindFilter<$PrismaModel = never> = {
+  equals?: $Enums.DossierSubjectKind | Prisma.EnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  in?: $Enums.DossierSubjectKind[] | Prisma.ListEnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DossierSubjectKind[] | Prisma.ListEnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDossierSubjectKindFilter<$PrismaModel> | $Enums.DossierSubjectKind
+}
+
+export type NestedEnumDossierStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.DossierStatus | Prisma.EnumDossierStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DossierStatus[] | Prisma.ListEnumDossierStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DossierStatus[] | Prisma.ListEnumDossierStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDossierStatusFilter<$PrismaModel> | $Enums.DossierStatus
+}
+
+export type NestedEnumDossierSubjectKindWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DossierSubjectKind | Prisma.EnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  in?: $Enums.DossierSubjectKind[] | Prisma.ListEnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DossierSubjectKind[] | Prisma.ListEnumDossierSubjectKindFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDossierSubjectKindWithAggregatesFilter<$PrismaModel> | $Enums.DossierSubjectKind
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDossierSubjectKindFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDossierSubjectKindFilter<$PrismaModel>
+}
+
+export type NestedEnumDossierStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DossierStatus | Prisma.EnumDossierStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.DossierStatus[] | Prisma.ListEnumDossierStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.DossierStatus[] | Prisma.ListEnumDossierStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumDossierStatusWithAggregatesFilter<$PrismaModel> | $Enums.DossierStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDossierStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDossierStatusFilter<$PrismaModel>
 }
 
 export type NestedBigIntFilter<$PrismaModel = never> = {

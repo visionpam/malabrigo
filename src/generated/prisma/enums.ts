@@ -183,3 +183,24 @@ export const DocumentStatus = {
 } as const
 
 export type DocumentStatus = (typeof DocumentStatus)[keyof typeof DocumentStatus]
+
+
+export const DossierSubjectKind = {
+  SALE: 'SALE',
+  PRIMARY_HOLDER: 'PRIMARY_HOLDER',
+  HOLDER: 'HOLDER',
+  BENEFICIARY: 'BENEFICIARY'
+} as const
+
+export type DossierSubjectKind = (typeof DossierSubjectKind)[keyof typeof DossierSubjectKind]
+
+
+export const DossierStatus = {
+  REQUESTED: 'REQUESTED',
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type DossierStatus = (typeof DossierStatus)[keyof typeof DossierStatus]

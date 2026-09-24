@@ -429,6 +429,7 @@ export const ModelName = {
   ProjectUpdate: 'ProjectUpdate',
   ProjectMedia: 'ProjectMedia',
   DocumentRecord: 'DocumentRecord',
+  DossierDocument: 'DossierDocument',
   AuditLog: 'AuditLog',
   ContractTemplate: 'ContractTemplate',
   Contract: 'Contract',
@@ -457,7 +458,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "country" | "addressRegion" | "addressProvince" | "addressDistrict" | "documentTypeOption" | "occupationOption" | "maritalStatusOption" | "role" | "userRole" | "permission" | "userPermission" | "member" | "investorProfile" | "ambassadorProfile" | "beneficiary" | "program" | "financingPlan" | "sale" | "installment" | "paymentSubmission" | "payment" | "paymentAllocation" | "shareAllocation" | "stayAllocation" | "referralCode" | "sponsorship" | "constructionProject" | "projectStage" | "projectUpdate" | "projectMedia" | "documentRecord" | "auditLog" | "contractTemplate" | "contract" | "legalAcceptance" | "accountInvitation" | "passwordResetToken" | "userSession" | "commissionRule" | "commissionEntry" | "rankDefinition" | "ambassadorRankHistory" | "rankBonusPayment" | "rankAward"
+    modelProps: "user" | "country" | "addressRegion" | "addressProvince" | "addressDistrict" | "documentTypeOption" | "occupationOption" | "maritalStatusOption" | "role" | "userRole" | "permission" | "userPermission" | "member" | "investorProfile" | "ambassadorProfile" | "beneficiary" | "program" | "financingPlan" | "sale" | "installment" | "paymentSubmission" | "payment" | "paymentAllocation" | "shareAllocation" | "stayAllocation" | "referralCode" | "sponsorship" | "constructionProject" | "projectStage" | "projectUpdate" | "projectMedia" | "documentRecord" | "dossierDocument" | "auditLog" | "contractTemplate" | "contract" | "legalAcceptance" | "accountInvitation" | "passwordResetToken" | "userSession" | "commissionRule" | "commissionEntry" | "rankDefinition" | "ambassadorRankHistory" | "rankBonusPayment" | "rankAward"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2829,6 +2830,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DossierDocument: {
+      payload: Prisma.$DossierDocumentPayload<ExtArgs>
+      fields: Prisma.DossierDocumentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DossierDocumentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DossierDocumentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>
+        }
+        findFirst: {
+          args: Prisma.DossierDocumentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DossierDocumentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>
+        }
+        findMany: {
+          args: Prisma.DossierDocumentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>[]
+        }
+        create: {
+          args: Prisma.DossierDocumentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>
+        }
+        createMany: {
+          args: Prisma.DossierDocumentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DossierDocumentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>[]
+        }
+        delete: {
+          args: Prisma.DossierDocumentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>
+        }
+        update: {
+          args: Prisma.DossierDocumentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>
+        }
+        deleteMany: {
+          args: Prisma.DossierDocumentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DossierDocumentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DossierDocumentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>[]
+        }
+        upsert: {
+          args: Prisma.DossierDocumentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DossierDocumentPayload>
+        }
+        aggregate: {
+          args: Prisma.DossierDocumentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDossierDocument>
+        }
+        groupBy: {
+          args: Prisma.DossierDocumentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DossierDocumentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DossierDocumentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DossierDocumentCountAggregateOutputType> | number
+        }
+      }
+    }
     AuditLog: {
       payload: Prisma.$AuditLogPayload<ExtArgs>
       fields: Prisma.AuditLogFieldRefs
@@ -4250,6 +4325,28 @@ export const DocumentRecordScalarFieldEnum = {
 export type DocumentRecordScalarFieldEnum = (typeof DocumentRecordScalarFieldEnum)[keyof typeof DocumentRecordScalarFieldEnum]
 
 
+export const DossierDocumentScalarFieldEnum = {
+  id: 'id',
+  saleId: 'saleId',
+  beneficiaryId: 'beneficiaryId',
+  subjectKind: 'subjectKind',
+  subjectName: 'subjectName',
+  category: 'category',
+  title: 'title',
+  status: 'status',
+  fileData: 'fileData',
+  fileMimeType: 'fileMimeType',
+  fileName: 'fileName',
+  uploadedById: 'uploadedById',
+  rejectionReason: 'rejectionReason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  reviewedAt: 'reviewedAt'
+} as const
+
+export type DossierDocumentScalarFieldEnum = (typeof DossierDocumentScalarFieldEnum)[keyof typeof DossierDocumentScalarFieldEnum]
+
+
 export const AuditLogScalarFieldEnum = {
   id: 'id',
   actorUserId: 'actorUserId',
@@ -4759,6 +4856,34 @@ export type ListEnumDocumentStatusFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'DossierSubjectKind'
+ */
+export type EnumDossierSubjectKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DossierSubjectKind'>
+    
+
+
+/**
+ * Reference to a field of type 'DossierSubjectKind[]'
+ */
+export type ListEnumDossierSubjectKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DossierSubjectKind[]'>
+    
+
+
+/**
+ * Reference to a field of type 'DossierStatus'
+ */
+export type EnumDossierStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DossierStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'DossierStatus[]'
+ */
+export type ListEnumDossierStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DossierStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'BigInt'
  */
 export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
@@ -5010,6 +5135,7 @@ export type GlobalOmitConfig = {
   projectUpdate?: Prisma.ProjectUpdateOmit
   projectMedia?: Prisma.ProjectMediaOmit
   documentRecord?: Prisma.DocumentRecordOmit
+  dossierDocument?: Prisma.DossierDocumentOmit
   auditLog?: Prisma.AuditLogOmit
   contractTemplate?: Prisma.ContractTemplateOmit
   contract?: Prisma.ContractOmit
