@@ -9,32 +9,8 @@ import { db } from "@/lib/db";
 import { requirePermission } from "@/lib/access-control";
 
 export type ExpedientState = { success: boolean; message: string };
-const beneficiarySchema = z.object({ fullName: z.string().trim().min(3).max(180), document: z.string().trim().max(60), relationship: z.string().trim().min(2).max(60), isSpouse: z.boolean() });
 const documentSchema = z.object({ title: z.string().trim().min(3).max(180), category: z.enum(["IDENTITY", "SEPARATION_FORM", "SEPARATION_PROOF", "SALE_PROOF", "SIGNED_CONTRACT", "ANNEX", "OTHER"]), saleId: z.string().uuid().or(z.literal("")) });
 const allowedTypes: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "application/pdf": "pdf" };
-
-export async function addBeneficiaryAction(memberId: string, _previous: ExpedientState, formData: FormData): Promise<ExpedientState> {
-  const actor = await requirePermission("MEMBERS");
-  const parsed = beneficiarySchema.safeParse({ fullName: formData.get("fullName"), document: formData.get("document") ?? "", relationship: formData.get("relationship"), isSpouse: formData.get("isSpouse") === "on" });
-  if (!parsed.success) return { success: false, message: "Completa el nombre y parentesco del beneficiario." };
-  const member = await db.member.findUnique({ where: { id: memberId }, include: { beneficiaries: true, sales: { where: { status: { not: "CANCELLED" } }, include: { program: true } } } });
-  if (!member) return { success: false, message: "El socio no existe." };
-  const cap = Math.max(1, ...member.sales.map((sale) => sale.program.beneficiaryCap));
-  if (member.beneficiaries.length >= cap) return { success: false, message: `El programa vigente permite un máximo de ${cap} beneficiarios.` };
-  const beneficiary = await db.beneficiary.create({ data: { memberId, fullName: parsed.data.fullName, document: parsed.data.document || null, relationship: parsed.data.relationship, isSpouse: parsed.data.isSpouse } });
-  await db.auditLog.create({ data: { actorUserId: actor.id, action: "BENEFICIARY_ADDED", entityType: "Member", entityId: memberId, after: { beneficiaryId: beneficiary.id, ...parsed.data } } });
-  revalidatePath("/socios"); revalidatePath("/mi-portal");
-  return { success: true, message: "Beneficiario agregado." };
-}
-
-export async function removeBeneficiaryAction(memberId: string, beneficiaryId: string) {
-  const actor = await requirePermission("MEMBERS");
-  const beneficiary = await db.beneficiary.findFirst({ where: { id: beneficiaryId, memberId } });
-  if (!beneficiary) return;
-  await db.beneficiary.delete({ where: { id: beneficiary.id } });
-  await db.auditLog.create({ data: { actorUserId: actor.id, action: "BENEFICIARY_REMOVED", entityType: "Member", entityId: memberId, before: { beneficiaryId, fullName: beneficiary.fullName } } });
-  revalidatePath("/socios"); revalidatePath("/mi-portal");
-}
 
 export async function uploadMemberDocumentAction(memberId: string, _previous: ExpedientState, formData: FormData): Promise<ExpedientState> {
   const actor = await requirePermission("MEMBERS");

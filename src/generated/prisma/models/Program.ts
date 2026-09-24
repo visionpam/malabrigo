@@ -32,6 +32,8 @@ export type ProgramAvgAggregateOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number | null
+  holderCap: number | null
+  marriedHolderCap: number | null
   marriedBeneficiaryCap: number | null
 }
 
@@ -41,6 +43,8 @@ export type ProgramSumAggregateOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number | null
+  holderCap: number | null
+  marriedHolderCap: number | null
   marriedBeneficiaryCap: number | null
 }
 
@@ -53,6 +57,8 @@ export type ProgramMinAggregateOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number | null
+  holderCap: number | null
+  marriedHolderCap: number | null
   marriedBeneficiaryCap: number | null
   membershipName: string | null
   shareholderCategory: string | null
@@ -70,6 +76,8 @@ export type ProgramMaxAggregateOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number | null
+  holderCap: number | null
+  marriedHolderCap: number | null
   marriedBeneficiaryCap: number | null
   membershipName: string | null
   shareholderCategory: string | null
@@ -87,6 +95,8 @@ export type ProgramCountAggregateOutputType = {
   cashShares: number
   cashStayDays: number
   beneficiaryCap: number
+  holderCap: number
+  marriedHolderCap: number
   marriedBeneficiaryCap: number
   membershipName: number
   shareholderCategory: number
@@ -103,6 +113,8 @@ export type ProgramAvgAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  holderCap?: true
+  marriedHolderCap?: true
   marriedBeneficiaryCap?: true
 }
 
@@ -112,6 +124,8 @@ export type ProgramSumAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  holderCap?: true
+  marriedHolderCap?: true
   marriedBeneficiaryCap?: true
 }
 
@@ -124,6 +138,8 @@ export type ProgramMinAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  holderCap?: true
+  marriedHolderCap?: true
   marriedBeneficiaryCap?: true
   membershipName?: true
   shareholderCategory?: true
@@ -141,6 +157,8 @@ export type ProgramMaxAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  holderCap?: true
+  marriedHolderCap?: true
   marriedBeneficiaryCap?: true
   membershipName?: true
   shareholderCategory?: true
@@ -158,6 +176,8 @@ export type ProgramCountAggregateInputType = {
   cashShares?: true
   cashStayDays?: true
   beneficiaryCap?: true
+  holderCap?: true
+  marriedHolderCap?: true
   marriedBeneficiaryCap?: true
   membershipName?: true
   shareholderCategory?: true
@@ -262,6 +282,8 @@ export type ProgramGroupByOutputType = {
   cashShares: number | null
   cashStayDays: number | null
   beneficiaryCap: number
+  holderCap: number
+  marriedHolderCap: number
   marriedBeneficiaryCap: number
   membershipName: string | null
   shareholderCategory: string | null
@@ -302,6 +324,8 @@ export type ProgramWhereInput = {
   cashShares?: Prisma.IntNullableFilter<"Program"> | number | null
   cashStayDays?: Prisma.IntNullableFilter<"Program"> | number | null
   beneficiaryCap?: Prisma.IntFilter<"Program"> | number
+  holderCap?: Prisma.IntFilter<"Program"> | number
+  marriedHolderCap?: Prisma.IntFilter<"Program"> | number
   marriedBeneficiaryCap?: Prisma.IntFilter<"Program"> | number
   membershipName?: Prisma.StringNullableFilter<"Program"> | string | null
   shareholderCategory?: Prisma.StringNullableFilter<"Program"> | string | null
@@ -322,6 +346,8 @@ export type ProgramOrderByWithRelationInput = {
   cashShares?: Prisma.SortOrderInput | Prisma.SortOrder
   cashStayDays?: Prisma.SortOrderInput | Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  holderCap?: Prisma.SortOrder
+  marriedHolderCap?: Prisma.SortOrder
   marriedBeneficiaryCap?: Prisma.SortOrder
   membershipName?: Prisma.SortOrderInput | Prisma.SortOrder
   shareholderCategory?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -345,6 +371,8 @@ export type ProgramWhereUniqueInput = Prisma.AtLeast<{
   cashShares?: Prisma.IntNullableFilter<"Program"> | number | null
   cashStayDays?: Prisma.IntNullableFilter<"Program"> | number | null
   beneficiaryCap?: Prisma.IntFilter<"Program"> | number
+  holderCap?: Prisma.IntFilter<"Program"> | number
+  marriedHolderCap?: Prisma.IntFilter<"Program"> | number
   marriedBeneficiaryCap?: Prisma.IntFilter<"Program"> | number
   membershipName?: Prisma.StringNullableFilter<"Program"> | string | null
   shareholderCategory?: Prisma.StringNullableFilter<"Program"> | string | null
@@ -365,6 +393,8 @@ export type ProgramOrderByWithAggregationInput = {
   cashShares?: Prisma.SortOrderInput | Prisma.SortOrder
   cashStayDays?: Prisma.SortOrderInput | Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  holderCap?: Prisma.SortOrder
+  marriedHolderCap?: Prisma.SortOrder
   marriedBeneficiaryCap?: Prisma.SortOrder
   membershipName?: Prisma.SortOrderInput | Prisma.SortOrder
   shareholderCategory?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -390,6 +420,8 @@ export type ProgramScalarWhereWithAggregatesInput = {
   cashShares?: Prisma.IntNullableWithAggregatesFilter<"Program"> | number | null
   cashStayDays?: Prisma.IntNullableWithAggregatesFilter<"Program"> | number | null
   beneficiaryCap?: Prisma.IntWithAggregatesFilter<"Program"> | number
+  holderCap?: Prisma.IntWithAggregatesFilter<"Program"> | number
+  marriedHolderCap?: Prisma.IntWithAggregatesFilter<"Program"> | number
   marriedBeneficiaryCap?: Prisma.IntWithAggregatesFilter<"Program"> | number
   membershipName?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
   shareholderCategory?: Prisma.StringNullableWithAggregatesFilter<"Program"> | string | null
@@ -407,6 +439,8 @@ export type ProgramCreateInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -427,6 +461,8 @@ export type ProgramUncheckedCreateInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -447,6 +483,8 @@ export type ProgramUpdateInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -467,6 +505,8 @@ export type ProgramUncheckedUpdateInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -487,6 +527,8 @@ export type ProgramCreateManyInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -504,6 +546,8 @@ export type ProgramUpdateManyMutationInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -521,6 +565,8 @@ export type ProgramUncheckedUpdateManyInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -538,6 +584,8 @@ export type ProgramCountOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  holderCap?: Prisma.SortOrder
+  marriedHolderCap?: Prisma.SortOrder
   marriedBeneficiaryCap?: Prisma.SortOrder
   membershipName?: Prisma.SortOrder
   shareholderCategory?: Prisma.SortOrder
@@ -552,6 +600,8 @@ export type ProgramAvgOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  holderCap?: Prisma.SortOrder
+  marriedHolderCap?: Prisma.SortOrder
   marriedBeneficiaryCap?: Prisma.SortOrder
 }
 
@@ -564,6 +614,8 @@ export type ProgramMaxOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  holderCap?: Prisma.SortOrder
+  marriedHolderCap?: Prisma.SortOrder
   marriedBeneficiaryCap?: Prisma.SortOrder
   membershipName?: Prisma.SortOrder
   shareholderCategory?: Prisma.SortOrder
@@ -581,6 +633,8 @@ export type ProgramMinOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  holderCap?: Prisma.SortOrder
+  marriedHolderCap?: Prisma.SortOrder
   marriedBeneficiaryCap?: Prisma.SortOrder
   membershipName?: Prisma.SortOrder
   shareholderCategory?: Prisma.SortOrder
@@ -595,6 +649,8 @@ export type ProgramSumOrderByAggregateInput = {
   cashShares?: Prisma.SortOrder
   cashStayDays?: Prisma.SortOrder
   beneficiaryCap?: Prisma.SortOrder
+  holderCap?: Prisma.SortOrder
+  marriedHolderCap?: Prisma.SortOrder
   marriedBeneficiaryCap?: Prisma.SortOrder
 }
 
@@ -681,6 +737,8 @@ export type ProgramCreateWithoutFinancingPlansInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -700,6 +758,8 @@ export type ProgramUncheckedCreateWithoutFinancingPlansInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -735,6 +795,8 @@ export type ProgramUpdateWithoutFinancingPlansInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -754,6 +816,8 @@ export type ProgramUncheckedUpdateWithoutFinancingPlansInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -773,6 +837,8 @@ export type ProgramCreateWithoutSalesInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -792,6 +858,8 @@ export type ProgramUncheckedCreateWithoutSalesInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -827,6 +895,8 @@ export type ProgramUpdateWithoutSalesInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -846,6 +916,8 @@ export type ProgramUncheckedUpdateWithoutSalesInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -865,6 +937,8 @@ export type ProgramCreateWithoutCommissionRulesInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -884,6 +958,8 @@ export type ProgramUncheckedCreateWithoutCommissionRulesInput = {
   cashShares?: number | null
   cashStayDays?: number | null
   beneficiaryCap: number
+  holderCap?: number
+  marriedHolderCap?: number
   marriedBeneficiaryCap?: number
   membershipName?: string | null
   shareholderCategory?: string | null
@@ -919,6 +995,8 @@ export type ProgramUpdateWithoutCommissionRulesInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -938,6 +1016,8 @@ export type ProgramUncheckedUpdateWithoutCommissionRulesInput = {
   cashShares?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   cashStayDays?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   beneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
+  holderCap?: Prisma.IntFieldUpdateOperationsInput | number
+  marriedHolderCap?: Prisma.IntFieldUpdateOperationsInput | number
   marriedBeneficiaryCap?: Prisma.IntFieldUpdateOperationsInput | number
   membershipName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shareholderCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1006,6 +1086,8 @@ export type ProgramSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   cashShares?: boolean
   cashStayDays?: boolean
   beneficiaryCap?: boolean
+  holderCap?: boolean
+  marriedHolderCap?: boolean
   marriedBeneficiaryCap?: boolean
   membershipName?: boolean
   shareholderCategory?: boolean
@@ -1027,6 +1109,8 @@ export type ProgramSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   cashShares?: boolean
   cashStayDays?: boolean
   beneficiaryCap?: boolean
+  holderCap?: boolean
+  marriedHolderCap?: boolean
   marriedBeneficiaryCap?: boolean
   membershipName?: boolean
   shareholderCategory?: boolean
@@ -1044,6 +1128,8 @@ export type ProgramSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   cashShares?: boolean
   cashStayDays?: boolean
   beneficiaryCap?: boolean
+  holderCap?: boolean
+  marriedHolderCap?: boolean
   marriedBeneficiaryCap?: boolean
   membershipName?: boolean
   shareholderCategory?: boolean
@@ -1061,6 +1147,8 @@ export type ProgramSelectScalar = {
   cashShares?: boolean
   cashStayDays?: boolean
   beneficiaryCap?: boolean
+  holderCap?: boolean
+  marriedHolderCap?: boolean
   marriedBeneficiaryCap?: boolean
   membershipName?: boolean
   shareholderCategory?: boolean
@@ -1069,7 +1157,7 @@ export type ProgramSelectScalar = {
   createdAt?: boolean
 }
 
-export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kind" | "name" | "cashPrice" | "separation" | "cashShares" | "cashStayDays" | "beneficiaryCap" | "marriedBeneficiaryCap" | "membershipName" | "shareholderCategory" | "observations" | "active" | "createdAt", ExtArgs["result"]["program"]>
+export type ProgramOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "kind" | "name" | "cashPrice" | "separation" | "cashShares" | "cashStayDays" | "beneficiaryCap" | "holderCap" | "marriedHolderCap" | "marriedBeneficiaryCap" | "membershipName" | "shareholderCategory" | "observations" | "active" | "createdAt", ExtArgs["result"]["program"]>
 export type ProgramInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   financingPlans?: boolean | Prisma.Program$financingPlansArgs<ExtArgs>
   sales?: boolean | Prisma.Program$salesArgs<ExtArgs>
@@ -1095,6 +1183,8 @@ export type $ProgramPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     cashShares: number | null
     cashStayDays: number | null
     beneficiaryCap: number
+    holderCap: number
+    marriedHolderCap: number
     marriedBeneficiaryCap: number
     membershipName: string | null
     shareholderCategory: string | null
@@ -1535,6 +1625,8 @@ export interface ProgramFieldRefs {
   readonly cashShares: Prisma.FieldRef<"Program", 'Int'>
   readonly cashStayDays: Prisma.FieldRef<"Program", 'Int'>
   readonly beneficiaryCap: Prisma.FieldRef<"Program", 'Int'>
+  readonly holderCap: Prisma.FieldRef<"Program", 'Int'>
+  readonly marriedHolderCap: Prisma.FieldRef<"Program", 'Int'>
   readonly marriedBeneficiaryCap: Prisma.FieldRef<"Program", 'Int'>
   readonly membershipName: Prisma.FieldRef<"Program", 'String'>
   readonly shareholderCategory: Prisma.FieldRef<"Program", 'String'>

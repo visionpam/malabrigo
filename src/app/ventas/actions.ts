@@ -138,10 +138,10 @@ export async function updateDraftSaleAction(saleId: string, _previousState: Sale
   const actor = await requirePermission("SALES");
   const parsed = saleSchema.safeParse({ memberId: formData.get("memberId"), programId: formData.get("programId"), mode: formData.get("mode"), financingPlanId: formData.get("financingPlanId") ?? "" });
   if (!parsed.success) return { success: false, message: "Revisa el socio, programa y modalidad seleccionados." };
-  const current = await db.sale.findUnique({ where: { id: saleId }, include: { payments: true, paymentSubmissions: true, documents: true, contracts: true } });
+  const current = await db.sale.findUnique({ where: { id: saleId }, include: { payments: true, paymentSubmissions: true, documents: true, contracts: true, beneficiaries: true } });
   if (!current) return { success: false, message: "La venta ya no existe." };
   if (current.status !== "DRAFT") return { success: false, message: "Solo los borradores se pueden editar desde esta lista." };
-  if (current.payments.length || current.paymentSubmissions.length || current.documents.length || current.contracts.length) return { success: false, message: "El borrador tiene movimientos asociados y no puede modificarse." };
+  if (current.payments.length || current.paymentSubmissions.length || current.documents.length || current.contracts.length || current.beneficiaries.length) return { success: false, message: "El borrador tiene movimientos o personas asignadas y no puede modificarse." };
   const input = parsed.data;
   const [member, program] = await Promise.all([
     db.member.findUnique({ where: { id: input.memberId }, select: { id: true, investorProfile: { select: { id: true } } } }),
@@ -164,10 +164,10 @@ export async function updateDraftSaleAction(saleId: string, _previousState: Sale
 export async function deleteDraftSaleAction(saleId: string, _previousState: SaleOperationState): Promise<SaleOperationState> {
   void _previousState;
   const actor = await requirePermission("SALES");
-  const sale = await db.sale.findUnique({ where: { id: saleId }, include: { payments: true, paymentSubmissions: true, documents: true, contracts: true, shareAllocation: true, stayAllocation: true } });
+  const sale = await db.sale.findUnique({ where: { id: saleId }, include: { payments: true, paymentSubmissions: true, documents: true, contracts: true, beneficiaries: true, shareAllocation: true, stayAllocation: true } });
   if (!sale) return { success: false, message: "La venta ya no existe." };
   if (sale.status !== "DRAFT") return { success: false, message: "Solo los borradores sin activar se pueden eliminar." };
-  if (sale.payments.length || sale.paymentSubmissions.length || sale.documents.length || sale.contracts.length || sale.shareAllocation || sale.stayAllocation) return { success: false, message: "No se puede eliminar: el borrador tiene movimientos o documentos asociados." };
+  if (sale.payments.length || sale.paymentSubmissions.length || sale.documents.length || sale.contracts.length || sale.beneficiaries.length || sale.shareAllocation || sale.stayAllocation) return { success: false, message: "No se puede eliminar: el borrador tiene movimientos, personas o documentos asociados." };
   await db.$transaction(async (transaction) => {
     await transaction.auditLog.create({ data: { actorUserId: actor.id, action: "SALE_DRAFT_DELETED", entityType: "Sale", entityId: saleId, before: { code: sale.code, memberId: sale.memberId, programId: sale.programId } } });
     await transaction.installment.deleteMany({ where: { saleId } });

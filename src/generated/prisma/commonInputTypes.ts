@@ -365,6 +365,13 @@ export type EnumSaleStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumSaleStatusFilter<$PrismaModel> | $Enums.SaleStatus
 }
 
+export type EnumOwnershipTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.OwnershipType | Prisma.EnumOwnershipTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OwnershipType[] | Prisma.ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OwnershipType[] | Prisma.ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOwnershipTypeFilter<$PrismaModel> | $Enums.OwnershipType
+}
+
 export type EnumSaleModeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.SaleMode | Prisma.EnumSaleModeFieldRefInput<$PrismaModel>
   in?: $Enums.SaleMode[] | Prisma.ListEnumSaleModeFieldRefInput<$PrismaModel>
@@ -383,6 +390,16 @@ export type EnumSaleStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSaleStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSaleStatusFilter<$PrismaModel>
+}
+
+export type EnumOwnershipTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OwnershipType | Prisma.EnumOwnershipTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OwnershipType[] | Prisma.ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OwnershipType[] | Prisma.ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOwnershipTypeWithAggregatesFilter<$PrismaModel> | $Enums.OwnershipType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOwnershipTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOwnershipTypeFilter<$PrismaModel>
 }
 
 export type EnumInstallmentStatusFilter<$PrismaModel = never> = {
@@ -1088,6 +1105,13 @@ export type NestedEnumSaleStatusFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumSaleStatusFilter<$PrismaModel> | $Enums.SaleStatus
 }
 
+export type NestedEnumOwnershipTypeFilter<$PrismaModel = never> = {
+  equals?: $Enums.OwnershipType | Prisma.EnumOwnershipTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OwnershipType[] | Prisma.ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OwnershipType[] | Prisma.ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOwnershipTypeFilter<$PrismaModel> | $Enums.OwnershipType
+}
+
 export type NestedEnumSaleModeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.SaleMode | Prisma.EnumSaleModeFieldRefInput<$PrismaModel>
   in?: $Enums.SaleMode[] | Prisma.ListEnumSaleModeFieldRefInput<$PrismaModel>
@@ -1106,6 +1130,16 @@ export type NestedEnumSaleStatusWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumSaleStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumSaleStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumOwnershipTypeWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.OwnershipType | Prisma.EnumOwnershipTypeFieldRefInput<$PrismaModel>
+  in?: $Enums.OwnershipType[] | Prisma.ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+  notIn?: $Enums.OwnershipType[] | Prisma.ListEnumOwnershipTypeFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumOwnershipTypeWithAggregatesFilter<$PrismaModel> | $Enums.OwnershipType
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumOwnershipTypeFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumOwnershipTypeFilter<$PrismaModel>
 }
 
 export type NestedEnumInstallmentStatusFilter<$PrismaModel = never> = {

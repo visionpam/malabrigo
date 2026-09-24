@@ -81,6 +81,14 @@ export const SaleStatus = {
 export type SaleStatus = (typeof SaleStatus)[keyof typeof SaleStatus]
 
 
+export const OwnershipType = {
+  SINGLE: 'SINGLE',
+  MARRIED: 'MARRIED'
+} as const
+
+export type OwnershipType = (typeof OwnershipType)[keyof typeof OwnershipType]
+
+
 export const InstallmentStatus = {
   PENDING: 'PENDING',
   IN_REVIEW: 'IN_REVIEW',

@@ -46,6 +46,7 @@ export type SaleMinAggregateOutputType = {
   financingPlanId: string | null
   mode: $Enums.SaleMode | null
   status: $Enums.SaleStatus | null
+  ownershipType: $Enums.OwnershipType | null
   currency: string | null
   totalPrice: runtime.Decimal | null
   separationAmount: runtime.Decimal | null
@@ -63,6 +64,7 @@ export type SaleMaxAggregateOutputType = {
   financingPlanId: string | null
   mode: $Enums.SaleMode | null
   status: $Enums.SaleStatus | null
+  ownershipType: $Enums.OwnershipType | null
   currency: string | null
   totalPrice: runtime.Decimal | null
   separationAmount: runtime.Decimal | null
@@ -80,6 +82,7 @@ export type SaleCountAggregateOutputType = {
   financingPlanId: number
   mode: number
   status: number
+  ownershipType: number
   currency: number
   totalPrice: number
   separationAmount: number
@@ -111,6 +114,7 @@ export type SaleMinAggregateInputType = {
   financingPlanId?: true
   mode?: true
   status?: true
+  ownershipType?: true
   currency?: true
   totalPrice?: true
   separationAmount?: true
@@ -128,6 +132,7 @@ export type SaleMaxAggregateInputType = {
   financingPlanId?: true
   mode?: true
   status?: true
+  ownershipType?: true
   currency?: true
   totalPrice?: true
   separationAmount?: true
@@ -145,6 +150,7 @@ export type SaleCountAggregateInputType = {
   financingPlanId?: true
   mode?: true
   status?: true
+  ownershipType?: true
   currency?: true
   totalPrice?: true
   separationAmount?: true
@@ -249,6 +255,7 @@ export type SaleGroupByOutputType = {
   financingPlanId: string | null
   mode: $Enums.SaleMode
   status: $Enums.SaleStatus
+  ownershipType: $Enums.OwnershipType
   currency: string
   totalPrice: runtime.Decimal
   separationAmount: runtime.Decimal
@@ -289,6 +296,7 @@ export type SaleWhereInput = {
   financingPlanId?: Prisma.UuidNullableFilter<"Sale"> | string | null
   mode?: Prisma.EnumSaleModeFilter<"Sale"> | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFilter<"Sale"> | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFilter<"Sale"> | $Enums.OwnershipType
   currency?: Prisma.StringFilter<"Sale"> | string
   totalPrice?: Prisma.DecimalFilter<"Sale"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFilter<"Sale"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -306,6 +314,7 @@ export type SaleWhereInput = {
   stayAllocation?: Prisma.XOR<Prisma.StayAllocationNullableScalarRelationFilter, Prisma.StayAllocationWhereInput> | null
   contracts?: Prisma.ContractListRelationFilter
   documents?: Prisma.DocumentRecordListRelationFilter
+  beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }
 
 export type SaleOrderByWithRelationInput = {
@@ -316,6 +325,7 @@ export type SaleOrderByWithRelationInput = {
   financingPlanId?: Prisma.SortOrderInput | Prisma.SortOrder
   mode?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  ownershipType?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   separationAmount?: Prisma.SortOrder
@@ -333,6 +343,7 @@ export type SaleOrderByWithRelationInput = {
   stayAllocation?: Prisma.StayAllocationOrderByWithRelationInput
   contracts?: Prisma.ContractOrderByRelationAggregateInput
   documents?: Prisma.DocumentRecordOrderByRelationAggregateInput
+  beneficiaries?: Prisma.BeneficiaryOrderByRelationAggregateInput
 }
 
 export type SaleWhereUniqueInput = Prisma.AtLeast<{
@@ -346,6 +357,7 @@ export type SaleWhereUniqueInput = Prisma.AtLeast<{
   financingPlanId?: Prisma.UuidNullableFilter<"Sale"> | string | null
   mode?: Prisma.EnumSaleModeFilter<"Sale"> | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFilter<"Sale"> | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFilter<"Sale"> | $Enums.OwnershipType
   currency?: Prisma.StringFilter<"Sale"> | string
   totalPrice?: Prisma.DecimalFilter<"Sale"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFilter<"Sale"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -363,6 +375,7 @@ export type SaleWhereUniqueInput = Prisma.AtLeast<{
   stayAllocation?: Prisma.XOR<Prisma.StayAllocationNullableScalarRelationFilter, Prisma.StayAllocationWhereInput> | null
   contracts?: Prisma.ContractListRelationFilter
   documents?: Prisma.DocumentRecordListRelationFilter
+  beneficiaries?: Prisma.BeneficiaryListRelationFilter
 }, "id" | "code">
 
 export type SaleOrderByWithAggregationInput = {
@@ -373,6 +386,7 @@ export type SaleOrderByWithAggregationInput = {
   financingPlanId?: Prisma.SortOrderInput | Prisma.SortOrder
   mode?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  ownershipType?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   separationAmount?: Prisma.SortOrder
@@ -398,6 +412,7 @@ export type SaleScalarWhereWithAggregatesInput = {
   financingPlanId?: Prisma.UuidNullableWithAggregatesFilter<"Sale"> | string | null
   mode?: Prisma.EnumSaleModeWithAggregatesFilter<"Sale"> | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusWithAggregatesFilter<"Sale"> | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeWithAggregatesFilter<"Sale"> | $Enums.OwnershipType
   currency?: Prisma.StringWithAggregatesFilter<"Sale"> | string
   totalPrice?: Prisma.DecimalWithAggregatesFilter<"Sale"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalWithAggregatesFilter<"Sale"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -412,6 +427,7 @@ export type SaleCreateInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -429,6 +445,7 @@ export type SaleCreateInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateInput = {
@@ -439,6 +456,7 @@ export type SaleUncheckedCreateInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -453,6 +471,7 @@ export type SaleUncheckedCreateInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUpdateInput = {
@@ -460,6 +479,7 @@ export type SaleUpdateInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -477,6 +497,7 @@ export type SaleUpdateInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateInput = {
@@ -487,6 +508,7 @@ export type SaleUncheckedUpdateInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -501,6 +523,7 @@ export type SaleUncheckedUpdateInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateManyInput = {
@@ -511,6 +534,7 @@ export type SaleCreateManyInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -525,6 +549,7 @@ export type SaleUpdateManyMutationInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -542,6 +567,7 @@ export type SaleUncheckedUpdateManyInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -561,6 +587,11 @@ export type SaleOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type SaleScalarRelationFilter = {
+  is?: Prisma.SaleWhereInput
+  isNot?: Prisma.SaleWhereInput
+}
+
 export type SaleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
@@ -569,6 +600,7 @@ export type SaleCountOrderByAggregateInput = {
   financingPlanId?: Prisma.SortOrder
   mode?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  ownershipType?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   separationAmount?: Prisma.SortOrder
@@ -592,6 +624,7 @@ export type SaleMaxOrderByAggregateInput = {
   financingPlanId?: Prisma.SortOrder
   mode?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  ownershipType?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   separationAmount?: Prisma.SortOrder
@@ -609,6 +642,7 @@ export type SaleMinOrderByAggregateInput = {
   financingPlanId?: Prisma.SortOrder
   mode?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  ownershipType?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   totalPrice?: Prisma.SortOrder
   separationAmount?: Prisma.SortOrder
@@ -622,11 +656,6 @@ export type SaleSumOrderByAggregateInput = {
   totalPrice?: Prisma.SortOrder
   separationAmount?: Prisma.SortOrder
   downPaymentAmount?: Prisma.SortOrder
-}
-
-export type SaleScalarRelationFilter = {
-  is?: Prisma.SaleWhereInput
-  isNot?: Prisma.SaleWhereInput
 }
 
 export type SaleNullableScalarRelationFilter = {
@@ -674,6 +703,20 @@ export type SaleUncheckedUpdateManyWithoutMemberNestedInput = {
   update?: Prisma.SaleUpdateWithWhereUniqueWithoutMemberInput | Prisma.SaleUpdateWithWhereUniqueWithoutMemberInput[]
   updateMany?: Prisma.SaleUpdateManyWithWhereWithoutMemberInput | Prisma.SaleUpdateManyWithWhereWithoutMemberInput[]
   deleteMany?: Prisma.SaleScalarWhereInput | Prisma.SaleScalarWhereInput[]
+}
+
+export type SaleCreateNestedOneWithoutBeneficiariesInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutBeneficiariesInput, Prisma.SaleUncheckedCreateWithoutBeneficiariesInput>
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutBeneficiariesInput
+  connect?: Prisma.SaleWhereUniqueInput
+}
+
+export type SaleUpdateOneRequiredWithoutBeneficiariesNestedInput = {
+  create?: Prisma.XOR<Prisma.SaleCreateWithoutBeneficiariesInput, Prisma.SaleUncheckedCreateWithoutBeneficiariesInput>
+  connectOrCreate?: Prisma.SaleCreateOrConnectWithoutBeneficiariesInput
+  upsert?: Prisma.SaleUpsertWithoutBeneficiariesInput
+  connect?: Prisma.SaleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SaleUpdateToOneWithWhereWithoutBeneficiariesInput, Prisma.SaleUpdateWithoutBeneficiariesInput>, Prisma.SaleUncheckedUpdateWithoutBeneficiariesInput>
 }
 
 export type SaleCreateNestedManyWithoutProgramInput = {
@@ -766,6 +809,10 @@ export type EnumSaleModeFieldUpdateOperationsInput = {
 
 export type EnumSaleStatusFieldUpdateOperationsInput = {
   set?: $Enums.SaleStatus
+}
+
+export type EnumOwnershipTypeFieldUpdateOperationsInput = {
+  set?: $Enums.OwnershipType
 }
 
 export type SaleCreateNestedOneWithoutInstallmentsInput = {
@@ -873,6 +920,7 @@ export type SaleCreateWithoutMemberInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -889,6 +937,7 @@ export type SaleCreateWithoutMemberInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutMemberInput = {
@@ -898,6 +947,7 @@ export type SaleUncheckedCreateWithoutMemberInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -912,6 +962,7 @@ export type SaleUncheckedCreateWithoutMemberInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutMemberInput = {
@@ -951,6 +1002,7 @@ export type SaleScalarWhereInput = {
   financingPlanId?: Prisma.UuidNullableFilter<"Sale"> | string | null
   mode?: Prisma.EnumSaleModeFilter<"Sale"> | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFilter<"Sale"> | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFilter<"Sale"> | $Enums.OwnershipType
   currency?: Prisma.StringFilter<"Sale"> | string
   totalPrice?: Prisma.DecimalFilter<"Sale"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFilter<"Sale"> | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -960,11 +1012,128 @@ export type SaleScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Sale"> | Date | string
 }
 
+export type SaleCreateWithoutBeneficiariesInput = {
+  id?: string
+  code: string
+  mode: $Enums.SaleMode
+  status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
+  currency?: string
+  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member: Prisma.MemberCreateNestedOneWithoutSalesInput
+  program: Prisma.ProgramCreateNestedOneWithoutSalesInput
+  financingPlan?: Prisma.FinancingPlanCreateNestedOneWithoutSalesInput
+  installments?: Prisma.InstallmentCreateNestedManyWithoutSaleInput
+  paymentSubmissions?: Prisma.PaymentSubmissionCreateNestedManyWithoutSaleInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutSaleInput
+  shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
+  stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
+  contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+}
+
+export type SaleUncheckedCreateWithoutBeneficiariesInput = {
+  id?: string
+  code: string
+  memberId: string
+  programId: string
+  financingPlanId?: string | null
+  mode: $Enums.SaleMode
+  status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
+  currency?: string
+  totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  installments?: Prisma.InstallmentUncheckedCreateNestedManyWithoutSaleInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUncheckedCreateNestedManyWithoutSaleInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutSaleInput
+  shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
+  stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
+  contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+}
+
+export type SaleCreateOrConnectWithoutBeneficiariesInput = {
+  where: Prisma.SaleWhereUniqueInput
+  create: Prisma.XOR<Prisma.SaleCreateWithoutBeneficiariesInput, Prisma.SaleUncheckedCreateWithoutBeneficiariesInput>
+}
+
+export type SaleUpsertWithoutBeneficiariesInput = {
+  update: Prisma.XOR<Prisma.SaleUpdateWithoutBeneficiariesInput, Prisma.SaleUncheckedUpdateWithoutBeneficiariesInput>
+  create: Prisma.XOR<Prisma.SaleCreateWithoutBeneficiariesInput, Prisma.SaleUncheckedCreateWithoutBeneficiariesInput>
+  where?: Prisma.SaleWhereInput
+}
+
+export type SaleUpdateToOneWithWhereWithoutBeneficiariesInput = {
+  where?: Prisma.SaleWhereInput
+  data: Prisma.XOR<Prisma.SaleUpdateWithoutBeneficiariesInput, Prisma.SaleUncheckedUpdateWithoutBeneficiariesInput>
+}
+
+export type SaleUpdateWithoutBeneficiariesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
+  status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneRequiredWithoutSalesNestedInput
+  program?: Prisma.ProgramUpdateOneRequiredWithoutSalesNestedInput
+  financingPlan?: Prisma.FinancingPlanUpdateOneWithoutSalesNestedInput
+  installments?: Prisma.InstallmentUpdateManyWithoutSaleNestedInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUpdateManyWithoutSaleNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutSaleNestedInput
+  shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
+  stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
+  contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+}
+
+export type SaleUncheckedUpdateWithoutBeneficiariesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  code?: Prisma.StringFieldUpdateOperationsInput | string
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  programId?: Prisma.StringFieldUpdateOperationsInput | string
+  financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
+  status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  downPaymentAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  signedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  installments?: Prisma.InstallmentUncheckedUpdateManyWithoutSaleNestedInput
+  paymentSubmissions?: Prisma.PaymentSubmissionUncheckedUpdateManyWithoutSaleNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutSaleNestedInput
+  shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
+  stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
+  contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+}
+
 export type SaleCreateWithoutProgramInput = {
   id?: string
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -981,6 +1150,7 @@ export type SaleCreateWithoutProgramInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutProgramInput = {
@@ -990,6 +1160,7 @@ export type SaleUncheckedCreateWithoutProgramInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1004,6 +1175,7 @@ export type SaleUncheckedCreateWithoutProgramInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutProgramInput = {
@@ -1037,6 +1209,7 @@ export type SaleCreateWithoutFinancingPlanInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1053,6 +1226,7 @@ export type SaleCreateWithoutFinancingPlanInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutFinancingPlanInput = {
@@ -1062,6 +1236,7 @@ export type SaleUncheckedCreateWithoutFinancingPlanInput = {
   programId: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1076,6 +1251,7 @@ export type SaleUncheckedCreateWithoutFinancingPlanInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutFinancingPlanInput = {
@@ -1109,6 +1285,7 @@ export type SaleCreateWithoutInstallmentsInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1125,6 +1302,7 @@ export type SaleCreateWithoutInstallmentsInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutInstallmentsInput = {
@@ -1135,6 +1313,7 @@ export type SaleUncheckedCreateWithoutInstallmentsInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1148,6 +1327,7 @@ export type SaleUncheckedCreateWithoutInstallmentsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutInstallmentsInput = {
@@ -1171,6 +1351,7 @@ export type SaleUpdateWithoutInstallmentsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1187,6 +1368,7 @@ export type SaleUpdateWithoutInstallmentsInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutInstallmentsInput = {
@@ -1197,6 +1379,7 @@ export type SaleUncheckedUpdateWithoutInstallmentsInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1210,6 +1393,7 @@ export type SaleUncheckedUpdateWithoutInstallmentsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutPaymentSubmissionsInput = {
@@ -1217,6 +1401,7 @@ export type SaleCreateWithoutPaymentSubmissionsInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1233,6 +1418,7 @@ export type SaleCreateWithoutPaymentSubmissionsInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutPaymentSubmissionsInput = {
@@ -1243,6 +1429,7 @@ export type SaleUncheckedCreateWithoutPaymentSubmissionsInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1256,6 +1443,7 @@ export type SaleUncheckedCreateWithoutPaymentSubmissionsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutPaymentSubmissionsInput = {
@@ -1279,6 +1467,7 @@ export type SaleUpdateWithoutPaymentSubmissionsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1295,6 +1484,7 @@ export type SaleUpdateWithoutPaymentSubmissionsInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutPaymentSubmissionsInput = {
@@ -1305,6 +1495,7 @@ export type SaleUncheckedUpdateWithoutPaymentSubmissionsInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1318,6 +1509,7 @@ export type SaleUncheckedUpdateWithoutPaymentSubmissionsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutPaymentsInput = {
@@ -1325,6 +1517,7 @@ export type SaleCreateWithoutPaymentsInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1341,6 +1534,7 @@ export type SaleCreateWithoutPaymentsInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutPaymentsInput = {
@@ -1351,6 +1545,7 @@ export type SaleUncheckedCreateWithoutPaymentsInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1364,6 +1559,7 @@ export type SaleUncheckedCreateWithoutPaymentsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutPaymentsInput = {
@@ -1387,6 +1583,7 @@ export type SaleUpdateWithoutPaymentsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1403,6 +1600,7 @@ export type SaleUpdateWithoutPaymentsInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutPaymentsInput = {
@@ -1413,6 +1611,7 @@ export type SaleUncheckedUpdateWithoutPaymentsInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1426,6 +1625,7 @@ export type SaleUncheckedUpdateWithoutPaymentsInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutShareAllocationInput = {
@@ -1433,6 +1633,7 @@ export type SaleCreateWithoutShareAllocationInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1449,6 +1650,7 @@ export type SaleCreateWithoutShareAllocationInput = {
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutShareAllocationInput = {
@@ -1459,6 +1661,7 @@ export type SaleUncheckedCreateWithoutShareAllocationInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1472,6 +1675,7 @@ export type SaleUncheckedCreateWithoutShareAllocationInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutShareAllocationInput = {
@@ -1495,6 +1699,7 @@ export type SaleUpdateWithoutShareAllocationInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1511,6 +1716,7 @@ export type SaleUpdateWithoutShareAllocationInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutShareAllocationInput = {
@@ -1521,6 +1727,7 @@ export type SaleUncheckedUpdateWithoutShareAllocationInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1534,6 +1741,7 @@ export type SaleUncheckedUpdateWithoutShareAllocationInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutStayAllocationInput = {
@@ -1541,6 +1749,7 @@ export type SaleCreateWithoutStayAllocationInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1557,6 +1766,7 @@ export type SaleCreateWithoutStayAllocationInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutStayAllocationInput = {
@@ -1567,6 +1777,7 @@ export type SaleUncheckedCreateWithoutStayAllocationInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1580,6 +1791,7 @@ export type SaleUncheckedCreateWithoutStayAllocationInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutStayAllocationInput = {
@@ -1603,6 +1815,7 @@ export type SaleUpdateWithoutStayAllocationInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1619,6 +1832,7 @@ export type SaleUpdateWithoutStayAllocationInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutStayAllocationInput = {
@@ -1629,6 +1843,7 @@ export type SaleUncheckedUpdateWithoutStayAllocationInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1642,6 +1857,7 @@ export type SaleUncheckedUpdateWithoutStayAllocationInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutDocumentsInput = {
@@ -1649,6 +1865,7 @@ export type SaleCreateWithoutDocumentsInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1665,6 +1882,7 @@ export type SaleCreateWithoutDocumentsInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutDocumentsInput = {
@@ -1675,6 +1893,7 @@ export type SaleUncheckedCreateWithoutDocumentsInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1688,6 +1907,7 @@ export type SaleUncheckedCreateWithoutDocumentsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   contracts?: Prisma.ContractUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutDocumentsInput = {
@@ -1711,6 +1931,7 @@ export type SaleUpdateWithoutDocumentsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1727,6 +1948,7 @@ export type SaleUpdateWithoutDocumentsInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutDocumentsInput = {
@@ -1737,6 +1959,7 @@ export type SaleUncheckedUpdateWithoutDocumentsInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1750,6 +1973,7 @@ export type SaleUncheckedUpdateWithoutDocumentsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateWithoutContractsInput = {
@@ -1757,6 +1981,7 @@ export type SaleCreateWithoutContractsInput = {
   code: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1773,6 +1998,7 @@ export type SaleCreateWithoutContractsInput = {
   shareAllocation?: Prisma.ShareAllocationCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationCreateNestedOneWithoutSaleInput
   documents?: Prisma.DocumentRecordCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryCreateNestedManyWithoutSaleInput
 }
 
 export type SaleUncheckedCreateWithoutContractsInput = {
@@ -1783,6 +2009,7 @@ export type SaleUncheckedCreateWithoutContractsInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1796,6 +2023,7 @@ export type SaleUncheckedCreateWithoutContractsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedCreateNestedOneWithoutSaleInput
   stayAllocation?: Prisma.StayAllocationUncheckedCreateNestedOneWithoutSaleInput
   documents?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutSaleInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedCreateNestedManyWithoutSaleInput
 }
 
 export type SaleCreateOrConnectWithoutContractsInput = {
@@ -1819,6 +2047,7 @@ export type SaleUpdateWithoutContractsInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1835,6 +2064,7 @@ export type SaleUpdateWithoutContractsInput = {
   shareAllocation?: Prisma.ShareAllocationUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutContractsInput = {
@@ -1845,6 +2075,7 @@ export type SaleUncheckedUpdateWithoutContractsInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1858,6 +2089,7 @@ export type SaleUncheckedUpdateWithoutContractsInput = {
   shareAllocation?: Prisma.ShareAllocationUncheckedUpdateOneWithoutSaleNestedInput
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleCreateManyMemberInput = {
@@ -1867,6 +2099,7 @@ export type SaleCreateManyMemberInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1881,6 +2114,7 @@ export type SaleUpdateWithoutMemberInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1897,6 +2131,7 @@ export type SaleUpdateWithoutMemberInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutMemberInput = {
@@ -1906,6 +2141,7 @@ export type SaleUncheckedUpdateWithoutMemberInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1920,6 +2156,7 @@ export type SaleUncheckedUpdateWithoutMemberInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutMemberInput = {
@@ -1929,6 +2166,7 @@ export type SaleUncheckedUpdateManyWithoutMemberInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1945,6 +2183,7 @@ export type SaleCreateManyProgramInput = {
   financingPlanId?: string | null
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1959,6 +2198,7 @@ export type SaleUpdateWithoutProgramInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1975,6 +2215,7 @@ export type SaleUpdateWithoutProgramInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutProgramInput = {
@@ -1984,6 +2225,7 @@ export type SaleUncheckedUpdateWithoutProgramInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1998,6 +2240,7 @@ export type SaleUncheckedUpdateWithoutProgramInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutProgramInput = {
@@ -2007,6 +2250,7 @@ export type SaleUncheckedUpdateManyWithoutProgramInput = {
   financingPlanId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2023,6 +2267,7 @@ export type SaleCreateManyFinancingPlanInput = {
   programId: string
   mode: $Enums.SaleMode
   status?: $Enums.SaleStatus
+  ownershipType?: $Enums.OwnershipType
   currency?: string
   totalPrice: runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2037,6 +2282,7 @@ export type SaleUpdateWithoutFinancingPlanInput = {
   code?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2053,6 +2299,7 @@ export type SaleUpdateWithoutFinancingPlanInput = {
   stayAllocation?: Prisma.StayAllocationUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateWithoutFinancingPlanInput = {
@@ -2062,6 +2309,7 @@ export type SaleUncheckedUpdateWithoutFinancingPlanInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2076,6 +2324,7 @@ export type SaleUncheckedUpdateWithoutFinancingPlanInput = {
   stayAllocation?: Prisma.StayAllocationUncheckedUpdateOneWithoutSaleNestedInput
   contracts?: Prisma.ContractUncheckedUpdateManyWithoutSaleNestedInput
   documents?: Prisma.DocumentRecordUncheckedUpdateManyWithoutSaleNestedInput
+  beneficiaries?: Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput
 }
 
 export type SaleUncheckedUpdateManyWithoutFinancingPlanInput = {
@@ -2085,6 +2334,7 @@ export type SaleUncheckedUpdateManyWithoutFinancingPlanInput = {
   programId?: Prisma.StringFieldUpdateOperationsInput | string
   mode?: Prisma.EnumSaleModeFieldUpdateOperationsInput | $Enums.SaleMode
   status?: Prisma.EnumSaleStatusFieldUpdateOperationsInput | $Enums.SaleStatus
+  ownershipType?: Prisma.EnumOwnershipTypeFieldUpdateOperationsInput | $Enums.OwnershipType
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   totalPrice?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   separationAmount?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -2105,6 +2355,7 @@ export type SaleCountOutputType = {
   payments: number
   contracts: number
   documents: number
+  beneficiaries: number
 }
 
 export type SaleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2113,6 +2364,7 @@ export type SaleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   payments?: boolean | SaleCountOutputTypeCountPaymentsArgs
   contracts?: boolean | SaleCountOutputTypeCountContractsArgs
   documents?: boolean | SaleCountOutputTypeCountDocumentsArgs
+  beneficiaries?: boolean | SaleCountOutputTypeCountBeneficiariesArgs
 }
 
 /**
@@ -2160,6 +2412,13 @@ export type SaleCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.DocumentRecordWhereInput
 }
 
+/**
+ * SaleCountOutputType without action
+ */
+export type SaleCountOutputTypeCountBeneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BeneficiaryWhereInput
+}
+
 
 export type SaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2169,6 +2428,7 @@ export type SaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   financingPlanId?: boolean
   mode?: boolean
   status?: boolean
+  ownershipType?: boolean
   currency?: boolean
   totalPrice?: boolean
   separationAmount?: boolean
@@ -2186,6 +2446,7 @@ export type SaleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   stayAllocation?: boolean | Prisma.Sale$stayAllocationArgs<ExtArgs>
   contracts?: boolean | Prisma.Sale$contractsArgs<ExtArgs>
   documents?: boolean | Prisma.Sale$documentsArgs<ExtArgs>
+  beneficiaries?: boolean | Prisma.Sale$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.SaleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["sale"]>
 
@@ -2197,6 +2458,7 @@ export type SaleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   financingPlanId?: boolean
   mode?: boolean
   status?: boolean
+  ownershipType?: boolean
   currency?: boolean
   totalPrice?: boolean
   separationAmount?: boolean
@@ -2217,6 +2479,7 @@ export type SaleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   financingPlanId?: boolean
   mode?: boolean
   status?: boolean
+  ownershipType?: boolean
   currency?: boolean
   totalPrice?: boolean
   separationAmount?: boolean
@@ -2237,6 +2500,7 @@ export type SaleSelectScalar = {
   financingPlanId?: boolean
   mode?: boolean
   status?: boolean
+  ownershipType?: boolean
   currency?: boolean
   totalPrice?: boolean
   separationAmount?: boolean
@@ -2246,7 +2510,7 @@ export type SaleSelectScalar = {
   updatedAt?: boolean
 }
 
-export type SaleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "memberId" | "programId" | "financingPlanId" | "mode" | "status" | "currency" | "totalPrice" | "separationAmount" | "downPaymentAmount" | "signedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["sale"]>
+export type SaleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "memberId" | "programId" | "financingPlanId" | "mode" | "status" | "ownershipType" | "currency" | "totalPrice" | "separationAmount" | "downPaymentAmount" | "signedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["sale"]>
 export type SaleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   program?: boolean | Prisma.ProgramDefaultArgs<ExtArgs>
@@ -2258,6 +2522,7 @@ export type SaleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   stayAllocation?: boolean | Prisma.Sale$stayAllocationArgs<ExtArgs>
   contracts?: boolean | Prisma.Sale$contractsArgs<ExtArgs>
   documents?: boolean | Prisma.Sale$documentsArgs<ExtArgs>
+  beneficiaries?: boolean | Prisma.Sale$beneficiariesArgs<ExtArgs>
   _count?: boolean | Prisma.SaleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SaleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2284,6 +2549,7 @@ export type $SalePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     stayAllocation: Prisma.$StayAllocationPayload<ExtArgs> | null
     contracts: Prisma.$ContractPayload<ExtArgs>[]
     documents: Prisma.$DocumentRecordPayload<ExtArgs>[]
+    beneficiaries: Prisma.$BeneficiaryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2293,6 +2559,7 @@ export type $SalePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     financingPlanId: string | null
     mode: $Enums.SaleMode
     status: $Enums.SaleStatus
+    ownershipType: $Enums.OwnershipType
     currency: string
     totalPrice: runtime.Decimal
     separationAmount: runtime.Decimal
@@ -2704,6 +2971,7 @@ export interface Prisma__SaleClient<T, Null = never, ExtArgs extends runtime.Typ
   stayAllocation<T extends Prisma.Sale$stayAllocationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$stayAllocationArgs<ExtArgs>>): Prisma.Prisma__StayAllocationClient<runtime.Types.Result.GetResult<Prisma.$StayAllocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   contracts<T extends Prisma.Sale$contractsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$contractsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContractPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.Sale$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  beneficiaries<T extends Prisma.Sale$beneficiariesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Sale$beneficiariesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BeneficiaryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2740,6 +3008,7 @@ export interface SaleFieldRefs {
   readonly financingPlanId: Prisma.FieldRef<"Sale", 'String'>
   readonly mode: Prisma.FieldRef<"Sale", 'SaleMode'>
   readonly status: Prisma.FieldRef<"Sale", 'SaleStatus'>
+  readonly ownershipType: Prisma.FieldRef<"Sale", 'OwnershipType'>
   readonly currency: Prisma.FieldRef<"Sale", 'String'>
   readonly totalPrice: Prisma.FieldRef<"Sale", 'Decimal'>
   readonly separationAmount: Prisma.FieldRef<"Sale", 'Decimal'>
@@ -3322,6 +3591,30 @@ export type Sale$documentsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.DocumentRecordScalarFieldEnum | Prisma.DocumentRecordScalarFieldEnum[]
+}
+
+/**
+ * Sale.beneficiaries
+ */
+export type Sale$beneficiariesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Beneficiary
+   */
+  select?: Prisma.BeneficiarySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Beneficiary
+   */
+  omit?: Prisma.BeneficiaryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BeneficiaryInclude<ExtArgs> | null
+  where?: Prisma.BeneficiaryWhereInput
+  orderBy?: Prisma.BeneficiaryOrderByWithRelationInput | Prisma.BeneficiaryOrderByWithRelationInput[]
+  cursor?: Prisma.BeneficiaryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BeneficiaryScalarFieldEnum | Prisma.BeneficiaryScalarFieldEnum[]
 }
 
 /**

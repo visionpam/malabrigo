@@ -4009,10 +4009,12 @@ export type AmbassadorProfileScalarFieldEnum = (typeof AmbassadorProfileScalarFi
 export const BeneficiaryScalarFieldEnum = {
   id: 'id',
   memberId: 'memberId',
+  saleId: 'saleId',
   fullName: 'fullName',
   document: 'document',
   relationship: 'relationship',
   isSpouse: 'isSpouse',
+  isHolder: 'isHolder',
   createdAt: 'createdAt'
 } as const
 
@@ -4028,6 +4030,8 @@ export const ProgramScalarFieldEnum = {
   cashShares: 'cashShares',
   cashStayDays: 'cashStayDays',
   beneficiaryCap: 'beneficiaryCap',
+  holderCap: 'holderCap',
+  marriedHolderCap: 'marriedHolderCap',
   marriedBeneficiaryCap: 'marriedBeneficiaryCap',
   membershipName: 'membershipName',
   shareholderCategory: 'shareholderCategory',
@@ -4062,6 +4066,7 @@ export const SaleScalarFieldEnum = {
   financingPlanId: 'financingPlanId',
   mode: 'mode',
   status: 'status',
+  ownershipType: 'ownershipType',
   currency: 'currency',
   totalPrice: 'totalPrice',
   separationAmount: 'separationAmount',
@@ -4624,6 +4629,20 @@ export type EnumSaleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$Prism
  * Reference to a field of type 'SaleStatus[]'
  */
 export type ListEnumSaleStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SaleStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'OwnershipType'
+ */
+export type EnumOwnershipTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OwnershipType'>
+    
+
+
+/**
+ * Reference to a field of type 'OwnershipType[]'
+ */
+export type ListEnumOwnershipTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OwnershipType[]'>
     
 
 

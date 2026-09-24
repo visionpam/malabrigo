@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { LoaderCircle, UserPlus, X } from "lucide-react";
+import { LoaderCircle, Save, UserPlus, X } from "lucide-react";
 import { createAdminUserAction, type AdminUserState, updateAdminPermissionsAction } from "./actions";
 
 function AdminUserForm({ permissions, onCreated }: { permissions: { id: string; code: string; name: string }[]; onCreated: () => void }) {
@@ -20,5 +20,5 @@ export function AdminUserDialog({ permissions }: { permissions: { id: string; co
 export function AdminPermissionsForm({ userId, assigned, permissions }: { userId: string; assigned: string[]; permissions: { id: string; code: string; name: string }[] }) {
   const action = updateAdminPermissionsAction.bind(null, userId);
   const [state, formAction, pending] = useActionState(action, { success: false, message: "" } satisfies AdminUserState);
-  return <details className="permission-editor"><summary>Editar permisos</summary><form action={formAction}><div>{permissions.map((permission) => <label key={permission.id} className="check-field"><input type="checkbox" name="permissions" value={permission.code} defaultChecked={assigned.includes(permission.code)} /><span>{permission.name}</span></label>)}</div><button className="row-action" disabled={pending}>{pending ? "Guardando..." : "Guardar permisos"}</button>{state.message && <small className={state.success ? "success-text" : "field-error"}>{state.message}</small>}</form></details>;
+  return <details className="permission-editor"><summary>Editar permisos</summary><form action={formAction}><div>{permissions.map((permission) => <label key={permission.id} className="check-field"><input type="checkbox" name="permissions" value={permission.code} defaultChecked={assigned.includes(permission.code)} /><span>{permission.name}</span></label>)}</div><button className="row-action" type="submit" disabled={pending}>{pending ? <LoaderCircle className="spinner" size={16} aria-hidden="true" /> : <Save size={16} aria-hidden="true" />}{pending ? "Guardando..." : "Guardar permisos"}</button>{state.message && <small className={state.success ? "success-text" : "field-error"}>{state.message}</small>}</form></details>;
 }

@@ -14,19 +14,18 @@ ON CONFLICT ("code") DO UPDATE SET
 -- Confirmed commercial program catalog
 INSERT INTO "programs" (
   "id", "kind", "name", "cash_price", "separation", "cash_shares",
-  "cash_stay_days", "beneficiary_cap", "active"
+  "cash_stay_days", "beneficiary_cap", "married_beneficiary_cap", "active"
 ) VALUES
-  ('20000000-0000-0000-0000-000000000001', 'PLUS', 'Plus', 2000.00, 200.00, NULL, 1000, 2, true),
-  ('20000000-0000-0000-0000-000000000002', 'PREMIUM', 'Vitalicio Premium', 2600.00, 200.00, 2600, NULL, 3, true),
-  ('20000000-0000-0000-0000-000000000003', 'FAMILIAR', 'Vitalicio Familiar', 3900.00, 200.00, 3900, NULL, 5, true),
-  ('20000000-0000-0000-0000-000000000004', 'VIP', 'Vitalicio VIP', 7800.00, 200.00, 7800, NULL, 11, true)
+  ('20000000-0000-0000-0000-000000000001', 'PLUS', 'Plus', 2000.00, 200.00, NULL, 1000, 1, 0, true),
+  ('20000000-0000-0000-0000-000000000002', 'PREMIUM', 'Vitalicio Premium', 2600.00, 200.00, 2600, NULL, 2, 1, true),
+  ('20000000-0000-0000-0000-000000000003', 'FAMILIAR', 'Vitalicio Familiar', 3900.00, 200.00, 3900, NULL, 4, 3, true),
+  ('20000000-0000-0000-0000-000000000004', 'VIP', 'Vitalicio VIP', 7800.00, 200.00, 7800, NULL, 10, 9, true)
 ON CONFLICT ("kind") DO UPDATE SET
   "name" = EXCLUDED."name",
   "cash_price" = EXCLUDED."cash_price",
   "separation" = EXCLUDED."separation",
   "cash_shares" = EXCLUDED."cash_shares",
   "cash_stay_days" = EXCLUDED."cash_stay_days",
-  "beneficiary_cap" = EXCLUDED."beneficiary_cap",
   "active" = EXCLUDED."active";
 
 -- Credit terms from the approved program tables

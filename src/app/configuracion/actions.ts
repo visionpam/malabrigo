@@ -27,7 +27,9 @@ const programSchema = z.object({
   separation: z.coerce.number().min(0, "La separación no puede ser negativa"),
   cashShares: z.string().transform((value) => value ? Number(value) : null).pipe(nullableInteger),
   cashStayDays: z.string().transform((value) => value ? Number(value) : null).pipe(nullableInteger),
-  beneficiaryCap: z.coerce.number().int().min(1, "Debe permitir al menos un beneficiario"),
+  beneficiaryCap: z.coerce.number().int().min(0),
+  holderCap: z.coerce.number().int().min(1, "Debe permitir al menos un titular"),
+  marriedHolderCap: z.coerce.number().int().min(2, "La sociedad conyugal requiere al menos dos titulares"),
   marriedBeneficiaryCap: z.coerce.number().int().min(0),
   membershipName: z.string().trim().max(160),
   shareholderCategory: z.string().trim().max(80),
@@ -98,7 +100,7 @@ export async function updateProgramAction(programId: string, _previous: ProgramS
   const parsed = programSchema.safeParse({
     name: formData.get("name"), cashPrice: formData.get("cashPrice"), separation: formData.get("separation"),
     cashShares: formData.get("cashShares") ?? "", cashStayDays: formData.get("cashStayDays") ?? "",
-    beneficiaryCap: formData.get("beneficiaryCap"), marriedBeneficiaryCap: formData.get("marriedBeneficiaryCap"),
+    beneficiaryCap: formData.get("beneficiaryCap"), holderCap: formData.get("holderCap"), marriedHolderCap: formData.get("marriedHolderCap"), marriedBeneficiaryCap: formData.get("marriedBeneficiaryCap"),
     membershipName: formData.get("membershipName") ?? "", shareholderCategory: formData.get("shareholderCategory") ?? "", observations: formData.get("observations") ?? "",
     active: formData.get("active") ?? "false", plansJson: formData.get("plansJson"),
   });
@@ -108,13 +110,20 @@ export async function updateProgramAction(programId: string, _previous: ProgramS
 
   const current = await db.program.findUnique({ where: { id: programId }, include: { financingPlans: true } });
   if (!current) return { success: false, message: "El programa ya no existe." };
+  const assignedSales = await db.sale.findMany({ where: { programId, status: { not: "CANCELLED" } }, select: { code: true, ownershipType: true, beneficiaries: { select: { isHolder: true } } } });
+  const overCapacity = assignedSales.find((sale) => {
+    const holders = 1 + sale.beneficiaries.filter((person) => person.isHolder).length;
+    const beneficiaries = sale.beneficiaries.filter((person) => !person.isHolder).length;
+    return sale.ownershipType === "MARRIED" ? holders > data.marriedHolderCap || beneficiaries > data.marriedBeneficiaryCap : holders > data.holderCap || beneficiaries > data.beneficiaryCap;
+  });
+  if (overCapacity) return { success: false, message: `El nuevo cupo dejaría sin capacidad a la venta ${overCapacity.code}. Revisa sus asignaciones primero.` };
   const validPlanIds = new Set(current.financingPlans.map((plan) => plan.id));
   if (data.plansJson.some((plan) => plan.id && !validPlanIds.has(plan.id))) return { success: false, message: "Uno de los planes no pertenece al programa." };
   if (data.plansJson.some((plan) => plan.id && current.financingPlans.find((currentPlan) => currentPlan.id === plan.id)?.termMonths !== plan.termMonths)) return { success: false, message: "El plazo de un plan existente no se puede cambiar. Desactívalo y agrega uno nuevo." };
 
   try {
     await db.$transaction(async (transaction) => {
-      await transaction.program.update({ where: { id: programId }, data: { name: data.name, cashPrice: data.cashPrice, separation: data.separation, cashShares: data.cashShares, cashStayDays: data.cashStayDays, beneficiaryCap: data.beneficiaryCap, marriedBeneficiaryCap: data.marriedBeneficiaryCap, membershipName: data.membershipName || null, shareholderCategory: data.shareholderCategory || null, observations: data.observations || null, active: data.active } });
+      await transaction.program.update({ where: { id: programId }, data: { name: data.name, cashPrice: data.cashPrice, separation: data.separation, cashShares: data.cashShares, cashStayDays: data.cashStayDays, beneficiaryCap: data.beneficiaryCap, holderCap: data.holderCap, marriedHolderCap: data.marriedHolderCap, marriedBeneficiaryCap: data.marriedBeneficiaryCap, membershipName: data.membershipName || null, shareholderCategory: data.shareholderCategory || null, observations: data.observations || null, active: data.active } });
       for (const plan of data.plansJson) {
         const values = { termMonths: plan.termMonths, downPayment: plan.downPayment, financedAmount: plan.financedAmount, monthlyPayment: plan.monthlyPayment, sharesGranted: plan.sharesGranted, stayDaysGranted: plan.stayDaysGranted, active: plan.active };
         if (plan.id) await transaction.financingPlan.update({ where: { id: plan.id }, data: values });

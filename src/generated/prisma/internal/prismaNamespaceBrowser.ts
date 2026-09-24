@@ -293,10 +293,12 @@ export type AmbassadorProfileScalarFieldEnum = (typeof AmbassadorProfileScalarFi
 export const BeneficiaryScalarFieldEnum = {
   id: 'id',
   memberId: 'memberId',
+  saleId: 'saleId',
   fullName: 'fullName',
   document: 'document',
   relationship: 'relationship',
   isSpouse: 'isSpouse',
+  isHolder: 'isHolder',
   createdAt: 'createdAt'
 } as const
 
@@ -312,6 +314,8 @@ export const ProgramScalarFieldEnum = {
   cashShares: 'cashShares',
   cashStayDays: 'cashStayDays',
   beneficiaryCap: 'beneficiaryCap',
+  holderCap: 'holderCap',
+  marriedHolderCap: 'marriedHolderCap',
   marriedBeneficiaryCap: 'marriedBeneficiaryCap',
   membershipName: 'membershipName',
   shareholderCategory: 'shareholderCategory',
@@ -346,6 +350,7 @@ export const SaleScalarFieldEnum = {
   financingPlanId: 'financingPlanId',
   mode: 'mode',
   status: 'status',
+  ownershipType: 'ownershipType',
   currency: 'currency',
   totalPrice: 'totalPrice',
   separationAmount: 'separationAmount',

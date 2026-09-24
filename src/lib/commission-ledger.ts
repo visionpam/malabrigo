@@ -1,4 +1,5 @@
 import type { Prisma } from "@/generated/prisma/client";
+import { db } from "@/lib/db";
 
 type Tx = Prisma.TransactionClient;
 
@@ -26,11 +27,22 @@ async function collectNetwork(transaction: Tx, ambassadorId: string) {
     frontier = ambassadors.map((item) => item.id);
   }
   const memberList = [...memberIds];
-  const [sales, directPoints] = await Promise.all([
-    memberList.length ? transaction.sale.findMany({ where: { memberId: { in: memberList }, status: { in: ["ACTIVE", "COMPLETED"] } }, select: { totalPrice: true } }) : [],
+  const [sales, directPoints, pointRules] = await Promise.all([
+    memberList.length ? transaction.sale.findMany({ where: { memberId: { in: memberList }, status: { in: ["ACTIVE", "COMPLETED"] } }, select: { programId: true, mode: true } }) : [],
     transaction.commissionEntry.aggregate({ where: { ambassadorId, generation: 1, status: { not: "REVERSED" } }, _sum: { points: true } }),
+    transaction.commissionRule.findMany({ where: { generation: 0, active: true, programId: { not: null }, mode: { not: null } }, orderBy: { version: "desc" }, select: { programId: true, mode: true, points: true } }),
   ]);
-  return { affiliatedAt: root.affiliatedAt, memberCount: memberIds.size, directCount: directMemberIds.size, directPoints: directPoints._sum.points ?? 0, totalVolume: sales.reduce((sum, sale) => sum + Number(sale.totalPrice), 0) };
+  const pointsByProgramAndMode = new Map<string, number>();
+  for (const rule of pointRules) {
+    const key = `${rule.programId}:${rule.mode}`;
+    if (!pointsByProgramAndMode.has(key)) pointsByProgramAndMode.set(key, rule.points);
+  }
+  const volumePoints = sales.reduce((sum, sale) => sum + (pointsByProgramAndMode.get(`${sale.programId}:${sale.mode}`) ?? 0), 0);
+  return { affiliatedAt: root.affiliatedAt, memberCount: memberIds.size, directCount: directMemberIds.size, directPoints: directPoints._sum.points ?? 0, volumePoints };
+}
+
+export async function readAmbassadorRankMetrics(ambassadorId: string) {
+  return db.$transaction((transaction) => collectNetwork(transaction, ambassadorId));
 }
 
 export async function reconcileAmbassadorRank(transaction: Tx, ambassadorId: string) {
@@ -44,12 +56,12 @@ export async function reconcileAmbassadorRank(transaction: Tx, ambassadorId: str
   const now = new Date();
   for (const definition of definitions) {
     const deadline = new Date(metrics.affiliatedAt); deadline.setUTCMonth(deadline.getUTCMonth() + definition.deadlineMonths);
-    const qualifies = now <= deadline && metrics.memberCount >= definition.memberCount && metrics.directCount >= definition.directCount && metrics.directPoints >= definition.directPoints && metrics.totalVolume >= definition.totalPoints;
+    const qualifies = now <= deadline && metrics.memberCount >= definition.memberCount && metrics.directCount >= definition.directCount && metrics.directPoints >= definition.directPoints && metrics.volumePoints >= definition.totalPoints;
     if (qualifies && (!achieved || definition.sortOrder > achieved.sortOrder)) achieved = definition;
   }
   if (achieved && achieved.code !== profile?.currentRank) {
     await transaction.ambassadorProfile.update({ where: { id: ambassadorId }, data: { currentRank: achieved.code } });
-    await transaction.ambassadorRankHistory.upsert({ where: { ambassadorId_rankCode: { ambassadorId, rankCode: achieved.code } }, update: {}, create: { ambassadorId, rankCode: achieved.code, snapshot: { memberCount: metrics.memberCount, directCount: metrics.directCount, directPoints: metrics.directPoints, totalVolume: metrics.totalVolume } } });
+    await transaction.ambassadorRankHistory.upsert({ where: { ambassadorId_rankCode: { ambassadorId, rankCode: achieved.code } }, update: {}, create: { ambassadorId, rankCode: achieved.code, snapshot: { memberCount: metrics.memberCount, directCount: metrics.directCount, directPoints: metrics.directPoints, volumePoints: metrics.volumePoints } } });
     if (achieved.rewardName) await transaction.rankAward.upsert({ where: { ambassadorId_rankCode: { ambassadorId, rankCode: achieved.code } }, update: {}, create: { ambassadorId, rankCode: achieved.code } });
   }
   if (achieved) {

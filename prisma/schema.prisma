@@ -58,6 +58,11 @@ enum SaleStatus {
   CANCELLED
 }
 
+enum OwnershipType {
+  SINGLE
+  MARRIED
+}
+
 enum InstallmentStatus {
   PENDING
   IN_REVIEW
@@ -350,14 +355,18 @@ model AmbassadorProfile {
 model Beneficiary {
   id           String   @id @default(uuid()) @db.Uuid
   memberId     String   @map("member_id") @db.Uuid
+  saleId       String   @map("sale_id") @db.Uuid
   fullName     String   @map("full_name") @db.VarChar(180)
   document     String?  @db.VarChar(60)
   relationship String   @db.VarChar(60)
   isSpouse     Boolean  @default(false) @map("is_spouse")
+  isHolder     Boolean  @default(false) @map("is_holder")
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   holder       Member   @relation("InvestmentHolder", fields: [memberId], references: [id], onDelete: Cascade)
+  sale         Sale     @relation(fields: [saleId], references: [id], onDelete: Cascade)
 
   @@index([memberId])
+  @@index([saleId])
   @@map("beneficiaries")
 }
 
@@ -370,6 +379,8 @@ model Program {
   cashShares            Int?             @map("cash_shares")
   cashStayDays          Int?             @map("cash_stay_days")
   beneficiaryCap        Int              @map("beneficiary_cap")
+  holderCap             Int              @default(1) @map("holder_cap")
+  marriedHolderCap      Int              @default(2) @map("married_holder_cap")
   marriedBeneficiaryCap Int              @default(0) @map("married_beneficiary_cap")
   membershipName        String?          @map("membership_name") @db.VarChar(160)
   shareholderCategory   String?          @map("shareholder_category") @db.VarChar(80)
@@ -408,6 +419,7 @@ model Sale {
   financingPlanId    String?             @map("financing_plan_id") @db.Uuid
   mode               SaleMode
   status             SaleStatus          @default(DRAFT)
+  ownershipType      OwnershipType       @default(SINGLE) @map("ownership_type")
   currency           String              @default("USD") @db.Char(3)
   totalPrice         Decimal             @map("total_price") @db.Decimal(18, 2)
   separationAmount   Decimal             @map("separation_amount") @db.Decimal(18, 2)
@@ -425,6 +437,7 @@ model Sale {
   stayAllocation     StayAllocation?
   contracts          Contract[]
   documents          DocumentRecord[]
+  beneficiaries      Beneficiary[]
 
   @@index([memberId, status])
   @@index([createdAt])

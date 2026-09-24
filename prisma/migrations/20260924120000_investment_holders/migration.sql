@@ -1,0 +1,2 @@
+ALTER TABLE "programs" ADD COLUMN "holder_cap" INTEGER NOT NULL DEFAULT 1;
+ALTER TABLE "beneficiaries" ADD COLUMN "is_holder" BOOLEAN NOT NULL DEFAULT false;

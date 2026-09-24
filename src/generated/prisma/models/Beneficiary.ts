@@ -27,30 +27,36 @@ export type AggregateBeneficiary = {
 export type BeneficiaryMinAggregateOutputType = {
   id: string | null
   memberId: string | null
+  saleId: string | null
   fullName: string | null
   document: string | null
   relationship: string | null
   isSpouse: boolean | null
+  isHolder: boolean | null
   createdAt: Date | null
 }
 
 export type BeneficiaryMaxAggregateOutputType = {
   id: string | null
   memberId: string | null
+  saleId: string | null
   fullName: string | null
   document: string | null
   relationship: string | null
   isSpouse: boolean | null
+  isHolder: boolean | null
   createdAt: Date | null
 }
 
 export type BeneficiaryCountAggregateOutputType = {
   id: number
   memberId: number
+  saleId: number
   fullName: number
   document: number
   relationship: number
   isSpouse: number
+  isHolder: number
   createdAt: number
   _all: number
 }
@@ -59,30 +65,36 @@ export type BeneficiaryCountAggregateOutputType = {
 export type BeneficiaryMinAggregateInputType = {
   id?: true
   memberId?: true
+  saleId?: true
   fullName?: true
   document?: true
   relationship?: true
   isSpouse?: true
+  isHolder?: true
   createdAt?: true
 }
 
 export type BeneficiaryMaxAggregateInputType = {
   id?: true
   memberId?: true
+  saleId?: true
   fullName?: true
   document?: true
   relationship?: true
   isSpouse?: true
+  isHolder?: true
   createdAt?: true
 }
 
 export type BeneficiaryCountAggregateInputType = {
   id?: true
   memberId?: true
+  saleId?: true
   fullName?: true
   document?: true
   relationship?: true
   isSpouse?: true
+  isHolder?: true
   createdAt?: true
   _all?: true
 }
@@ -162,10 +174,12 @@ export type BeneficiaryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type BeneficiaryGroupByOutputType = {
   id: string
   memberId: string
+  saleId: string
   fullName: string
   document: string | null
   relationship: string
   isSpouse: boolean
+  isHolder: boolean
   createdAt: Date
   _count: BeneficiaryCountAggregateOutputType | null
   _min: BeneficiaryMinAggregateOutputType | null
@@ -193,23 +207,29 @@ export type BeneficiaryWhereInput = {
   NOT?: Prisma.BeneficiaryWhereInput | Prisma.BeneficiaryWhereInput[]
   id?: Prisma.UuidFilter<"Beneficiary"> | string
   memberId?: Prisma.UuidFilter<"Beneficiary"> | string
+  saleId?: Prisma.UuidFilter<"Beneficiary"> | string
   fullName?: Prisma.StringFilter<"Beneficiary"> | string
   document?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   relationship?: Prisma.StringFilter<"Beneficiary"> | string
   isSpouse?: Prisma.BoolFilter<"Beneficiary"> | boolean
+  isHolder?: Prisma.BoolFilter<"Beneficiary"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   holder?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  sale?: Prisma.XOR<Prisma.SaleScalarRelationFilter, Prisma.SaleWhereInput>
 }
 
 export type BeneficiaryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  saleId?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   document?: Prisma.SortOrderInput | Prisma.SortOrder
   relationship?: Prisma.SortOrder
   isSpouse?: Prisma.SortOrder
+  isHolder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   holder?: Prisma.MemberOrderByWithRelationInput
+  sale?: Prisma.SaleOrderByWithRelationInput
 }
 
 export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
@@ -218,21 +238,26 @@ export type BeneficiaryWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.BeneficiaryWhereInput[]
   NOT?: Prisma.BeneficiaryWhereInput | Prisma.BeneficiaryWhereInput[]
   memberId?: Prisma.UuidFilter<"Beneficiary"> | string
+  saleId?: Prisma.UuidFilter<"Beneficiary"> | string
   fullName?: Prisma.StringFilter<"Beneficiary"> | string
   document?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   relationship?: Prisma.StringFilter<"Beneficiary"> | string
   isSpouse?: Prisma.BoolFilter<"Beneficiary"> | boolean
+  isHolder?: Prisma.BoolFilter<"Beneficiary"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
   holder?: Prisma.XOR<Prisma.MemberScalarRelationFilter, Prisma.MemberWhereInput>
+  sale?: Prisma.XOR<Prisma.SaleScalarRelationFilter, Prisma.SaleWhereInput>
 }, "id">
 
 export type BeneficiaryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  saleId?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   document?: Prisma.SortOrderInput | Prisma.SortOrder
   relationship?: Prisma.SortOrder
   isSpouse?: Prisma.SortOrder
+  isHolder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.BeneficiaryCountOrderByAggregateInput
   _max?: Prisma.BeneficiaryMaxOrderByAggregateInput
@@ -245,10 +270,12 @@ export type BeneficiaryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BeneficiaryScalarWhereWithAggregatesInput | Prisma.BeneficiaryScalarWhereWithAggregatesInput[]
   id?: Prisma.UuidWithAggregatesFilter<"Beneficiary"> | string
   memberId?: Prisma.UuidWithAggregatesFilter<"Beneficiary"> | string
+  saleId?: Prisma.UuidWithAggregatesFilter<"Beneficiary"> | string
   fullName?: Prisma.StringWithAggregatesFilter<"Beneficiary"> | string
   document?: Prisma.StringNullableWithAggregatesFilter<"Beneficiary"> | string | null
   relationship?: Prisma.StringWithAggregatesFilter<"Beneficiary"> | string
   isSpouse?: Prisma.BoolWithAggregatesFilter<"Beneficiary"> | boolean
+  isHolder?: Prisma.BoolWithAggregatesFilter<"Beneficiary"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Beneficiary"> | Date | string
 }
 
@@ -258,17 +285,21 @@ export type BeneficiaryCreateInput = {
   document?: string | null
   relationship: string
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: Date | string
   holder: Prisma.MemberCreateNestedOneWithoutBeneficiariesInput
+  sale: Prisma.SaleCreateNestedOneWithoutBeneficiariesInput
 }
 
 export type BeneficiaryUncheckedCreateInput = {
   id?: string
   memberId: string
+  saleId: string
   fullName: string
   document?: string | null
   relationship: string
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: Date | string
 }
 
@@ -278,27 +309,33 @@ export type BeneficiaryUpdateInput = {
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   holder?: Prisma.MemberUpdateOneRequiredWithoutBeneficiariesNestedInput
+  sale?: Prisma.SaleUpdateOneRequiredWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  saleId?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BeneficiaryCreateManyInput = {
   id?: string
   memberId: string
+  saleId: string
   fullName: string
   document?: string | null
   relationship: string
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: Date | string
 }
 
@@ -308,16 +345,19 @@ export type BeneficiaryUpdateManyMutationInput = {
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BeneficiaryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  saleId?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -334,30 +374,36 @@ export type BeneficiaryOrderByRelationAggregateInput = {
 export type BeneficiaryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  saleId?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   document?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
   isSpouse?: Prisma.SortOrder
+  isHolder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type BeneficiaryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  saleId?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   document?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
   isSpouse?: Prisma.SortOrder
+  isHolder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
 export type BeneficiaryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
+  saleId?: Prisma.SortOrder
   fullName?: Prisma.SortOrder
   document?: Prisma.SortOrder
   relationship?: Prisma.SortOrder
   isSpouse?: Prisma.SortOrder
+  isHolder?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -403,21 +449,67 @@ export type BeneficiaryUncheckedUpdateManyWithoutHolderNestedInput = {
   deleteMany?: Prisma.BeneficiaryScalarWhereInput | Prisma.BeneficiaryScalarWhereInput[]
 }
 
+export type BeneficiaryCreateNestedManyWithoutSaleInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutSaleInput, Prisma.BeneficiaryUncheckedCreateWithoutSaleInput> | Prisma.BeneficiaryCreateWithoutSaleInput[] | Prisma.BeneficiaryUncheckedCreateWithoutSaleInput[]
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutSaleInput | Prisma.BeneficiaryCreateOrConnectWithoutSaleInput[]
+  createMany?: Prisma.BeneficiaryCreateManySaleInputEnvelope
+  connect?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+}
+
+export type BeneficiaryUncheckedCreateNestedManyWithoutSaleInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutSaleInput, Prisma.BeneficiaryUncheckedCreateWithoutSaleInput> | Prisma.BeneficiaryCreateWithoutSaleInput[] | Prisma.BeneficiaryUncheckedCreateWithoutSaleInput[]
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutSaleInput | Prisma.BeneficiaryCreateOrConnectWithoutSaleInput[]
+  createMany?: Prisma.BeneficiaryCreateManySaleInputEnvelope
+  connect?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+}
+
+export type BeneficiaryUpdateManyWithoutSaleNestedInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutSaleInput, Prisma.BeneficiaryUncheckedCreateWithoutSaleInput> | Prisma.BeneficiaryCreateWithoutSaleInput[] | Prisma.BeneficiaryUncheckedCreateWithoutSaleInput[]
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutSaleInput | Prisma.BeneficiaryCreateOrConnectWithoutSaleInput[]
+  upsert?: Prisma.BeneficiaryUpsertWithWhereUniqueWithoutSaleInput | Prisma.BeneficiaryUpsertWithWhereUniqueWithoutSaleInput[]
+  createMany?: Prisma.BeneficiaryCreateManySaleInputEnvelope
+  set?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+  disconnect?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+  delete?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+  connect?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+  update?: Prisma.BeneficiaryUpdateWithWhereUniqueWithoutSaleInput | Prisma.BeneficiaryUpdateWithWhereUniqueWithoutSaleInput[]
+  updateMany?: Prisma.BeneficiaryUpdateManyWithWhereWithoutSaleInput | Prisma.BeneficiaryUpdateManyWithWhereWithoutSaleInput[]
+  deleteMany?: Prisma.BeneficiaryScalarWhereInput | Prisma.BeneficiaryScalarWhereInput[]
+}
+
+export type BeneficiaryUncheckedUpdateManyWithoutSaleNestedInput = {
+  create?: Prisma.XOR<Prisma.BeneficiaryCreateWithoutSaleInput, Prisma.BeneficiaryUncheckedCreateWithoutSaleInput> | Prisma.BeneficiaryCreateWithoutSaleInput[] | Prisma.BeneficiaryUncheckedCreateWithoutSaleInput[]
+  connectOrCreate?: Prisma.BeneficiaryCreateOrConnectWithoutSaleInput | Prisma.BeneficiaryCreateOrConnectWithoutSaleInput[]
+  upsert?: Prisma.BeneficiaryUpsertWithWhereUniqueWithoutSaleInput | Prisma.BeneficiaryUpsertWithWhereUniqueWithoutSaleInput[]
+  createMany?: Prisma.BeneficiaryCreateManySaleInputEnvelope
+  set?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+  disconnect?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+  delete?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+  connect?: Prisma.BeneficiaryWhereUniqueInput | Prisma.BeneficiaryWhereUniqueInput[]
+  update?: Prisma.BeneficiaryUpdateWithWhereUniqueWithoutSaleInput | Prisma.BeneficiaryUpdateWithWhereUniqueWithoutSaleInput[]
+  updateMany?: Prisma.BeneficiaryUpdateManyWithWhereWithoutSaleInput | Prisma.BeneficiaryUpdateManyWithWhereWithoutSaleInput[]
+  deleteMany?: Prisma.BeneficiaryScalarWhereInput | Prisma.BeneficiaryScalarWhereInput[]
+}
+
 export type BeneficiaryCreateWithoutHolderInput = {
   id?: string
   fullName: string
   document?: string | null
   relationship: string
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: Date | string
+  sale: Prisma.SaleCreateNestedOneWithoutBeneficiariesInput
 }
 
 export type BeneficiaryUncheckedCreateWithoutHolderInput = {
   id?: string
+  saleId: string
   fullName: string
   document?: string | null
   relationship: string
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: Date | string
 }
 
@@ -453,19 +545,71 @@ export type BeneficiaryScalarWhereInput = {
   NOT?: Prisma.BeneficiaryScalarWhereInput | Prisma.BeneficiaryScalarWhereInput[]
   id?: Prisma.UuidFilter<"Beneficiary"> | string
   memberId?: Prisma.UuidFilter<"Beneficiary"> | string
+  saleId?: Prisma.UuidFilter<"Beneficiary"> | string
   fullName?: Prisma.StringFilter<"Beneficiary"> | string
   document?: Prisma.StringNullableFilter<"Beneficiary"> | string | null
   relationship?: Prisma.StringFilter<"Beneficiary"> | string
   isSpouse?: Prisma.BoolFilter<"Beneficiary"> | boolean
+  isHolder?: Prisma.BoolFilter<"Beneficiary"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Beneficiary"> | Date | string
 }
 
-export type BeneficiaryCreateManyHolderInput = {
+export type BeneficiaryCreateWithoutSaleInput = {
   id?: string
   fullName: string
   document?: string | null
   relationship: string
   isSpouse?: boolean
+  isHolder?: boolean
+  createdAt?: Date | string
+  holder: Prisma.MemberCreateNestedOneWithoutBeneficiariesInput
+}
+
+export type BeneficiaryUncheckedCreateWithoutSaleInput = {
+  id?: string
+  memberId: string
+  fullName: string
+  document?: string | null
+  relationship: string
+  isSpouse?: boolean
+  isHolder?: boolean
+  createdAt?: Date | string
+}
+
+export type BeneficiaryCreateOrConnectWithoutSaleInput = {
+  where: Prisma.BeneficiaryWhereUniqueInput
+  create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutSaleInput, Prisma.BeneficiaryUncheckedCreateWithoutSaleInput>
+}
+
+export type BeneficiaryCreateManySaleInputEnvelope = {
+  data: Prisma.BeneficiaryCreateManySaleInput | Prisma.BeneficiaryCreateManySaleInput[]
+  skipDuplicates?: boolean
+}
+
+export type BeneficiaryUpsertWithWhereUniqueWithoutSaleInput = {
+  where: Prisma.BeneficiaryWhereUniqueInput
+  update: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutSaleInput, Prisma.BeneficiaryUncheckedUpdateWithoutSaleInput>
+  create: Prisma.XOR<Prisma.BeneficiaryCreateWithoutSaleInput, Prisma.BeneficiaryUncheckedCreateWithoutSaleInput>
+}
+
+export type BeneficiaryUpdateWithWhereUniqueWithoutSaleInput = {
+  where: Prisma.BeneficiaryWhereUniqueInput
+  data: Prisma.XOR<Prisma.BeneficiaryUpdateWithoutSaleInput, Prisma.BeneficiaryUncheckedUpdateWithoutSaleInput>
+}
+
+export type BeneficiaryUpdateManyWithWhereWithoutSaleInput = {
+  where: Prisma.BeneficiaryScalarWhereInput
+  data: Prisma.XOR<Prisma.BeneficiaryUpdateManyMutationInput, Prisma.BeneficiaryUncheckedUpdateManyWithoutSaleInput>
+}
+
+export type BeneficiaryCreateManyHolderInput = {
+  id?: string
+  saleId: string
+  fullName: string
+  document?: string | null
+  relationship: string
+  isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: Date | string
 }
 
@@ -475,24 +619,74 @@ export type BeneficiaryUpdateWithoutHolderInput = {
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sale?: Prisma.SaleUpdateOneRequiredWithoutBeneficiariesNestedInput
 }
 
 export type BeneficiaryUncheckedUpdateWithoutHolderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  saleId?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type BeneficiaryUncheckedUpdateManyWithoutHolderInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  saleId?: Prisma.StringFieldUpdateOperationsInput | string
   fullName?: Prisma.StringFieldUpdateOperationsInput | string
   document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relationship?: Prisma.StringFieldUpdateOperationsInput | string
   isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BeneficiaryCreateManySaleInput = {
+  id?: string
+  memberId: string
+  fullName: string
+  document?: string | null
+  relationship: string
+  isSpouse?: boolean
+  isHolder?: boolean
+  createdAt?: Date | string
+}
+
+export type BeneficiaryUpdateWithoutSaleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationship?: Prisma.StringFieldUpdateOperationsInput | string
+  isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  holder?: Prisma.MemberUpdateOneRequiredWithoutBeneficiariesNestedInput
+}
+
+export type BeneficiaryUncheckedUpdateWithoutSaleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationship?: Prisma.StringFieldUpdateOperationsInput | string
+  isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type BeneficiaryUncheckedUpdateManyWithoutSaleInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  fullName?: Prisma.StringFieldUpdateOperationsInput | string
+  document?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relationship?: Prisma.StringFieldUpdateOperationsInput | string
+  isSpouse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isHolder?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -501,69 +695,86 @@ export type BeneficiaryUncheckedUpdateManyWithoutHolderInput = {
 export type BeneficiarySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   memberId?: boolean
+  saleId?: boolean
   fullName?: boolean
   document?: boolean
   relationship?: boolean
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: boolean
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["beneficiary"]>
 
 export type BeneficiarySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   memberId?: boolean
+  saleId?: boolean
   fullName?: boolean
   document?: boolean
   relationship?: boolean
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: boolean
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["beneficiary"]>
 
 export type BeneficiarySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   memberId?: boolean
+  saleId?: boolean
   fullName?: boolean
   document?: boolean
   relationship?: boolean
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: boolean
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["beneficiary"]>
 
 export type BeneficiarySelectScalar = {
   id?: boolean
   memberId?: boolean
+  saleId?: boolean
   fullName?: boolean
   document?: boolean
   relationship?: boolean
   isSpouse?: boolean
+  isHolder?: boolean
   createdAt?: boolean
 }
 
-export type BeneficiaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "fullName" | "document" | "relationship" | "isSpouse" | "createdAt", ExtArgs["result"]["beneficiary"]>
+export type BeneficiaryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "saleId" | "fullName" | "document" | "relationship" | "isSpouse" | "isHolder" | "createdAt", ExtArgs["result"]["beneficiary"]>
 export type BeneficiaryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
 }
 export type BeneficiaryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
 }
 export type BeneficiaryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   holder?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
+  sale?: boolean | Prisma.SaleDefaultArgs<ExtArgs>
 }
 
 export type $BeneficiaryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Beneficiary"
   objects: {
     holder: Prisma.$MemberPayload<ExtArgs>
+    sale: Prisma.$SalePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     memberId: string
+    saleId: string
     fullName: string
     document: string | null
     relationship: string
     isSpouse: boolean
+    isHolder: boolean
     createdAt: Date
   }, ExtArgs["result"]["beneficiary"]>
   composites: {}
@@ -960,6 +1171,7 @@ readonly fields: BeneficiaryFieldRefs;
 export interface Prisma__BeneficiaryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   holder<T extends Prisma.MemberDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MemberDefaultArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  sale<T extends Prisma.SaleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SaleDefaultArgs<ExtArgs>>): Prisma.Prisma__SaleClient<runtime.Types.Result.GetResult<Prisma.$SalePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -991,10 +1203,12 @@ export interface Prisma__BeneficiaryClient<T, Null = never, ExtArgs extends runt
 export interface BeneficiaryFieldRefs {
   readonly id: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly memberId: Prisma.FieldRef<"Beneficiary", 'String'>
+  readonly saleId: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly fullName: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly document: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly relationship: Prisma.FieldRef<"Beneficiary", 'String'>
   readonly isSpouse: Prisma.FieldRef<"Beneficiary", 'Boolean'>
+  readonly isHolder: Prisma.FieldRef<"Beneficiary", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Beneficiary", 'DateTime'>
 }
     

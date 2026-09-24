@@ -6,7 +6,7 @@ import { LoaderCircle, Pencil, Plus, Save, Trash2, X } from "lucide-react";
 import { updateProgramAction, type ProgramState } from "./actions";
 
 type PlanData = { id?: string; termMonths: number; downPayment: number; financedAmount: number; monthlyPayment: number; sharesGranted: number | null; stayDaysGranted: number | null; active: boolean };
-export type ProgramData = { id: string; name: string; cashPrice: number; separation: number; cashShares: number | null; cashStayDays: number | null; beneficiaryCap: number; marriedBeneficiaryCap: number; membershipName: string; shareholderCategory: string; observations: string; active: boolean; plans: PlanData[] };
+export type ProgramData = { id: string; name: string; cashPrice: number; separation: number; cashShares: number | null; cashStayDays: number | null; beneficiaryCap: number; holderCap: number; marriedHolderCap: number; marriedBeneficiaryCap: number; membershipName: string; shareholderCategory: string; observations: string; active: boolean; plans: PlanData[] };
 const initialState: ProgramState = { success: false, message: "" };
 
 function ProgramEditor({ program, onDone }: { program: ProgramData; onDone: (message: string) => void }) {
@@ -21,8 +21,12 @@ function ProgramEditor({ program, onDone }: { program: ProgramData; onDone: (mes
       <label><span>Separación *</span><input name="separation" type="number" min="0" step="0.01" defaultValue={program.separation} required /></label>
       <label><span>Acciones al contado</span><input name="cashShares" type="number" min="0" defaultValue={program.cashShares ?? ""} /></label>
       <label><span>Días de estadía al contado</span><input name="cashStayDays" type="number" min="0" defaultValue={program.cashStayDays ?? ""} /></label>
-      <label><span>Máximo de beneficiarios *</span><input name="beneficiaryCap" type="number" min="1" defaultValue={program.beneficiaryCap} required /></label>
-      <label><span>Beneficiarios con cónyuge *</span><input name="marriedBeneficiaryCap" type="number" min="0" defaultValue={program.marriedBeneficiaryCap} required /></label>
+      <div className="form-wide program-participant-heading"><strong>Un contratante</strong><small>El inversionista siempre ocupa el primer cupo de titular.</small></div>
+      <label><span>Titulares, incluido el principal *</span><input name="holderCap" type="number" min="1" defaultValue={program.holderCap} required /></label>
+      <label><span>Beneficiarios *</span><input name="beneficiaryCap" type="number" min="0" defaultValue={program.beneficiaryCap} required /></label>
+      <div className="form-wide program-participant-heading"><strong>Sociedad conyugal</strong><small>El inversionista sigue siendo el titular principal; el segundo cupo corresponde al cotitular.</small></div>
+      <label><span>Titulares, incluido el principal *</span><input name="marriedHolderCap" type="number" min="2" defaultValue={program.marriedHolderCap} required /></label>
+      <label><span>Beneficiarios *</span><input name="marriedBeneficiaryCap" type="number" min="0" defaultValue={program.marriedBeneficiaryCap} required /></label>
       <label><span>Membresía</span><input name="membershipName" defaultValue={program.membershipName} maxLength={160} /></label>
       <label><span>Categoría accionaria</span><input name="shareholderCategory" defaultValue={program.shareholderCategory} maxLength={80} /></label>
       <label className="form-wide"><span>Observaciones y beneficios</span><textarea name="observations" rows={3} defaultValue={program.observations} maxLength={500} /></label>
