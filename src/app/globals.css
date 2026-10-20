@@ -742,7 +742,19 @@ tbody tr:hover { background: rgba(214,163,66,.045); }
 .expedient-person-form .form-grid, .expedient-document-form .form-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .program-participant-heading { display: grid; gap: 2px; margin-top: 5px; padding: 12px 14px; border-left: 3px solid var(--ui-gold); border-radius: 0 9px 9px 0; background: rgba(214,163,66,.07); }.program-participant-heading strong { color: var(--ui-gold-bright); font-size: 13px; }.program-participant-heading small { color: var(--ui-muted); font-size: 11px; }
 .sale-participants-dialog { width: min(980px, 100%); }.sale-participant-content { min-height: 0; overflow-y: auto; }.sale-participant-content .expedient-tabs { padding: 12px 22px; }.sale-participant-mode { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; padding: 18px 22px; border-bottom: 1px solid var(--ui-border); }.sale-participant-mode label { display: grid; flex: 1 1 250px; gap: 5px; }.sale-participant-mode label span { color: var(--ui-muted); font-size: 12px; }.sale-participant-mode select { min-height: 44px; padding: 0 12px; color: var(--ui-text); border: 1px solid var(--ui-border); border-radius: 10px; background: #082b43; }.sale-participant-mode .form-message { flex: 1 0 100%; margin: 0; }.sale-participant-form .form-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }.sale-participant-content .expedient-person-list + .record-list { margin-top: 8px; }
+.sale-participant-list > article { flex-wrap: wrap; }
+.sale-participant-document-edit { flex: 1 0 100%; border-top: 1px solid var(--ui-border); padding-top: 8px; }
+.sale-participant-document-edit summary { width: fit-content; color: var(--ui-gold-bright); font-size: 12px; font-weight: 700; cursor: pointer; }
+.sale-participant-document-edit .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; margin-top: 12px; }
+.sale-participant-document-edit .form-message { grid-column: 1 / -1; margin: 0; }
+@media (max-width: 600px) { .sale-participant-document-edit .form-grid { grid-template-columns: 1fr; } }
 .investor-program-people { display: grid; gap: 18px; padding: 18px; }.investor-program-people > article { min-width: 0; padding: 18px; border: 1px solid var(--ui-border); border-radius: 12px; background: rgba(255,255,255,.025); }.investor-program-people .section-title p { margin: 2px 0 0; color: var(--ui-muted); font-size: 12px; }
+.investor-program-metric > div:last-child { min-width: 0; }
+.investor-program-metric strong { overflow-wrap: anywhere; font-size: clamp(15px, 1.3vw, 19px); line-height: 1.3; }
+.investor-program-table table { min-width: 1100px; }
+.investor-program-table th { white-space: normal; line-height: 1.35; }
+.investor-program-table td { vertical-align: top; }
+.investor-document-type { color: var(--ui-muted); }
 .section-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
 .section-title h3 { margin: 0; font-size: 17px; }
 .section-title span { color: var(--ui-muted); font-size: 12px; }

@@ -8,9 +8,11 @@ import { db } from "@/lib/db";
 export type ParticipantState = { success: boolean; message: string };
 const personSchema = z.object({
   fullName: z.string().trim().min(3, "Ingresa el nombre completo").max(180),
+  documentType: z.string().trim().min(1, "Selecciona el tipo de documento").max(20),
   document: z.string().trim().min(3, "Ingresa el documento").max(60),
   relationship: z.string().trim().min(2, "Ingresa el parentesco").max(60),
 });
+const documentSchema = personSchema.pick({ documentType: true, document: true });
 
 function revalidateParticipants() {
   revalidatePath("/ventas");
@@ -39,18 +41,20 @@ export async function setOwnershipTypeAction(saleId: string, _previous: Particip
 
 export async function addSaleParticipantAction(saleId: string, isHolder: boolean, _previous: ParticipantState, formData: FormData): Promise<ParticipantState> {
   const actor = await requirePermission("SALES");
-  const parsed = personSchema.safeParse({ fullName: formData.get("fullName"), document: formData.get("document"), relationship: formData.get("relationship") });
+  const parsed = personSchema.safeParse({ fullName: formData.get("fullName"), documentType: formData.get("documentType"), document: formData.get("document"), relationship: formData.get("relationship") });
   if (!parsed.success) return { success: false, message: parsed.error.issues[0]?.message ?? "Revisa los datos de la persona." };
   try {
     const result = await db.$transaction(async (tx) => {
       const sale = await tx.sale.findUnique({ where: { id: saleId }, include: { program: true, beneficiaries: true, member: { select: { documentNumber: true } } } });
       if (!sale || sale.status === "CANCELLED") return { success: false, message: "La venta no está disponible." };
+      const documentType = await tx.documentTypeOption.findFirst({ where: { code: parsed.data.documentType, active: true }, select: { code: true } });
+      if (!documentType) return { success: false, message: "Selecciona un tipo de documento válido." };
       const cap = isHolder ? (sale.ownershipType === "MARRIED" ? sale.program.marriedHolderCap : sale.program.holderCap) : (sale.ownershipType === "MARRIED" ? sale.program.marriedBeneficiaryCap : sale.program.beneficiaryCap);
       const used = sale.beneficiaries.filter((item) => item.isHolder === isHolder).length + (isHolder ? 1 : 0);
       if (used >= cap) return { success: false, message: "Se alcanzó el cupo de " + (isHolder ? "titulares" : "beneficiarios") + " de este programa." };
       if (parsed.data.document === sale.member.documentNumber || sale.beneficiaries.some((item) => item.document === parsed.data.document)) return { success: false, message: "Este documento ya está asignado a la venta." };
       const spouse = isHolder && sale.ownershipType === "MARRIED" && used === 1;
-      const person = await tx.beneficiary.create({ data: { saleId, memberId: sale.memberId, isHolder, isSpouse: spouse, fullName: parsed.data.fullName, document: parsed.data.document, relationship: spouse ? "Cónyuge" : parsed.data.relationship } });
+      const person = await tx.beneficiary.create({ data: { saleId, memberId: sale.memberId, isHolder, isSpouse: spouse, fullName: parsed.data.fullName, documentType: parsed.data.documentType, document: parsed.data.document, relationship: spouse ? "Cónyuge" : parsed.data.relationship } });
       await tx.auditLog.create({ data: { actorUserId: actor.id, action: isHolder ? "SALE_HOLDER_ADDED" : "SALE_BENEFICIARY_ADDED", entityType: "Sale", entityId: saleId, after: { personId: person.id, ...parsed.data, isHolder } } });
       return { success: true, message: isHolder ? "Titular agregado a este programa." : "Beneficiario agregado a este programa." };
     }, { isolationLevel: "Serializable" });
@@ -58,6 +62,30 @@ export async function addSaleParticipantAction(saleId: string, isHolder: boolean
     return result;
   } catch {
     return { success: false, message: "No fue posible agregar la persona. Inténtalo de nuevo." };
+  }
+}
+
+export async function updateSaleParticipantDocumentAction(saleId: string, personId: string, _previous: ParticipantState, formData: FormData): Promise<ParticipantState> {
+  const actor = await requirePermission("SALES");
+  const parsed = documentSchema.safeParse({ documentType: formData.get("documentType"), document: formData.get("document") });
+  if (!parsed.success) return { success: false, message: parsed.error.issues[0]?.message ?? "Revisa el documento." };
+  try {
+    const result = await db.$transaction(async (tx) => {
+      const sale = await tx.sale.findUnique({ where: { id: saleId }, include: { member: { select: { documentNumber: true } }, beneficiaries: true } });
+      if (!sale || sale.status === "CANCELLED") return { success: false, message: "La venta no está disponible." };
+      const person = sale.beneficiaries.find((item) => item.id === personId);
+      if (!person) return { success: false, message: "La persona no pertenece a esta venta." };
+      const documentType = await tx.documentTypeOption.findFirst({ where: { code: parsed.data.documentType, active: true }, select: { code: true } });
+      if (!documentType) return { success: false, message: "Selecciona un tipo de documento válido." };
+      if (parsed.data.document === sale.member.documentNumber || sale.beneficiaries.some((item) => item.id !== personId && item.document === parsed.data.document)) return { success: false, message: "Este documento ya está asignado a la venta." };
+      await tx.beneficiary.update({ where: { id: personId }, data: parsed.data });
+      await tx.auditLog.create({ data: { actorUserId: actor.id, action: "SALE_PARTICIPANT_DOCUMENT_UPDATED", entityType: "Sale", entityId: saleId, before: { personId, documentType: person.documentType, document: person.document }, after: { personId, ...parsed.data } } });
+      return { success: true, message: "Documento actualizado." };
+    }, { isolationLevel: "Serializable" });
+    if (result.success) revalidateParticipants();
+    return result;
+  } catch {
+    return { success: false, message: "No fue posible actualizar el documento. Inténtalo de nuevo." };
   }
 }
 

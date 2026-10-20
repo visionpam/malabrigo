@@ -372,6 +372,7 @@ model Beneficiary {
   memberId     String   @map("member_id") @db.Uuid
   saleId       String   @map("sale_id") @db.Uuid
   fullName     String   @map("full_name") @db.VarChar(180)
+  documentType String?  @map("document_type") @db.VarChar(20)
   document     String?  @db.VarChar(60)
   relationship String   @db.VarChar(60)
   isSpouse     Boolean  @default(false) @map("is_spouse")

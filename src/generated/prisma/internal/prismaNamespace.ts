@@ -4086,6 +4086,7 @@ export const BeneficiaryScalarFieldEnum = {
   memberId: 'memberId',
   saleId: 'saleId',
   fullName: 'fullName',
+  documentType: 'documentType',
   document: 'document',
   relationship: 'relationship',
   isSpouse: 'isSpouse',
