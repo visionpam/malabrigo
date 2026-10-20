@@ -35,9 +35,9 @@ export default async function OwnDocumentsPage() {
   const otherLegacyDocuments = legacyDocuments.filter((item) => !isCertificate(item.title));
 
   return <>
-    <PageHeader eyebrow="Portal del inversionista" title="Mis documentos" description="Consulta tus contratos, certificados y solicitudes de documentación por inversión." />
+    <PageHeader eyebrow="Portal del inversionista" title="Mis contratos" description="Consulta tus contratos, certificados y solicitudes de documentación por inversión." />
     <section className="module-metrics" aria-label="Resumen de documentos">
-      <MetricCard label="Mis contratos" value={String(contracts.length)} detail="Contrato de participación" icon={FileCheck2} />
+      <MetricCard label="Contrato de participación" value={String(contracts.length)} detail="Contratos asociados a tus inversiones" icon={FileCheck2} />
       <MetricCard label="Mis certificados" value={String(certificates.length)} detail="Certificado de Accionista o ficha RUC" icon={ScrollText} />
       <MetricCard label="Biblioteca del proyecto" value={String(companyDocuments.length)} detail="Documentos oficiales" icon={Building2} />
     </section>
