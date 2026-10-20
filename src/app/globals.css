@@ -755,6 +755,15 @@ tbody tr:hover { background: rgba(214,163,66,.045); }
 .investor-program-table th { white-space: normal; line-height: 1.35; }
 .investor-program-table td { vertical-align: top; }
 .investor-document-type { color: var(--ui-muted); }
+.investor-payment-toolbar { gap: 14px; }
+.investor-payment-toolbar > .secondary-button { flex: 0 0 auto; text-decoration: none; }
+.investor-payments-table table { min-width: 800px; }
+.investor-payments-table th { white-space: normal; line-height: 1.35; }
+.investor-payments-table td { vertical-align: top; }
+.investor-payment-concept { display: block; margin-bottom: 6px; font-weight: 700; }
+.investor-payment-rejection { max-width: 310px; color: var(--ui-danger) !important; overflow-wrap: anywhere; }
+.investor-payment-unavailable { color: var(--ui-muted); font-size: 12px; }
+@media (max-width: 600px) { .investor-payment-toolbar { align-items: flex-start; flex-direction: column; }.investor-payment-toolbar > .secondary-button { width: 100%; justify-content: center; } }
 .section-title { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
 .section-title h3 { margin: 0; font-size: 17px; }
 .section-title span { color: var(--ui-muted); font-size: 12px; }

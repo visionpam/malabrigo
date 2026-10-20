@@ -1,30 +1,31 @@
 import { connection } from "next/server";
-import { CircleDollarSign, Clock3, Eye, ReceiptText } from "lucide-react";
+import { CircleDollarSign, Clock3, Download, Eye, ReceiptText } from "lucide-react";
 
 import { EmptyState, MetricCard, PageHeader, StatusPill } from "@/components/module-ui";
-import { db } from "@/lib/db";
 import { requireUser } from "@/lib/access-control";
-import { formatDate, formatMoney, statusTone } from "@/lib/format";
-import { paymentConceptLabels } from "@/lib/payment-concepts";
-import { PaymentSubmissionForm } from "./payment-submission-form";
-
-const submissionLabel = { PENDING: "Pendiente", APPROVED: "Aprobado", REJECTED: "Rechazado" } as const;
+import { formatDate, formatMoney } from "@/lib/format";
+import { getInvestorPaymentStatement } from "@/lib/investor-payment-statement";
 
 export default async function MyPaymentsPage() {
   const user = await requireUser();
   if (!user.member) return <EmptyState icon={ReceiptText} title="Perfil no disponible" description="Tu cuenta no tiene un perfil de socio asociado." />;
   await connection();
-  const memberId = user.member.id;
-  const [sales, payments, submissions] = await Promise.all([
-    db.sale.findMany({ where: { memberId, status: { not: "CANCELLED" } }, orderBy: { createdAt: "desc" }, include: { program: true } }),
-    db.payment.findMany({ where: { sale: { memberId } }, orderBy: { paidAt: "desc" }, include: { sale: { include: { program: true } } } }),
-    db.paymentSubmission.findMany({ where: { sale: { memberId } }, orderBy: { submittedAt: "desc" }, select: { id: true, concept: true, amount: true, submittedAt: true, status: true, voucherUrl: true, sale: { include: { program: true } } } }),
-  ]);
-  const confirmed = payments.filter((payment) => payment.status === "CONFIRMED");
-  return <><PageHeader eyebrow="Portal del socio" title="Mis pagos" description="Consulta tus pagos y envía comprobantes para aprobación." />
-    <section className="module-metrics"><MetricCard label="Pagos confirmados" value={String(confirmed.length)} detail={formatMoney(confirmed.reduce((sum, payment) => sum + Number(payment.amount), 0))} icon={CircleDollarSign} /><MetricCard label="Por aprobar" value={String(submissions.filter((item) => item.status === "PENDING").length)} detail="Comprobantes enviados" icon={Clock3} /><MetricCard label="Inversiones" value={String(sales.length)} detail="Disponibles para pagos" icon={ReceiptText} /></section>
-    <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Subir comprobante</h2><p>El administrador validará el desprendible antes de aplicarlo a tu cuenta.</p></div></div>{sales.length ? <PaymentSubmissionForm sales={sales.map((sale) => ({ id: sale.id, code: sale.code, program: sale.program.name }))} /> : <EmptyState icon={ReceiptText} title="No tienes inversiones disponibles" description="Necesitas una venta vigente para presentar un pago." />}</section>
-    <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Comprobantes enviados</h2><p>Seguimiento de la revisión administrativa</p></div></div>{submissions.length ? <div className="table-wrap module-table"><table><thead><tr><th>Inversión</th><th>Programa</th><th>Concepto</th><th>Monto</th><th>Enviado</th><th>Estado</th><th>Comprobante</th></tr></thead><tbody>{submissions.map((item) => <tr key={item.id}><td className="money">{item.sale.code}</td><td>{item.sale.program.name}</td><td>{paymentConceptLabels[item.concept]}</td><td className="money">{formatMoney(item.amount)}</td><td>{formatDate(item.submittedAt)}</td><td><StatusPill tone={statusTone(item.status)}>{submissionLabel[item.status]}</StatusPill></td><td><a className="row-action row-action-icon" href={item.voucherUrl} target="_blank" rel="noreferrer" aria-label="Ver comprobante" title="Ver comprobante"><Eye size={17} aria-hidden="true" /></a></td></tr>)}</tbody></table></div> : <EmptyState icon={Clock3} title="Sin comprobantes" description="Los comprobantes que envíes aparecerán aquí." />}</section>
-    <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Pagos aplicados</h2><p>Solo movimientos asociados a tu cuenta</p></div></div>{payments.length ? <div className="table-wrap module-table"><table><thead><tr><th>Referencia</th><th>Inversión</th><th>Programa</th><th>Concepto</th><th>Monto</th><th>Fecha</th><th>Estado</th></tr></thead><tbody>{payments.map((payment) => <tr key={payment.id}><td className="money">{payment.reference}</td><td>{payment.sale.code}</td><td>{payment.sale.program.name}</td><td>{paymentConceptLabels[payment.concept]}</td><td className="money">{formatMoney(payment.amount)}</td><td>{formatDate(payment.paidAt)}</td><td><StatusPill tone={statusTone(payment.status)}>{payment.status === "CONFIRMED" ? "Confirmado" : "Anulado"}</StatusPill></td></tr>)}</tbody></table></div> : <EmptyState icon={ReceiptText} title="Sin pagos aplicados" description="Los pagos aprobados aparecerán en este historial." />}</section>
+  const statement = await getInvestorPaymentStatement(user.member.id);
+
+  return <>
+    <PageHeader eyebrow="Portal del inversionista" title="Mis pagos" description="Consulta el valor de tus programas, cuotas y pagos registrados por administración." />
+    <section className="module-metrics" aria-label="Resumen de pagos">
+      <MetricCard label="Valor del programa" value={formatMoney(statement.contracted)} detail="Programas vigentes" icon={CircleDollarSign} />
+      <MetricCard label="Saldo pendiente" value={formatMoney(statement.balance)} detail={`${formatMoney(statement.paid)} pagados`} icon={Clock3} />
+      <MetricCard label="N° de cuotas" value={String(statement.installments)} detail={`${statement.pendingInstallments} por completar`} icon={ReceiptText} />
+    </section>
+
+    <section className="module-panel portal-section"><div className="module-toolbar investor-payment-toolbar"><div><h2>Mis comprobantes de pago</h2><p>Resumen por proyecto y programa. Los soportes disponibles se consultan en el seguimiento.</p></div><a className="secondary-button" href="/mi-portal/pagos/exportar" download="seguimiento-pagos.csv"><Download size={17} aria-hidden="true" />Exportar seguimiento</a></div>
+      {statement.investmentRows.length ? <div className="table-wrap module-table investor-payments-table"><table><thead><tr><th>Proyecto / programa</th><th>Modalidad</th><th>Valor del programa</th><th>Monto pagado</th><th>Saldo pendiente</th><th>N° de cuotas</th></tr></thead><tbody>{statement.investmentRows.map((sale) => <tr key={sale.id}><td><strong>{sale.project} / {sale.program}</strong><small className="cell-secondary">{sale.code}</small></td><td>{sale.mode}</td><td className="money">{formatMoney(sale.value)}</td><td className="money">{formatMoney(sale.paid)}</td><td className="money">{formatMoney(sale.balance)}</td><td>{sale.installments ? sale.installments : "No aplica"}</td></tr>)}</tbody></table></div> : <EmptyState icon={ReceiptText} title="Sin programas vigentes" description="Cuando tengas una inversión vigente aparecerá aquí su resumen de pagos." />}
+    </section>
+
+    <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Seguimiento de pagos</h2><p>Movimientos y comprobantes asociados a tus programas</p></div></div>
+      {statement.paymentRows.length ? <div className="table-wrap module-table investor-payments-table"><table><thead><tr><th>Proyecto</th><th>Programa</th><th>Concepto</th><th>Monto</th><th>Fecha de pago</th><th>Comprobante</th></tr></thead><tbody>{statement.paymentRows.map((item) => <tr key={item.id}><td><strong>{item.project}</strong><small className="cell-secondary">{item.code}</small></td><td>{item.program}</td><td><span className="investor-payment-concept">{item.concept}</span><StatusPill tone={item.status === "Confirmado" ? "success" : item.status === "Pendiente" ? "warning" : "danger"}>{item.status}</StatusPill>{item.submittedAt && <small className="cell-secondary">Enviado el {formatDate(item.submittedAt)}</small>}{item.rejectionReason && <small className="cell-secondary investor-payment-rejection">Motivo: {item.rejectionReason}</small>}</td><td className="money">{formatMoney(item.amount)}</td><td>{item.paidAt ? formatDate(item.paidAt) : "Aún no registrada"}</td><td>{item.voucherUrl ? <a className="row-action row-action-icon" href={item.voucherUrl} target="_blank" rel="noopener noreferrer" aria-label={`Ver comprobante de ${item.concept} de ${item.program}`} title="Ver comprobante"><Eye size={17} aria-hidden="true" /></a> : <span className="investor-payment-unavailable">No disponible</span>}</td></tr>)}</tbody></table></div> : <EmptyState icon={Clock3} title="Sin pagos registrados" description="Los pagos administrados y sus soportes aparecerán aquí." />}
+    </section>
   </>;
 }
