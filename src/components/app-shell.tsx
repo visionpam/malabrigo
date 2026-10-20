@@ -30,7 +30,6 @@ const navigation: NavigationItem[] = [
 const investorNavigation: NavigationItem[] = [
   { label: "Mis inversiones", icon: Landmark, href: "/mi-portal", permission: "PORTAL" },
   { label: "Mis pagos", icon: WalletCards, href: "/mi-portal/pagos", permission: "PORTAL" },
-  { label: "Mis contratos", icon: FileCheck2, href: "/mi-portal/contratos", permission: "PORTAL" },
   { label: "Mis documentos", icon: Files, href: "/mi-portal/documentos", permission: "PORTAL" },
   { label: "Avance de obra", icon: HardHat, href: "/mi-portal/avance-obra", permission: "PORTAL" },
   { label: "Mis reportes", icon: FolderKanban, href: "/mi-portal/reportes", permission: "PORTAL" },

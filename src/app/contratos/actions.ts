@@ -91,7 +91,7 @@ export async function generateContractAction(_previous: ContractState, formData:
   const documentUrl = `/contratos/archivo/${contractId}`;
   const contract = await db.contract.create({ data: { id: contractId, saleId: sale.id, templateId: template.id, status: "GENERATED", documentUrl, documentText, generatedAt: new Date() } });
   await db.auditLog.create({ data: { actorUserId: actor.id, action: "CONTRACT_GENERATED", entityType: "Contract", entityId: contract.id, after: { saleId: sale.id, templateId: template.id, documentUrl } } });
-  revalidatePath("/contratos"); revalidatePath("/mi-portal/contratos");
+  revalidatePath("/contratos"); revalidatePath("/mi-portal/documentos");
   return { success: true, message: "Contrato generado correctamente." };
 }
 
@@ -113,7 +113,7 @@ export async function updateContractAction(contractId: string, _previous: Contra
   const updated = await db.contract.updateMany({ where: { id: contractId, status: { not: "VOIDED" } }, data: { status: status.data, documentUrl, signedAt: status.data === "SIGNED" ? new Date() : undefined } });
   if (!updated.count) return { success: false, message: "El contrato fue anulado por otro usuario y no puede modificarse." };
   await db.auditLog.create({ data: { actorUserId: actor.id, action: "CONTRACT_STATUS_UPDATED", entityType: "Contract", entityId: contractId, after: { status: status.data, documentUrl } } });
-  revalidatePath("/contratos"); revalidatePath("/mi-portal/contratos");
+  revalidatePath("/contratos"); revalidatePath("/mi-portal/documentos");
   return { success: true, message: "Contrato actualizado." };
 }
 
@@ -132,7 +132,7 @@ export async function voidContractAction(contractId: string, _previous: Contract
       await tx.auditLog.create({ data: { actorUserId: actor.id, action: "CONTRACT_VOIDED", entityType: "Contract", entityId: contractId, before: { status: contract.status }, after: { status: "VOIDED", reason: reason.data } } });
       return { success: true, message: "Contrato anulado correctamente." };
     }, { maxWait: 20000, timeout: 30000 });
-    if (result.success) { revalidatePath("/contratos"); revalidatePath("/mi-portal/contratos"); }
+    if (result.success) { revalidatePath("/contratos"); revalidatePath("/mi-portal/documentos"); }
     return result;
   } catch {
     return { success: false, message: "No fue posible anular el contrato. Inténtalo nuevamente." };
