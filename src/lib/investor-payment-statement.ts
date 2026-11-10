@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { paymentConceptLabels } from "@/lib/payment-concepts";
 import { PROJECT_NAME } from "@/lib/project-name";
+import { summarizeInstallments } from "@/lib/installment-summary";
 
 export async function getInvestorPaymentStatement(memberId: string) {
   const [sales, payments, submissions] = await Promise.all([
@@ -12,12 +13,14 @@ export async function getInvestorPaymentStatement(memberId: string) {
   const confirmed = payments.filter((payment) => payment.status === "CONFIRMED");
   const contracted = sales.reduce((sum, sale) => sum + Number(sale.totalPrice), 0);
   const paid = confirmed.filter((payment) => payment.sale.status !== "CANCELLED").reduce((sum, payment) => sum + Number(payment.amount), 0);
-  const installments = sales.reduce((sum, sale) => sum + sale.installments.length, 0);
-  const pendingInstallments = sales.reduce((sum, sale) => sum + sale.installments.filter((item) => item.status !== "PAID").length, 0);
+  const installmentSummary = summarizeInstallments(sales.flatMap((sale) => sale.installments));
+  const installments = installmentSummary.total;
+  const completedInstallments = installmentSummary.completed;
+  const pendingInstallments = installmentSummary.pending;
 
   const investmentRows = sales.map((sale) => {
     const salePaid = confirmed.filter((payment) => payment.saleId === sale.id).reduce((sum, payment) => sum + Number(payment.amount), 0);
-    return { id: sale.id, code: sale.code, project: PROJECT_NAME, program: sale.program.name, mode: sale.mode === "CASH" ? "Contado" : "Financiado", value: Number(sale.totalPrice), paid: salePaid, balance: Math.max(0, Number(sale.totalPrice) - salePaid), installments: sale.installments.length };
+    return { id: sale.id, code: sale.code, project: PROJECT_NAME, program: sale.program.name, mode: sale.mode === "CASH" ? "Contado" : "Financiado", value: Number(sale.totalPrice), paid: salePaid, balance: Math.max(0, Number(sale.totalPrice) - salePaid), installments: summarizeInstallments(sale.installments).total };
   });
 
   const paymentRows = payments.map((payment) => {
@@ -36,5 +39,5 @@ export async function getInvestorPaymentStatement(memberId: string) {
     sortAt: submission.submittedAt,
   }));
 
-  return { investmentRows, paymentRows: [...paymentRows, ...pendingRows].sort((a, b) => b.sortAt.getTime() - a.sortAt.getTime()), contracted, paid, balance: Math.max(0, contracted - paid), installments, pendingInstallments };
+  return { investmentRows, paymentRows: [...paymentRows, ...pendingRows].sort((a, b) => b.sortAt.getTime() - a.sortAt.getTime()), contracted, paid, balance: Math.max(0, contracted - paid), installments, completedInstallments, pendingInstallments };
 }

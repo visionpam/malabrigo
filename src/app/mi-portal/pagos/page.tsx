@@ -17,7 +17,7 @@ export default async function MyPaymentsPage() {
     <section className="module-metrics" aria-label="Resumen de pagos">
       <MetricCard label="Valor del programa" value={formatMoney(statement.contracted)} detail="Programas vigentes" icon={CircleDollarSign} />
       <MetricCard label="Saldo pendiente" value={formatMoney(statement.balance)} detail={`${formatMoney(statement.paid)} pagados`} icon={Clock3} />
-      <MetricCard label="N° de cuotas" value={String(statement.installments)} detail={`${statement.pendingInstallments} por completar`} icon={ReceiptText} />
+      <MetricCard label="N° de cuotas" value={String(statement.installments)} detail={`${statement.completedInstallments} completadas · ${statement.pendingInstallments} por completar`} icon={ReceiptText} />
     </section>
 
     <section className="module-panel portal-section"><div className="module-toolbar investor-payment-toolbar"><div><h2>Mis comprobantes de pago</h2><p>Resumen por proyecto y programa. Los soportes disponibles se consultan en el seguimiento.</p></div><a className="secondary-button" href="/mi-portal/pagos/exportar" download="seguimiento-pagos.csv"><Download size={17} aria-hidden="true" />Exportar seguimiento</a></div>
