@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  Bell, ChevronDown, FileCheck2, FolderKanban, Gauge,
+  Bell, ChevronDown, FileCheck2, FolderKanban, Gauge, MessageSquareText,
   HardHat, KeyRound, Landmark, Menu, Search, Settings, UserRound, UsersRound, Files,
   WalletCards, X, Network,
   LogOut, ShieldCheck,
@@ -38,7 +38,7 @@ const investorNavigation: NavigationItem[] = [
 type PortalView = "AMBASSADOR" | "INVESTOR";
 type ShellUser = { displayName: string; roles: string[]; permissions: string[]; hasAmbassadorProfile: boolean; hasInvestorProfile: boolean; portalViewPreference: PortalView | null } | null;
 
-export function AppShell({ children, user }: { children: React.ReactNode; user: ShellUser }) {
+export function AppShell({ children, user, pqrsUnreadCount = 0 }: { children: React.ReactNode; user: ShellUser; pqrsUnreadCount?: number }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
@@ -87,6 +87,7 @@ export function AppShell({ children, user }: { children: React.ReactNode; user: 
   const profileLabel = superadmin ? "Superadministrador" : activePortalView === "AMBASSADOR" && hasAmbassadorProfile ? "Vista Embajador" : hasInvestorProfile ? "Vista Inversionista" : "Administración";
   const canManageUsers = superadmin || (user?.permissions.includes("ADMIN_USERS") ?? false);
   const canOpenSettings = superadmin || (user?.permissions.includes("SETTINGS") ?? false);
+  const canManagePqrs = superadmin || user?.roles.includes("SUPPORT") || (user?.permissions.includes("ADMIN_USERS") ?? false);
   const selectPortalView = (view: PortalView) => {
     setSelectedPortalView(view);
     document.cookie = `malabrigo_portal_view=${view}; path=/; max-age=31536000; samesite=lax`;
@@ -124,7 +125,7 @@ export function AppShell({ children, user }: { children: React.ReactNode; user: 
           })}</div>}
         </nav>
 
-        {canManageUsers && <div className="sidebar-footer"><Link className={pathname.startsWith("/administracion") ? "nav-item active" : "nav-item"} href="/administracion/usuarios" onClick={() => { setMenuOpen(false); setProfileOpen(false); }}><ShieldCheck size={18} />Administración</Link></div>}
+        {(canManageUsers || canManagePqrs) && <div className="sidebar-footer">{canManagePqrs && <Link className={pathname.startsWith("/pqrs/administracion") ? "nav-item active" : "nav-item"} href="/pqrs/administracion" onClick={() => { setMenuOpen(false); setProfileOpen(false); }}><MessageSquareText size={18} aria-hidden="true" />Atención PQRS</Link>}{canManageUsers && <Link className={pathname.startsWith("/administracion") ? "nav-item active" : "nav-item"} href="/administracion/usuarios" onClick={() => { setMenuOpen(false); setProfileOpen(false); }}><ShieldCheck size={18} />Administración</Link>}</div>}
       </aside>
 
       <section className="workspace">
@@ -132,7 +133,7 @@ export function AppShell({ children, user }: { children: React.ReactNode; user: 
           <button className="icon-button menu-button" aria-label="Abrir menú" onClick={() => setMenuOpen(true)}><Menu size={20} /></button>
           <label className="search-box"><Search aria-hidden="true" size={17} /><input aria-label="Buscar" placeholder="Buscar socio, venta o comprobante..." /></label>
           <div className="topbar-actions">
-            <button className="icon-button notification" aria-label="Notificaciones"><Bell aria-hidden="true" size={19} /><i aria-hidden="true" /></button>
+            {hasAmbassadorProfile || hasInvestorProfile ? <Link className="icon-button notification" href="/pqrs" aria-label={pqrsUnreadCount ? `${pqrsUnreadCount} respuesta(s) nuevas en PQRS` : "Mis PQRS"}><Bell aria-hidden="true" size={19} />{pqrsUnreadCount > 0 && <i aria-hidden="true" />}</Link> : null}
             <div className="profile-menu-wrap" ref={profileMenuRef}>
               <button className="profile" type="button" aria-expanded={profileOpen} aria-controls="profile-actions" onClick={() => setProfileOpen((open) => !open)}>
                 <div className="avatar">{initials}</div><div><strong>{user?.displayName ?? "Sin sesión"}</strong><span>{profileLabel}</span></div><ChevronDown className={profileOpen ? "profile-chevron open" : "profile-chevron"} size={16} />
@@ -149,6 +150,7 @@ export function AppShell({ children, user }: { children: React.ReactNode; user: 
           </div>
         </header>
         <main className="content" id="contenido-principal" tabIndex={-1}>{children}</main>
+        {(hasAmbassadorProfile || hasInvestorProfile) && <Link className="pqrs-floating" href="/pqrs" aria-label={pqrsUnreadCount ? `Atención al cliente: ${pqrsUnreadCount} respuesta(s) nuevas` : "Atención al cliente: abrir PQRS"}><MessageSquareText size={20} aria-hidden="true" /><span>PQRS</span>{pqrsUnreadCount > 0 && <b aria-hidden="true">{pqrsUnreadCount > 9 ? "9+" : pqrsUnreadCount}</b>}</Link>}
       </section>
     </div>
   );

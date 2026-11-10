@@ -188,6 +188,16 @@ export type DossierDocument = Prisma.DossierDocumentModel
  */
 export type AuditLog = Prisma.AuditLogModel
 /**
+ * Model PqrsCase
+ * 
+ */
+export type PqrsCase = Prisma.PqrsCaseModel
+/**
+ * Model PqrsMessage
+ * 
+ */
+export type PqrsMessage = Prisma.PqrsMessageModel
+/**
  * Model ContractTemplate
  * 
  */

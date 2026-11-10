@@ -85,6 +85,8 @@ export const ModelName = {
   DocumentRecord: 'DocumentRecord',
   DossierDocument: 'DossierDocument',
   AuditLog: 'AuditLog',
+  PqrsCase: 'PqrsCase',
+  PqrsMessage: 'PqrsMessage',
   ContractTemplate: 'ContractTemplate',
   Contract: 'Contract',
   LegalAcceptance: 'LegalAcceptance',
@@ -571,6 +573,37 @@ export const AuditLogScalarFieldEnum = {
 } as const
 
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const PqrsCaseScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  ownerId: 'ownerId',
+  category: 'category',
+  subject: 'subject',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  lastAdminReplyAt: 'lastAdminReplyAt',
+  memberSeenAt: 'memberSeenAt'
+} as const
+
+export type PqrsCaseScalarFieldEnum = (typeof PqrsCaseScalarFieldEnum)[keyof typeof PqrsCaseScalarFieldEnum]
+
+
+export const PqrsMessageScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  authorId: 'authorId',
+  body: 'body',
+  isStaff: 'isStaff',
+  fileName: 'fileName',
+  fileMimeType: 'fileMimeType',
+  fileData: 'fileData',
+  createdAt: 'createdAt'
+} as const
+
+export type PqrsMessageScalarFieldEnum = (typeof PqrsMessageScalarFieldEnum)[keyof typeof PqrsMessageScalarFieldEnum]
 
 
 export const ContractTemplateScalarFieldEnum = {

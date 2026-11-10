@@ -204,3 +204,23 @@ export const DossierStatus = {
 } as const
 
 export type DossierStatus = (typeof DossierStatus)[keyof typeof DossierStatus]
+
+
+export const PqrsCategory = {
+  PETITION: 'PETITION',
+  COMPLAINT: 'COMPLAINT',
+  CLAIM: 'CLAIM',
+  SUGGESTION: 'SUGGESTION'
+} as const
+
+export type PqrsCategory = (typeof PqrsCategory)[keyof typeof PqrsCategory]
+
+
+export const PqrsStatus = {
+  FILED: 'FILED',
+  IN_REVIEW: 'IN_REVIEW',
+  ANSWERED: 'ANSWERED',
+  CLOSED: 'CLOSED'
+} as const
+
+export type PqrsStatus = (typeof PqrsStatus)[keyof typeof PqrsStatus]

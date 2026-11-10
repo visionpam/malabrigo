@@ -147,6 +147,20 @@ enum DossierStatus {
   CANCELLED
 }
 
+enum PqrsCategory {
+  PETITION
+  COMPLAINT
+  CLAIM
+  SUGGESTION
+}
+
+enum PqrsStatus {
+  FILED
+  IN_REVIEW
+  ANSWERED
+  CLOSED
+}
+
 model User {
   id                String               @id @default(uuid()) @db.Uuid
   email             String               @unique @db.VarChar(255)
@@ -164,6 +178,8 @@ model User {
   sessions          UserSession[]
   permissions       UserPermission[]
   uploadedDocuments DocumentRecord[]     @relation("DocumentUploader")
+  pqrsCases         PqrsCase[]           @relation("PqrsOwner")
+  pqrsMessages      PqrsMessage[]        @relation("PqrsAuthor")
 
   @@map("users")
 }
@@ -694,6 +710,42 @@ model AuditLog {
   @@index([entityType, entityId])
   @@index([createdAt])
   @@map("audit_logs")
+}
+
+model PqrsCase {
+  id               String        @id @default(uuid()) @db.Uuid
+  code             String        @unique @db.VarChar(30)
+  ownerId          String        @map("owner_id") @db.Uuid
+  category         PqrsCategory
+  subject          String        @db.VarChar(180)
+  status           PqrsStatus    @default(FILED)
+  createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)
+  lastAdminReplyAt DateTime?     @map("last_admin_reply_at") @db.Timestamptz(6)
+  memberSeenAt     DateTime?     @map("member_seen_at") @db.Timestamptz(6)
+  owner            User          @relation("PqrsOwner", fields: [ownerId], references: [id], onDelete: Restrict)
+  messages         PqrsMessage[]
+
+  @@index([ownerId, createdAt])
+  @@index([status, updatedAt])
+  @@map("pqrs_cases")
+}
+
+model PqrsMessage {
+  id           String   @id @default(uuid()) @db.Uuid
+  caseId       String   @map("case_id") @db.Uuid
+  authorId     String   @map("author_id") @db.Uuid
+  body         String   @db.Text
+  isStaff      Boolean  @default(false) @map("is_staff")
+  fileName     String?  @map("file_name") @db.VarChar(180)
+  fileMimeType String?  @map("file_mime_type") @db.VarChar(50)
+  fileData     Bytes?   @map("file_data") @db.ByteA
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  case         PqrsCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  author       User     @relation("PqrsAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+
+  @@index([caseId, createdAt])
+  @@map("pqrs_messages")
 }
 
 model ContractTemplate {

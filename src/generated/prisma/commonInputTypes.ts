@@ -650,6 +650,40 @@ export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
   _max?: Prisma.NestedJsonNullableFilter<$PrismaModel>
 }
 
+export type EnumPqrsCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.PqrsCategory | Prisma.EnumPqrsCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.PqrsCategory[] | Prisma.ListEnumPqrsCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PqrsCategory[] | Prisma.ListEnumPqrsCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPqrsCategoryFilter<$PrismaModel> | $Enums.PqrsCategory
+}
+
+export type EnumPqrsStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PqrsStatus | Prisma.EnumPqrsStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PqrsStatus[] | Prisma.ListEnumPqrsStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PqrsStatus[] | Prisma.ListEnumPqrsStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPqrsStatusFilter<$PrismaModel> | $Enums.PqrsStatus
+}
+
+export type EnumPqrsCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PqrsCategory | Prisma.EnumPqrsCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.PqrsCategory[] | Prisma.ListEnumPqrsCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PqrsCategory[] | Prisma.ListEnumPqrsCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPqrsCategoryWithAggregatesFilter<$PrismaModel> | $Enums.PqrsCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPqrsCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPqrsCategoryFilter<$PrismaModel>
+}
+
+export type EnumPqrsStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PqrsStatus | Prisma.EnumPqrsStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PqrsStatus[] | Prisma.ListEnumPqrsStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PqrsStatus[] | Prisma.ListEnumPqrsStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPqrsStatusWithAggregatesFilter<$PrismaModel> | $Enums.PqrsStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPqrsStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPqrsStatusFilter<$PrismaModel>
+}
+
 export type EnumContractStatusFilter<$PrismaModel = never> = {
   equals?: $Enums.ContractStatus | Prisma.EnumContractStatusFieldRefInput<$PrismaModel>
   in?: $Enums.ContractStatus[] | Prisma.ListEnumContractStatusFieldRefInput<$PrismaModel>
@@ -1395,6 +1429,40 @@ export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
   gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
+}
+
+export type NestedEnumPqrsCategoryFilter<$PrismaModel = never> = {
+  equals?: $Enums.PqrsCategory | Prisma.EnumPqrsCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.PqrsCategory[] | Prisma.ListEnumPqrsCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PqrsCategory[] | Prisma.ListEnumPqrsCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPqrsCategoryFilter<$PrismaModel> | $Enums.PqrsCategory
+}
+
+export type NestedEnumPqrsStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PqrsStatus | Prisma.EnumPqrsStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PqrsStatus[] | Prisma.ListEnumPqrsStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PqrsStatus[] | Prisma.ListEnumPqrsStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPqrsStatusFilter<$PrismaModel> | $Enums.PqrsStatus
+}
+
+export type NestedEnumPqrsCategoryWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PqrsCategory | Prisma.EnumPqrsCategoryFieldRefInput<$PrismaModel>
+  in?: $Enums.PqrsCategory[] | Prisma.ListEnumPqrsCategoryFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PqrsCategory[] | Prisma.ListEnumPqrsCategoryFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPqrsCategoryWithAggregatesFilter<$PrismaModel> | $Enums.PqrsCategory
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPqrsCategoryFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPqrsCategoryFilter<$PrismaModel>
+}
+
+export type NestedEnumPqrsStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PqrsStatus | Prisma.EnumPqrsStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PqrsStatus[] | Prisma.ListEnumPqrsStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PqrsStatus[] | Prisma.ListEnumPqrsStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPqrsStatusWithAggregatesFilter<$PrismaModel> | $Enums.PqrsStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPqrsStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPqrsStatusFilter<$PrismaModel>
 }
 
 export type NestedEnumContractStatusFilter<$PrismaModel = never> = {

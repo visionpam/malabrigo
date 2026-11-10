@@ -214,6 +214,8 @@ export type UserWhereInput = {
   sessions?: Prisma.UserSessionListRelationFilter
   permissions?: Prisma.UserPermissionListRelationFilter
   uploadedDocuments?: Prisma.DocumentRecordListRelationFilter
+  pqrsCases?: Prisma.PqrsCaseListRelationFilter
+  pqrsMessages?: Prisma.PqrsMessageListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -233,6 +235,8 @@ export type UserOrderByWithRelationInput = {
   sessions?: Prisma.UserSessionOrderByRelationAggregateInput
   permissions?: Prisma.UserPermissionOrderByRelationAggregateInput
   uploadedDocuments?: Prisma.DocumentRecordOrderByRelationAggregateInput
+  pqrsCases?: Prisma.PqrsCaseOrderByRelationAggregateInput
+  pqrsMessages?: Prisma.PqrsMessageOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -255,6 +259,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   sessions?: Prisma.UserSessionListRelationFilter
   permissions?: Prisma.UserPermissionListRelationFilter
   uploadedDocuments?: Prisma.DocumentRecordListRelationFilter
+  pqrsCases?: Prisma.PqrsCaseListRelationFilter
+  pqrsMessages?: Prisma.PqrsMessageListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -302,6 +308,8 @@ export type UserCreateInput = {
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -321,6 +329,8 @@ export type UserUncheckedCreateInput = {
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUpdateInput = {
@@ -340,6 +350,8 @@ export type UserUpdateInput = {
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -359,6 +371,8 @@ export type UserUncheckedUpdateInput = {
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -533,6 +547,34 @@ export type UserUpdateOneWithoutAuditEntriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAuditEntriesInput, Prisma.UserUpdateWithoutAuditEntriesInput>, Prisma.UserUncheckedUpdateWithoutAuditEntriesInput>
 }
 
+export type UserCreateNestedOneWithoutPqrsCasesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPqrsCasesInput, Prisma.UserUncheckedCreateWithoutPqrsCasesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPqrsCasesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPqrsCasesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPqrsCasesInput, Prisma.UserUncheckedCreateWithoutPqrsCasesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPqrsCasesInput
+  upsert?: Prisma.UserUpsertWithoutPqrsCasesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPqrsCasesInput, Prisma.UserUpdateWithoutPqrsCasesInput>, Prisma.UserUncheckedUpdateWithoutPqrsCasesInput>
+}
+
+export type UserCreateNestedOneWithoutPqrsMessagesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPqrsMessagesInput, Prisma.UserUncheckedCreateWithoutPqrsMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPqrsMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutPqrsMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPqrsMessagesInput, Prisma.UserUncheckedCreateWithoutPqrsMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPqrsMessagesInput
+  upsert?: Prisma.UserUpsertWithoutPqrsMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPqrsMessagesInput, Prisma.UserUpdateWithoutPqrsMessagesInput>, Prisma.UserUncheckedUpdateWithoutPqrsMessagesInput>
+}
+
 export type UserCreateNestedOneWithoutInvitationsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutInvitationsInput, Prisma.UserUncheckedCreateWithoutInvitationsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutInvitationsInput
@@ -591,6 +633,8 @@ export type UserCreateWithoutRolesInput = {
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutRolesInput = {
@@ -609,6 +653,8 @@ export type UserUncheckedCreateWithoutRolesInput = {
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutRolesInput = {
@@ -643,6 +689,8 @@ export type UserUpdateWithoutRolesInput = {
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRolesInput = {
@@ -661,6 +709,8 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutPermissionsInput = {
@@ -679,6 +729,8 @@ export type UserCreateWithoutPermissionsInput = {
   passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutPermissionsInput = {
@@ -697,6 +749,8 @@ export type UserUncheckedCreateWithoutPermissionsInput = {
   passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutPermissionsInput = {
@@ -731,6 +785,8 @@ export type UserUpdateWithoutPermissionsInput = {
   passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPermissionsInput = {
@@ -749,6 +805,8 @@ export type UserUncheckedUpdateWithoutPermissionsInput = {
   passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutMemberInput = {
@@ -767,6 +825,8 @@ export type UserCreateWithoutMemberInput = {
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutMemberInput = {
@@ -785,6 +845,8 @@ export type UserUncheckedCreateWithoutMemberInput = {
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutMemberInput = {
@@ -819,6 +881,8 @@ export type UserUpdateWithoutMemberInput = {
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberInput = {
@@ -837,6 +901,8 @@ export type UserUncheckedUpdateWithoutMemberInput = {
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutUploadedDocumentsInput = {
@@ -855,6 +921,8 @@ export type UserCreateWithoutUploadedDocumentsInput = {
   passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
@@ -873,6 +941,8 @@ export type UserUncheckedCreateWithoutUploadedDocumentsInput = {
   passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutUploadedDocumentsInput = {
@@ -907,6 +977,8 @@ export type UserUpdateWithoutUploadedDocumentsInput = {
   passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
@@ -925,6 +997,8 @@ export type UserUncheckedUpdateWithoutUploadedDocumentsInput = {
   passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutAuditEntriesInput = {
@@ -943,6 +1017,8 @@ export type UserCreateWithoutAuditEntriesInput = {
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutAuditEntriesInput = {
@@ -961,6 +1037,8 @@ export type UserUncheckedCreateWithoutAuditEntriesInput = {
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutAuditEntriesInput = {
@@ -995,6 +1073,8 @@ export type UserUpdateWithoutAuditEntriesInput = {
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditEntriesInput = {
@@ -1013,6 +1093,200 @@ export type UserUncheckedUpdateWithoutAuditEntriesInput = {
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateWithoutPqrsCasesInput = {
+  id?: string
+  email: string
+  passwordHash?: string | null
+  displayName: string
+  status?: $Enums.UserStatus
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  invitations?: Prisma.AccountInvitationCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
+  uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutPqrsCasesInput = {
+  id?: string
+  email: string
+  passwordHash?: string | null
+  displayName: string
+  status?: $Enums.UserStatus
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  invitations?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
+  uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutPqrsCasesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPqrsCasesInput, Prisma.UserUncheckedCreateWithoutPqrsCasesInput>
+}
+
+export type UserUpsertWithoutPqrsCasesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPqrsCasesInput, Prisma.UserUncheckedUpdateWithoutPqrsCasesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPqrsCasesInput, Prisma.UserUncheckedCreateWithoutPqrsCasesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPqrsCasesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPqrsCasesInput, Prisma.UserUncheckedUpdateWithoutPqrsCasesInput>
+}
+
+export type UserUpdateWithoutPqrsCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  invitations?: Prisma.AccountInvitationUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
+  uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPqrsCasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  invitations?: Prisma.AccountInvitationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+  uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateWithoutPqrsMessagesInput = {
+  id?: string
+  email: string
+  passwordHash?: string | null
+  displayName: string
+  status?: $Enums.UserStatus
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  auditEntries?: Prisma.AuditLogCreateNestedManyWithoutActorInput
+  invitations?: Prisma.AccountInvitationCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
+  permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
+  uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+}
+
+export type UserUncheckedCreateWithoutPqrsMessagesInput = {
+  id?: string
+  email: string
+  passwordHash?: string | null
+  displayName: string
+  status?: $Enums.UserStatus
+  lastLoginAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  auditEntries?: Prisma.AuditLogUncheckedCreateNestedManyWithoutActorInput
+  invitations?: Prisma.AccountInvitationUncheckedCreateNestedManyWithoutUserInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
+  permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
+  uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+}
+
+export type UserCreateOrConnectWithoutPqrsMessagesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutPqrsMessagesInput, Prisma.UserUncheckedCreateWithoutPqrsMessagesInput>
+}
+
+export type UserUpsertWithoutPqrsMessagesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPqrsMessagesInput, Prisma.UserUncheckedUpdateWithoutPqrsMessagesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPqrsMessagesInput, Prisma.UserUncheckedCreateWithoutPqrsMessagesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutPqrsMessagesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPqrsMessagesInput, Prisma.UserUncheckedUpdateWithoutPqrsMessagesInput>
+}
+
+export type UserUpdateWithoutPqrsMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  auditEntries?: Prisma.AuditLogUpdateManyWithoutActorNestedInput
+  invitations?: Prisma.AccountInvitationUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
+  uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutPqrsMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+  lastLoginAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  auditEntries?: Prisma.AuditLogUncheckedUpdateManyWithoutActorNestedInput
+  invitations?: Prisma.AccountInvitationUncheckedUpdateManyWithoutUserNestedInput
+  passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
+  permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+  uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type UserCreateWithoutInvitationsInput = {
@@ -1031,6 +1305,8 @@ export type UserCreateWithoutInvitationsInput = {
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutInvitationsInput = {
@@ -1049,6 +1325,8 @@ export type UserUncheckedCreateWithoutInvitationsInput = {
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutInvitationsInput = {
@@ -1083,6 +1361,8 @@ export type UserUpdateWithoutInvitationsInput = {
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInvitationsInput = {
@@ -1101,6 +1381,8 @@ export type UserUncheckedUpdateWithoutInvitationsInput = {
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutPasswordResetsInput = {
@@ -1119,6 +1401,8 @@ export type UserCreateWithoutPasswordResetsInput = {
   sessions?: Prisma.UserSessionCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutPasswordResetsInput = {
@@ -1137,6 +1421,8 @@ export type UserUncheckedCreateWithoutPasswordResetsInput = {
   sessions?: Prisma.UserSessionUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutPasswordResetsInput = {
@@ -1171,6 +1457,8 @@ export type UserUpdateWithoutPasswordResetsInput = {
   sessions?: Prisma.UserSessionUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPasswordResetsInput = {
@@ -1189,6 +1477,8 @@ export type UserUncheckedUpdateWithoutPasswordResetsInput = {
   sessions?: Prisma.UserSessionUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1207,6 +1497,8 @@ export type UserCreateWithoutSessionsInput = {
   passwordResets?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageCreateNestedManyWithoutAuthorInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1225,6 +1517,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   passwordResets?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   permissions?: Prisma.UserPermissionUncheckedCreateNestedManyWithoutUserInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedCreateNestedManyWithoutUploadedByInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedCreateNestedManyWithoutOwnerInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedCreateNestedManyWithoutAuthorInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1259,6 +1553,8 @@ export type UserUpdateWithoutSessionsInput = {
   passwordResets?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUpdateManyWithoutAuthorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1277,6 +1573,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   passwordResets?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   permissions?: Prisma.UserPermissionUncheckedUpdateManyWithoutUserNestedInput
   uploadedDocuments?: Prisma.DocumentRecordUncheckedUpdateManyWithoutUploadedByNestedInput
+  pqrsCases?: Prisma.PqrsCaseUncheckedUpdateManyWithoutOwnerNestedInput
+  pqrsMessages?: Prisma.PqrsMessageUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
 
@@ -1292,6 +1590,8 @@ export type UserCountOutputType = {
   sessions: number
   permissions: number
   uploadedDocuments: number
+  pqrsCases: number
+  pqrsMessages: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1302,6 +1602,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   permissions?: boolean | UserCountOutputTypeCountPermissionsArgs
   uploadedDocuments?: boolean | UserCountOutputTypeCountUploadedDocumentsArgs
+  pqrsCases?: boolean | UserCountOutputTypeCountPqrsCasesArgs
+  pqrsMessages?: boolean | UserCountOutputTypeCountPqrsMessagesArgs
 }
 
 /**
@@ -1363,6 +1665,20 @@ export type UserCountOutputTypeCountUploadedDocumentsArgs<ExtArgs extends runtim
   where?: Prisma.DocumentRecordWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPqrsCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PqrsCaseWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountPqrsMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PqrsMessageWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1381,6 +1697,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
   uploadedDocuments?: boolean | Prisma.User$uploadedDocumentsArgs<ExtArgs>
+  pqrsCases?: boolean | Prisma.User$pqrsCasesArgs<ExtArgs>
+  pqrsMessages?: boolean | Prisma.User$pqrsMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1427,6 +1745,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   permissions?: boolean | Prisma.User$permissionsArgs<ExtArgs>
   uploadedDocuments?: boolean | Prisma.User$uploadedDocumentsArgs<ExtArgs>
+  pqrsCases?: boolean | Prisma.User$pqrsCasesArgs<ExtArgs>
+  pqrsMessages?: boolean | Prisma.User$pqrsMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1443,6 +1763,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     sessions: Prisma.$UserSessionPayload<ExtArgs>[]
     permissions: Prisma.$UserPermissionPayload<ExtArgs>[]
     uploadedDocuments: Prisma.$DocumentRecordPayload<ExtArgs>[]
+    pqrsCases: Prisma.$PqrsCasePayload<ExtArgs>[]
+    pqrsMessages: Prisma.$PqrsMessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1855,6 +2177,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   permissions<T extends Prisma.User$permissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploadedDocuments<T extends Prisma.User$uploadedDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadedDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pqrsCases<T extends Prisma.User$pqrsCasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pqrsCasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PqrsCasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  pqrsMessages<T extends Prisma.User$pqrsMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pqrsMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PqrsMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2469,6 +2793,54 @@ export type User$uploadedDocumentsArgs<ExtArgs extends runtime.Types.Extensions.
   take?: number
   skip?: number
   distinct?: Prisma.DocumentRecordScalarFieldEnum | Prisma.DocumentRecordScalarFieldEnum[]
+}
+
+/**
+ * User.pqrsCases
+ */
+export type User$pqrsCasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PqrsCase
+   */
+  select?: Prisma.PqrsCaseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PqrsCase
+   */
+  omit?: Prisma.PqrsCaseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PqrsCaseInclude<ExtArgs> | null
+  where?: Prisma.PqrsCaseWhereInput
+  orderBy?: Prisma.PqrsCaseOrderByWithRelationInput | Prisma.PqrsCaseOrderByWithRelationInput[]
+  cursor?: Prisma.PqrsCaseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PqrsCaseScalarFieldEnum | Prisma.PqrsCaseScalarFieldEnum[]
+}
+
+/**
+ * User.pqrsMessages
+ */
+export type User$pqrsMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PqrsMessage
+   */
+  select?: Prisma.PqrsMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PqrsMessage
+   */
+  omit?: Prisma.PqrsMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PqrsMessageInclude<ExtArgs> | null
+  where?: Prisma.PqrsMessageWhereInput
+  orderBy?: Prisma.PqrsMessageOrderByWithRelationInput | Prisma.PqrsMessageOrderByWithRelationInput[]
+  cursor?: Prisma.PqrsMessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PqrsMessageScalarFieldEnum | Prisma.PqrsMessageScalarFieldEnum[]
 }
 
 /**

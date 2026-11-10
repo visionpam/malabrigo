@@ -431,6 +431,8 @@ export const ModelName = {
   DocumentRecord: 'DocumentRecord',
   DossierDocument: 'DossierDocument',
   AuditLog: 'AuditLog',
+  PqrsCase: 'PqrsCase',
+  PqrsMessage: 'PqrsMessage',
   ContractTemplate: 'ContractTemplate',
   Contract: 'Contract',
   LegalAcceptance: 'LegalAcceptance',
@@ -458,7 +460,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "country" | "addressRegion" | "addressProvince" | "addressDistrict" | "documentTypeOption" | "occupationOption" | "maritalStatusOption" | "role" | "userRole" | "permission" | "userPermission" | "member" | "investorProfile" | "ambassadorProfile" | "beneficiary" | "program" | "financingPlan" | "sale" | "installment" | "paymentSubmission" | "payment" | "paymentAllocation" | "shareAllocation" | "stayAllocation" | "referralCode" | "sponsorship" | "constructionProject" | "projectStage" | "projectUpdate" | "projectMedia" | "documentRecord" | "dossierDocument" | "auditLog" | "contractTemplate" | "contract" | "legalAcceptance" | "accountInvitation" | "passwordResetToken" | "userSession" | "commissionRule" | "commissionEntry" | "rankDefinition" | "ambassadorRankHistory" | "rankBonusPayment" | "rankAward"
+    modelProps: "user" | "country" | "addressRegion" | "addressProvince" | "addressDistrict" | "documentTypeOption" | "occupationOption" | "maritalStatusOption" | "role" | "userRole" | "permission" | "userPermission" | "member" | "investorProfile" | "ambassadorProfile" | "beneficiary" | "program" | "financingPlan" | "sale" | "installment" | "paymentSubmission" | "payment" | "paymentAllocation" | "shareAllocation" | "stayAllocation" | "referralCode" | "sponsorship" | "constructionProject" | "projectStage" | "projectUpdate" | "projectMedia" | "documentRecord" | "dossierDocument" | "auditLog" | "pqrsCase" | "pqrsMessage" | "contractTemplate" | "contract" | "legalAcceptance" | "accountInvitation" | "passwordResetToken" | "userSession" | "commissionRule" | "commissionEntry" | "rankDefinition" | "ambassadorRankHistory" | "rankBonusPayment" | "rankAward"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2978,6 +2980,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PqrsCase: {
+      payload: Prisma.$PqrsCasePayload<ExtArgs>
+      fields: Prisma.PqrsCaseFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PqrsCaseFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PqrsCaseFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>
+        }
+        findFirst: {
+          args: Prisma.PqrsCaseFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PqrsCaseFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>
+        }
+        findMany: {
+          args: Prisma.PqrsCaseFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>[]
+        }
+        create: {
+          args: Prisma.PqrsCaseCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>
+        }
+        createMany: {
+          args: Prisma.PqrsCaseCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PqrsCaseCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>[]
+        }
+        delete: {
+          args: Prisma.PqrsCaseDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>
+        }
+        update: {
+          args: Prisma.PqrsCaseUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>
+        }
+        deleteMany: {
+          args: Prisma.PqrsCaseDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PqrsCaseUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PqrsCaseUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>[]
+        }
+        upsert: {
+          args: Prisma.PqrsCaseUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsCasePayload>
+        }
+        aggregate: {
+          args: Prisma.PqrsCaseAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePqrsCase>
+        }
+        groupBy: {
+          args: Prisma.PqrsCaseGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PqrsCaseGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PqrsCaseCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PqrsCaseCountAggregateOutputType> | number
+        }
+      }
+    }
+    PqrsMessage: {
+      payload: Prisma.$PqrsMessagePayload<ExtArgs>
+      fields: Prisma.PqrsMessageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PqrsMessageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PqrsMessageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>
+        }
+        findFirst: {
+          args: Prisma.PqrsMessageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PqrsMessageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>
+        }
+        findMany: {
+          args: Prisma.PqrsMessageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>[]
+        }
+        create: {
+          args: Prisma.PqrsMessageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>
+        }
+        createMany: {
+          args: Prisma.PqrsMessageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PqrsMessageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>[]
+        }
+        delete: {
+          args: Prisma.PqrsMessageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>
+        }
+        update: {
+          args: Prisma.PqrsMessageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>
+        }
+        deleteMany: {
+          args: Prisma.PqrsMessageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PqrsMessageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PqrsMessageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>[]
+        }
+        upsert: {
+          args: Prisma.PqrsMessageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PqrsMessagePayload>
+        }
+        aggregate: {
+          args: Prisma.PqrsMessageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePqrsMessage>
+        }
+        groupBy: {
+          args: Prisma.PqrsMessageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PqrsMessageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PqrsMessageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PqrsMessageCountAggregateOutputType> | number
+        }
+      }
+    }
     ContractTemplate: {
       payload: Prisma.$ContractTemplatePayload<ExtArgs>
       fields: Prisma.ContractTemplateFieldRefs
@@ -4363,6 +4513,37 @@ export const AuditLogScalarFieldEnum = {
 export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
 
 
+export const PqrsCaseScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  ownerId: 'ownerId',
+  category: 'category',
+  subject: 'subject',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  lastAdminReplyAt: 'lastAdminReplyAt',
+  memberSeenAt: 'memberSeenAt'
+} as const
+
+export type PqrsCaseScalarFieldEnum = (typeof PqrsCaseScalarFieldEnum)[keyof typeof PqrsCaseScalarFieldEnum]
+
+
+export const PqrsMessageScalarFieldEnum = {
+  id: 'id',
+  caseId: 'caseId',
+  authorId: 'authorId',
+  body: 'body',
+  isStaff: 'isStaff',
+  fileName: 'fileName',
+  fileMimeType: 'fileMimeType',
+  fileData: 'fileData',
+  createdAt: 'createdAt'
+} as const
+
+export type PqrsMessageScalarFieldEnum = (typeof PqrsMessageScalarFieldEnum)[keyof typeof PqrsMessageScalarFieldEnum]
+
+
 export const ContractTemplateScalarFieldEnum = {
   id: 'id',
   code: 'code',
@@ -4913,6 +5094,34 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'PqrsCategory'
+ */
+export type EnumPqrsCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PqrsCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'PqrsCategory[]'
+ */
+export type ListEnumPqrsCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PqrsCategory[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PqrsStatus'
+ */
+export type EnumPqrsStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PqrsStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PqrsStatus[]'
+ */
+export type ListEnumPqrsStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PqrsStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'ContractStatus'
  */
 export type EnumContractStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContractStatus'>
@@ -5138,6 +5347,8 @@ export type GlobalOmitConfig = {
   documentRecord?: Prisma.DocumentRecordOmit
   dossierDocument?: Prisma.DossierDocumentOmit
   auditLog?: Prisma.AuditLogOmit
+  pqrsCase?: Prisma.PqrsCaseOmit
+  pqrsMessage?: Prisma.PqrsMessageOmit
   contractTemplate?: Prisma.ContractTemplateOmit
   contract?: Prisma.ContractOmit
   legalAcceptance?: Prisma.LegalAcceptanceOmit

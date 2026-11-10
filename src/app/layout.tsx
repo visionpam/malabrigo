@@ -60,11 +60,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     hasInvestorProfile: Boolean(user.member?.investorProfile),
     portalViewPreference,
   } : null;
+  const pqrsUnreadCount = user && (user.member?.ambassadorProfile || user.member?.investorProfile)
+    ? await db.pqrsCase.count({ where: { ownerId: user.id, lastAdminReplyAt: { not: null }, OR: [{ memberSeenAt: null }, { memberSeenAt: { lt: db.pqrsCase.fields.lastAdminReplyAt } }] } })
+    : 0;
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${nunitoSans.variable} ${quicksand.variable}`}>
         <PwaRegistration />
-        <AppShell user={shellUser}>{children}</AppShell>
+        <AppShell user={shellUser} pqrsUnreadCount={pqrsUnreadCount}>{children}</AppShell>
       </body>
     </html>
   );
