@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
+import { PROJECT_NAME } from "@/lib/project-name";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     id: "/",
-    name: "Malabrigo Club Resort",
-    short_name: "Malabrigo",
-    description: "Portal de socios, inversionistas y embajadores de Malabrigo Club Resort.",
+    name: PROJECT_NAME,
+    short_name: PROJECT_NAME,
+    description: `Portal de socios, inversionistas y embajadores de ${PROJECT_NAME}.`,
     start_url: "/",
     scope: "/",
     display: "standalone",

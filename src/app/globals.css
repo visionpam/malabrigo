@@ -754,6 +754,7 @@ tbody tr:hover { background: rgba(214,163,66,.045); }
 .investor-program-table table { min-width: 1100px; }
 .investor-program-table th { white-space: normal; line-height: 1.35; }
 .investor-program-table td { vertical-align: top; }
+.investor-program-table td strong, .investor-payments-table td strong { overflow-wrap: anywhere; }
 .investor-document-type { color: var(--ui-muted); }
 .portal-section[id] { scroll-margin-top: 105px; }
 .investor-payment-toolbar { gap: 14px; }

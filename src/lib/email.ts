@@ -93,12 +93,12 @@ export async function sendAccountInvitation(input: { email: string; name: string
   const from = process.env.EMAIL_FROM?.trim();
   if (!from) return { sent: false, reason: "EMAIL_NOT_CONFIGURED" };
   const activationUrl = `${applicationUrl()}/activar-cuenta?token=${encodeURIComponent(input.token)}`;
-  return deliver({ from, to: input.email, subject: "Activa tu cuenta de Malabrigo", html: `<p>Hola ${escapeHtml(input.name)},</p><p>Tu cuenta de Malabrigo fue creada. Usa el siguiente enlace para crear tu contraseña:</p><p><a href="${activationUrl}">Crear mi contraseña</a></p><p>El enlace vence en 24 horas y solo puede utilizarse una vez.</p>` });
+  return deliver({ from, to: input.email, subject: "Activa tu cuenta de Malabrigo Club Resort", html: `<p>Hola ${escapeHtml(input.name)},</p><p>Tu cuenta de Malabrigo Club Resort fue creada. Usa el siguiente enlace para crear tu contraseña:</p><p><a href="${activationUrl}">Crear mi contraseña</a></p><p>El enlace vence en 24 horas y solo puede utilizarse una vez.</p>` });
 }
 
 export async function sendPasswordReset(input: { email: string; name: string; token: string }): Promise<DeliveryResult> {
   const from = process.env.EMAIL_FROM?.trim();
   if (!from) return { sent: false, reason: "EMAIL_NOT_CONFIGURED" };
   const url = `${applicationUrl()}/restablecer-contrasena?token=${encodeURIComponent(input.token)}`;
-  return deliver({ from, to: input.email, subject: "Restablece tu contraseña de Malabrigo", html: `<p>Hola ${escapeHtml(input.name)},</p><p>Solicitaste restablecer tu contraseña.</p><p><a href="${url}">Crear nueva contraseña</a></p><p>Este enlace vence en una hora. Si no hiciste esta solicitud, ignora este mensaje.</p>` });
+  return deliver({ from, to: input.email, subject: "Restablece tu contraseña de Malabrigo Club Resort", html: `<p>Hola ${escapeHtml(input.name)},</p><p>Solicitaste restablecer tu contraseña.</p><p><a href="${url}">Crear nueva contraseña</a></p><p>Este enlace vence en una hora. Si no hiciste esta solicitud, ignora este mensaje.</p>` });
 }

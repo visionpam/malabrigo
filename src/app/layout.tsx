@@ -6,19 +6,20 @@ import { PwaRegistration } from "@/components/pwa-registration";
 import { ServiceUnavailable } from "@/components/service-unavailable";
 import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/session";
+import { PROJECT_NAME } from "@/lib/project-name";
 import "./globals.css";
 
 const nunitoSans = Nunito_Sans({ subsets: ["latin"], variable: "--font-body" });
 const quicksand = Quicksand({ subsets: ["latin"], variable: "--font-heading" });
 
 export const metadata: Metadata = {
-  title: "Malabrigo Club Resort",
-  description: "Plataforma de gestión para socios de Malabrigo Club Resort",
-  applicationName: "Malabrigo Club Resort",
+  title: PROJECT_NAME,
+  description: `Plataforma de gestión para socios de ${PROJECT_NAME}`,
+  applicationName: PROJECT_NAME,
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
-    title: "Malabrigo",
+    title: PROJECT_NAME,
     statusBarStyle: "black-translucent",
   },
   icons: {

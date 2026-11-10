@@ -4,8 +4,7 @@ import { requireUser, roleCodes } from "@/lib/access-control";
 import { db } from "@/lib/db";
 import { formatDate, formatMoney, saleStatusLabel, statusTone } from "@/lib/format";
 import { redirect } from "next/navigation";
-
-const projectName = "Malabrigo";
+import { PROJECT_NAME } from "@/lib/project-name";
 
 export default async function MyPortalPage() {
   const user = await requireUser();
@@ -38,14 +37,14 @@ export default async function MyPortalPage() {
     <PageHeader eyebrow="Portal del inversionista" title="Mis inversiones" description={`${member.firstName}, aquí solo se muestra tu información personal y contractual.`} />
 
     <section className="module-metrics" aria-label="Resumen de inversiones">
-      <article className="module-metric investor-program-metric"><div className="kpi-icon"><Landmark size={20} aria-hidden="true" /></div><div><span>Proyecto / programa</span><strong>{programNames.length ? programNames.map((name) => `${projectName} / ${name}`).join(" · ") : "Sin inversiones"}</strong><small>{activeSales.length} {activeSales.length === 1 ? "inversión registrada" : "inversiones registradas"}</small></div></article>
+      <article className="module-metric investor-program-metric"><div className="kpi-icon"><Landmark size={20} aria-hidden="true" /></div><div><span>Proyecto / programa</span><strong>{programNames.length ? programNames.map((name) => `${PROJECT_NAME} / ${name}`).join(" · ") : "Sin inversiones"}</strong><small>{activeSales.length} {activeSales.length === 1 ? "inversión registrada" : "inversiones registradas"}</small></div></article>
       <MetricCard label="Valor del programa" value={formatMoney(programValue)} detail="Valor contratado vigente" icon={WalletCards} />
       <MetricCard label="Modalidad" value={paymentMode} detail={hasCash && hasFinancing ? "Contado y financiado" : "Según tus inversiones vigentes"} icon={FileCheck2} />
       <MetricCard label="Beneficiarios" value={String(beneficiaryCount)} detail="Asignaciones en programas" icon={UsersRound} />
     </section>
 
     <section className="module-panel"><div className="module-toolbar"><div><h2>Mis programas</h2><p>Condiciones, beneficios y estado de cada inversión</p></div></div>
-      {member.sales.length === 0 ? <EmptyState icon={Landmark} title="No tienes inversiones registradas" description="Cuando se registre una inversión a tu nombre aparecerá en este espacio." /> : <div className="table-wrap module-table investor-program-table"><table><thead><tr><th>Proyecto</th><th>Programa</th><th>Tipo de membresía</th><th>Modalidad</th><th>Valor</th><th>Monto pagado</th><th>Número de acciones</th><th>Estado</th><th>Fecha de registro</th></tr></thead><tbody>{member.sales.map((sale) => <tr key={sale.id}><td><strong>{projectName}</strong><small className="cell-secondary">{sale.code}</small></td><td>{sale.program.name}</td><td>{sale.program.membershipName ?? "No definida"}</td><td>{sale.mode === "CASH" ? "Contado" : "Financiado"}</td><td className="money">{formatMoney(sale.totalPrice)}</td><td className="money">{formatMoney(sale.payments.reduce((sum, payment) => sum + Number(payment.amount), 0))}</td><td>{sale.shareAllocation?.quantity != null ? sale.shareAllocation.quantity.toLocaleString("es-PE") : "No aplica"}</td><td><StatusPill tone={statusTone(sale.status)}>{saleStatusLabel[sale.status]}</StatusPill></td><td>{formatDate(sale.createdAt)}</td></tr>)}</tbody></table></div>}
+      {member.sales.length === 0 ? <EmptyState icon={Landmark} title="No tienes inversiones registradas" description="Cuando se registre una inversión a tu nombre aparecerá en este espacio." /> : <div className="table-wrap module-table investor-program-table"><table><thead><tr><th>Proyecto</th><th>Programa</th><th>Tipo de membresía</th><th>Modalidad</th><th>Valor</th><th>Monto pagado</th><th>Número de acciones</th><th>Estado</th><th>Fecha de registro</th></tr></thead><tbody>{member.sales.map((sale) => <tr key={sale.id}><td><strong>{PROJECT_NAME}</strong><small className="cell-secondary">{sale.code}</small></td><td>{sale.program.name}</td><td>{sale.program.membershipName ?? "No definida"}</td><td>{sale.mode === "CASH" ? "Contado" : "Financiado"}</td><td className="money">{formatMoney(sale.totalPrice)}</td><td className="money">{formatMoney(sale.payments.reduce((sum, payment) => sum + Number(payment.amount), 0))}</td><td>{sale.shareAllocation?.quantity != null ? sale.shareAllocation.quantity.toLocaleString("es-PE") : "No aplica"}</td><td><StatusPill tone={statusTone(sale.status)}>{saleStatusLabel[sale.status]}</StatusPill></td><td>{formatDate(sale.createdAt)}</td></tr>)}</tbody></table></div>}
     </section>
 
     <section className="module-panel portal-section"><div className="module-toolbar"><div><h2>Titulares y beneficiarios</h2><p>Personas asignadas por separado a cada programa.</p></div></div>
