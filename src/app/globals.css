@@ -44,6 +44,14 @@ a.primary-button, a.secondary-button { text-decoration: none; }
 .nav-item:hover { color: var(--text); background: rgba(255,255,255,.04); }
 .nav-item.active { color: var(--text); background: linear-gradient(90deg, rgba(207,148,52,.20), rgba(8,125,165,.08)); box-shadow: inset 2px 0 var(--brand-gold); }
 .nav-item.active svg { color: var(--sky); }
+.nav-project-heading { display: flex; align-items: center; gap: 4px; }
+.nav-project-heading .nav-item { min-width: 0; flex: 1; }
+.nav-project-toggle { width: 44px; min-height: 44px; display: grid; place-items: center; border: 1px solid var(--ui-border); border-radius: 10px; color: var(--ui-text); background: transparent; cursor: pointer; }
+.nav-project-toggle:hover, .nav-project-toggle:focus-visible { border-color: var(--ui-gold); background: rgba(214,163,66,.10); }
+.nav-project-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.nav-submenu { display: grid; gap: 3px; margin: 4px 0 8px 21px; padding-left: 12px; border-left: 1px solid var(--ui-border); }
+.nav-submenu a, .nav-submenu span { min-height: 36px; display: flex; align-items: center; padding: 7px 10px; border-radius: 8px; color: var(--ui-muted); font-size: 12px; line-height: 1.3; text-decoration: none; }
+.nav-submenu a:hover, .nav-submenu a:focus-visible { color: var(--ui-text); background: rgba(214,163,66,.10); }
 .nav-item b { margin-left: auto; min-width: 20px; height: 20px; display: grid; place-items: center; border-radius: 6px; color: var(--brand-gold-light); background: rgba(207,148,52,.14); font-size: 10px; }
 .sidebar-footer { margin-top: auto; flex: 0 0 auto; display: grid; gap: 6px; padding-top: 10px; border-top: 1px solid var(--border); }
 .sidebar-close, .sidebar-overlay { display: none; }

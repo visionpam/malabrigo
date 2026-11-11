@@ -28,6 +28,7 @@ export type ConstructionProjectMinAggregateOutputType = {
   id: string | null
   code: string | null
   name: string | null
+  developmentName: string | null
   description: string | null
   active: boolean | null
   createdAt: Date | null
@@ -37,6 +38,7 @@ export type ConstructionProjectMaxAggregateOutputType = {
   id: string | null
   code: string | null
   name: string | null
+  developmentName: string | null
   description: string | null
   active: boolean | null
   createdAt: Date | null
@@ -46,6 +48,7 @@ export type ConstructionProjectCountAggregateOutputType = {
   id: number
   code: number
   name: number
+  developmentName: number
   description: number
   active: number
   createdAt: number
@@ -57,6 +60,7 @@ export type ConstructionProjectMinAggregateInputType = {
   id?: true
   code?: true
   name?: true
+  developmentName?: true
   description?: true
   active?: true
   createdAt?: true
@@ -66,6 +70,7 @@ export type ConstructionProjectMaxAggregateInputType = {
   id?: true
   code?: true
   name?: true
+  developmentName?: true
   description?: true
   active?: true
   createdAt?: true
@@ -75,6 +80,7 @@ export type ConstructionProjectCountAggregateInputType = {
   id?: true
   code?: true
   name?: true
+  developmentName?: true
   description?: true
   active?: true
   createdAt?: true
@@ -157,6 +163,7 @@ export type ConstructionProjectGroupByOutputType = {
   id: string
   code: string
   name: string
+  developmentName: string
   description: string | null
   active: boolean
   createdAt: Date
@@ -187,6 +194,7 @@ export type ConstructionProjectWhereInput = {
   id?: Prisma.UuidFilter<"ConstructionProject"> | string
   code?: Prisma.StringFilter<"ConstructionProject"> | string
   name?: Prisma.StringFilter<"ConstructionProject"> | string
+  developmentName?: Prisma.StringFilter<"ConstructionProject"> | string
   description?: Prisma.StringNullableFilter<"ConstructionProject"> | string | null
   active?: Prisma.BoolFilter<"ConstructionProject"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ConstructionProject"> | Date | string
@@ -197,6 +205,7 @@ export type ConstructionProjectOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  developmentName?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -210,6 +219,7 @@ export type ConstructionProjectWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.ConstructionProjectWhereInput[]
   NOT?: Prisma.ConstructionProjectWhereInput | Prisma.ConstructionProjectWhereInput[]
   name?: Prisma.StringFilter<"ConstructionProject"> | string
+  developmentName?: Prisma.StringFilter<"ConstructionProject"> | string
   description?: Prisma.StringNullableFilter<"ConstructionProject"> | string | null
   active?: Prisma.BoolFilter<"ConstructionProject"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ConstructionProject"> | Date | string
@@ -220,6 +230,7 @@ export type ConstructionProjectOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  developmentName?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -235,6 +246,7 @@ export type ConstructionProjectScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"ConstructionProject"> | string
   code?: Prisma.StringWithAggregatesFilter<"ConstructionProject"> | string
   name?: Prisma.StringWithAggregatesFilter<"ConstructionProject"> | string
+  developmentName?: Prisma.StringWithAggregatesFilter<"ConstructionProject"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"ConstructionProject"> | string | null
   active?: Prisma.BoolWithAggregatesFilter<"ConstructionProject"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ConstructionProject"> | Date | string
@@ -244,6 +256,7 @@ export type ConstructionProjectCreateInput = {
   id?: string
   code: string
   name: string
+  developmentName?: string
   description?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -254,6 +267,7 @@ export type ConstructionProjectUncheckedCreateInput = {
   id?: string
   code: string
   name: string
+  developmentName?: string
   description?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -264,6 +278,7 @@ export type ConstructionProjectUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  developmentName?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -274,6 +289,7 @@ export type ConstructionProjectUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  developmentName?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -284,6 +300,7 @@ export type ConstructionProjectCreateManyInput = {
   id?: string
   code: string
   name: string
+  developmentName?: string
   description?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -293,6 +310,7 @@ export type ConstructionProjectUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  developmentName?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -302,6 +320,7 @@ export type ConstructionProjectUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  developmentName?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -311,6 +330,7 @@ export type ConstructionProjectCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  developmentName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -320,6 +340,7 @@ export type ConstructionProjectMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  developmentName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -329,6 +350,7 @@ export type ConstructionProjectMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   code?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  developmentName?: Prisma.SortOrder
   description?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -357,6 +379,7 @@ export type ConstructionProjectCreateWithoutStagesInput = {
   id?: string
   code: string
   name: string
+  developmentName?: string
   description?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -366,6 +389,7 @@ export type ConstructionProjectUncheckedCreateWithoutStagesInput = {
   id?: string
   code: string
   name: string
+  developmentName?: string
   description?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -391,6 +415,7 @@ export type ConstructionProjectUpdateWithoutStagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  developmentName?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -400,6 +425,7 @@ export type ConstructionProjectUncheckedUpdateWithoutStagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   code?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  developmentName?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -440,6 +466,7 @@ export type ConstructionProjectSelect<ExtArgs extends runtime.Types.Extensions.I
   id?: boolean
   code?: boolean
   name?: boolean
+  developmentName?: boolean
   description?: boolean
   active?: boolean
   createdAt?: boolean
@@ -451,6 +478,7 @@ export type ConstructionProjectSelectCreateManyAndReturn<ExtArgs extends runtime
   id?: boolean
   code?: boolean
   name?: boolean
+  developmentName?: boolean
   description?: boolean
   active?: boolean
   createdAt?: boolean
@@ -460,6 +488,7 @@ export type ConstructionProjectSelectUpdateManyAndReturn<ExtArgs extends runtime
   id?: boolean
   code?: boolean
   name?: boolean
+  developmentName?: boolean
   description?: boolean
   active?: boolean
   createdAt?: boolean
@@ -469,12 +498,13 @@ export type ConstructionProjectSelectScalar = {
   id?: boolean
   code?: boolean
   name?: boolean
+  developmentName?: boolean
   description?: boolean
   active?: boolean
   createdAt?: boolean
 }
 
-export type ConstructionProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "description" | "active" | "createdAt", ExtArgs["result"]["constructionProject"]>
+export type ConstructionProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "name" | "developmentName" | "description" | "active" | "createdAt", ExtArgs["result"]["constructionProject"]>
 export type ConstructionProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stages?: boolean | Prisma.ConstructionProject$stagesArgs<ExtArgs>
   _count?: boolean | Prisma.ConstructionProjectCountOutputTypeDefaultArgs<ExtArgs>
@@ -491,6 +521,7 @@ export type $ConstructionProjectPayload<ExtArgs extends runtime.Types.Extensions
     id: string
     code: string
     name: string
+    developmentName: string
     description: string | null
     active: boolean
     createdAt: Date
@@ -921,6 +952,7 @@ export interface ConstructionProjectFieldRefs {
   readonly id: Prisma.FieldRef<"ConstructionProject", 'String'>
   readonly code: Prisma.FieldRef<"ConstructionProject", 'String'>
   readonly name: Prisma.FieldRef<"ConstructionProject", 'String'>
+  readonly developmentName: Prisma.FieldRef<"ConstructionProject", 'String'>
   readonly description: Prisma.FieldRef<"ConstructionProject", 'String'>
   readonly active: Prisma.FieldRef<"ConstructionProject", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"ConstructionProject", 'DateTime'>

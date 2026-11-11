@@ -64,11 +64,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const pqrsUnreadCount = user && (user.member?.ambassadorProfile || user.member?.investorProfile)
     ? await db.pqrsCase.count({ where: { ownerId: user.id, lastAdminReplyAt: { not: null }, OR: [{ memberSeenAt: null }, { memberSeenAt: { lt: db.pqrsCase.fields.lastAdminReplyAt } }] } })
     : 0;
+  const investorProjects = shellUser?.hasInvestorProfile
+    ? await db.constructionProject.findMany({ where: { active: true }, distinct: ["developmentName"], orderBy: { developmentName: "asc" }, select: { developmentName: true } })
+    : [];
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${nunitoSans.variable} ${quicksand.variable}`}>
         <PwaRegistration />
-        <AppShell user={shellUser} pqrsUnreadCount={pqrsUnreadCount}>{children}</AppShell>
+        <AppShell user={shellUser} pqrsUnreadCount={pqrsUnreadCount} investorProjects={investorProjects.map((project) => project.developmentName)}>{children}</AppShell>
       </body>
     </html>
   );

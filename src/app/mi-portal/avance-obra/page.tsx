@@ -4,20 +4,26 @@ import { EmptyState, MetricCard, PageHeader } from "@/components/module-ui";
 import { db } from "@/lib/db";
 import { requireUser } from "@/lib/access-control";
 import { formatDate } from "@/lib/format";
+import { PROJECT_NAME } from "@/lib/project-name";
+import { selectDevelopmentName } from "@/lib/construction-portal";
 
-export default async function MemberConstructionPage() {
+export default async function MemberConstructionPage({ searchParams }: { searchParams: Promise<{ proyecto?: string }> }) {
   const user = await requireUser();
   if (!user.member) return <EmptyState icon={HardHat} title="Perfil no disponible" description="Tu cuenta no tiene un perfil de socio asociado." />;
   await connection();
 
-  const [projects, renders] = await Promise.all([
-    db.constructionProject.findMany({ where: { active: true }, orderBy: { createdAt: "asc" }, include: { stages: { orderBy: { sortOrder: "asc" }, include: { updates: { where: { publishedAt: { not: null } }, orderBy: { occurredAt: "desc" }, include: { media: { orderBy: { sortOrder: "asc" } } } } } } } }),
+  const { proyecto } = await searchParams;
+  const [allProjects, allRenders] = await Promise.all([
+    db.constructionProject.findMany({ where: { active: true }, orderBy: [{ developmentName: "asc" }, { createdAt: "asc" }], include: { stages: { orderBy: { sortOrder: "asc" }, include: { updates: { where: { publishedAt: { not: null } }, orderBy: { occurredAt: "desc" }, include: { media: { orderBy: { sortOrder: "asc" } } } } } } } }),
     db.documentRecord.findMany({ where: { memberId: null, visibility: "ALL_MEMBERS", status: "APPROVED", category: "RENDER" }, orderBy: { createdAt: "desc" }, select: { id: true, title: true, url: true, createdAt: true } }),
   ]);
+  const selectedName = selectDevelopmentName(allProjects, proyecto);
+  const projects = allProjects.filter((project) => project.developmentName === selectedName);
+  const renders = selectedName === PROJECT_NAME ? allRenders : [];
   const updates = projects.flatMap((project, index) => project.stages.flatMap((stage) => stage.updates.map((update) => ({ project, stage, update, index }))));
 
   return <>
-    <PageHeader eyebrow="Etapas de Malabrigo Club Resort" title="MALABRIGO CLUB RESORT" description="Consulta las etapas y publicaciones oficiales del avance de obra." />
+    <PageHeader eyebrow="Proyecto inmobiliario" title={selectedName ?? "Proyectos"} description="Consulta las etapas y publicaciones oficiales del avance de obra." />
     <section className="module-metrics" aria-label="Ir al material del proyecto">
       <MetricCard label="Etapas" value={String(projects.length)} detail="Ver etapas" icon={HardHat} href="#etapas-obra" />
       <MetricCard label="Renderizados" value={String(renders.length)} detail="Ver renderizados" icon={FileImage} href="#renderizados" />

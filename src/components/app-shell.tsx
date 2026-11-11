@@ -38,10 +38,11 @@ const investorNavigation: NavigationItem[] = [
 type PortalView = "AMBASSADOR" | "INVESTOR";
 type ShellUser = { displayName: string; roles: string[]; permissions: string[]; hasAmbassadorProfile: boolean; hasInvestorProfile: boolean; portalViewPreference: PortalView | null } | null;
 
-export function AppShell({ children, user, pqrsUnreadCount = 0 }: { children: React.ReactNode; user: ShellUser; pqrsUnreadCount?: number }) {
+export function AppShell({ children, user, pqrsUnreadCount = 0, investorProjects = [] }: { children: React.ReactNode; user: ShellUser; pqrsUnreadCount?: number; investorProjects?: string[] }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(pathname.startsWith("/mi-portal/avance-obra"));
   const [selectedPortalView, setSelectedPortalView] = useState<PortalView>(pathname.startsWith("/mi-portal") ? "INVESTOR" : pathname.startsWith("/mi-red") ? "AMBASSADOR" : user?.portalViewPreference ?? "AMBASSADOR");
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
@@ -121,6 +122,10 @@ export function AppShell({ children, user, pqrsUnreadCount = 0 }: { children: Re
             })}</div>}
           {!!portalNavigation.length && <div className="nav-group"><span className="nav-group-label">{activePortalView === "AMBASSADOR" ? "Portal del embajador" : "Portal del inversionista"}</span>{portalNavigation.map(({ label, icon: Icon, href }) => {
             const active = href === "/mi-portal" ? pathname === href : pathname.startsWith(href);
+            if (href === "/mi-portal/avance-obra") return <div className="nav-project-group" key={href}>
+              <div className="nav-project-heading"><Link className={active ? "nav-item active" : "nav-item"} href={href} onClick={() => { setProjectsOpen(true); setMenuOpen(false); setProfileOpen(false); }} aria-current={active ? "page" : undefined}><Icon aria-hidden="true" size={19} strokeWidth={1.8} /><span>{label}</span></Link><button type="button" className="nav-project-toggle" aria-label={`${projectsOpen ? "Ocultar" : "Mostrar"} proyectos`} aria-expanded={projectsOpen} onClick={() => setProjectsOpen((open) => !open)}><ChevronDown size={17} aria-hidden="true" /></button></div>
+              {projectsOpen && <div className="nav-submenu" role="group" aria-label="Proyectos disponibles">{investorProjects.length ? investorProjects.map((name) => <Link key={name} href={`${href}?proyecto=${encodeURIComponent(name)}`} onClick={() => { setMenuOpen(false); setProfileOpen(false); }}>{name}</Link>) : <span>Sin proyectos disponibles</span>}</div>}
+            </div>;
             return <Link className={active ? "nav-item active" : "nav-item"} href={href} key={href} onClick={() => { setMenuOpen(false); setProfileOpen(false); }} aria-current={active ? "page" : undefined}><Icon aria-hidden="true" size={19} strokeWidth={1.8} /><span>{label}</span></Link>;
           })}</div>}
         </nav>

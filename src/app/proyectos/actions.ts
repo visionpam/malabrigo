@@ -9,6 +9,7 @@ export type ProjectState = { success: boolean; message: string };
 const schema = z.object({
   code: z.string().trim().toUpperCase().min(2).max(40).regex(/^[A-Z0-9-]+$/),
   name: z.string().trim().min(3).max(160),
+  developmentName: z.string().trim().min(3).max(160),
   description: z.string().trim().max(2000),
 });
 
@@ -18,12 +19,12 @@ function refresh() {
 
 export async function saveConstructionProjectAction(id: string | null, _previous: ProjectState, formData: FormData): Promise<ProjectState> {
   const actor = await requirePermission("CONSTRUCTION");
-  const parsed = schema.safeParse({ code: formData.get("code"), name: formData.get("name"), description: formData.get("description") ?? "" });
-  if (!parsed.success) return { success: false, message: "Revisa el código (letras, números o guiones), el nombre y la descripción." };
+  const parsed = schema.safeParse({ code: formData.get("code"), name: formData.get("name"), developmentName: formData.get("developmentName"), description: formData.get("description") ?? "" });
+  if (!parsed.success) return { success: false, message: "Revisa el código, el proyecto inmobiliario, el nombre de la etapa y la descripción." };
   try {
-    const data = { code: parsed.data.code, name: parsed.data.name, description: parsed.data.description || null };
+    const data = { code: parsed.data.code, name: parsed.data.name, developmentName: parsed.data.developmentName, description: parsed.data.description || null };
     await db.$transaction(async (tx) => {
-      const current = id ? await tx.constructionProject.findUnique({ where: { id }, select: { code: true, name: true, description: true, active: true } }) : null;
+      const current = id ? await tx.constructionProject.findUnique({ where: { id }, select: { code: true, name: true, developmentName: true, description: true, active: true } }) : null;
       if (id && !current) throw new Error("PROJECT_NOT_FOUND");
       const project = id ? await tx.constructionProject.update({ where: { id }, data }) : await tx.constructionProject.create({ data });
       await tx.auditLog.create({ data: { actorUserId: actor.id, action: id ? "CONSTRUCTION_PROJECT_UPDATED" : "CONSTRUCTION_PROJECT_CREATED", entityType: "ConstructionProject", entityId: project.id, before: current ?? undefined, after: { ...data, active: project.active } } });

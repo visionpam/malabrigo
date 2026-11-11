@@ -596,11 +596,13 @@ model ConstructionProject {
   id          String         @id @default(uuid()) @db.Uuid
   code        String         @unique @db.VarChar(40)
   name        String         @db.VarChar(160)
+  developmentName String     @default("Malabrigo Club Resort") @map("development_name") @db.VarChar(160)
   description String?        @db.Text
   active      Boolean        @default(true)
   createdAt   DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
   stages      ProjectStage[]
 
+  @@index([developmentName, active])
   @@map("construction_projects")
 }
 

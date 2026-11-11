@@ -4,14 +4,15 @@ import { useActionState, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Ban, Check, LoaderCircle, Pencil, Plus, Save, TriangleAlert, X } from "lucide-react";
 import { saveConstructionProjectAction, setConstructionProjectActiveAction, type ProjectState } from "./actions";
+import { PROJECT_NAME } from "@/lib/project-name";
 
-export type ProjectInfo = { id: string; code: string; name: string; description: string | null; active: boolean };
+export type ProjectInfo = { id: string; code: string; name: string; developmentName: string; description: string | null; active: boolean };
 const initial: ProjectState = { success: false, message: "" };
 
 function ProjectForm({ project, onClose, onDone }: { project: ProjectInfo | null; onClose: () => void; onDone: (message: string) => void }) {
   const [state, action, pending] = useActionState(saveConstructionProjectAction.bind(null, project?.id ?? null), initial);
   useEffect(() => { if (state.success) onDone(state.message); }, [state.success, state.message, onDone]);
-  return <form action={action} className="member-form"><div className="form-grid"><label><span>Código *</span><input name="code" defaultValue={project?.code ?? ""} maxLength={40} required placeholder="EJ. MALABRIGO-01" /></label><label><span>Nombre del proyecto *</span><input name="name" defaultValue={project?.name ?? ""} maxLength={160} required /></label><label className="form-wide"><span>Descripción</span><textarea name="description" defaultValue={project?.description ?? ""} rows={4} maxLength={2000} /></label></div>{state.message && !state.success && <p className="form-message error" role="alert">{state.message}</p>}<div className="dialog-actions"><button className="cancel-button" type="button" onClick={onClose}>Cancelar</button><button className="primary-button" disabled={pending}>{pending ? <LoaderCircle className="spinner" size={17} /> : <Save size={17} />}{pending ? "Guardando..." : "Guardar proyecto"}</button></div></form>;
+  return <form action={action} className="member-form"><div className="form-grid"><label><span>Código *</span><input name="code" defaultValue={project?.code ?? ""} maxLength={40} required placeholder="EJ. MALABRIGO-01" /></label><label><span>Proyecto inmobiliario *</span><input name="developmentName" defaultValue={project?.developmentName ?? PROJECT_NAME} maxLength={160} required /></label><label className="form-wide"><span>Nombre de la etapa o frente *</span><input name="name" defaultValue={project?.name ?? ""} maxLength={160} required /></label><label className="form-wide"><span>Descripción</span><textarea name="description" defaultValue={project?.description ?? ""} rows={4} maxLength={2000} /></label></div>{state.message && !state.success && <p className="form-message error" role="alert">{state.message}</p>}<div className="dialog-actions"><button className="cancel-button" type="button" onClick={onClose}>Cancelar</button><button className="primary-button" disabled={pending}>{pending ? <LoaderCircle className="spinner" size={17} /> : <Save size={17} />}{pending ? "Guardando..." : "Guardar proyecto"}</button></div></form>;
 }
 
 function StatusForm({ project, onClose, onDone }: { project: ProjectInfo; onClose: () => void; onDone: (message: string) => void }) {

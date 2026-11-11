@@ -4409,6 +4409,7 @@ export const ConstructionProjectScalarFieldEnum = {
   id: 'id',
   code: 'code',
   name: 'name',
+  developmentName: 'developmentName',
   description: 'description',
   active: 'active',
   createdAt: 'createdAt'
