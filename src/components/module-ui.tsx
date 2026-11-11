@@ -4,8 +4,9 @@ export function PageHeader({ eyebrow, title, description, action }: { eyebrow: s
   return <div className="module-heading"><div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{description}</p></div>{action && <div className="heading-actions">{action}</div>}</div>;
 }
 
-export function MetricCard({ label, value, detail, icon: Icon }: { label: string; value: string; detail: string; icon: LucideIcon }) {
-  return <article className="module-metric"><div className="kpi-icon"><Icon size={20} /></div><div><span>{label}</span><strong>{value}</strong><small>{detail}</small></div></article>;
+export function MetricCard({ label, value, detail, icon: Icon, href }: { label: string; value: string; detail: string; icon: LucideIcon; href?: string }) {
+  const content = <><div className="kpi-icon"><Icon size={20} aria-hidden="true" /></div><div><span>{label}</span><strong>{value}</strong><small>{detail}</small></div></>;
+  return href ? <a className="module-metric" href={href} aria-label={`${label}: ${value}. Ir a la sección`}>{content}</a> : <article className="module-metric">{content}</article>;
 }
 
 export function EmptyState({ icon: Icon, title, description }: { icon: LucideIcon; title: string; description: string }) {
