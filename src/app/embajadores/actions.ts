@@ -11,6 +11,19 @@ export async function recalculateRanksAction() {
   revalidatePath("/embajadores"); revalidatePath("/mi-red"); revalidatePath("/reportes");
 }
 
+export async function approveNetworkInclusionAction(profileId: string) {
+  const actor = await requirePermission("AMBASSADORS");
+  await db.$transaction(async (transaction) => {
+    const profile = await transaction.investorProfile.findUnique({ where: { id: profileId }, select: { id: true, memberId: true, sponsorId: true, networkApprovalStatus: true } });
+    if (!profile?.sponsorId || profile.networkApprovalStatus !== "PENDING") return;
+    await transaction.investorProfile.update({ where: { id: profileId }, data: { networkApprovalStatus: "APPROVED", networkApprovedAt: new Date() } });
+    const sales = await transaction.sale.findMany({ where: { memberId: profile.memberId, status: { in: ["ACTIVE", "COMPLETED"] } }, select: { id: true } });
+    for (const sale of sales) await reconcileDirectCommission(transaction, sale.id);
+    await transaction.auditLog.create({ data: { actorUserId: actor.id, action: "NETWORK_INCLUSION_APPROVED", entityType: "InvestorProfile", entityId: profile.id, before: { networkApprovalStatus: "PENDING" }, after: { networkApprovalStatus: "APPROVED", sponsorId: profile.sponsorId } } });
+  });
+  revalidatePath("/embajadores"); revalidatePath("/mi-red"); revalidatePath("/reportes");
+}
+
 export async function updateCommissionStatusAction(id: string, status: "APPROVED" | "PAID" | "REVERSED") {
   const actor = await requirePermission("AMBASSADORS");
   const current = await db.commissionEntry.findUnique({ where: { id } }); if (!current) return;

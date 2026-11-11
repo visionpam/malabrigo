@@ -352,6 +352,8 @@ model InvestorProfile {
   id          String             @id @default(uuid()) @db.Uuid
   memberId    String             @unique @map("member_id") @db.Uuid
   sponsorId   String?            @map("sponsor_id") @db.Uuid
+  networkApprovalStatus String   @default("APPROVED") @map("network_approval_status") @db.VarChar(20)
+  networkApprovedAt DateTime?     @map("network_approved_at") @db.Timestamptz(6)
   status      MemberStatus       @default(PROSPECT)
   activatedAt DateTime?          @map("activated_at") @db.Timestamptz(6)
   createdAt   DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
@@ -359,6 +361,7 @@ model InvestorProfile {
   sponsor     AmbassadorProfile? @relation("InvestorSponsorship", fields: [sponsorId], references: [id], onDelete: Restrict)
 
   @@index([sponsorId])
+  @@index([networkApprovalStatus])
   @@map("investor_profiles")
 }
 

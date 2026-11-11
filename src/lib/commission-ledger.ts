@@ -21,7 +21,7 @@ async function collectNetwork(transaction: Tx, ambassadorId: string) {
   for (let depth = 1; depth <= 8 && frontier.length; depth++) {
     const [ambassadors, investors] = await Promise.all([
       transaction.ambassadorProfile.findMany({ where: { sponsorId: { in: frontier }, status: "ACTIVE" }, select: { id: true, memberId: true } }),
-      transaction.investorProfile.findMany({ where: { sponsorId: { in: frontier }, status: { notIn: ["WITHDRAWN", "SUSPENDED"] } }, select: { memberId: true } }),
+      transaction.investorProfile.findMany({ where: { sponsorId: { in: frontier }, networkApprovalStatus: "APPROVED", status: { notIn: ["WITHDRAWN", "SUSPENDED"] } }, select: { memberId: true } }),
     ]);
     for (const item of [...ambassadors, ...investors]) { memberIds.add(item.memberId); if (depth === 1) directMemberIds.add(item.memberId); }
     frontier = ambassadors.map((item) => item.id);
@@ -75,7 +75,7 @@ export async function reconcileDirectCommission(transaction: Tx, saleId: string)
   if (!sale) return;
   await transaction.commissionEntry.deleteMany({ where: { sourceSaleId: saleId, generation: { gte: 1 }, status: "PENDING" } });
   const sponsorId = sale.member.investorProfile?.sponsorId;
-  if (!sponsorId || !["ACTIVE", "COMPLETED"].includes(sale.status)) return;
+  if (!sponsorId || sale.member.investorProfile?.networkApprovalStatus !== "APPROVED" || !["ACTIVE", "COMPLETED"].includes(sale.status)) return;
   let accumulated = 0; let triggerPaymentId: string | null = null;
   const eligiblePayments = sale.mode === "CREDIT" ? sale.payments.filter((payment) => payment.concept === "DOWN_PAYMENT") : sale.payments;
   const threshold = sale.mode === "CREDIT" ? Number(sale.downPaymentAmount) : Number(sale.totalPrice);

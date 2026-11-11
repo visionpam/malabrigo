@@ -272,6 +272,8 @@ export const InvestorProfileScalarFieldEnum = {
   id: 'id',
   memberId: 'memberId',
   sponsorId: 'sponsorId',
+  networkApprovalStatus: 'networkApprovalStatus',
+  networkApprovedAt: 'networkApprovedAt',
   status: 'status',
   activatedAt: 'activatedAt',
   createdAt: 'createdAt'

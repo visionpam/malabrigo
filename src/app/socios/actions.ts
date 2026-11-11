@@ -126,7 +126,7 @@ export async function createMemberAction(_previousState: CreateMemberState, form
       });
       createdMemberId = member.id;
 
-      if (data.profileType === "INVESTOR" || data.profileType === "BOTH") await transaction.investorProfile.create({ data: { memberId: member.id, sponsorId: data.sponsorId || null, status: "PROSPECT" } });
+      if (data.profileType === "INVESTOR" || data.profileType === "BOTH") await transaction.investorProfile.create({ data: { memberId: member.id, sponsorId: data.sponsorId || null, status: "PROSPECT", networkApprovalStatus: data.sponsorId ? "PENDING" : "APPROVED" } });
       if (data.profileType === "AMBASSADOR" || data.profileType === "BOTH") await transaction.ambassadorProfile.create({ data: { memberId: member.id, referralCode: memberCode, sponsorId: data.sponsorId || null, status: "ACTIVE" } });
       const roleCodes = [data.profileType !== "AMBASSADOR" ? "MEMBER" : null, data.profileType !== "INVESTOR" ? "AMBASSADOR" : null].filter((value): value is string => Boolean(value));
       const roles = await transaction.role.findMany({ where: { code: { in: roleCodes } }, select: { id: true } });
@@ -204,7 +204,7 @@ export async function updateMemberAction(memberId: string, _previousState: Creat
         if (!sponsor) throw new Error("INVALID_SPONSOR");
       }
       await transaction.member.update({ where: { id: memberId }, data: { documentType: data.documentType, documentNumber, firstName: data.firstName, lastName: data.lastName, countryCode: data.countryCode, regionCode: data.regionCode || null, provinceCode: data.provinceCode || null, districtCode: data.districtCode || null, phone: data.phone || null, email: data.email, residence: data.residence || null, occupation: data.occupation || null, maritalStatus: data.maritalStatus ?? null } });
-      if (wantsInvestor && !current.investorProfile) await transaction.investorProfile.create({ data: { memberId, sponsorId: data.sponsorId || null, status: "PROSPECT" } });
+      if (wantsInvestor && !current.investorProfile) await transaction.investorProfile.create({ data: { memberId, sponsorId: data.sponsorId || null, status: "PROSPECT", networkApprovalStatus: data.sponsorId ? "PENDING" : "APPROVED" } });
       if (wantsAmbassador && !current.ambassadorProfile) await transaction.ambassadorProfile.create({ data: { memberId, referralCode: current.memberCode, sponsorId: data.sponsorId || null, status: "ACTIVE" } });
       if (current.userId) await transaction.user.update({ where: { id: current.userId }, data: { email: data.email, displayName: `${data.firstName} ${data.lastName}` } });
       await transaction.auditLog.create({ data: {

@@ -28,6 +28,8 @@ export type InvestorProfileMinAggregateOutputType = {
   id: string | null
   memberId: string | null
   sponsorId: string | null
+  networkApprovalStatus: string | null
+  networkApprovedAt: Date | null
   status: $Enums.MemberStatus | null
   activatedAt: Date | null
   createdAt: Date | null
@@ -37,6 +39,8 @@ export type InvestorProfileMaxAggregateOutputType = {
   id: string | null
   memberId: string | null
   sponsorId: string | null
+  networkApprovalStatus: string | null
+  networkApprovedAt: Date | null
   status: $Enums.MemberStatus | null
   activatedAt: Date | null
   createdAt: Date | null
@@ -46,6 +50,8 @@ export type InvestorProfileCountAggregateOutputType = {
   id: number
   memberId: number
   sponsorId: number
+  networkApprovalStatus: number
+  networkApprovedAt: number
   status: number
   activatedAt: number
   createdAt: number
@@ -57,6 +63,8 @@ export type InvestorProfileMinAggregateInputType = {
   id?: true
   memberId?: true
   sponsorId?: true
+  networkApprovalStatus?: true
+  networkApprovedAt?: true
   status?: true
   activatedAt?: true
   createdAt?: true
@@ -66,6 +74,8 @@ export type InvestorProfileMaxAggregateInputType = {
   id?: true
   memberId?: true
   sponsorId?: true
+  networkApprovalStatus?: true
+  networkApprovedAt?: true
   status?: true
   activatedAt?: true
   createdAt?: true
@@ -75,6 +85,8 @@ export type InvestorProfileCountAggregateInputType = {
   id?: true
   memberId?: true
   sponsorId?: true
+  networkApprovalStatus?: true
+  networkApprovedAt?: true
   status?: true
   activatedAt?: true
   createdAt?: true
@@ -157,6 +169,8 @@ export type InvestorProfileGroupByOutputType = {
   id: string
   memberId: string
   sponsorId: string | null
+  networkApprovalStatus: string
+  networkApprovedAt: Date | null
   status: $Enums.MemberStatus
   activatedAt: Date | null
   createdAt: Date
@@ -187,6 +201,8 @@ export type InvestorProfileWhereInput = {
   id?: Prisma.UuidFilter<"InvestorProfile"> | string
   memberId?: Prisma.UuidFilter<"InvestorProfile"> | string
   sponsorId?: Prisma.UuidNullableFilter<"InvestorProfile"> | string | null
+  networkApprovalStatus?: Prisma.StringFilter<"InvestorProfile"> | string
+  networkApprovedAt?: Prisma.DateTimeNullableFilter<"InvestorProfile"> | Date | string | null
   status?: Prisma.EnumMemberStatusFilter<"InvestorProfile"> | $Enums.MemberStatus
   activatedAt?: Prisma.DateTimeNullableFilter<"InvestorProfile"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"InvestorProfile"> | Date | string
@@ -198,6 +214,8 @@ export type InvestorProfileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   sponsorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  networkApprovalStatus?: Prisma.SortOrder
+  networkApprovedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -212,6 +230,8 @@ export type InvestorProfileWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.InvestorProfileWhereInput[]
   NOT?: Prisma.InvestorProfileWhereInput | Prisma.InvestorProfileWhereInput[]
   sponsorId?: Prisma.UuidNullableFilter<"InvestorProfile"> | string | null
+  networkApprovalStatus?: Prisma.StringFilter<"InvestorProfile"> | string
+  networkApprovedAt?: Prisma.DateTimeNullableFilter<"InvestorProfile"> | Date | string | null
   status?: Prisma.EnumMemberStatusFilter<"InvestorProfile"> | $Enums.MemberStatus
   activatedAt?: Prisma.DateTimeNullableFilter<"InvestorProfile"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"InvestorProfile"> | Date | string
@@ -223,6 +243,8 @@ export type InvestorProfileOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   sponsorId?: Prisma.SortOrderInput | Prisma.SortOrder
+  networkApprovalStatus?: Prisma.SortOrder
+  networkApprovedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -238,6 +260,8 @@ export type InvestorProfileScalarWhereWithAggregatesInput = {
   id?: Prisma.UuidWithAggregatesFilter<"InvestorProfile"> | string
   memberId?: Prisma.UuidWithAggregatesFilter<"InvestorProfile"> | string
   sponsorId?: Prisma.UuidNullableWithAggregatesFilter<"InvestorProfile"> | string | null
+  networkApprovalStatus?: Prisma.StringWithAggregatesFilter<"InvestorProfile"> | string
+  networkApprovedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"InvestorProfile"> | Date | string | null
   status?: Prisma.EnumMemberStatusWithAggregatesFilter<"InvestorProfile"> | $Enums.MemberStatus
   activatedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"InvestorProfile"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"InvestorProfile"> | Date | string
@@ -245,6 +269,8 @@ export type InvestorProfileScalarWhereWithAggregatesInput = {
 
 export type InvestorProfileCreateInput = {
   id?: string
+  networkApprovalStatus?: string
+  networkApprovedAt?: Date | string | null
   status?: $Enums.MemberStatus
   activatedAt?: Date | string | null
   createdAt?: Date | string
@@ -256,6 +282,8 @@ export type InvestorProfileUncheckedCreateInput = {
   id?: string
   memberId: string
   sponsorId?: string | null
+  networkApprovalStatus?: string
+  networkApprovedAt?: Date | string | null
   status?: $Enums.MemberStatus
   activatedAt?: Date | string | null
   createdAt?: Date | string
@@ -263,6 +291,8 @@ export type InvestorProfileUncheckedCreateInput = {
 
 export type InvestorProfileUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -274,6 +304,8 @@ export type InvestorProfileUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
   sponsorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -283,6 +315,8 @@ export type InvestorProfileCreateManyInput = {
   id?: string
   memberId: string
   sponsorId?: string | null
+  networkApprovalStatus?: string
+  networkApprovedAt?: Date | string | null
   status?: $Enums.MemberStatus
   activatedAt?: Date | string | null
   createdAt?: Date | string
@@ -290,6 +324,8 @@ export type InvestorProfileCreateManyInput = {
 
 export type InvestorProfileUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -299,6 +335,8 @@ export type InvestorProfileUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
   sponsorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -313,6 +351,8 @@ export type InvestorProfileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   sponsorId?: Prisma.SortOrder
+  networkApprovalStatus?: Prisma.SortOrder
+  networkApprovedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -322,6 +362,8 @@ export type InvestorProfileMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   sponsorId?: Prisma.SortOrder
+  networkApprovalStatus?: Prisma.SortOrder
+  networkApprovedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -331,6 +373,8 @@ export type InvestorProfileMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   memberId?: Prisma.SortOrder
   sponsorId?: Prisma.SortOrder
+  networkApprovalStatus?: Prisma.SortOrder
+  networkApprovedAt?: Prisma.SortOrder
   status?: Prisma.SortOrder
   activatedAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -422,6 +466,8 @@ export type InvestorProfileUncheckedUpdateManyWithoutSponsorNestedInput = {
 
 export type InvestorProfileCreateWithoutMemberInput = {
   id?: string
+  networkApprovalStatus?: string
+  networkApprovedAt?: Date | string | null
   status?: $Enums.MemberStatus
   activatedAt?: Date | string | null
   createdAt?: Date | string
@@ -431,6 +477,8 @@ export type InvestorProfileCreateWithoutMemberInput = {
 export type InvestorProfileUncheckedCreateWithoutMemberInput = {
   id?: string
   sponsorId?: string | null
+  networkApprovalStatus?: string
+  networkApprovedAt?: Date | string | null
   status?: $Enums.MemberStatus
   activatedAt?: Date | string | null
   createdAt?: Date | string
@@ -454,6 +502,8 @@ export type InvestorProfileUpdateToOneWithWhereWithoutMemberInput = {
 
 export type InvestorProfileUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -463,6 +513,8 @@ export type InvestorProfileUpdateWithoutMemberInput = {
 export type InvestorProfileUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sponsorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -470,6 +522,8 @@ export type InvestorProfileUncheckedUpdateWithoutMemberInput = {
 
 export type InvestorProfileCreateWithoutSponsorInput = {
   id?: string
+  networkApprovalStatus?: string
+  networkApprovedAt?: Date | string | null
   status?: $Enums.MemberStatus
   activatedAt?: Date | string | null
   createdAt?: Date | string
@@ -479,6 +533,8 @@ export type InvestorProfileCreateWithoutSponsorInput = {
 export type InvestorProfileUncheckedCreateWithoutSponsorInput = {
   id?: string
   memberId: string
+  networkApprovalStatus?: string
+  networkApprovedAt?: Date | string | null
   status?: $Enums.MemberStatus
   activatedAt?: Date | string | null
   createdAt?: Date | string
@@ -517,6 +573,8 @@ export type InvestorProfileScalarWhereInput = {
   id?: Prisma.UuidFilter<"InvestorProfile"> | string
   memberId?: Prisma.UuidFilter<"InvestorProfile"> | string
   sponsorId?: Prisma.UuidNullableFilter<"InvestorProfile"> | string | null
+  networkApprovalStatus?: Prisma.StringFilter<"InvestorProfile"> | string
+  networkApprovedAt?: Prisma.DateTimeNullableFilter<"InvestorProfile"> | Date | string | null
   status?: Prisma.EnumMemberStatusFilter<"InvestorProfile"> | $Enums.MemberStatus
   activatedAt?: Prisma.DateTimeNullableFilter<"InvestorProfile"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"InvestorProfile"> | Date | string
@@ -525,6 +583,8 @@ export type InvestorProfileScalarWhereInput = {
 export type InvestorProfileCreateManySponsorInput = {
   id?: string
   memberId: string
+  networkApprovalStatus?: string
+  networkApprovedAt?: Date | string | null
   status?: $Enums.MemberStatus
   activatedAt?: Date | string | null
   createdAt?: Date | string
@@ -532,6 +592,8 @@ export type InvestorProfileCreateManySponsorInput = {
 
 export type InvestorProfileUpdateWithoutSponsorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -541,6 +603,8 @@ export type InvestorProfileUpdateWithoutSponsorInput = {
 export type InvestorProfileUncheckedUpdateWithoutSponsorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -549,6 +613,8 @@ export type InvestorProfileUncheckedUpdateWithoutSponsorInput = {
 export type InvestorProfileUncheckedUpdateManyWithoutSponsorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   memberId?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  networkApprovedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   status?: Prisma.EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
   activatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -560,6 +626,8 @@ export type InvestorProfileSelect<ExtArgs extends runtime.Types.Extensions.Inter
   id?: boolean
   memberId?: boolean
   sponsorId?: boolean
+  networkApprovalStatus?: boolean
+  networkApprovedAt?: boolean
   status?: boolean
   activatedAt?: boolean
   createdAt?: boolean
@@ -571,6 +639,8 @@ export type InvestorProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Typ
   id?: boolean
   memberId?: boolean
   sponsorId?: boolean
+  networkApprovalStatus?: boolean
+  networkApprovedAt?: boolean
   status?: boolean
   activatedAt?: boolean
   createdAt?: boolean
@@ -582,6 +652,8 @@ export type InvestorProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Typ
   id?: boolean
   memberId?: boolean
   sponsorId?: boolean
+  networkApprovalStatus?: boolean
+  networkApprovedAt?: boolean
   status?: boolean
   activatedAt?: boolean
   createdAt?: boolean
@@ -593,12 +665,14 @@ export type InvestorProfileSelectScalar = {
   id?: boolean
   memberId?: boolean
   sponsorId?: boolean
+  networkApprovalStatus?: boolean
+  networkApprovedAt?: boolean
   status?: boolean
   activatedAt?: boolean
   createdAt?: boolean
 }
 
-export type InvestorProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "sponsorId" | "status" | "activatedAt" | "createdAt", ExtArgs["result"]["investorProfile"]>
+export type InvestorProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "memberId" | "sponsorId" | "networkApprovalStatus" | "networkApprovedAt" | "status" | "activatedAt" | "createdAt", ExtArgs["result"]["investorProfile"]>
 export type InvestorProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   member?: boolean | Prisma.MemberDefaultArgs<ExtArgs>
   sponsor?: boolean | Prisma.InvestorProfile$sponsorArgs<ExtArgs>
@@ -622,6 +696,8 @@ export type $InvestorProfilePayload<ExtArgs extends runtime.Types.Extensions.Int
     id: string
     memberId: string
     sponsorId: string | null
+    networkApprovalStatus: string
+    networkApprovedAt: Date | null
     status: $Enums.MemberStatus
     activatedAt: Date | null
     createdAt: Date
@@ -1053,6 +1129,8 @@ export interface InvestorProfileFieldRefs {
   readonly id: Prisma.FieldRef<"InvestorProfile", 'String'>
   readonly memberId: Prisma.FieldRef<"InvestorProfile", 'String'>
   readonly sponsorId: Prisma.FieldRef<"InvestorProfile", 'String'>
+  readonly networkApprovalStatus: Prisma.FieldRef<"InvestorProfile", 'String'>
+  readonly networkApprovedAt: Prisma.FieldRef<"InvestorProfile", 'DateTime'>
   readonly status: Prisma.FieldRef<"InvestorProfile", 'MemberStatus'>
   readonly activatedAt: Prisma.FieldRef<"InvestorProfile", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"InvestorProfile", 'DateTime'>
