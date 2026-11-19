@@ -845,6 +845,18 @@ tbody tr:hover { background: rgba(214,163,66,.045); }
 .pqrs-floating:hover { box-shadow: 0 18px 44px rgba(214,163,66,.28); }
 .pqrs-floating:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .pqrs-floating b { display: grid; place-items: center; min-width: 21px; height: 21px; padding: 0 4px; border-radius: 999px; color: #fff; background: #9d3434; font-size: 11px; }
+.support-popover { position: fixed; z-index: 86; right: max(20px, env(safe-area-inset-right)); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 60px); width: min(430px, calc(100vw - 24px)); max-height: calc(100dvh - 92px - env(safe-area-inset-top)); overflow-y: auto; overscroll-behavior: contain; border: 1px solid var(--ui-border-strong); border-radius: 18px; color: var(--ui-text); background: #09283c; box-shadow: 0 24px 64px rgba(0,0,0,.48); }
+.support-popover-header { display: flex; justify-content: space-between; gap: 16px; padding: 20px 22px 16px; border-bottom: 1px solid var(--ui-border); }
+.support-popover-header h2 { margin: 5px 0; font-size: 19px; }
+.support-popover-header p { margin: 0; color: var(--ui-muted); font-size: 12px; line-height: 1.45; }
+.support-popover-header .icon-button { flex: none; }
+.support-popover-links { display: flex; flex-wrap: wrap; gap: 9px; padding: 14px 22px; border-bottom: 1px solid var(--ui-border); }
+.support-popover-links a { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 6px 10px; border: 1px solid var(--ui-border-strong); border-radius: 9px; color: var(--ui-text); font-size: 12px; text-decoration: none; }
+.support-popover-links a:hover { border-color: var(--ui-gold); }
+.support-popover-links a:focus-visible { outline: 2px solid var(--ui-gold-bright); outline-offset: 2px; }
+.support-popover-links b { color: var(--ui-gold-bright); font-size: 11px; }
+.support-popover .pqrs-form { padding: 18px 22px 22px; gap: 13px; }
+.support-popover .pqrs-success { flex-wrap: wrap; }
 .pqrs-create-panel, .pqrs-list-panel, .pqrs-detail-panel { margin-top: 20px; }
 .pqrs-form { display: grid; gap: 16px; padding: 22px 24px; }
 .pqrs-form label { display: grid; gap: 7px; color: var(--ui-text); font-size: 13px; font-weight: 700; }
@@ -877,7 +889,7 @@ tbody tr:hover { background: rgba(214,163,66,.045); }
 .pqrs-read-form, .pqrs-status-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 16px 24px; }
 .pqrs-read-form { border-bottom: 1px solid var(--ui-border); color: var(--ui-gold-bright); font-size: 13px; }
 .pqrs-status-form { display: flex; align-items: center; gap: 12px; }.pqrs-status-form span { font-size: 12px; color: var(--ui-muted); }
-@media (max-width: 760px) { .pqrs-case-row { grid-template-columns: 1fr; gap: 7px; padding: 16px; }.pqrs-case-state { justify-content: flex-start; }.pqrs-message { max-width: 100%; }.pqrs-message > div { flex-direction: column; gap: 4px; }.pqrs-success { flex-direction: column; align-items: flex-start; }.pqrs-floating { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); } }
+@media (max-width: 760px) { .pqrs-case-row { grid-template-columns: 1fr; gap: 7px; padding: 16px; }.pqrs-case-state { justify-content: flex-start; }.pqrs-message { max-width: 100%; }.pqrs-message > div { flex-direction: column; gap: 4px; }.pqrs-success { flex-direction: column; align-items: flex-start; }.pqrs-floating { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); }.support-popover { right: 12px; bottom: calc(max(12px, env(safe-area-inset-bottom)) + 60px); max-height: calc(100dvh - 84px - env(safe-area-inset-top)); } }
 @media (prefers-reduced-motion: reduce) { .leadership-climber svg, .leadership-kpi-icon svg { animation: none; }.leadership-climber svg { transform: translate(55px, -44px); }.leadership-rank-card { transition: none; }.leadership-rank-card:hover { transform: none; } }
 .portal-summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
 .padded-list { padding: 18px; }

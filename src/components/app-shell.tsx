@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { logoutAction } from "@/app/auth-actions";
 import { BrandLogo } from "@/components/brand-logo";
+import { CustomerSupportFloating } from "@/components/customer-support-floating";
 
 type NavigationItem = { label: string; icon: LucideIcon; href: string; permission: string };
 const navigation: NavigationItem[] = [
@@ -155,7 +156,7 @@ export function AppShell({ children, user, pqrsUnreadCount = 0, investorProjects
           </div>
         </header>
         <main className="content" id="contenido-principal" tabIndex={-1}>{children}</main>
-        {(hasAmbassadorProfile || hasInvestorProfile) && <Link className="pqrs-floating" href="/pqrs" aria-label={pqrsUnreadCount ? `Atención al cliente: ${pqrsUnreadCount} respuesta(s) nuevas` : "Atención al cliente: abrir PQRS"}><MessageSquareText size={20} aria-hidden="true" /><span>PQRS</span>{pqrsUnreadCount > 0 && <b aria-hidden="true">{pqrsUnreadCount > 9 ? "9+" : pqrsUnreadCount}</b>}</Link>}
+        {activePortalView === "INVESTOR" && hasInvestorProfile ? <CustomerSupportFloating unreadCount={pqrsUnreadCount} /> : hasAmbassadorProfile && <Link className="pqrs-floating" href="/pqrs" aria-label={pqrsUnreadCount ? `Atención al cliente: ${pqrsUnreadCount} respuesta(s) nuevas` : "Atención al cliente: abrir PQRS"}><MessageSquareText size={20} aria-hidden="true" /><span>PQRS</span>{pqrsUnreadCount > 0 && <b aria-hidden="true">{pqrsUnreadCount > 9 ? "9+" : pqrsUnreadCount}</b>}</Link>}
       </section>
     </div>
   );
