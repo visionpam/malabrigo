@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  Bell, ChevronDown, FileCheck2, FolderKanban, Gauge, MessageSquareText,
+  Award, Bell, ChevronDown, Coins, FileCheck2, FolderKanban, Gauge, MessageSquareText,
   HardHat, KeyRound, Landmark, Menu, Search, Settings, UserRound, UsersRound, Files,
   WalletCards, X, Network,
   LogOut, ShieldCheck,
@@ -44,7 +44,7 @@ export function AppShell({ children, user, pqrsUnreadCount = 0, investorProjects
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(pathname.startsWith("/mi-portal/avance-obra"));
-  const [selectedPortalView, setSelectedPortalView] = useState<PortalView>(pathname.startsWith("/mi-portal") ? "INVESTOR" : pathname.startsWith("/mi-red") ? "AMBASSADOR" : user?.portalViewPreference ?? "AMBASSADOR");
+  const [selectedPortalView, setSelectedPortalView] = useState<PortalView>(pathname.startsWith("/mi-portal") ? "INVESTOR" : pathname.startsWith("/mi-red") || pathname.startsWith("/mi-comisiones") || pathname.startsWith("/mis-premios") ? "AMBASSADOR" : user?.portalViewPreference ?? "AMBASSADOR");
   const profileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -79,11 +79,11 @@ export function AppShell({ children, user, pqrsUnreadCount = 0, investorProjects
   const hasAmbassadorProfile = user?.hasAmbassadorProfile ?? false;
   const hasInvestorProfile = user?.hasInvestorProfile ?? false;
   const hasDualProfile = hasAmbassadorProfile && hasInvestorProfile;
-  const routePortalView: PortalView | null = pathname.startsWith("/mi-red") ? "AMBASSADOR" : pathname.startsWith("/mi-portal") ? "INVESTOR" : null;
+  const routePortalView: PortalView | null = pathname.startsWith("/mi-red") || pathname.startsWith("/mi-comisiones") || pathname.startsWith("/mis-premios") ? "AMBASSADOR" : pathname.startsWith("/mi-portal") ? "INVESTOR" : null;
   const activePortalView = routePortalView
     ?? (hasAmbassadorProfile && !hasInvestorProfile ? "AMBASSADOR" : hasInvestorProfile && !hasAmbassadorProfile ? "INVESTOR" : selectedPortalView);
   const portalNavigation = activePortalView === "AMBASSADOR"
-    ? (hasAmbassadorProfile ? [{ label: "Mi red", icon: Network, href: "/mi-red", permission: "PORTAL" }] : [])
+    ? (hasAmbassadorProfile ? [{ label: "Mi red", icon: Network, href: "/mi-red", permission: "PORTAL" }, { label: "Mis comisiones", icon: Coins, href: "/mi-comisiones", permission: "PORTAL" }, { label: "Mis premios", icon: Award, href: "/mis-premios", permission: "PORTAL" }] : [])
     : (hasInvestorProfile ? investorNavigation : []);
   const initials = user?.displayName.split(" ").slice(0, 2).map((part) => part[0]).join("").toUpperCase() ?? "?";
   const profileLabel = superadmin ? "Superadministrador" : activePortalView === "AMBASSADOR" && hasAmbassadorProfile ? "Vista Embajador" : hasInvestorProfile ? "Vista Inversionista" : "Administración";
