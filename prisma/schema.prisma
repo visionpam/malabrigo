@@ -152,6 +152,7 @@ enum PqrsCategory {
   COMPLAINT
   CLAIM
   SUGGESTION
+  DOCUMENT_REQUEST
 }
 
 enum PqrsStatus {

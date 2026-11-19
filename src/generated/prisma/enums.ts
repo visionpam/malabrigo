@@ -210,7 +210,8 @@ export const PqrsCategory = {
   PETITION: 'PETITION',
   COMPLAINT: 'COMPLAINT',
   CLAIM: 'CLAIM',
-  SUGGESTION: 'SUGGESTION'
+  SUGGESTION: 'SUGGESTION',
+  DOCUMENT_REQUEST: 'DOCUMENT_REQUEST'
 } as const
 
 export type PqrsCategory = (typeof PqrsCategory)[keyof typeof PqrsCategory]

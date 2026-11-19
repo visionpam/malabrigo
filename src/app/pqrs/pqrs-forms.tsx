@@ -11,7 +11,7 @@ export function NewPqrsForm() {
   const [state, action, pending] = useActionState(createPqrsAction, initial);
   if (state.success) return <div className="pqrs-success" role="status"><strong>{state.message}</strong><Link className="secondary-button" href={`/pqrs/${state.caseId}`}>Ver seguimiento</Link></div>;
   return <form action={action} className="pqrs-form">
-    <label>Tipo de solicitud <select name="category" required defaultValue=""><option value="" disabled>Selecciona una opción</option><option value="PETITION">Petición</option><option value="COMPLAINT">Queja</option><option value="CLAIM">Reclamo</option><option value="SUGGESTION">Sugerencia</option></select></label>
+    <label>Tipo de solicitud <select name="category" required defaultValue=""><option value="" disabled>Selecciona una opción</option><option value="PETITION">Petición</option><option value="COMPLAINT">Queja</option><option value="CLAIM">Reclamo</option><option value="SUGGESTION">Sugerencia</option><option value="DOCUMENT_REQUEST">Solicitud de documento</option></select></label>
     <label>Asunto <input name="subject" minLength={5} maxLength={180} required placeholder="Resume el motivo de tu solicitud" /></label>
     <label>Descripción <textarea name="body" minLength={10} maxLength={5000} required rows={6} placeholder="Cuéntanos qué ocurrió y qué respuesta esperas" /></label>
     <label>Adjunto (opcional) <input name="file" type="file" accept=".jpg,.jpeg,.png,.pdf" /><small>JPG, PNG o PDF, máximo 8 MB.</small></label>

@@ -5,7 +5,7 @@ import type { getCurrentUser } from "@/lib/session";
 type User = NonNullable<Awaited<ReturnType<typeof getCurrentUser>>>;
 
 export const pqrsCategoryLabels: Record<PqrsCategory, string> = {
-  PETITION: "Petición", COMPLAINT: "Queja", CLAIM: "Reclamo", SUGGESTION: "Sugerencia",
+  PETITION: "Petición", COMPLAINT: "Queja", CLAIM: "Reclamo", SUGGESTION: "Sugerencia", DOCUMENT_REQUEST: "Solicitud de documento",
 };
 export const pqrsStatusLabels: Record<PqrsStatus, string> = {
   FILED: "Radicado", IN_REVIEW: "En revisión", ANSWERED: "Respondido", CLOSED: "Cerrado",

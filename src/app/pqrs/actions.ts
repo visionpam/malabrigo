@@ -8,7 +8,7 @@ import { db } from "@/lib/db";
 import { canFilePqrs, canManagePqrs } from "@/lib/pqrs";
 
 export type PqrsActionState = { success: boolean; message: string; caseId?: string };
-const category = z.enum(["PETITION", "COMPLAINT", "CLAIM", "SUGGESTION"]);
+const category = z.enum(["PETITION", "COMPLAINT", "CLAIM", "SUGGESTION", "DOCUMENT_REQUEST"]);
 const text = z.string().trim().min(10).max(5000);
 const uuid = z.string().uuid();
 
@@ -24,6 +24,7 @@ async function attachment(value: FormDataEntryValue | null) {
 function refresh() {
   revalidatePath("/pqrs");
   revalidatePath("/pqrs/administracion");
+  revalidatePath("/mi-portal/documentos");
   revalidatePath("/", "layout");
 }
 
