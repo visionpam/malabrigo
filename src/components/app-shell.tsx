@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  Award, Bell, ChevronDown, Coins, FileCheck2, FolderKanban, Gauge, MessageSquareText,
+  Award, Bell, ChevronDown, Coins, FileCheck2, FolderKanban, Gauge, MessageSquareText, Moon, Sun,
   HardHat, KeyRound, Landmark, Menu, Search, Settings, UserRound, UsersRound, Files,
   WalletCards, X, Network,
   LogOut, ShieldCheck,
@@ -39,10 +39,11 @@ const investorNavigation: NavigationItem[] = [
 type PortalView = "AMBASSADOR" | "INVESTOR";
 type ShellUser = { displayName: string; roles: string[]; permissions: string[]; hasAmbassadorProfile: boolean; hasInvestorProfile: boolean; portalViewPreference: PortalView | null } | null;
 
-export function AppShell({ children, user, pqrsUnreadCount = 0, investorProjects = [] }: { children: React.ReactNode; user: ShellUser; pqrsUnreadCount?: number; investorProjects?: string[] }) {
+export function AppShell({ children, user, initialTheme = "dark", pqrsUnreadCount = 0, investorProjects = [] }: { children: React.ReactNode; user: ShellUser; initialTheme?: "light" | "dark"; pqrsUnreadCount?: number; investorProjects?: string[] }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [theme, setTheme] = useState(initialTheme);
   const [projectsOpen, setProjectsOpen] = useState(pathname.startsWith("/mi-portal/avance-obra"));
   const [selectedPortalView, setSelectedPortalView] = useState<PortalView>(pathname.startsWith("/mi-portal") ? "INVESTOR" : pathname.startsWith("/mi-red") || pathname.startsWith("/mi-comisiones") || pathname.startsWith("/mis-premios") || pathname.startsWith("/mis-reportes") ? "AMBASSADOR" : user?.portalViewPreference ?? "AMBASSADOR");
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -95,6 +96,12 @@ export function AppShell({ children, user, pqrsUnreadCount = 0, investorProjects
     document.cookie = `malabrigo_portal_view=${view}; path=/; max-age=31536000; samesite=lax`;
     setMenuOpen(false);
   };
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+    document.cookie = `malabrigo_theme=${nextTheme}; path=/; max-age=31536000; samesite=lax`;
+  };
 
   return (
     <div className="app-shell">
@@ -139,6 +146,7 @@ export function AppShell({ children, user, pqrsUnreadCount = 0, investorProjects
           <button className="icon-button menu-button" aria-label="Abrir menú" onClick={() => setMenuOpen(true)}><Menu size={20} /></button>
           <label className="search-box"><Search aria-hidden="true" size={17} /><input aria-label="Buscar" placeholder="Buscar socio, venta o comprobante..." /></label>
           <div className="topbar-actions">
+            <button className="icon-button theme-toggle" type="button" onClick={toggleTheme} aria-label={theme === "dark" ? "Activar modo claro" : "Activar modo oscuro"} title={theme === "dark" ? "Modo claro" : "Modo oscuro"}>{theme === "dark" ? <Sun aria-hidden="true" size={19} /> : <Moon aria-hidden="true" size={19} />}</button>
             {hasAmbassadorProfile || hasInvestorProfile ? <Link className="icon-button notification" href="/pqrs" aria-label={pqrsUnreadCount ? `${pqrsUnreadCount} respuesta(s) nuevas en PQRS` : "Mis PQRS"}><Bell aria-hidden="true" size={19} />{pqrsUnreadCount > 0 && <i aria-hidden="true" />}</Link> : null}
             <div className="profile-menu-wrap" ref={profileMenuRef}>
               <button className="profile" type="button" aria-expanded={profileOpen} aria-controls="profile-actions" onClick={() => setProfileOpen((open) => !open)}>

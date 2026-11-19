@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: "#031522",
-  colorScheme: "dark",
+  colorScheme: "light dark",
   viewportFit: "cover",
 };
 
@@ -52,6 +52,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     return <html lang="es"><body style={{ margin: 0 }}><ServiceUnavailable /></body></html>;
   }
   const savedPortalView = cookieStore.get("malabrigo_portal_view")?.value;
+  const theme = cookieStore.get("malabrigo_theme")?.value === "light" ? "light" : "dark";
   const portalViewPreference: "AMBASSADOR" | "INVESTOR" | null = savedPortalView === "AMBASSADOR" || savedPortalView === "INVESTOR" ? savedPortalView : null;
   const shellUser = user ? {
     displayName: user.displayName,
@@ -68,10 +69,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     ? await db.constructionProject.findMany({ where: { active: true }, distinct: ["developmentName"], orderBy: { developmentName: "asc" }, select: { developmentName: true } })
     : [];
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" data-theme={theme} suppressHydrationWarning>
       <body className={`${nunitoSans.variable} ${quicksand.variable}`}>
         <PwaRegistration />
-        <AppShell user={shellUser} pqrsUnreadCount={pqrsUnreadCount} investorProjects={investorProjects.map((project) => project.developmentName)}>{children}</AppShell>
+        <AppShell user={shellUser} initialTheme={theme} pqrsUnreadCount={pqrsUnreadCount} investorProjects={investorProjects.map((project) => project.developmentName)}>{children}</AppShell>
       </body>
     </html>
   );

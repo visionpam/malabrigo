@@ -980,3 +980,107 @@ tbody tr:hover { background: rgba(214,163,66,.045); }
   .direct-bonus-grid { grid-template-columns: 1fr; padding: 18px; }
   .visual-section-heading { padding: 20px 18px 15px; }.points-note, .visual-explainer { margin-right: 18px; margin-left: 18px; }.generation-ladder, .rank-journey { padding: 18px; }.rank-journey-card, .rank-journey-card:nth-child(even), .rank-journey-card:nth-child(3n) { min-height: 280px; }
 }
+
+/* Paleta de modo claro suministrada por el cliente. */
+html[data-theme="dark"] { color-scheme: dark; }
+html[data-theme="light"] {
+  color-scheme: light;
+  --ui-bg: #f5f0e7;
+  --ui-sidebar: #ffffff;
+  --ui-surface: #ffffff;
+  --ui-surface-raised: #fbf8f2;
+  --ui-surface-soft: rgba(5, 38, 61, .03);
+  --ui-text: #0b2a40;
+  --ui-muted: #4d6574;
+  --ui-tertiary: #5c707c;
+  --ui-gold: #b8862e;
+  --ui-gold-bright: #8a5f14;
+  --ui-gold-button: #d6a342;
+  --ui-blue: #0a6a8c;
+  --ui-border: rgba(5, 38, 61, .12);
+  --ui-border-strong: rgba(184, 134, 46, .40);
+  --ui-danger: #b9382b;
+  --ui-success: #267349;
+  --ui-success-bg: #e3f1e8;
+  --ui-shadow: 0 15px 38px rgba(5, 38, 61, .09);
+  --ui-shadow-raised: 0 22px 60px rgba(5, 38, 61, .16);
+  --brand-navy: #ffffff;
+  --brand-navy-deep: #0b2a40;
+  --brand-navy-soft: #fbf8f2;
+  --brand-blue: #0a6a8c;
+  --brand-gold: #b8862e;
+  --brand-gold-light: #8a5f14;
+  --brand-ivory: #0b2a40;
+  --brand-sand: #4d6574;
+  --green: #267349;
+  --petrol: #0a6a8c;
+  --sky: #8a5f14;
+  --orange: #b8862e;
+}
+
+html[data-theme="light"] .app-shell { background: radial-gradient(circle at 84% -8%, rgba(10,106,140,.08), transparent 32%), var(--ui-bg); }
+html[data-theme="light"] .sidebar, html[data-theme="light"] .topbar { background: rgba(255,255,255,.96); box-shadow: var(--ui-shadow); }
+html[data-theme="light"] .nav-group-label, html[data-theme="light"] .portal-switcher > span { color: var(--ui-tertiary); }
+html[data-theme="light"] .nav-item, html[data-theme="light"] .nav-item svg, html[data-theme="light"] .portal-switcher a { color: var(--ui-muted); }
+html[data-theme="light"] .nav-item:hover, html[data-theme="light"] .nav-item.active { color: var(--ui-text); background: rgba(184,134,46,.10); }
+html[data-theme="light"] .nav-item.active svg { color: var(--ui-gold-bright); }
+html[data-theme="light"] .portal-switcher, html[data-theme="light"] .search-box { background: var(--ui-surface-raised); }
+html[data-theme="light"] .portal-switcher a.active { color: var(--ui-text); background: var(--ui-gold-button); }
+html[data-theme="light"] .profile:hover, html[data-theme="light"] .icon-button:hover { background: rgba(184,134,46,.10); }
+html[data-theme="light"] .profile-menu, html[data-theme="light"] .catalog-combobox-menu { background: var(--ui-surface); }
+html[data-theme="light"] .brand-logo { border-color: var(--ui-border-strong); box-shadow: var(--ui-shadow); }
+html[data-theme="light"] .kpi-card, html[data-theme="light"] .module-metric, html[data-theme="light"] .panel, html[data-theme="light"] .module-panel,
+html[data-theme="light"] .ambassador-visual-section, html[data-theme="light"] .rank-journey-card { background: var(--ui-surface); box-shadow: var(--ui-shadow); }
+html[data-theme="light"] .module-toolbar, html[data-theme="light"] .dialog-header, html[data-theme="light"] th { background: var(--ui-surface-raised); }
+html[data-theme="light"] th { color: var(--ui-tertiary); }
+html[data-theme="light"] tbody tr:hover { background: var(--ui-surface-soft); }
+html[data-theme="light"] .kpi-icon, html[data-theme="light"] .empty-state > div { color: var(--ui-gold-bright); background: rgba(184,134,46,.10); }
+html[data-theme="light"] .primary-button, html[data-theme="light"] .profile .avatar, html[data-theme="light"] .pqrs-floating { color: var(--ui-text); background: var(--ui-gold-button); }
+html[data-theme="light"] .primary-button:hover, html[data-theme="light"] .pqrs-floating:hover { background: #e3b652; }
+html[data-theme="light"] .member-dialog, html[data-theme="light"] .auth-card, html[data-theme="light"] .support-popover { color: var(--ui-text); background: var(--ui-surface); box-shadow: var(--ui-shadow-raised); }
+html[data-theme="light"] .form-grid input, html[data-theme="light"] .form-grid select, html[data-theme="light"] .form-grid textarea,
+html[data-theme="light"] .operation-card input, html[data-theme="light"] .operation-card textarea, html[data-theme="light"] .void-form textarea,
+html[data-theme="light"] .auth-form input, html[data-theme="light"] .member-form textarea, html[data-theme="light"] .pqrs-form input,
+html[data-theme="light"] .pqrs-form select, html[data-theme="light"] .pqrs-form textarea, html[data-theme="light"] .inline-review-form input,
+html[data-theme="light"] .sale-participant-mode select { color: var(--ui-text); background: var(--ui-surface); border-color: var(--ui-border-strong); color-scheme: light; }
+html[data-theme="light"] .form-grid label > span, html[data-theme="light"] .operation-card > label > span, html[data-theme="light"] .void-form > label > span,
+html[data-theme="light"] .searchable-field > label > span, html[data-theme="light"] .auth-form label span { color: var(--ui-text); }
+html[data-theme="light"] .form-grid input::placeholder, html[data-theme="light"] .pqrs-form input::placeholder,
+html[data-theme="light"] .pqrs-form textarea::placeholder { color: var(--ui-tertiary); }
+html[data-theme="light"] .form-grid select option, html[data-theme="light"] .pqrs-form select option { color: var(--ui-text); background: var(--ui-surface); }
+html[data-theme="light"] .module-status.success, html[data-theme="light"] .dossier-status-approved { color: var(--ui-success); background: var(--ui-success-bg); }
+html[data-theme="light"] .module-status.warning { color: var(--ui-gold-bright); background: rgba(184,134,46,.12); }
+html[data-theme="light"] .module-status.danger, html[data-theme="light"] .field-error, html[data-theme="light"] .form-message.error { color: var(--ui-danger); }
+html[data-theme="light"] .module-status.info { color: var(--ui-blue); background: rgba(10,106,140,.10); }
+html[data-theme="light"] .status.aprobado, html[data-theme="light"] .success-text,
+html[data-theme="light"] .form-message.success, html[data-theme="light"] .row-action-message.success { color: var(--ui-success); }
+html[data-theme="light"] .status.observado, html[data-theme="light"] .warning-box,
+html[data-theme="light"] .construction-field-error, html[data-theme="light"] .dossier-item-main .dossier-reason,
+html[data-theme="light"] .dossier-status-rejected, html[data-theme="light"] .dossier-inline-form small.error { color: var(--ui-danger); }
+html[data-theme="light"] .dossier-status-pending, html[data-theme="light"] .row-action-info,
+html[data-theme="light"] .payment-approval-voucher { color: var(--ui-blue); }
+html[data-theme="light"] .row-action.approve { color: var(--ui-success); background: var(--ui-success-bg); }
+html[data-theme="light"] .row-action.danger, html[data-theme="light"] .row-action.danger-action { color: var(--ui-danger); }
+html[data-theme="light"] .secondary-button, html[data-theme="light"] .cancel-button, html[data-theme="light"] .date-button,
+html[data-theme="light"] .row-action, html[data-theme="light"] .icon-button { color: var(--ui-text); background: var(--ui-surface); }
+html[data-theme="light"] .leadership-hero, html[data-theme="light"] .leadership-requirement,
+html[data-theme="light"] .leadership-rank-card, html[data-theme="light"] .leadership-next-prize,
+html[data-theme="light"] .direct-bonus-card, html[data-theme="light"] .generation-step,
+html[data-theme="light"] .expedient-content > section, html[data-theme="light"] .pqrs-message { background: var(--ui-surface-raised); }
+html[data-theme="light"] .leadership-step, html[data-theme="light"] .expedient-tabs button,
+html[data-theme="light"] .dossier-mode button { color: var(--ui-text); background: var(--ui-surface); }
+html[data-theme="light"] .leadership-step.selected, html[data-theme="light"] .expedient-tabs button.active,
+html[data-theme="light"] .dossier-mode button.active { color: var(--ui-text); background: var(--ui-gold-button); }
+html[data-theme="light"] .leadership-step.reached:not(.selected), html[data-theme="light"] .leadership-requirement.met b,
+html[data-theme="light"] .leadership-requirement.met .leadership-requirement-top svg { color: var(--ui-success); }
+html[data-theme="light"] .leadership-deadline-note { color: var(--ui-danger); }
+html[data-theme="light"] .direct-bonus-card-header { color: var(--ui-text); background: var(--ui-gold-button); }
+html[data-theme="light"] .sale-summary > div, html[data-theme="light"] .rank-journey-card,
+html[data-theme="light"] .record-status, html[data-theme="light"] .leadership-reward-feature { background: var(--ui-surface-raised); }
+html[data-theme="light"] .program-plan-row label > span, html[data-theme="light"] .permission-grid legend,
+html[data-theme="light"] .stage-item small, html[data-theme="light"] .kpi-menu { color: var(--ui-tertiary); }
+html[data-theme="light"] .points-note, html[data-theme="light"] .visual-explainer { color: var(--ui-text); background: rgba(184,134,46,.08); }
+html[data-theme="light"] .toast-message, html[data-theme="light"] .pqrs-success { color: var(--ui-success); background: var(--ui-success-bg); }
+html[data-theme="light"] .edit-link { color: var(--ui-blue) !important; }
+html[data-theme="light"] .danger-link { color: var(--ui-danger) !important; }
+html[data-theme="light"] .theme-toggle { flex: 0 0 auto; }
