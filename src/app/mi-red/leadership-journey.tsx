@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Award, Bike, Building2, CarFront, Check, CircleAlert, Flag, House, PersonStanding, Plane, Ship, Sparkles, Target, Trophy, Truck, UsersRound, Waves, X, type LucideIcon } from "lucide-react";
+import { Award, Bike, Building2, CarFront, Check, CircleAlert, Flag, House, Plane, Ship, Sparkles, Target, Trophy, Truck, UsersRound, Waves, X, type LucideIcon } from "lucide-react";
+import { LeadershipClimbIcon } from "./leadership-icons";
 
 type Rank = {
   code: string;
@@ -80,7 +81,7 @@ export function LeadershipJourney({ ranks, currentRank, metrics, salesCount, aff
 
   return <section className="module-panel portal-section leadership-journey" aria-labelledby="leadership-title">
     <div className="leadership-hero">
-      <div className="leadership-climber" aria-hidden="true"><span /><span /><span /><span /><PersonStanding size={36} strokeWidth={2.4} /></div>
+      <div className="leadership-climber" aria-hidden="true"><LeadershipClimbIcon /></div>
       <div className="leadership-intro"><span className="eyebrow">Club de Liderazgo · Ascenso a Diamante</span><h2 id="leadership-title">{headline}</h2><p>{summary}</p><div className="leadership-meta"><span><UsersRound size={15} aria-hidden="true" />{number.format(salesCount)} {salesCount === 1 ? "venta registrada" : "ventas registradas"} en tu red</span><span><Target size={15} aria-hidden="true" />{completed} de 4 metas cumplidas</span><span className={deadlinePassed && !highestReached ? "deadline-passed" : ""}><Flag size={15} aria-hidden="true" />Plazo del rango: {deadlineLabel}{deadlinePassed && !highestReached ? " · vencido" : ""}</span></div></div>
       <div className="leadership-next-prize"><span>Próximo premio</span><strong>{highestReached ? "Carrera completada" : nextReward}</strong><small>{highestReached ? "Reconocimiento máximo" : `Al alcanzar ${nextRank.name}`}</small></div>
     </div>

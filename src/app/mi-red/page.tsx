@@ -1,4 +1,4 @@
-import { TrendingUp, PersonStanding, UsersRound } from "lucide-react";
+import { TrendingUp, UsersRound } from "lucide-react";
 import { EmptyState, MetricCard, PageHeader, StatusPill } from "@/components/module-ui";
 import { requireUser, roleCodes } from "@/lib/access-control";
 import { db } from "@/lib/db";
@@ -6,6 +6,7 @@ import { formatDate, formatMoney } from "@/lib/format";
 import { getAmbassadorNetwork } from "@/lib/network";
 import { readAmbassadorRankMetrics } from "@/lib/commission-ledger";
 import { LeadershipJourney } from "./leadership-journey";
+import { StartLineIcon } from "./leadership-icons";
 import { MemberCreateDialog } from "../socios/member-create-dialog";
 import { redirect } from "next/navigation";
 
@@ -30,7 +31,7 @@ export default async function MyNetworkPage() {
   const approvedPeople = people.filter((item) => item.status === "ACTIVE" || item.status === "APPROVED");
   const networkVolume = approvedPeople.reduce((sum, item) => sum + item.volume, 0);
   return <><PageHeader eyebrow="Portal del embajador" title="Mi red" description={`Código ${profile.referralCode}. Se muestran exclusivamente tus ocho generaciones.`} action={<MemberCreateDialog countries={countries} documentTypes={documentTypes} occupations={occupations} maritalStatuses={maritalStatuses} regions={regions} provinces={provinces.map((item) => ({ ...item, parentCode: item.regionCode }))} districts={districts.map((item) => ({ ...item, parentCode: item.provinceCode }))} ambassadors={[]} networkMode />} />
-    <section className="module-metrics"><MetricCard label="Socios directos" value={String(rankMetrics?.directCount ?? 0)} detail={`${rankMetrics?.memberCount ?? 0} elegibles en toda la red`} icon={UsersRound} /><MetricCard label="Valor de ventas en red" value={formatMoney(networkVolume)} detail="Ventas no anuladas · USD" icon={TrendingUp} /><article className="module-metric"><div className="kpi-icon leadership-kpi-icon" aria-hidden="true"><span /><span /><span /><PersonStanding size={21} /></div><div><span>Rango actual</span><strong>{ranks.find((rank) => rank.code === profile.currentRank)?.name ?? "Sin rango"}</strong><small>Carrera del embajador</small></div></article></section>
+    <section className="module-metrics"><MetricCard label="Socios directos" value={String(rankMetrics?.directCount ?? 0)} detail={`${rankMetrics?.memberCount ?? 0} elegibles en toda la red`} icon={UsersRound} /><MetricCard label="Valor de ventas en red" value={formatMoney(networkVolume)} detail="Ventas no anuladas · USD" icon={TrendingUp} /><article className="module-metric"><div className="kpi-icon leadership-kpi-icon" aria-hidden="true"><StartLineIcon /></div><div><span>Rango actual</span><strong>{ranks.find((rank) => rank.code === profile.currentRank)?.name ?? "Sin rango"}</strong><small>Carrera del embajador</small></div></article></section>
 
     {ranks.length > 0 && rankMetrics && <LeadershipJourney ranks={ranks.map((rank) => ({ code: rank.code, name: rank.name, sortOrder: rank.sortOrder, logoUrl: rank.logoUrl, rewardName: rank.rewardName, rewardDescription: rank.rewardDescription, memberCount: rank.memberCount, directCount: rank.directCount, directPoints: rank.directPoints, totalPoints: Number(rank.totalPoints), deadlineMonths: rank.deadlineMonths }))} currentRank={profile.currentRank} metrics={{ memberCount: rankMetrics.memberCount, directCount: rankMetrics.directCount, directPoints: rankMetrics.directPoints, volumePoints: rankMetrics.volumePoints }} salesCount={approvedPeople.reduce((sum, item) => sum + item.sales, 0)} affiliatedAt={rankMetrics.affiliatedAt.toISOString()} asOf={new Date().toISOString()} />}
 
